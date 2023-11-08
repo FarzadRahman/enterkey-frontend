@@ -27,42 +27,53 @@ const RegisterForm = ({ token }) => {
   const [companies, setCompanies] = useState([]);
   const [branches, setBranches] = useState([]);
 
-  // FETCH BRANCHES
-  useEffect(() => {
-    const apiBranches = BASE_URL + "api/v1/branches?company_id=" + company_id;
+  const role = [
+    {
+        "id": 1,
+        "name": "Admin",
+    },
+    {
+      "id": 2,
+      "name": "User",
+    },
+  ];
 
-    if (company_id) {
-      axios
-        .get(apiBranches, {
-          headers: { Authorization: "Bearer " + token },
-        })
-        .then((res) => {
-          if (res.data.status) {
-            setBranches(res.data.data);
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-  }, [company_id]);
+  // FETCH BRANCHES
+  // useEffect(() => {
+  //   const apiBranches = BASE_URL + "api/v1/branches?company_id=" + company_id;
+
+  //   if (company_id) {
+  //     axios
+  //       .get(apiBranches, {
+  //         headers: { Authorization: "Bearer " + token },
+  //       })
+  //       .then((res) => {
+  //         if (res.data.status) {
+  //           setBranches(res.data.data);
+  //         }
+  //       })
+  //       .catch((error) => {
+  //         console.log(error);
+  //       });
+  //   }
+  // }, [company_id]);
 
   // Fetch Roles
-  useEffect(() => {
-    const apiRoles = BASE_URL + "api/v1/roles";
-    axios
-      .get(apiRoles, {
-        headers: { Authorization: "Bearer " + token },
-      })
-      .then((res) => {
-        if (res.data.status == true) {
-          setRoles(res.data.data);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+  // useEffect(() => {
+  //   const apiRoles = BASE_URL + "api/v1/roles";
+  //   axios
+  //     .get(apiRoles, {
+  //       headers: { Authorization: "Bearer " + token },
+  //     })
+  //     .then((res) => {
+  //       if (res.data.status == true) {
+  //         setRoles(res.data.data);
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // }, []);
 
   const rolesAdd = (e) => {
     setRoleId(e.target.value);
@@ -72,14 +83,14 @@ const RegisterForm = ({ token }) => {
 
   // Fetch Company
   useEffect(() => {
-    const apiCompanies = BASE_URL + "api/v1/companies";
+    const apiCompanies = BASE_URL + "companies";
     axios
       .get(apiCompanies, {
         headers: { Authorization: "Bearer " + token },
       })
       .then((res) => {
-        if (res.data.status == true) {
-          setCompanies(res.data.data);
+        if (res.data) {
+          setCompanies(res.data);
         }
       })
       .catch((error) => {
@@ -89,22 +100,20 @@ const RegisterForm = ({ token }) => {
 
   async function register(e) {
     e.preventDefault();
-    const apiUrl = BASE_URL + "api/v1/admin/store";
+    const apiUrl = BASE_URL + "register";
     const regData = {
       email,
       password,
       name,
       phone,
-      admin_roles,
+      role_id,
       company_id,
-      branch_id,
     };
     const config = {
       headers: { Authorization: `Bearer ${token}` },
     };
     axios.post(apiUrl, regData, config).then((response) => {
-      console.log(response.data);
-      if (response.data.status) {
+      if (response.data) {
         Router.push({
           pathname: "/users/userList",
         });
@@ -176,7 +185,7 @@ const RegisterForm = ({ token }) => {
               value={role_id || ""}
               className="shadow-input"
             >
-              {roles?.map((option, index) => (
+              {role?.map((option, index) => (
                 <MenuItem key={index} value={option.id}>
                   {option.name}
                 </MenuItem>
@@ -193,17 +202,19 @@ const RegisterForm = ({ token }) => {
               size="small"
               fullWidth
               value={company_id || ""}
+
               className="shadow-input"
             >
               {companies?.map((option, index) => (
-                <MenuItem key={index} value={option.id}>
-                  {option.name} ({option.company_bin})
+                <MenuItem key={index} value={option.comp_id}>
+                  {option.company_name} 
+                  {/* ({option.company_bin}) */}
                 </MenuItem>
               ))}
             </TextField>
           </div>
         </div>
-        {branches.length != 0 && (
+        {/* {branches.length != 0 && (
           <div className="row">
             <div className="col-md-6 mt-4">
               <TextField
@@ -225,7 +236,7 @@ const RegisterForm = ({ token }) => {
               </TextField>
             </div>
           </div>
-        )}
+        )} */}
         <div className="row">
           <div className="col-md-12">
             <Button
