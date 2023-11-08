@@ -17,7 +17,7 @@ const createUser = ({ roles }) => {
   const [superAdmin, setSuperAdmin] = useState(false);
 
   useEffect(() => {
-    roles.map((role) => {
+    roles?.map((role) => {
       if (role.name === "SuperAdmin") {
         setSuperAdmin(true);
       }
@@ -26,7 +26,8 @@ const createUser = ({ roles }) => {
 
   return (
     <>
-      {superAdmin ? (
+      {/* {superAdmin ? ( */}
+      {!superAdmin ? (
         <>
           <Typography
             variant="h2"
@@ -35,7 +36,8 @@ const createUser = ({ roles }) => {
           >
             Create User
           </Typography>
-          {superAdmin && <RegisterForm />}
+          {/* {superAdmin && <RegisterForm />} */}
+          {!superAdmin && <RegisterForm />}
         </>
       ) : (
         <Typography variant="h3" color={colors.greenAccent[300]}>

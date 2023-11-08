@@ -91,43 +91,11 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
   const [width, setWidth] = useState(window.innerWidth);
   const [opened, setOpened] = useState([
     {
+      name: "user",
+      isOpen: false,
+    },
+    {
       name: "role",
-      isOpen: false,
-    },
-    {
-      name: "bom",
-      isOpen: false,
-    },
-    {
-      name: "companies",
-      isOpen: false,
-    },
-    {
-      name: "customers",
-      isOpen: false,
-    },
-    {
-      name: "mushak",
-      isOpen: false,
-    },
-    {
-      name: "orders",
-      isOpen: false,
-    },
-    {
-      name: "products",
-      isOpen: false,
-    },
-    {
-      name: "purchases",
-      isOpen: false,
-    },
-    {
-      name: "vendors",
-      isOpen: false,
-    },
-    {
-      name: "hscodes",
       isOpen: false,
     },
     {
@@ -135,15 +103,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
       isOpen: false,
     },
     {
-      name: "branch",
-      isOpen: false,
-    },
-    {
-      name: "stock",
-      isOpen: false,
-    },
-    {
-      name: "user",
+      name: "companies",
       isOpen: false,
     },
     {
@@ -151,17 +111,62 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
       isOpen: false,
     },
     {
-      name: "transfer",
+      name: "branch",
       isOpen: false,
     },
     {
-      name: "report",
+      name: "department",
       isOpen: false,
     },
-    {
-      name: "categories",
-      isOpen: false,
-    },
+    
+    // {
+    //   name: "bom",
+    //   isOpen: false,
+    // },
+    // {
+    //   name: "customers",
+    //   isOpen: false,
+    // },
+    // {
+    //   name: "mushak",
+    //   isOpen: false,
+    // },
+    // {
+    //   name: "orders",
+    //   isOpen: false,
+    // },
+    // {
+    //   name: "products",
+    //   isOpen: false,
+    // },
+    // {
+    //   name: "purchases",
+    //   isOpen: false,
+    // },
+    // {
+    //   name: "vendors",
+    //   isOpen: false,
+    // },
+    // {
+    //   name: "hscodes",
+    //   isOpen: false,
+    // },
+    // {
+    //   name: "stock",
+    //   isOpen: false,
+    // },
+    // {
+    //   name: "transfer",
+    //   isOpen: false,
+    // },
+    // {
+    //   name: "report",
+    //   isOpen: false,
+    // },
+    // {
+    //   name: "categories",
+    //   isOpen: false,
+    // },
   ]);
 
   // SET WINDOW SIZE
@@ -850,95 +855,6 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                   width={width}
                 />
               </SubMenu> */}
-
-              {/* Companies */}
-              <SubMenu
-                title="Manage Company"
-                icon={<BusinessIcon />}
-                style={{
-                  color: colors.grey[100],
-                }}
-                onOpenChange={() => {
-                  handleChange("companies");
-                }}
-                open={opened[2].isOpen}
-              >
-                <Item
-                  title="Create New Company"
-                  to="/companies/createCompany"
-                  icon={<AddIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                  change={change}
-                  width={width}
-                />
-                <Item
-                  title="Company List"
-                  to="/companies/companyList"
-                  icon={<DomainAddIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                  change={change}
-                  width={width}
-                />
-              </SubMenu>
-
-              {/* Branches */}
-              {/* <SubMenu
-                title="Manage Branch"
-                icon={<AccountTreeIcon />}
-                style={{
-                  color: colors.grey[100],
-                }}
-                onOpenChange={() => {
-                  handleChange("branch");
-                }}
-                open={opened[11].isOpen}
-              >
-                <Item
-                  title="Create New Branch"
-                  to="/branch/createBranch"
-                  icon={<AddchartIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                  change={change}
-                  width={width}
-                />
-                <Item
-                  title="Branch List"
-                  to="/branch/branchList"
-                  icon={<ReceiptLongIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                  change={change}
-                  width={width}
-                />
-              </SubMenu> */}
-
-              {/* HS Codes */}
-              {/* <SubMenu
-                title="Manage HS Codes"
-                icon={<CodeIcon />}
-                style={{
-                  color: colors.grey[100],
-                }}
-                onOpenChange={() => {
-                  handleChange("hscodes");
-                }}
-                open={opened[9].isOpen}
-              >
-                <Item
-                  title="HS Code List"
-                  to="/hsCodes/hsCodeList"
-                  icon={<FormatListBulletedIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                  change={change}
-                  width={width}
-                />
-              </SubMenu> */}
-
-              {/* User */}
               <SubMenu
                 title="Manage User"
                 icon={<PersonIcon />}
@@ -948,7 +864,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                 onOpenChange={() => {
                   handleChange("user");
                 }}
-                open={opened[13].isOpen}
+                open={opened[0].isOpen}
               >
                 <Item
                   title="Create New User"
@@ -980,7 +896,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                 onOpenChange={() => {
                   handleChange("role");
                 }}
-                open={opened[0].isOpen}
+                open={opened[1].isOpen}
               >
                 <MenuItem
                   active={selected === "Create Role"}
@@ -1020,7 +936,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                 onOpenChange={() => {
                   handleChange("permission");
                 }}
-                open={opened[10].isOpen}
+                open={opened[2].isOpen}
               >
                 <MenuItem
                   active={selected === "Create Permission"}
@@ -1040,6 +956,151 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                   <Typography>Create Permission</Typography>
                 </MenuItem>
               </SubMenu>
+
+              {/* Companies */}
+              <SubMenu
+                title="Manage Company"
+                icon={<BusinessIcon />}
+                style={{
+                  color: colors.grey[100],
+                }}
+                onOpenChange={() => {
+                  handleChange("companies");
+                }}
+                open={opened[3].isOpen}
+              >
+                <Item
+                  title="Create New Company"
+                  to="/companies/createCompany"
+                  icon={<AddIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                  change={change}
+                  width={width}
+                />
+                <Item
+                  title="Company List"
+                  to="/companies/companyList"
+                  icon={<DomainAddIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                  change={change}
+                  width={width}
+                />
+              </SubMenu>
+
+              {/* Company Settings */}
+              <SubMenu
+                title="Company Settings"
+                icon={<SettingsApplicationsIcon />}
+                style={{
+                  color: colors.grey[100],
+                }}
+                onOpenChange={() => {
+                  handleChange("companySettings");
+                }}
+                open={opened[4].isOpen}
+              >
+                <Item
+                  title="Company Profile"
+                  to="/companies/companySettings"
+                  icon={<BusinessIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                  change={change}
+                  width={width}
+                />
+              </SubMenu>
+
+              {/* Branches */}
+              <SubMenu
+                title="Manage Branch"
+                icon={<AccountTreeIcon />}
+                style={{
+                  color: colors.grey[100],
+                }}
+                onOpenChange={() => {
+                  handleChange("branch");
+                }}
+                open={opened[5].isOpen}
+              >
+                <Item
+                  title="Create New Branch"
+                  to="/branch/createBranch"
+                  icon={<AddchartIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                  change={change}
+                  width={width}
+                />
+                <Item
+                  title="Branch List"
+                  to="/branch/branchList"
+                  icon={<ReceiptLongIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                  change={change}
+                  width={width}
+                />
+              </SubMenu>
+
+              {/* Department */}
+              <SubMenu
+                title="Manage Department"
+                icon={<AccountTreeIcon />}
+                style={{
+                  color: colors.grey[100],
+                }}
+                onOpenChange={() => {
+                  handleChange("department");
+                }}
+                open={opened[6].isOpen}
+              >
+                <Item
+                  title="Create New Department"
+                  to="/department/createDepartment"
+                  icon={<AddchartIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                  change={change}
+                  width={width}
+                />
+                <Item
+                  title="Department List"
+                  to="/department/departmentList"
+                  icon={<ReceiptLongIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                  change={change}
+                  width={width}
+                />
+              </SubMenu>
+
+              {/* HS Codes */}
+              {/* <SubMenu
+                title="Manage HS Codes"
+                icon={<CodeIcon />}
+                style={{
+                  color: colors.grey[100],
+                }}
+                onOpenChange={() => {
+                  handleChange("hscodes");
+                }}
+                open={opened[9].isOpen}
+              >
+                <Item
+                  title="HS Code List"
+                  to="/hsCodes/hsCodeList"
+                  icon={<FormatListBulletedIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                  change={change}
+                  width={width}
+                />
+              </SubMenu> */}
+
+              {/* User */}
+              
 
               {/* Categories */}
               {/* <SubMenu
@@ -1073,28 +1134,8 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                 />
               </SubMenu> */}
 
-              {/* Company Settings */}
-              <SubMenu
-                title="Company Settings"
-                icon={<SettingsApplicationsIcon />}
-                style={{
-                  color: colors.grey[100],
-                }}
-                onOpenChange={() => {
-                  handleChange("companySettings");
-                }}
-                open={opened[14].isOpen}
-              >
-                <Item
-                  title="Company Profile"
-                  to="/companies/companySettings"
-                  icon={<BusinessIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                  change={change}
-                  width={width}
-                />
-              </SubMenu>
+              
+              
 
               {/* Reports */}
               {/* <SubMenu

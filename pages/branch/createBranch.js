@@ -16,8 +16,8 @@ const createBranch = ({ token }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
-  const [name, setBranchName] = useState("");
-  const [code, setBranchCode] = useState("");
+  const [branch_name, setBranchName] = useState("");
+  const [company_id, setCompany_id] = useState("");
   const [contact_address, setContactAddress] = useState("");
   const [order_prefix, setOrderPrefix] = useState("");
   const [contact_person, setContactPerson] = useState("");
@@ -25,32 +25,57 @@ const createBranch = ({ token }) => {
   const [contact_mobile, setContactPhone] = useState("");
   const [formErrors, setFormErrors] = useState("");
 
+  // const onSubmit = (e) => {
+  //   e.preventDefault();
+  //   const branch = {
+  //     name,
+  //     code,
+  //     contact_address,
+  //     order_prefix,
+  //     contact_person,
+  //     contact_email,
+  //     contact_mobile,
+  //     formErrors,
+  //   };
+  //   const apiBranch = BASE_URL + "api/v1/branches/create";
+  //   const config = {
+  //     headers: { Authorization: `Bearer ${token}` },
+  //   };
+  //   console.log(branch);
+  //   axios.post(apiBranch, branch, config).then((response) => {
+  //     console.log(response.data);
+  //     if (response.data.status) {
+  //       alert("Branch Information Created!");
+  //       Router.push({
+  //         pathname: "/branch/branchList",
+  //       });
+  //     } else {
+  //       setFormErrors(Object.values(response.data.errors));
+  //     }
+  //   });
+  // };
+
   const onSubmit = (e) => {
     e.preventDefault();
     const branch = {
-      name,
-      code,
-      contact_address,
-      order_prefix,
-      contact_person,
-      contact_email,
-      contact_mobile,
-      formErrors,
+      branch_name,
+      company_id,
     };
-    const apiBranch = BASE_URL + "api/v1/branches/create";
+    const apiBranch = BASE_URL + "branch/create";
     const config = {
       headers: { Authorization: `Bearer ${token}` },
     };
     console.log(branch);
     axios.post(apiBranch, branch, config).then((response) => {
       console.log(response.data);
-      if (response.data.status) {
+      if (response.data) {
+        console.log(response.data.data);
         alert("Branch Information Created!");
         Router.push({
           pathname: "/branch/branchList",
         });
       } else {
-        setFormErrors(Object.values(response.data.errors));
+        setFormErrors(Object.values(response.data));
       }
     });
   };
@@ -81,7 +106,7 @@ const createBranch = ({ token }) => {
         </div>
       </div>
       <div className="row">
-        <div className="col-md-4 mt-4">
+        <div className="col-md-6 mt-4">
           <TextField
             label="Branch Name"
             variant="outlined"
@@ -92,18 +117,18 @@ const createBranch = ({ token }) => {
             className="shadow-input"
           />
         </div>
-        <div className="col-md-4 mt-4">
+        <div className="col-md-6 mt-4">
           <TextField
-            label="Branch Code"
+            label="Company Id"
             variant="outlined"
             size="small"
-            type="email"
+            type="number"
             fullWidth
-            onChange={(e) => setBranchCode(e.target.value)}
+            onChange={(e) => setCompany_id(e.target.value)}
             className="shadow-input"
           />
         </div>
-        <div className="col-md-4 mt-4">
+        {/* <div className="col-md-4 mt-4">
           <TextField
             label="Order Prefix"
             variant="outlined"
@@ -113,10 +138,10 @@ const createBranch = ({ token }) => {
             onChange={(e) => setOrderPrefix(e.target.value)}
             className="shadow-input"
           />
-        </div>
+        </div> */}
       </div>
 
-      <div className="row">
+      {/* <div className="row">
         <div className="col-md-4 mt-4">
           <TextField
             label="Contact Person"
@@ -150,8 +175,8 @@ const createBranch = ({ token }) => {
             className="shadow-input"
           />
         </div>
-      </div>
-      <div className="row">
+      </div> */}
+      {/* <div className="row">
         <div className="col-md-12 mt-4">
           <TextField
             label="Address"
@@ -166,7 +191,7 @@ const createBranch = ({ token }) => {
             className="shadow-input"
           />
         </div>
-      </div>
+      </div> */}
       <div className="row mt-4">
         <div className="col-md-12">
           <Button

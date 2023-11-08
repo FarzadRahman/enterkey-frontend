@@ -232,7 +232,7 @@ export function Home() {
           </Card>
         </div>
         
-        {/* <div className="col-md-3">
+        <div className="col-md-3">
           <Card className="mt-5">
             <CardContent className="text-center">
               <AccountTreeIcon
@@ -252,7 +252,7 @@ export function Home() {
               </Link>
             </CardActions>
           </Card>
-        </div> */}
+        </div>
       </div>
       <div className="row">
         {/* <div className="col-md-3">

@@ -18,7 +18,7 @@ const UpdateCompany = ({ query, token }) => {
   const colors = tokens(theme.palette.mode);
 
   // DATA FOR POST
-  const [company_name, setCompanyName] = useState("");
+  const [name, setCompanyName] = useState("");
   const [contact_email, setContactEmail] = useState("");
   const [contact_address, setContactAddress] = useState("");
   const [contact_number, setContactNumber] = useState("");
@@ -32,22 +32,27 @@ const UpdateCompany = ({ query, token }) => {
 
   // Fetch Company Details
   useEffect(() => {
-    const apiUrl = BASE_URL + "company/" + id;
+    const apiUrl = BASE_URL + "companies";
     axios
       .get(apiUrl, {
         headers: { Authorization: "Bearer " + token },
       })
       .then((res) => {
         console.log(res);
-        if (res.status == 200) {
-          setLoader(false);
-          setCompanyName(res.data.data.company_name);
-          setContactEmail(res.data.data.contact_email);
-          setContactAddress(res.data.data.contact_address);
-          setContactNumber(res.data.data.contact_number);
-          setContactPerson(res.data.data.contact_person);
-          setCompanyTin(res.data.data.company_tin);
-          setCompanyBin(res.data.data.company_bin);
+        if (res.data) {
+          res.data.map((company)=>{
+            if (company.comp_id == id) {
+              console.log(company.comp_id);
+              setLoader(false);
+              setCompanyName(company.company_name);
+              setContactEmail(company.contact_email);
+              setContactAddress(company.contact_address);
+              setContactNumber(company.contact_number);
+              setContactPerson(company.contact_person);
+              setCompanyTin(company.company_tin);
+              setCompanyBin(company.company_bin);
+            }
+          })
         } else {
           setFormErrors(res.data.message);
           console.log(res.data);
@@ -62,20 +67,19 @@ const UpdateCompany = ({ query, token }) => {
     e.preventDefault();
     const apiCompany = BASE_URL + "company/update/"+id;
     const companyData = {
-      company_name,
+      name,
       contact_address,
       contact_number,
       contact_person,
       contact_email,
       company_bin,
       company_tin,
-      id,
     };
     const config = {
       headers: { Authorization: `Bearer ${token}` },
     };
     axios.post(apiCompany, companyData, config).then((response) => {
-      if (response.data.status) {
+      if (response.data) {
         alert("Company Updated");
         Router.push({
           pathname: "/companies/companyList",
@@ -119,7 +123,7 @@ const UpdateCompany = ({ query, token }) => {
                   size="small"
                   type="text"
                   fullWidth
-                  value={company_name}
+                  value={name}
                   onChange={(e) => setCompanyName(e.target.value)}
                   className="shadow-input"
                 />

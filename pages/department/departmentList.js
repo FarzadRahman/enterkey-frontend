@@ -22,7 +22,7 @@ import { BASE_URL } from "../../base";
 // Icon import
 import EditIcon from "@mui/icons-material/Edit";
 
-const branchList = ({ token }) => {
+const departmentList = ({ token }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
@@ -215,4 +215,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(branchList);
+export default connect(mapStateToProps)(departmentList);
