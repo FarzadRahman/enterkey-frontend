@@ -28,11 +28,21 @@ const ChangePassword = ({ token }) => {
   const colors = tokens(theme.palette.mode);
 
   const [password, setPassword] = useState(null);
+  const [oldPassword, setOldPassword] = useState(null);
   const [password_confirmation, setPasswordConfirmation] = useState(null);
 
   // HELPERS
+  const [oldPasswordType, setOldPasswordType] = useState("password");
   const [passwordType, setPasswordType] = useState("password");
   const [passwordConfirmType, setPasswordConfirmType] = useState("password");
+
+  const toggleOldPassword = () => {
+    if (oldPasswordType === "password") {
+      setOldPasswordType("text");
+      return;
+    }
+    setOldPasswordType("password");
+  };
 
   const togglePassword = () => {
     if (passwordType === "password") {
@@ -52,21 +62,26 @@ const ChangePassword = ({ token }) => {
   const onSubmit = () => {
     if (password === password_confirmation) {
       const data = {
+        oldPassword,
         password,
         password_confirmation,
       };
-      const apiPassword = BASE_URL + "api/v1/auth/change-password";
+      const apiPassword = BASE_URL + "auth/change-password";
       const config = {
         headers: { Authorization: `Bearer ${token}` },
       };
       axios.post(apiPassword, data, config).then((response) => {
-        if (response.data.status) {
-          alert("Password Changed!");
+        console.log(response);
+       
+
+        // return false;
+        if (response.status==200) {
+          alert(response.data.message);
           Router.push({
             pathname: "/",
           });
         } else {
-          console.log(response.data);
+          alert(response.data.message);
         }
       });
     } else {
@@ -79,8 +94,32 @@ const ChangePassword = ({ token }) => {
       <Typography variant="h2" className="mb-4" color={colors.greenAccent[300]}>
         Change Password
       </Typography>
+
       <div className="row">
         <div className="col-md-6">
+          <TextField
+            label="Previous Password"
+            variant="outlined"
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton onClick={toggleOldPassword}>
+                    <VisibilityIcon />
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+            size="small"
+            type={oldPasswordType}
+            fullWidth
+            onChange={(e) => setOldPassword(e.target.value)}
+            className="shadow-input"
+          />
+        </div>
+      </div>
+
+      <div className="row">
+        <div className="col-md-6  mt-4">
           <TextField
             label="Password"
             variant="outlined"
