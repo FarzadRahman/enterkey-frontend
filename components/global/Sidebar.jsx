@@ -118,6 +118,14 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
       name: "department",
       isOpen: false,
     },
+    {
+      name: "grade",
+      isOpen: false,
+    },
+    {
+      name: "designation",
+      isOpen: false,
+    },
     
     // {
     //   name: "bom",
@@ -990,7 +998,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
               </SubMenu>
 
               {/* Company Settings */}
-              <SubMenu
+              {/* <SubMenu
                 title="Company Settings"
                 icon={<SettingsApplicationsIcon />}
                 style={{
@@ -1010,7 +1018,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                   change={change}
                   width={width}
                 />
-              </SubMenu>
+              </SubMenu> */}
 
               {/* Branches */}
               <SubMenu
@@ -1075,6 +1083,71 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                   width={width}
                 />
               </SubMenu>
+
+              {/* Grade */}
+              <SubMenu
+                title="Manage Grade"
+                icon={<AccountTreeIcon />}
+                style={{
+                  color: colors.grey[100],
+                }}
+                onOpenChange={() => {
+                  handleChange("grade");
+                }}
+                open={opened[7].isOpen}
+              >
+                <Item
+                  title="Create New Grade"
+                  to="/grade/createGrade"
+                  icon={<AddchartIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                  change={change}
+                  width={width}
+                />
+                <Item
+                  title="Grade List"
+                  to="/grade/gradeList"
+                  icon={<ReceiptLongIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                  change={change}
+                  width={width}
+                />
+              </SubMenu>
+
+              {/* Designation */}
+              <SubMenu
+                title="Manage Designation"
+                icon={<AccountTreeIcon />}
+                style={{
+                  color: colors.grey[100],
+                }}
+                onOpenChange={() => {
+                  handleChange("designation");
+                }}
+                open={opened[8].isOpen}
+              >
+                <Item
+                  title="Create New Designation"
+                  to="/designation/createDesignation"
+                  icon={<AddchartIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                  change={change}
+                  width={width}
+                />
+                <Item
+                  title="Designation List"
+                  to="/designation/designationList"
+                  icon={<ReceiptLongIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                  change={change}
+                  width={width}
+                />
+              </SubMenu>
+
 
               {/* HS Codes */}
               {/* <SubMenu

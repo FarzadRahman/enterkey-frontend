@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 
 //theme
 import { tokens } from "../../theme";
-import { TextField, Button, Typography, useTheme } from "@mui/material";
+import { TextField, Button, Typography, useTheme, MenuItem } from "@mui/material";
 
 //axios
 import axios from "axios";
@@ -20,6 +20,7 @@ const updateBranch = ({ token, query }) => {
   const [branch_name, setBranchName] = useState("");
   const [bran_id, setBran_id] = useState("");
   const [company_id, setCompany_id] = useState("");
+  const [companies, setCompanies] = useState([]);
   const [order_prefix, setOrderPrefix] = useState("");
   const [contact_person, setContactPerson] = useState("");
   const [contact_email, setPersonEmail] = useState("");
@@ -55,6 +56,25 @@ const updateBranch = ({ token, query }) => {
   //       console.log(error);
   //     });
   // }, [id]);
+
+  useEffect(() => {
+    const apiUrl = BASE_URL + "companies";
+    axios
+      .get(apiUrl, {
+        headers: { Authorization: "Bearer " + token },
+      })
+      .then((res) => {
+        if (res.data) {
+          setCompanies(res.data);
+        } else {
+          setFormErrors(res.data.message);
+          console.log(res.data);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   useEffect(() => {
     const apiUrl = BASE_URL + "branches";
@@ -168,6 +188,26 @@ const updateBranch = ({ token, query }) => {
           />
         </div>
         <div className="col-md-6 mt-4">
+            <TextField
+              onChange={(e) => {
+                setCompany_id(+e.target.value);
+              }}
+              select
+              label="Company"
+              size="small"
+              fullWidth
+              value={company_id || ""}
+
+              className="shadow-input"
+            >
+              {companies?.map((option, index) => (
+                <MenuItem key={index} value={option.comp_id}>
+                  {option.company_name} 
+                </MenuItem>
+              ))}
+            </TextField>
+          </div>
+        {/* <div className="col-md-6 mt-4">
           <TextField
             label="Company Id"
             variant="outlined"
@@ -178,7 +218,7 @@ const updateBranch = ({ token, query }) => {
             onChange={(e) => setCompany_id(e.target.value)}
             className="shadow-input"
           />
-        </div>
+        </div> */}
         {/* <div className="col-md-4 mt-4">
           <TextField
             label="Order Prefix"

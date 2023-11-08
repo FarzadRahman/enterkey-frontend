@@ -98,6 +98,23 @@ const RegisterForm = ({ token }) => {
       });
   }, []);
 
+    // Fetch Role
+    useEffect(() => {
+      const apiRoles = BASE_URL + "role";
+      axios
+        .get(apiRoles, {
+          headers: { Authorization: "Bearer " + token },
+        })
+        .then((res) => {
+          if (res.data) {
+            setRoles(res.data.data);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }, []);
+
   async function register(e) {
     e.preventDefault();
     const apiUrl = BASE_URL + "register";
@@ -185,9 +202,9 @@ const RegisterForm = ({ token }) => {
               value={role_id || ""}
               className="shadow-input"
             >
-              {role?.map((option, index) => (
-                <MenuItem key={index} value={option.id}>
-                  {option.name}
+              {roles?.map((option, index) => (
+                <MenuItem key={index} value={option.role_id}>
+                  {option.role_name}
                 </MenuItem>
               ))}
             </TextField>

@@ -22,12 +22,12 @@ import { BASE_URL } from "../../base";
 // Icon import
 import EditIcon from "@mui/icons-material/Edit";
 
-const branchList = ({ token }) => {
+const designationList = ({ token }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
   // Helper
-  const [branches, setBranches] = useState([]);
+  const [designations, setDesignations] = useState([]);
   const [loader, setLoader] = useState(true);
 
   // Search
@@ -39,49 +39,19 @@ const branchList = ({ token }) => {
   const [lastPage, setLastPage] = useState(1);
   const [totalData, setTotalData] = useState(0);
 
-  // useEffect(() => {
-  //   const apiBranch =
-  //     BASE_URL +
-  //     "api/v1/branch-list?page=" +
-  //     page +
-  //     "&name=" +
-  //     name +
-  //     "&code=" +
-  //     code;
-
-  //   axios
-  //     .get(apiBranch, {
-  //       headers: { Authorization: "Bearer " + token },
-  //     })
-  //     .then((res) => {
-  //       console.log(res.data);
-  //       if (res.data.status) {
-  //         setLoader(false);
-  //         setBranches(res.data.data.data);
-  //         setLastPage(res.data.data.last_page);
-  //         setTotalData(res.data.data.total);
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // }, [page, name, code]);
-
   useEffect(() => {
     const apiBranch =
       BASE_URL +
-      "branches";
+      "designations";
 
     axios
       .get(apiBranch, {
         headers: { Authorization: "Bearer " + token },
       })
       .then((res) => {
-        console.log("res.data");
-        console.log(res.data);
         if (res.data) {
           setLoader(false);
-          setBranches(res.data);
+          setDesignations(res.data);
           // setLastPage(res.data.data.last_page);
           // setTotalData(res.data.data.total);
         }
@@ -109,13 +79,13 @@ const branchList = ({ token }) => {
                 className="mb-4"
                 color={colors.greenAccent[300]}
               >
-                Branch List
+                Designation List
               </Typography>
             </div>
             <div className="col-md-6 mt-1">
               <Link href="/branch/createBranch" className="anchor">
                 <Button variant="outlined" className="float-end">
-                  Create Branch
+                  Create Designation
                 </Button>
               </Link>
             </div>
@@ -151,21 +121,21 @@ const branchList = ({ token }) => {
               <thead>
                 <tr className="table-success">
                   <th scope="col">#</th>
-                  <th scope="col">Company ID</th>
+                  <th scope="col">Grade ID</th>
                   {/* <th scope="col">Branch ID</th> */}
-                  <th scope="col">Branch Name</th>
+                  <th scope="col">Designation Name</th>
                   <th scope="col">Actions</th>
                 </tr>
               </thead>
               <tbody>
-                {branches?.map((branch, index) => (
+                {designations?.map((designation, index) => (
                   <tr key={index}>
                     <th scope="row">{index + 1}</th>
-                    <td>{branch.company_id}</td>
+                    <td>{designation.grade_id}</td>
                     {/* <td>{branch.bran_id}</td> */}
-                    <td>{branch.branch_name}</td>
+                    <td>{designation.desg_nm}</td>
                     <td>
-                      <Link href={`/branch/updateBranch/${branch.bran_id}`}>
+                      <Link href={`/designation/updateDesignation/${designation.desg_id}`}>
                         <button className="btn btn-light btn-sm me-1">
                           <EditIcon cursor="pointer" />
                         </button>
@@ -215,4 +185,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(branchList);
+export default connect(mapStateToProps)(designationList);

@@ -34,13 +34,14 @@ const CreatePermission = ({ token }) => {
 
   // Loading roles
   useEffect(() => {
-    const apiRoles = BASE_URL + "api/v1/roles";
+    const apiRoles = BASE_URL + "role";
     axios
       .get(apiRoles, {
         headers: { Authorization: "Bearer " + token },
       })
       .then((res) => {
-        if (res.data.status == true) {
+        if (res.data) {
+          console.log(res.data.data);
           setAllRoles(res.data.data);
         }
       })
@@ -51,10 +52,10 @@ const CreatePermission = ({ token }) => {
 
   // Functions for creating roles array
   const rolesAdd = (list, item) => {
-    setRoles((roles) => [...roles, item.id]);
+    setRoles((roles) => [...roles, item.role_id]);
   };
   const rolesRemove = (list, item) => {
-    setRoles(roles.filter((i) => i !== item.id));
+    setRoles(roles.filter((i) => i !== item.role_id));
   };
 
   // POST to server
@@ -126,7 +127,7 @@ const CreatePermission = ({ token }) => {
             <Multiselect
               placeholder="Select Roles ▼"
               cursor="pointer"
-              displayValue="name"
+              displayValue="role_name"
               onRemove={rolesRemove}
               onSelect={rolesAdd}
               options={allRoles}

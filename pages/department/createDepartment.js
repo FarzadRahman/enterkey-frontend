@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Router from "next/router";
 import Link from "next/link";
 //redux imports
@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 
 //theme
 import { tokens } from "../theme";
-import { TextField, Button, Typography, useTheme } from "@mui/material";
+import { TextField, Button, Typography, useTheme, MenuItem } from "@mui/material";
 
 //axios
 import axios from "axios";
@@ -16,8 +16,9 @@ const createDepartment = ({ token }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
-  const [branch_name, setBranchName] = useState("");
-  const [company_id, setCompany_id] = useState("");
+  const [department_name, setDepartmentName] = useState("");
+  const [branch_id, setBranch_id] = useState("");
+  const [branches, setBranches] = useState([]);
   const [contact_address, setContactAddress] = useState("");
   const [order_prefix, setOrderPrefix] = useState("");
   const [contact_person, setContactPerson] = useState("");
@@ -25,57 +26,46 @@ const createDepartment = ({ token }) => {
   const [contact_mobile, setContactPhone] = useState("");
   const [formErrors, setFormErrors] = useState("");
 
-  // const onSubmit = (e) => {
-  //   e.preventDefault();
-  //   const branch = {
-  //     name,
-  //     code,
-  //     contact_address,
-  //     order_prefix,
-  //     contact_person,
-  //     contact_email,
-  //     contact_mobile,
-  //     formErrors,
-  //   };
-  //   const apiBranch = BASE_URL + "api/v1/branches/create";
-  //   const config = {
-  //     headers: { Authorization: `Bearer ${token}` },
-  //   };
-  //   console.log(branch);
-  //   axios.post(apiBranch, branch, config).then((response) => {
-  //     console.log(response.data);
-  //     if (response.data.status) {
-  //       alert("Branch Information Created!");
-  //       Router.push({
-  //         pathname: "/branch/branchList",
-  //       });
-  //     } else {
-  //       setFormErrors(Object.values(response.data.errors));
-  //     }
-  //   });
-  // };
+
+  // useEffect(() => {
+  //   const apiGrade =
+  //     BASE_URL +
+  //     "branches";
+
+  //   axios
+  //     .get(apiGrade, {
+  //       headers: { Authorization: "Bearer " + token },
+  //     })
+  //     .then((res) => {
+  //       if (res.data) {
+  //         setBranches(res.data);
+  //         // setLastPage(res.data.data.last_page);
+  //         // setTotalData(res.data.data.total);
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // }, []);
 
   const onSubmit = (e) => {
     e.preventDefault();
     const branch = {
-      branch_name,
-      company_id,
+      department_name
     };
-    const apiBranch = BASE_URL + "branch/create";
+    const apiBranch = BASE_URL + "department/create";
     const config = {
       headers: { Authorization: `Bearer ${token}` },
     };
-    console.log(branch);
     axios.post(apiBranch, branch, config).then((response) => {
-      console.log(response.data);
       if (response.data) {
-        console.log(response.data.data);
-        alert("Branch Information Created!");
+        alert("Department Information Created!");
         Router.push({
-          pathname: "/branch/branchList",
+          pathname: "/department/departmentList",
         });
       } else {
         setFormErrors(Object.values(response.data));
+        console.log(response.data);
       }
     });
   };
@@ -83,7 +73,7 @@ const createDepartment = ({ token }) => {
   // RETURN TO LIST
   const goBack = () => {
     Router.push({
-      pathname: "/branch/branchList",
+      pathname: "/department/departmentList",
     });
   };
 
@@ -96,28 +86,48 @@ const createDepartment = ({ token }) => {
             className="mb-4"
             color={colors.greenAccent[300]}
           >
-            Create Branch
+            Create Department
           </Typography>
         </div>
         <div className="col-2 mt-1">
-          <Link href="/branch/branchList" className="anchor">
-            <Button variant="outlined"> Branch List</Button>
+          <Link href="/department/departmentList" className="anchor">
+            <Button variant="outlined"> Department List</Button>
           </Link>
         </div>
       </div>
       <div className="row">
-        <div className="col-md-6 mt-4">
+        <div className="col-md-12 mt-4">
           <TextField
             label="Department Name"
             variant="outlined"
             size="small"
             type="text"
             fullWidth
-            onChange={(e) => setBranchName(e.target.value)}
+            onChange={(e) => setDepartmentName(e.target.value)}
             className="shadow-input"
           />
         </div>
-        <div className="col-md-6 mt-4">
+        {/* <div className="col-md-6 mt-4">
+          <TextField
+            onChange={(e) => {
+              branch_id(+e.target.value);
+            }}
+            select
+            label="Branch"
+            size="small"
+            fullWidth
+            value={branch_id || ""}
+
+            className="shadow-input"
+          >
+            {branches?.map((option, index) => (
+              <MenuItem key={index} value={option.bran_id}>
+                {option.branch_name} 
+              </MenuItem>
+            ))}
+          </TextField>
+        </div> */}
+        {/* <div className="col-md-6 mt-4">
           <TextField
             label="Branch Id"
             variant="outlined"
@@ -127,7 +137,7 @@ const createDepartment = ({ token }) => {
             onChange={(e) => setCompany_id(e.target.value)}
             className="shadow-input"
           />
-        </div>
+        </div> */}
         {/* <div className="col-md-4 mt-4">
           <TextField
             label="Order Prefix"

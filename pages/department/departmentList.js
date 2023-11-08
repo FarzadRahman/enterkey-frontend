@@ -27,7 +27,7 @@ const departmentList = ({ token }) => {
   const colors = tokens(theme.palette.mode);
 
   // Helper
-  const [branches, setBranches] = useState([]);
+  const [departments, setDepartments] = useState([]);
   const [loader, setLoader] = useState(true);
 
   // Search
@@ -70,18 +70,16 @@ const departmentList = ({ token }) => {
   useEffect(() => {
     const apiBranch =
       BASE_URL +
-      "branches";
+      "departments";
 
     axios
       .get(apiBranch, {
         headers: { Authorization: "Bearer " + token },
       })
       .then((res) => {
-        console.log("res.data");
-        console.log(res.data);
         if (res.data) {
           setLoader(false);
-          setBranches(res.data);
+          setDepartments(res.data);
           // setLastPage(res.data.data.last_page);
           // setTotalData(res.data.data.total);
         }
@@ -109,19 +107,19 @@ const departmentList = ({ token }) => {
                 className="mb-4"
                 color={colors.greenAccent[300]}
               >
-                Branch List
+                Department List
               </Typography>
             </div>
             <div className="col-md-6 mt-1">
-              <Link href="/branch/createBranch" className="anchor">
+              <Link href="/department/createDepartment" className="anchor">
                 <Button variant="outlined" className="float-end">
-                  Create Branch
+                  Create Department
                 </Button>
               </Link>
             </div>
           </div>
 
-          <div className="row">
+          {/* <div className="row">
             <div className="col-md-3 mb-4">
               <TextField
                 label="Name"
@@ -144,28 +142,28 @@ const departmentList = ({ token }) => {
                 className="shadow-input"
               />
             </div>
-          </div>
+          </div> */}
 
           <div className="table-responsive">
             <table className="table table-striped">
               <thead>
                 <tr className="table-success">
                   <th scope="col">#</th>
-                  <th scope="col">Company ID</th>
+                  {/* <th scope="col">Company ID</th> */}
                   {/* <th scope="col">Branch ID</th> */}
-                  <th scope="col">Branch Name</th>
+                  <th scope="col">Department Name</th>
                   <th scope="col">Actions</th>
                 </tr>
               </thead>
               <tbody>
-                {branches?.map((branch, index) => (
+                {departments?.map((department, index) => (
                   <tr key={index}>
                     <th scope="row">{index + 1}</th>
-                    <td>{branch.company_id}</td>
+                    {/* <td>{branch.company_id}</td> */}
                     {/* <td>{branch.bran_id}</td> */}
-                    <td>{branch.branch_name}</td>
+                    <td>{department.department_name}</td>
                     <td>
-                      <Link href={`/branch/updateBranch/${branch.bran_id}`}>
+                      <Link href={`/department/updateDepartment/${department.dept_id}`}>
                         <button className="btn btn-light btn-sm me-1">
                           <EditIcon cursor="pointer" />
                         </button>

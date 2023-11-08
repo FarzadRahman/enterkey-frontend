@@ -83,7 +83,7 @@ const companyList = ({ token }) => {
               <thead>
                 <tr className="table-success">
                   <th scope="col">#</th>
-                  <th scope="col">Company ID</th>
+                  {/* <th scope="col">Company ID</th> */}
                   <th scope="col">Company Name</th>
                   <th scope="col">Company BIN</th>
                   <th scope="col">Contact Person</th>
@@ -97,7 +97,7 @@ const companyList = ({ token }) => {
                 {companies.map((company, index) => (
                   <tr key={index}>
                     <th scope="row">{index + 1}</th>
-                    <td className="text-center">{company.comp_id}</td>
+                    {/* <td className="text-center">{company.comp_id}</td> */}
                     <td>{company.company_name}</td>
                     <td>{company.company_bin}</td>
                     <td>{company.contact_person}</td>
