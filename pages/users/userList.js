@@ -44,7 +44,8 @@ const userList = ({ token }) => {
         headers: { Authorization: "Bearer " + token },
       })
       .then((res) => {
-        if (res.data.status === true) {
+        console.log(res);
+        if (res.status === 200) {
           setUsers(res.data.users);
           setLastPage(res.data.users.last_page);
           setTotalData(res.data.users.total);

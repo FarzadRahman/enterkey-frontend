@@ -17,11 +17,12 @@ const createUser = ({ roles }) => {
   const [superAdmin, setSuperAdmin] = useState(false);
 
   useEffect(() => {
-    roles?.map((role) => {
-      if (role.name === "SuperAdmin") {
-        setSuperAdmin(true);
-      }
-    });
+    // roles?.map((role) => {
+    //   console.log(role.name);
+    //   if (role.name === "SuperAdmin") {
+    //     setSuperAdmin(true);
+    //   }
+    // });
   }, []);
 
   return (

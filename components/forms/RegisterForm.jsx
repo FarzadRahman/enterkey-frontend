@@ -130,6 +130,8 @@ const RegisterForm = ({ token }) => {
       headers: { Authorization: `Bearer ${token}` },
     };
     axios.post(apiUrl, regData, config).then((response) => {
+      // console.log(response);
+      // return false;
       if (response.data) {
         Router.push({
           pathname: "/users/userList",
