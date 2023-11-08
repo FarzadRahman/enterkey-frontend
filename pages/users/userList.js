@@ -73,8 +73,8 @@ const userList = ({ token }) => {
               <th>#</th>
               <th>Name</th>
               <th>Email</th>
-              <th>Phone</th>
-              <th>Contact Address</th>
+              <th>Company</th>
+              <th>Role</th>
               {/* <th>Actions</th> */}
             </tr>
           </thead>
@@ -84,8 +84,8 @@ const userList = ({ token }) => {
                 <th scope="row">{index + 1}</th>
                 <td>{user.name}</td>
                 <td>{user.email}</td>
-                <td>{user.phone}</td>
-                <td>{user.contact_address}</td>
+                <td>{user.company_name}</td>
+                <td>{user.role_name}</td>
                 {/* <td>
                   <Link href={`/users/updateUser/${user.id}`} className="anchor">
                     <button className="btn btn-light btn-sm me-1">
