@@ -53,6 +53,7 @@ const Topbar = ({ token, isCollapsed, name }) => {
 
   const submitHandler = () => {
     const apiUrl = BASE_URL + "logout";
+    console.log("logput");
     const config = {
       headers: { Authorization: `Bearer ${token}` },
     };

@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import { tokens } from "../theme";
 import { Typography, useTheme } from "@mui/material";
 
-const userProfile = ({ user }) => {
+const employeeProfile = ({ user }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
@@ -71,4 +71,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(userProfile);
+export default connect(mapStateToProps)(employeeProfile);

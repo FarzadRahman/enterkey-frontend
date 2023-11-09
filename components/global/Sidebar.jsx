@@ -126,6 +126,10 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
       name: "designation",
       isOpen: false,
     },
+    {
+      name: "employees",
+      isOpen: false,
+    },
     
     // {
     //   name: "bom",
@@ -1140,6 +1144,38 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                 <Item
                   title="Designation List"
                   to="/designation/designationList"
+                  icon={<ReceiptLongIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                  change={change}
+                  width={width}
+                />
+              </SubMenu>
+
+              {/* Employees */}
+              <SubMenu
+                title="Manage Employees"
+                icon={<AccountTreeIcon />}
+                style={{
+                  color: colors.grey[100],
+                }}
+                onOpenChange={() => {
+                  handleChange("employees");
+                }}
+                open={opened[9].isOpen}
+              >
+                <Item
+                  title="Create New Employee"
+                  to="/employees/createEmployee"
+                  icon={<AddchartIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                  change={change}
+                  width={width}
+                />
+                <Item
+                  title="Employee List"
+                  to="/employees/employeeList"
                   icon={<ReceiptLongIcon />}
                   selected={selected}
                   setSelected={setSelected}
