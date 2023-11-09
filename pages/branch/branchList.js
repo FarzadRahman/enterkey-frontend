@@ -70,7 +70,9 @@ const branchList = ({ token }) => {
   useEffect(() => {
     const apiBranch =
       BASE_URL +
-      "branches";
+      "branches?page=" +
+      page;
+  ;
 
     axios
       .get(apiBranch, {
@@ -81,7 +83,7 @@ const branchList = ({ token }) => {
         console.log(res.data);
         if (res.data) {
           setLoader(false);
-          setBranches(res.data);
+          setBranches(res.data.data);
           // setLastPage(res.data.data.last_page);
           // setTotalData(res.data.data.total);
         }
@@ -89,7 +91,7 @@ const branchList = ({ token }) => {
       .catch((error) => {
         console.log(error);
       });
-  }, [page, name, code]);
+  }, [page, name, code,token]);
 
   // Pagination
   const handleChange = (e, page) => {
@@ -151,7 +153,7 @@ const branchList = ({ token }) => {
               <thead>
                 <tr className="table-success">
                   <th scope="col">#</th>
-                  <th scope="col">Company ID</th>
+                  <th scope="col">Company Name</th>
                   {/* <th scope="col">Branch ID</th> */}
                   <th scope="col">Branch Name</th>
                   <th scope="col">Actions</th>
@@ -161,7 +163,7 @@ const branchList = ({ token }) => {
                 {branches?.map((branch, index) => (
                   <tr key={index}>
                     <th scope="row">{index + 1}</th>
-                    <td>{branch.company_id}</td>
+                    <td>{branch.company.company_name}</td>
                     {/* <td>{branch.bran_id}</td> */}
                     <td>{branch.branch_name}</td>
                     <td>
