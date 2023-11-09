@@ -15,6 +15,7 @@ import { BASE_URL } from "../../base";
 // Icon import
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from '@mui/icons-material/Delete';
+import Pagination from '@mui/material/Pagination';
 
 const companyList = ({ token }) => {
   const theme = useTheme();
@@ -22,6 +23,13 @@ const companyList = ({ token }) => {
 
   const [companies, setCompanies] = useState([]);
   const [loader, setLoader] = useState(true);
+
+  
+  // Pagination
+  const [page, setPage] = useState(1);
+  const [lastPage, setLastPage] = useState(1);
+  const [totalData, setTotalData] = useState(0);
+
 
   useEffect(() => {
     const apiCompanies = BASE_URL + "companies";
@@ -39,7 +47,7 @@ const companyList = ({ token }) => {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [page]);
   const handleDeleteCompany = (companyId) => {
     const apiUrl = BASE_URL + `company/delete/${companyId}`;
     axios
@@ -54,6 +62,10 @@ const companyList = ({ token }) => {
       .catch((error) => {
         console.log(error);
       });
+  };
+  // Pagination
+  const handleChange = (e, page) => {
+    setPage(page);
   };
   return (
     <>
@@ -121,6 +133,33 @@ const companyList = ({ token }) => {
                 ))}
               </tbody>
             </table>
+          </div>
+          <div className="row justify-content-center">
+            <div className="col-md-12 d-flex justify-content-center">
+              <Pagination
+                count={lastPage}
+                page={page}
+                color="secondary"
+                size="large"
+                onChange={handleChange}
+              />
+              {page === lastPage ? (
+                <span className="ms-3 mt-2">
+                  Showing {1 + (page - 1) * 10} - {totalData} out of {totalData}
+                </span>
+              ) : (
+                <>
+                  {totalData === 0 ? (
+                    <span className="ms-3 mt-2">Showing 0 out of 0</span>
+                  ) : (
+                    <span className="ms-3 mt-2">
+                      Showing {1 + (page - 1) * 10} - {10 + (page - 1) * 10} out
+                      of {totalData}
+                    </span>
+                  )}
+                </>
+              )}
+            </div>
           </div>
         </>
       )}

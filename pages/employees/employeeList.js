@@ -37,9 +37,8 @@ const employeeList = ({ token }) => {
     
     const apiUsers =
     BASE_URL +
-    "employees";
-    // ?page=" +
-    // page;
+    "employees?page=" +
+    page;
 
     axios
       .get(apiUsers, {
