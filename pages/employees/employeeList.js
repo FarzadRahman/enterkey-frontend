@@ -89,13 +89,13 @@ const employeeList = ({ token }) => {
           <thead>
             <tr className="table-success">
               <th>#</th>
-              <th>full_name</th>
-              <th>phone_number</th>
-              <th>email_address</th>
-              <th>office_id</th>
-              <th>branch_id</th>
-              <th>designation_id</th>
-              <th>department_id</th>
+              <th>Full Name</th>
+              <th>Phone Number</th>
+              <th>Email Address</th>
+              <th>Office ID</th>
+              <th>Branch</th>
+              <th>Designation</th>
+              <th>Department</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -107,9 +107,9 @@ const employeeList = ({ token }) => {
                 <td>{employee.phone_number}</td>
                 <td>{employee.email_address}</td>
                 <td>{employee.office_id}</td>
-                <td>{employee.branch_id}</td>
-                <td>{employee.designation_id}</td>
-                <td>{employee.department_id}</td>
+                <td>{employee?.branch?.branch_name}</td>
+                <td>{employee?.designation?.desg_nm}</td>
+                <td>{employee?.department?.department_name}</td>
                 <td>
                   <Link href={`/employees/updateEmployee/${employee.emp_id}`} className="anchor">
                     <button className="btn btn-light btn-sm me-1">

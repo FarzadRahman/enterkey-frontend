@@ -146,7 +146,6 @@ const updateDesignation = ({ token, query }) => {
               size="small"
               fullWidth
               value={grade_id || ""}
-
               className="shadow-input"
             >
               {grades?.map((option, index) => (

@@ -22,8 +22,6 @@ import { BASE_URL } from "../../../base";
 import EmployeeForm from "../../../components/forms/EmployeeForm";
 
 const EmployeeDetails = ({ query, token }) => {
-  console.log("query");
-  console.log(query);
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
@@ -79,126 +77,6 @@ const EmployeeDetails = ({ query, token }) => {
         console.log(error);
       });
   }, []);
-
-  // FETCH ALL ROLES
-  // useEffect(() => {
-  //   const apiRoles = BASE_URL + "api/v1/roles";
-  //   axios
-  //     .get(apiRoles, {
-  //       headers: { Authorization: "Bearer " + token },
-  //     })
-  //     .then((res) => {
-  //       if (res.data.status) {
-  //         setAllRoles(res.data.data);
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // }, []);
-
-  // SELECTED ROLES
-  // const rolesAdd = (e) => {
-  //   setRoleId(+e.target.value);
-  //   setRoles([]);
-  //   setRoles((roles) => [...roles, +e.target.value]);
-  // };
-
-  // FETCH ALL PERMISSIONS
-  // useEffect(() => {
-  //   const apiPermissions = BASE_URL + "api/v1/permissions";
-  //   axios
-  //     .get(apiPermissions, {
-  //       headers: { Authorization: "Bearer " + token },
-  //     })
-  //     .then((res) => {
-  //       if (res.data.status == true) {
-  //         res.data.data.map((permission) => {
-  //           permission.selected = false;
-  //         });
-
-  //         res.data.data.map((permission) => {
-  //           permissions.map((perm) => {
-  //             if (perm == permission.id) {
-  //               permission.selected = true;
-  //             }
-  //           });
-  //         });
-
-  //         setAllPermissions(res.data.data);
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // }, [permissions]);
-
-  // FETCH ALL COMPANIES
-  // useEffect(() => {
-  //   const apiCompanies = BASE_URL + "api/v1/companies";
-  //   axios
-  //     .get(apiCompanies, {
-  //       headers: { Authorization: "Bearer " + token },
-  //     })
-  //     .then((res) => {
-  //       if (res.data.status == true) {
-  //         setAllCompanies(res.data.data);
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // }, []);
-
-  // HANDLE PERMISSIONS
-  // const handlePermissions = (e, id) => {
-  //   const newState = allPermissions.map((perm) => {
-  //     if (perm.id === id) {
-  //       return { ...perm, selected: e.target.checked };
-  //     }
-  //     return perm;
-  //   });
-  //   setAllPermissions(newState);
-  // };
-
-  // POST UPDATE DATA
-  // const update = () => {
-  //   let temp = [];
-
-  //   allPermissions.map((pm) => {
-  //     if (pm.selected) {
-  //       temp.push(pm.id);
-  //     }
-  //   });
-
-  //   const updatedValues = {
-  //     email,
-  //     name,
-  //     phone,
-  //     roles,
-  //     permissions: temp,
-  //     id,
-  //     status,
-  //     company_id,
-  //   };
-  //   const apiUpdate = BASE_URL + "api/v1/admins/update";
-  //   const config = {
-  //     headers: { Authorization: `Bearer ${token}` },
-  //   };
-  //   console.log(updatedValues);
-  //   axios.post(apiUpdate, updatedValues, config).then((response) => {
-  //     if (response.data.status) {
-  //       alert("Information Updated!");
-  //       Router.push({
-  //         pathname: "/users/userList",
-  //       });
-  //     } else {
-  //       setErrors(Object.values(response.data.errors));
-  //     }
-  //   });
-  // };
-
-  // console.log(allPermissions);
 
   return (
     <>

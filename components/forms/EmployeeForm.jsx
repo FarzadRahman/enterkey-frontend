@@ -326,7 +326,7 @@ const EmployeeForm = ({ token, id }) => {
                             // onChange={(e) => setPassword(e.target.value)}
                             value={user_id || ""}
                             className="shadow-input"
-                            readonly
+                            readOnly
                             />
                         </div>
                     }
