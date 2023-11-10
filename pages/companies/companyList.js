@@ -32,7 +32,8 @@ const companyList = ({ token }) => {
 
 
   useEffect(() => {
-    const apiCompanies = BASE_URL + "companies";
+    const apiCompanies = BASE_URL + "companies?page=" +
+    page;
 
     axios
       .get(apiCompanies, {
@@ -41,7 +42,7 @@ const companyList = ({ token }) => {
       .then((res) => {
         if (res.status == 200) {
           setLoader(false);
-          setCompanies(res.data);
+          setCompanies(res.data.data);
         }
       })
       .catch((error) => {
