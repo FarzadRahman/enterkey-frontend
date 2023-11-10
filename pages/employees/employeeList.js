@@ -46,7 +46,7 @@ const employeeList = ({ token }) => {
       })
       .then((res) => {
         if (res.status === 200) {
-          setEmployees(res.data);
+          setEmployees(res.data.data);
           setLastPage(res.data.last_page);
           setTotalData(res.data.total);
         }

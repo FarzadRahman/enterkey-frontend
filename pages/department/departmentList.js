@@ -79,7 +79,9 @@ const departmentList = ({ token }) => {
       .then((res) => {
         if (res.data) {
           setLoader(false);
-          setDepartments(res.data);
+          setDepartments(res.data.data);
+          setLastPage(res.data.last_page);
+          setTotalData(res.data.total);
           // setLastPage(res.data.data.last_page);
           // setTotalData(res.data.data.total);
         }

@@ -43,6 +43,8 @@ const companyList = ({ token }) => {
         if (res.status == 200) {
           setLoader(false);
           setCompanies(res.data.data);
+          setLastPage(res.data.last_page);
+          setTotalData(res.data.total);
         }
       })
       .catch((error) => {

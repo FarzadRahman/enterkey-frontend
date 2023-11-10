@@ -52,6 +52,8 @@ const designationList = ({ token }) => {
         if (res.data) {
           setLoader(false);
           setDesignations(res.data.data);
+          setLastPage(res.data.last_page);
+          setTotalData(res.data.total);
           // setLastPage(res.data.data.last_page);
           // setTotalData(res.data.data.total);
         }
