@@ -51,7 +51,7 @@ const designationList = ({ token }) => {
       .then((res) => {
         if (res.data) {
           setLoader(false);
-          setDesignations(res.data);
+          setDesignations(res.data.data);
           // setLastPage(res.data.data.last_page);
           // setTotalData(res.data.data.total);
         }
@@ -121,7 +121,7 @@ const designationList = ({ token }) => {
               <thead>
                 <tr className="table-success">
                   <th scope="col">#</th>
-                  <th scope="col">Grade ID</th>
+                  <th scope="col">Grade Name</th>
                   {/* <th scope="col">Branch ID</th> */}
                   <th scope="col">Designation Name</th>
                   <th scope="col">Actions</th>
@@ -131,7 +131,7 @@ const designationList = ({ token }) => {
                 {designations?.map((designation, index) => (
                   <tr key={index}>
                     <th scope="row">{index + 1}</th>
-                    <td>{designation.grade_id}</td>
+                    <td>{designation.grade.grade_name}</td>
                     {/* <td>{branch.bran_id}</td> */}
                     <td>{designation.desg_nm}</td>
                     <td>
