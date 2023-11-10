@@ -51,7 +51,7 @@ const gradeList = ({ token }) => {
       .then((res) => {
         if (res.data) {
           setLoader(false);
-          setBranches(res.data);
+          setBranches(res.data.data);
           // setLastPage(res.data.data.last_page);
           // setTotalData(res.data.data.total);
         }
