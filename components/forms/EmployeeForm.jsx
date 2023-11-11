@@ -75,7 +75,7 @@ const EmployeeForm = ({ token, id }) => {
         })
         .then((res) => {
             if (res.data) {
-                setBranches(res.data);
+                setBranches(res.data.data);
             }
         })
         .catch((error) => {
@@ -90,8 +90,10 @@ const EmployeeForm = ({ token, id }) => {
             headers: { Authorization: "Bearer " + token },
         })
         .then((res) => {
+      
             if (res.data) {
-                setDesignations(res.data);
+               
+                setDesignations(res.data.data);
             }
         })
         .catch((error) => {
@@ -107,7 +109,7 @@ const EmployeeForm = ({ token, id }) => {
         })
         .then((res) => {
             if (res.data) {
-                setDepartments(res.data);
+                setDepartments(res.data.data);
             }
         })
         .catch((error) => {

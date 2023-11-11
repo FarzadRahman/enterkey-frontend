@@ -130,7 +130,10 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
       name: "employees",
       isOpen: false,
     },
-    
+    {
+      name: "application",
+      isOpen: false,
+    },
     // {
     //   name: "bom",
     //   isOpen: false,
@@ -1167,6 +1170,38 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                 <Item
                   title="Create New Employee"
                   to="/employees/createEmployee"
+                  icon={<AddchartIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                  change={change}
+                  width={width}
+                />
+                <Item
+                  title="Employee List"
+                  to="/employees/employeeList"
+                  icon={<ReceiptLongIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                  change={change}
+                  width={width}
+                />
+              </SubMenu>
+
+                    {/* Leave */}
+                    <SubMenu
+                title="Leave Application"
+                icon={<AccountTreeIcon />}
+                style={{
+                  color: colors.grey[100],
+                }}
+                onOpenChange={() => {
+                  handleChange("application");
+                }}
+                open={opened[10].isOpen}
+              >
+                <Item
+                  title="Create New Application"
+                  to="/application/leave-application"
                   icon={<AddchartIcon />}
                   selected={selected}
                   setSelected={setSelected}
