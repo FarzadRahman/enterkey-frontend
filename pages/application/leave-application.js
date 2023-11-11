@@ -8,9 +8,15 @@ import { connect } from "react-redux";
 import { tokens } from "../theme";
 import { TextField, Button, Typography, useTheme, MenuItem } from "@mui/material";
 
+// Datatable
+
+
+
+ 
 //axios
 import axios from "axios";
 import { BASE_URL } from "../../base";
+import MyDataTable from "../../components/data-table/MyDataTable";
 
 const createBranch = ({ token }) => {
   const theme = useTheme();
@@ -23,6 +29,8 @@ const createBranch = ({ token }) => {
   const [leaveStartDate, setLeaveStartDate] = useState("");
   const [leaveEndDate, setLeaveEndDate] = useState("");
   const [numberOfDays, setNumberOfDays] = useState(0);
+
+
 
   function setLeaveStartDateOnChange(value){
     setLeaveStartDate(value);
@@ -60,35 +68,6 @@ const createBranch = ({ token }) => {
  }
 
 
-  // const onSubmit = (e) => {
-  //   e.preventDefault();
-  //   const branch = {
-  //     name,
-  //     code,
-  //     contact_address,
-  //     order_prefix,
-  //     contact_person,
-  //     contact_email,
-  //     contact_mobile,
-  //     formErrors,
-  //   };
-  //   const apiBranch = BASE_URL + "api/v1/branches/create";
-  //   const config = {
-  //     headers: { Authorization: `Bearer ${token}` },
-  //   };
-  //   console.log(branch);
-  //   axios.post(apiBranch, branch, config).then((response) => {
-  //     console.log(response.data);
-  //     if (response.data.status) {
-  //       alert("Branch Information Created!");
-  //       Router.push({
-  //         pathname: "/branch/branchList",
-  //       });
-  //     } else {
-  //       setFormErrors(Object.values(response.data.errors));
-  //     }
-  //   });
-  // };
 
   useEffect(() => {
     const calculateDaysRemaining = () => {
@@ -125,14 +104,22 @@ const createBranch = ({ token }) => {
   }, []);
 
 
+  
+
+
+
+
+
+
+
   const onSubmit = (e) => {
     e.preventDefault();
     const application = {
-      application_Reason,
-      leave_type_id,
-      leaveStartDate,
-      leaveEndDate,
-      stayLocation
+      'reason':application_Reason,
+      'leave_type_id':leave_type_id,
+      'start':leaveStartDate,
+      'end':leaveEndDate,
+      'stay_location':stayLocation
     };
 
     // console.log(application);
@@ -249,13 +236,13 @@ const createBranch = ({ token }) => {
             className="shadow-input"
           />
         </div>
-
-
   
- 
       </div>
 
+
+      {/* <MyDataTable></MyDataTable> */}
      
+
       <div className="row mt-4">
         <div className="col-md-12">
           <Button
@@ -272,6 +259,8 @@ const createBranch = ({ token }) => {
         </div>
       </div>
     </div>
+
+    
   );
 };
 
