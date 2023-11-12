@@ -16,11 +16,14 @@ import { TextField, Button, Typography, useTheme, MenuItem } from "@mui/material
 //axios
 import axios from "axios";
 import { BASE_URL } from "../../base";
-import MyDataTable from "../../components/data-table/MyDataTable";
+//import MyDataTable from "../../components/data-table/MyDataTable";
 
 const createBranch = ({ token }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
+  const [approvalName,setApprovalName]=useState([]);
+  const [approval_id,setApproval_id]=useState("");
 
   const [application_Reason, setApplicationReason] = useState("");
   const [leaveTypes, setLeaveType] = useState([]);
@@ -92,7 +95,7 @@ const createBranch = ({ token }) => {
         headers: { Authorization: "Bearer " + token },
       })
       .then((res) => {
-        // console.log(res.data.data);
+        console.log(res.data.data);
         if (res.data) {
           setLeaveType(res.data.data);
         
@@ -103,6 +106,27 @@ const createBranch = ({ token }) => {
       });
   }, []);
 
+  useEffect(() => {
+    const apiGrade =
+      BASE_URL +
+      "leave/employee-list";
+
+    axios
+      .get(apiGrade, {
+        headers: { Authorization: "Bearer " + token },
+      })
+      .then((res) => {
+        // console.log(res.data.data);
+        if (res.data) {
+         // console.log(res.data.data);
+          setApprovalName(res.data);
+        
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   
 
@@ -115,6 +139,7 @@ const createBranch = ({ token }) => {
   const onSubmit = (e) => {
     e.preventDefault();
     const application = {
+      'approval_id':approval_id,
       'reason':application_Reason,
       'leave_type_id':leave_type_id,
       'start':leaveStartDate,
@@ -129,7 +154,7 @@ const createBranch = ({ token }) => {
     };
 
     axios.post(apiLeaveApplication, application, config).then((response) => {
-      console.log(response.data);
+      alert(response.data.message);
     //   if (response.data) {
     //     console.log(response.data.data);
     //     alert("Branch Information Created!");
@@ -168,6 +193,27 @@ const createBranch = ({ token }) => {
       <p>Number of Days: {numberOfDays}</p>
         
       <div className="row">
+        
+      <div className="col-md-4 mt-4">
+          <TextField
+            onChange={(e) => {
+              setApproval_id(+e.target.value);
+            }}
+            select
+            label="Approval Name"
+            size="small"
+            fullWidth
+            value={approval_id || ""}
+
+            className="shadow-input"
+          >
+            {approvalName?.map((option, index) => (
+              <MenuItem key={index} value={option.emp_id}>
+                {option.full_name} 
+              </MenuItem>
+            ))}
+          </TextField>
+        </div>
         <div className="col-md-4 mt-4">
           <TextField
             label="Reason"
