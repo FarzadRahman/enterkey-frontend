@@ -5,11 +5,13 @@ const initialState = {
     token: null,
     userId: null,
     name: null,
-    error: null,
+    email: null,
+    phone: null,
     roles: null,
+    company: null,
+    error: null,
     loading: false,
     user: null,
-    company: null
 };
 
 const authStart = ( state, action ) => {
@@ -21,11 +23,13 @@ const authSuccess = (state, action) => {
         token: action.idToken,
         userId: action.userId,
         name: action.name,
+        email: action.email,
+        phone: action.phone,
+        roles: action.role_id,
+        company: action.company,
+        user: action.user,
         error: null,
         loading: false,
-        roles: action.roles,
-        user: action.user,
-        company: action.company
      } );
 };
 
@@ -37,7 +41,7 @@ const authFail = (state, action) => {
 };
 
 const authLogout = (state, action) => {
-    return updateObject(state, { token: null, userId: null, roles: null, company: null });
+    return updateObject(state, { token: null, userId: null, name: null, email: null, phone: null, roles: null, company: null, user: null });
 };
 
 const reducer = ( state = initialState, action ) => {
@@ -47,7 +51,7 @@ const reducer = ( state = initialState, action ) => {
         case actionTypes.AUTH_FAIL: return authFail(state, action);
         case actionTypes.AUTH_LOGOUT: return authLogout(state, action);
         default:
-            return state;
+        return state;
     }
 };
 

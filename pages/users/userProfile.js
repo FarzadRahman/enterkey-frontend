@@ -1,5 +1,5 @@
-import React from "react";
-
+import React, { useEffect } from "react";
+import { jwtDecode } from "jwt-decode";
 //redux imports
 import { connect } from "react-redux";
 
@@ -8,8 +8,19 @@ import { tokens } from "../theme";
 import { Typography, useTheme } from "@mui/material";
 
 const userProfile = ({ user }) => {
+  // console.log("user");
+  // console.log(user);
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  // useEffect(() => {
+  //   console.log("jwtDecode(user.token)");
+  //   console.log(jwtDecode(user.token));
+  //   console.log("JSON.parse(atob(user.token.split('.')[1]))");
+  //   console.log(JSON.parse(atob(user.token.split('.')[1])));
+  //   const current_user = jwtDecode(user.token, { header: true });
+  //   console.log("current_user");
+  //   console.log(current_user);
+  // }, []);
 
   return (
     <div className="row">
@@ -67,7 +78,7 @@ const userProfile = ({ user }) => {
 
 const mapStateToProps = (state) => {
   return {
-    user: state.auth.user,
+    user: state.auth
   };
 };
 

@@ -178,7 +178,7 @@ const mapStateToProps = (state) => {
   return {
     token: state.auth.token,
     isCollapsed: state.collapse.isCollapse,
-    name: state.auth.user.name,
+    name: state.auth.name,
   };
 };
 

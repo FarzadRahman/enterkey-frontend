@@ -9,7 +9,7 @@ export const authStart = () => {
   };
 };
 
-export const authSuccess = (token, userId, roles, name, user, company) => {
+export const authSuccess = (token, userId, name, email, phone,  roles, company) => {
   Router.push({
     pathname: "/",
   });
@@ -17,9 +17,10 @@ export const authSuccess = (token, userId, roles, name, user, company) => {
     type: actionTypes.AUTH_SUCCESS,
     idToken: token,
     userId: userId,
-    roles: roles,
     name: name,
-    user: user,
+    email: email,
+    phone: phone,
+    roles: roles,
     company: company,
   };
 };
@@ -82,9 +83,10 @@ export const auth = (email, password) => {
             authSuccess(
               response.data.access_token,
               response.data.user.id,
+              response.data.user.name,
+              response.data.user.email,
+              response.data.user.phone,
               response.data.user.role_id,
-              response.data.user.name,
-              response.data.user.name,
               response.data.user.company
             )
           );
