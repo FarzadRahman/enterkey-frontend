@@ -1,63 +1,100 @@
-import React, { Component } from 'react';
+import React, { Component,useState,useEffect } from 'react';
+// import React, { useState, useEffect } from "react";
 import 'datatables.net';
 import $ from 'jquery';
 import 'datatables.net-dt/css/jquery.dataTables.min.css';
+import { BASE_URL } from "../../base";
+//redux imports
+import { connect } from "react-redux";
 
 
-class MyDataTable extends Component {
-Datatable="";
-  componentDidMount() {
-     // Check if DataTable has already been initialized
-     if (!$.fn.DataTable.isDataTable(this.refs.myTable)) {
-    // Initialize DataTable with Bootstrap styling
-    this.Datatable= $(this.refs.myTable).DataTable({
-      // DataTable options and configurations
-      // For example:
-      paging: true,
-      searching: true,
-      ordering: true,
-      // Add more options based on your requirements
-    });
+const MyDataTable = ({user})=> {
+
+
+// var datatable;
+const [Datatable, setDatatable] = useState();
+
+
+let reloadTable=()=> {
+  Datatable.ajax.reload();
 }
+
+useEffect(() => {
+
+    //  Check if DataTable has already been initialized
+     if (!$.fn.DataTable.isDataTable('#myTable')) {
+      // Initialize DataTable with Bootstrap styling
+    let  datatable= $('#myTable').DataTable({
+        // DataTable options and configurations
+        // For example:
+        paging: true,
+        searching: true,
+        ordering: true,
+        responsive: true,
+        processing: true,
+        serverSide: true,
+        Filter: true,
+        stateSave: true,
+        type: "POST",
+        "ajax": {
+            "url": BASE_URL+'leave/applied-list',
+            "type": "POST",
+              data: function (d) {
+                d.token= user;
+            
+            },
+        },
+        columns: [
+          {data: 'full_name', name: 'full_name'},
+          {data: 'start_date', name: 'start_date'},
+          {data: 'end_date', name: 'end_date'},
+          {data: 'reason', name: 'reason'},
+          {data: 'applied_total_days', name: 'applied_total_days'},
+        ]
+        // Add more options based on your requirements
+      });
+
+      setDatatable(datatable);
   }
 
-  render() {
+ 
+}, []);
+
+
     return (
+      <div>
+      {/* <button onClick={reloadTable}>reload table</button> */}
      
-        <table ref="myTable"  className="display">
+        <table id="myTable"  className="display">
         <thead>
               <tr>
-                  <th>Name</th>
-                  <th>Position</th>
-                  <th>Office</th>
-                  <th>Age</th>
-                  <th>Start date</th>
-                  <th>Salary</th>
+                  <th>Approver Name</th>
+                  <th>Start Date</th>
+                  <th>End Date</th>
+                  <th>Reasonn</th>
+                  <th>No of Days</th>
+              
+                
               </tr>
           </thead>
           <tbody>
-              <tr>
-                  <td>Tiger Nixon</td>
-                  <td>System Architect</td>
-                  <td>Edinburgh</td>
-                  <td>61</td>
-                  <td>2011-04-25</td>
-                  <td>$320,800</td>
-              </tr>
-              <tr>
-                  <td>Garrett Winters</td>
-                  <td>Accountant</td>
-                  <td>Tokyo</td>
-                  <td>63</td>
-                  <td>2011-07-25</td>
-                  <td>$170,750</td>
-              </tr>
-              </tbody>
+          
+          </tbody>
       
         </table>
+        </div>
      
     );
+    
+  
   }
-}
 
-export default MyDataTable;
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.auth.token
+  };
+};
+
+
+export default connect(mapStateToProps)(MyDataTable);

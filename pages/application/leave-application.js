@@ -78,7 +78,7 @@ const createBranch = ({ token }) => {
         const examDate = new Date('2023-11-12'); // Replace with your desired exam date
         const timeDifference = Math.abs(examDate - currentDate);
         const daysRemaining = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
-        console.log(daysRemaining);
+      
     };
 
     // calculateDaysRemaining();
@@ -95,7 +95,7 @@ const createBranch = ({ token }) => {
         headers: { Authorization: "Bearer " + token },
       })
       .then((res) => {
-        console.log(res.data.data);
+       
         if (res.data) {
           setLeaveType(res.data.data);
         
@@ -129,8 +129,6 @@ const createBranch = ({ token }) => {
   }, []);
 
   
-console.log("approvalName");
-console.log(approvalName);
 
 
 
@@ -155,7 +153,8 @@ console.log(approvalName);
     };
 
     axios.post(apiLeaveApplication, application, config).then((response) => {
-      alert(response.data.message);
+      console.log(response);
+      // alert(response.data.message);
     //   if (response.data) {
     //     console.log(response.data.data);
     //     alert("Branch Information Created!");

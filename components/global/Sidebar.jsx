@@ -1209,8 +1209,8 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                   width={width}
                 />
                 <Item
-                  title="Employee List"
-                  to="/employees/employeeList"
+                  title="Applied Application"
+                  to="/application/applied-list"
                   icon={<ReceiptLongIcon />}
                   selected={selected}
                   setSelected={setSelected}
