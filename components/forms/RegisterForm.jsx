@@ -90,7 +90,7 @@ const RegisterForm = ({ token }) => {
       })
       .then((res) => {
         if (res.data) {
-          setCompanies(res.data);
+          setCompanies(res.data?.data);
         }
       })
       .catch((error) => {
