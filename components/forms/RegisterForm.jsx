@@ -11,7 +11,52 @@ import { connect } from "react-redux";
 import axios from "axios";
 import { BASE_URL } from "../../base";
 
+// import { Dropdown } from "primereact/dropdown";
+import { InputText } from "primereact/inputtext";
+// import { Button } from "primereact/button";
+import { ProgressSpinner } from "primereact/progressspinner";
+// import React, { useState } from "react";
+import { Dropdown } from 'primereact/dropdown';
+
 const RegisterForm = ({ token }) => {
+
+
+  const [selectedCountry, setSelectedCountry] = useState(null);
+    const countries = [
+        { name: 'Australia', code: 'AU' },
+        { name: 'Brazil', code: 'BR' },
+        { name: 'China', code: 'CN' },
+        { name: 'Egypt', code: 'EG' },
+        { name: 'France', code: 'FR' },
+        { name: 'Germany', code: 'DE' },
+        { name: 'India', code: 'IN' },
+        { name: 'Japan', code: 'JP' },
+        { name: 'Spain', code: 'ES' },
+        { name: 'United States', code: 'US' }
+    ];
+
+    const selectedCountryTemplate = (option, props) => {
+        if (option) {
+            return (
+                <div className="flex align-items-center">
+                    {/* <img alt={option.name} src="https://primefaces.org/cdn/primereact/images/flag/flag_placeholder.png" className={`mr-2 flag flag-${option.code.toLowerCase()}`} style={{ width: '18px' }} /> */}
+                    <div>{option.name}</div>
+                </div>
+            );
+        }
+
+        return <span>{props.placeholder}</span>;
+    };
+
+    const countryOptionTemplate = (option) => {
+        return (
+            <div className="flex align-items-center">
+                {/* <img alt={option.name} src="https://primefaces.org/cdn/primereact/images/flag/flag_placeholder.png" className={`mr-2 flag flag-${option.code.toLowerCase()}`} style={{ width: '18px' }} /> */}
+                <div>{option.name}</div>
+            </div>
+        );
+    };
+
   // Variables for POST
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -20,12 +65,17 @@ const RegisterForm = ({ token }) => {
   const [company_id, setCompanyId] = useState(null);
   const [branch_id, setBranchId] = useState(null);
   const [admin_roles, setSelectedRole] = useState([]);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [filteredOptions, setFilteredOptions] = useState(null);
 
   // Helper Variables
   const [roles, setRoles] = useState([]);
   const [role_id, setRoleId] = useState(null);
   const [companies, setCompanies] = useState([]);
   const [branches, setBranches] = useState([]);
+  const [is, setIs] = useState(false);
+  const [isGradeEnabled, setIsGradeEnabled] = useState(false);
+  const [isGradeEnabled1, setIsGradeEnabled1] = useState(false);
 
   const role = [
     {
@@ -114,6 +164,24 @@ const RegisterForm = ({ token }) => {
           console.log(error);
         });
     }, []);
+
+    useEffect(()=>{
+      filterOption();
+    },[1]);
+
+    const handleProductChange = (event) => {
+      setSelectedProduct(event.value);
+      // console.log(event);
+      setIs(true);
+    };
+
+    const filterOption = () => {
+      const newState = companies?.filter((product) => {
+        return product?.comp_id === product?.comp_id;
+        // return product?.company_name === category?.type && product?.grade === grade?.grade;
+      });
+      setFilteredOptions(newState);
+    };
 
   async function register(e) {
     e.preventDefault();
@@ -211,8 +279,27 @@ const RegisterForm = ({ token }) => {
               ))}
             </TextField>
           </div>
-          <div className="col-md-6 mt-4">
-            <TextField
+          {/* <div className="col-md-6 mt-4"> */}
+          <div className="col-md-6 mt-4 card flex justify-content-center">
+            <Dropdown value={selectedCountry} onChange={(e) => setSelectedCountry(e.value)} options={countries} optionLabel="name" placeholder="Select a Country" 
+                filter valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate}  style={{ width: "100%" }} size="small"/>
+          </div>
+            {/* <Dropdown
+              value={selectedProduct}
+              options={companies}
+              optionLabel="company_name"
+              // options={productsi}
+              onChange={(e) => {
+                handleProductChange(e);
+              }}
+              filter
+              showClear
+              filterPlaceholder="Search"
+              placeholder="Select Product"
+              // disabled={!isGradeEnabled1}
+              style={{ width: "100%" }}
+            /> */}
+            {/* <TextField
               onChange={(e) => {
                 setCompanyId(+e.target.value);
               }}
@@ -227,12 +314,11 @@ const RegisterForm = ({ token }) => {
               {companies?.map((option, index) => (
                 <MenuItem key={index} value={option.comp_id}>
                   {option.company_name} 
-                  {/* ({option.company_bin}) */}
                 </MenuItem>
               ))}
-            </TextField>
+            </TextField> */}
           </div>
-        </div>
+        {/* </div> */}
         {/* {branches.length != 0 && (
           <div className="row">
             <div className="col-md-6 mt-4">
