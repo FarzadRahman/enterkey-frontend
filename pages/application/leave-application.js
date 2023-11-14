@@ -6,19 +6,30 @@ import { connect } from "react-redux";
 
 //theme
 import { tokens } from "../theme";
-import { TextField, Button, Typography, useTheme, MenuItem } from "@mui/material";
-
+import { TextField, Button, Typography, useTheme, MenuItem, DateField } from "@mui/material";
+// import { DateField } from '@mui/x-date-pickers/DateField';
+// import { DateField } from '@mui/x-date-pickers';
+// import { DateField } from '@mui/x-date-pickers-pro';
+import AntdMomentWebpackPlugin from '@ant-design/moment-webpack-plugin';
+// Date
+import { DatePicker } from "antd";
+import dayjs from "dayjs";
+// import { DatePicker } from '@mui/x-date-pickers-pro';
+// import { DatePicker } from '@mui/x-date-pickers';
+// import { DatePicker } from '@mui/x-date-pickers';
+// import { DatePicker } from '@mui/x-date-pickers-pro';
 // Datatable
-
-
-
- 
 //axios
 import axios from "axios";
 import { BASE_URL } from "../../base";
 //import MyDataTable from "../../components/data-table/MyDataTable";
 
-const createBranch = ({ token }) => {
+// import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+// import { LocalizationProvider } from '@mui/x-date-pickers-pro';
+// import { AdapterDayjs } from '@mui/x-date-pickers-pro/AdapterDayjs';
+// import { DateRangePicker } from '@mui/x-date-pickers-pro/DateRangePicker';
+
+const leaveApplication = ({ token }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
@@ -32,10 +43,31 @@ const createBranch = ({ token }) => {
   const [leaveStartDate, setLeaveStartDate] = useState("");
   const [leaveEndDate, setLeaveEndDate] = useState("");
   const [numberOfDays, setNumberOfDays] = useState(0);
+  const { RangePicker } = DatePicker;
 
 
+  function onChange(date, dateString) {
+    console.log("date");
+    console.log(date);
+    console.log("dateString");
+    console.log(dateString);
+    dateString?.map((date, index) => {
+      if (index == 0) setLeaveStartDate(date);
+      else setLeaveEndDate(date);
+    });
+    
+  }
+
+  const disabledDate = (current) => {
+    console.log("current");
+    console.log(current);
+    // Can not select days before today and today
+    return current == dayjs().endOf("day");
+  };
 
   function setLeaveStartDateOnChange(value){
+    console.log("value");
+    console.log(value);
     setLeaveStartDate(value);
 
     if(value && leaveEndDate){
@@ -69,8 +101,6 @@ const createBranch = ({ token }) => {
     setNumberOfDays(daysRemaining+1);
   
  }
-
-
 
   useEffect(() => {
     const calculateDaysRemaining = () => {
@@ -228,6 +258,18 @@ const createBranch = ({ token }) => {
 
         <div className="col-md-4 mt-4">
           <TextField
+            label="Stay Locaton"
+            variant="outlined"
+            size="small"
+            type="text"
+            fullWidth
+            onChange={(e) => setStayLocation(e.target.value)}
+            className="shadow-input"
+          />
+        </div>
+
+        <div className="col-md-4 mt-4">
+          <TextField
             onChange={(e) => {
               setLeaveType_id(+e.target.value);
             }}
@@ -247,8 +289,38 @@ const createBranch = ({ token }) => {
           </TextField>
         </div>
         
-        <div className="col-md-4 mt-4">
-          <TextField
+        <div className="col-md-8 mt-4">
+          <RangePicker
+            label="Date"
+            variant="outlined"
+            fullWidth
+            onChange={onChange}
+            size="large"
+            style={{ width: "100%"}}
+            className="shadow-input"
+            // disabledDate={disabledDate}
+          />
+           {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DemoContainer components={['DateRangePicker']}>
+                <DateRangePicker localeText={{ start: 'Check-in', end: 'Check-out' }} />
+              </DemoContainer>
+            </LocalizationProvider> */}
+          {/* <DatePicker label="Uncontrolled picker" defaultValue={dayjs('2022-04-17')} /> */}
+          {/* <DatePicker
+            label="Controlled picker"
+            // value={value}
+            onChange={(e) => setLeaveStartDateOnChange(e.target.value)}
+          /> */}
+          {/* <DatePicker
+            onChange={(e) => setLeaveStartDateOnChange(e.target.value)}
+            size="large"
+            // picker="month"
+            style={{ width: "100%" }}
+            className="shadow-input"
+            // disabledDate={disabledDate}
+            fullWidth
+          /> */}
+          {/* <TextField
             label="Start Date"
             variant="outlined"
             size="small"
@@ -256,32 +328,36 @@ const createBranch = ({ token }) => {
             fullWidth
             onChange={(e) => setLeaveStartDateOnChange(e.target.value)}
             className="shadow-input"
-          />
+          /> */}
+          {/* <DatePicker
+            label="Start Date"
+            views={"Start Date"}
+            variant="outlined"
+            size="large"
+            style={{ width: "100%" }}
+            fullWidth
+            // value={leaveStartDate}
+            onChange={(e) => setLeaveStartDateOnChange(e.target.value)}
+            className="shadow-input"
+            defaultValue={"Start"}
+          /> */}
+          
         </div>
         
-        <div className="col-md-4 mt-4">
-          <TextField
+        {/* <div className="col-md-4 mt-4">
+          <DatePicker
             label="End Date"
             variant="outlined"
-            size="small"
-            type="date"
+            size="large"
+            // type="text"
+            style={{ width: "100%" }}
             fullWidth
             onChange={(e) => setLeaveEndDateOnChange(e.target.value)}
             className="shadow-input"
           />
-        </div>
+        </div> */}
 
-        <div className="col-md-4 mt-4">
-          <TextField
-            label="Stay Locaton"
-            variant="outlined"
-            size="small"
-            type="text"
-            fullWidth
-            onChange={(e) => setStayLocation(e.target.value)}
-            className="shadow-input"
-          />
-        </div>
+        
   
       </div>
 
@@ -316,4 +392,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(createBranch);
+export default connect(mapStateToProps)(leaveApplication);
