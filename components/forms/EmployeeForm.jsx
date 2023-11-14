@@ -46,7 +46,7 @@ const EmployeeForm = ({ token, id }) => {
         .then((res) => {
             if (res.data) {
                 if(id){
-                    res.data.map((data)=>{
+                    res.data?.data.map((data)=>{
                         if (data.emp_id == id) {
                             setDepartment_id(data.department_id);
                             setDesignation_id(data.designation_id);

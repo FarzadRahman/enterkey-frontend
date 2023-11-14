@@ -51,24 +51,25 @@ const EmployeeDetails = ({ query, token }) => {
         headers: { Authorization: "Bearer " + token },
       })
       .then((res) => {
+        console.log(res.data.data);
         if (res.data) {
           setLoader(false);
-          setName(res.data.data.name);
-          setEmail(res.data.data.email);
-          setPhone(res.data.data.phone);
+          setName(res.data.data.full_name);
+          setEmail(res.data.data.email_address);
+          setPhone(res.data.data.phone_number);
           setCompanyId(res.data.data.company_id);
           setStatus(+res.data.data.status);
 
           setRoles([]);
           setPermissions([]);
 
-          res.data.data.roles?.map((role) => {
-            setRoles((roles) => [...roles, role.id]);
-            setRoleId(+role.id);
-          });
-          res.data.data.permissions?.map((permission) =>
-            setPermissions((permissions) => [...permissions, permission.id])
-          );
+          // res.data.data.roles?.map((role) => {
+          //   setRoles((roles) => [...roles, role.id]);
+          //   setRoleId(+role.id);
+          // });
+          // res.data.data.permissions?.map((permission) =>
+          //   setPermissions((permissions) => [...permissions, permission.id])
+          // );
         } else {
           setErrors(res.data.message);
         }

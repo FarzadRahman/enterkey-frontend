@@ -39,7 +39,7 @@ const createDesignation = ({ token }) => {
       })
       .then((res) => {
         if (res.data) {
-          setGrades(res.data);
+          setGrades(res.data?.data);
           // setLastPage(res.data.data.last_page);
           // setTotalData(res.data.data.total);
         }

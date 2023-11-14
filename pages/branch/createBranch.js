@@ -67,7 +67,7 @@ const createBranch = ({ token }) => {
       })
       .then((res) => {
         if (res.data) {
-          setCompanies(res.data);
+          setCompanies(res.data?.data);
           // setLastPage(res.data.data.last_page);
           // setTotalData(res.data.data.total);
         }

@@ -18,6 +18,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Pagination from '@mui/material/Pagination';
 
 const companyList = ({ token }) => {
+  console.log(token);
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
@@ -36,21 +37,24 @@ const companyList = ({ token }) => {
     page;
 
     axios
-      .get(apiCompanies, {
-        headers: { Authorization: "Bearer " + token },
-      })
-      .then((res) => {
-        if (res.status == 200) {
-          setLoader(false);
-          setCompanies(res.data.data);
-          setLastPage(res.data.last_page);
-          setTotalData(res.data.total);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [page]);
+    .get(apiCompanies, {
+      headers: { Authorization: "Bearer " + token },
+    })
+    .then((res) => {
+      console.log("res");
+      console.log(res.data);
+      if (res.status == 200) {
+        setLoader(false);
+        setCompanies(res.data.data);
+        setLastPage(res.data.last_page);
+        setTotalData(res.data.total);
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+      console.log("dddd");
+    });
+  }, []);
   const handleDeleteCompany = (companyId) => {
     const apiUrl = BASE_URL + `company/delete/${companyId}`;
     axios
