@@ -36,6 +36,9 @@ const leaveApplication = ({ token }) => {
   const [approvalName,setApprovalName]=useState([]);
   const [approval_id,setApproval_id]=useState("");
 
+  const [recorderName,setRecorderName]=useState([]);
+  const [recorder_id,setRecorder_id]=useState("");
+
   const [application_Reason, setApplicationReason] = useState("");
   const [leaveTypes, setLeaveType] = useState([]);
   const [leave_type_id, setLeaveType_id] = useState("");
@@ -47,14 +50,26 @@ const leaveApplication = ({ token }) => {
 
 
   function onChange(date, dateString) {
-    console.log("date");
-    console.log(date);
-    console.log("dateString");
-    console.log(dateString);
+    // console.log("date");
+    // console.log(date);
+    // console.log("dateString");
+
+    datediff(dateString[0],dateString[1]);
     dateString?.map((date, index) => {
-      if (index == 0) setLeaveStartDate(date);
-      else setLeaveEndDate(date);
+      if (index == 0) {
+        
+        setLeaveStartDate(date);
+      }
+      else{
+        setLeaveEndDate(date);
+     
+      } 
     });
+
+   
+
+
+   
     
   }
 
@@ -158,6 +173,28 @@ const leaveApplication = ({ token }) => {
       });
   }, []);
 
+  useEffect(() => {
+    const apiGrade =
+      BASE_URL +
+      "leave/employee-list";
+
+    axios
+      .get(apiGrade, {
+        headers: { Authorization: "Bearer " + token },
+      })
+      .then((res) => {
+        // console.log(res.data.data);
+        if (res.data) {
+         // console.log(res.data.data);
+          setRecorderName(res.data);
+        
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
   
 
 
@@ -244,6 +281,31 @@ const leaveApplication = ({ token }) => {
             ))}
           </TextField>
         </div>
+
+
+        <div className="col-md-4 mt-4">
+          <TextField
+            onChange={(e) => {
+              setRecorder_id(+e.target.value);
+            }}
+            select
+            label="Select Recorder"
+            size="small"
+            fullWidth
+            value={recorder_id || ""}
+
+            className="shadow-input"
+          >
+            {recorderName?.map((option, index) => (
+              <MenuItem key={index} value={option.emp_id}>
+                {option.full_name} 
+              </MenuItem>
+            ))}
+          </TextField>
+        </div>
+
+
+
         <div className="col-md-4 mt-4">
           <TextField
             label="Reason"
