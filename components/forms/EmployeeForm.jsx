@@ -25,6 +25,8 @@ const EmployeeForm = ({ token, id }) => {
     const [branches, setBranches] = useState([]);
     const [designations, setDesignations] = useState([]);
     const [departments, setDepartments] = useState([]);
+    const [isRecorrder, setRecorderChecked] = useState(false); 
+    const [isApprover, setApproverChecked] = useState(false); 
     const genders = [
         {
             "gender": "Male",
@@ -116,6 +118,19 @@ const EmployeeForm = ({ token, id }) => {
             console.log(error);
         });
     }, []);
+
+    function handleRecorderChange(e) {
+        setRecorderChecked(e.target.checked);
+ 
+        // setRecorderChecked((state) => ({recorderChecked: !state.recorderChecked}));
+     }
+
+     function handleApproverChange(e) {
+       
+        setApproverChecked(e.target.checked);
+ 
+        // setRecorderChecked((state) => ({recorderChecked: !state.recorderChecked}));
+     }
     async function register(e) {
         e.preventDefault();
         if(id){
@@ -128,12 +143,15 @@ const EmployeeForm = ({ token, id }) => {
                 office_id,
                 branch_id,
                 designation_id,
-                department_id
+                department_id,
+                isApprover,
+                isRecorrder
             };
             const config = {
             headers: { Authorization: `Bearer ${token}` },
             };
             axios.post(apiUrl, empData, config).then((response) => {
+                 
             if (response.data) {
                 Router.push({
                 pathname: "/employees/employeeList",
@@ -153,7 +171,9 @@ const EmployeeForm = ({ token, id }) => {
                 branch_id,
                 designation_id,
                 department_id,
-                password
+                password,
+                isApprover,
+                isRecorrder
             };
             const config = {
             headers: { Authorization: `Bearer ${token}` },
@@ -332,7 +352,28 @@ const EmployeeForm = ({ token, id }) => {
                             />
                         </div>
                     }
+                <div className="col-md-4 mt-4">
+                    <input value="test" type="checkbox" defaultChecked={isRecorrder}  onChange = {handleRecorderChange} />   
+                
+                    {isRecorrder ? (
+                        <div> Recorder is checked. </div>
+                    ) : (
+                        <div> Recorder is not checked. </div>
+                    )}  
                 </div>
+
+                <div className="col-md-4 mt-4">
+                    <input value="approver" defaultChecked={isApprover} type="checkbox"  onChange = {handleApproverChange} />   
+                
+                    {isApprover ? (
+                        <div> Approver is checked. </div>
+                    ) : (
+                        <div> Approver is not checked. </div>
+                    )}  
+                </div>
+               
+                </div>
+                
                 <div className="row">
                 <div className="col-md-12">
                     <Button

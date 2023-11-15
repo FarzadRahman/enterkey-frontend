@@ -53,7 +53,6 @@ useEffect(() => {
         ]
         // Add more options based on your requirements
       });
-
       setDatatable(datatable);
   }
 

@@ -176,7 +176,7 @@ const leaveApplication = ({ token }) => {
   useEffect(() => {
     const apiGrade =
       BASE_URL +
-      "leave/employee-list";
+      "leave/recorder-list";
 
     axios
       .get(apiGrade, {

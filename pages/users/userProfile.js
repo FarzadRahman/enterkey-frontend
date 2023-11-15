@@ -43,8 +43,8 @@ const userProfile = ({ user }) => {
     const profileData = {
       photo
     };
-    console.log("profileData");
-    console.log(profileData);
+    // console.log("profileData");
+    // console.log(profileData);
     const apiProfile = BASE_URL + "upload/image";
     const config = {
       headers: { Authorization: `Bearer ${user?.token}` },
@@ -55,6 +55,7 @@ const userProfile = ({ user }) => {
       axios
         .post(apiProfile, profileData, config)
         .then((response) => {
+          console.log(response);
           if (response.data.status == 200) {
             alert("Profile Photo Uploaded!");
             setCheck(3)
