@@ -51,14 +51,16 @@ const EmployeeDetails = ({ query, token }) => {
         headers: { Authorization: "Bearer " + token },
       })
       .then((res) => {
-        console.log(res.data.data);
+       
         if (res.data) {
+          console.log(res);
           setLoader(false);
           setName(res.data.data.full_name);
           setEmail(res.data.data.email_address);
           setPhone(res.data.data.phone_number);
           setCompanyId(res.data.data.company_id);
           setStatus(+res.data.data.status);
+          
 
           setRoles([]);
           setPermissions([]);

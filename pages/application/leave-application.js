@@ -183,7 +183,8 @@ const leaveApplication = ({ token }) => {
         headers: { Authorization: "Bearer " + token },
       })
       .then((res) => {
-        // console.log(res.data.data);
+        console.log('data');
+        console.log(res);
         if (res.data) {
          // console.log(res.data.data);
           setRecorderName(res.data);
