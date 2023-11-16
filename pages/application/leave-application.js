@@ -211,7 +211,8 @@ const leaveApplication = ({ token }) => {
       'leave_type_id':leave_type_id,
       'start':leaveStartDate,
       'end':leaveEndDate,
-      'stay_location':stayLocation
+      'stay_location':stayLocation,
+      'reviewer_id':recorder_id,
     };
 
     // console.log(application);
