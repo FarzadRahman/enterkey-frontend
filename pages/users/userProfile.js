@@ -20,16 +20,18 @@ import {
 import axios from "axios";
 
 //Base url
-import { BASE_URL } from "../../base";
+import { BASE_URL, SIGN_URL } from "../../base";
 import { IMAGE_URL } from "../../base";
 
-const userProfile = ({ user }) => {
+const userProfile = ({ user,company }) => {
   console.log("user");
+  console.log("company");
+  console.log(company);
   console.log(user);
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [photo, setPhoto] = useState(user?.profile_picture);
-  const [photoSign, setPhotoSign] = useState("");
+  const [photoSign, setPhotoSign] = useState(user?.signature);
   const [check, setCheck] = useState(0);
   const [checkSign, setCheckSign] = useState(0);
   // useEffect(() => {
@@ -239,7 +241,7 @@ const userProfile = ({ user }) => {
             alt="profile-user-signature"
             width={200}
             height={200}
-            src={photoSign || `../../assets/images/govt.png`}
+            src={`${SIGN_URL}${photoSign}` || `../../assets/images/govt.png`}
             // src={`../../assets/images/user.png`}
             style={{ cursor: "pointer" }}
           />
@@ -336,7 +338,8 @@ const userProfile = ({ user }) => {
 
 const mapStateToProps = (state) => {
   return {
-    user: state.auth
+    user: state.auth,
+    company: state.company 
   };
 };
 
