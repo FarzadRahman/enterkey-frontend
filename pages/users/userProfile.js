@@ -21,13 +21,14 @@ import axios from "axios";
 
 //Base url
 import { BASE_URL } from "../../base";
+import { IMAGE_URL } from "../../base";
 
 const userProfile = ({ user }) => {
   console.log("user");
   console.log(user);
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const [photo, setPhoto] = useState("");
+  const [photo, setPhoto] = useState(user?.profile_picture);
   const [photoSign, setPhotoSign] = useState("");
   const [check, setCheck] = useState(0);
   const [checkSign, setCheckSign] = useState(0);
@@ -41,6 +42,7 @@ const userProfile = ({ user }) => {
   //   console.log(current_user);
   // }, []);
 
+  // PHOTO Profile
   const submit = () => {
     const profileData = {
       photo
@@ -51,15 +53,19 @@ const userProfile = ({ user }) => {
     const config = {
       headers: { Authorization: `Bearer ${user?.token}` },
     };
+    console.log("profileData");
+    console.log(profileData);
     if (photo == "") {
       alert("Please select an Image!");
     } else {
       axios
         .post(apiProfile, profileData, config)
         .then((response) => {
-          console.log(response);
+          console.log("response.data");
+          console.log(response.data);
           if (response.data.status == 200) {
             alert("Profile Photo Uploaded!");
+            setPhoto(user?.profile_picture)
             setCheck(3)
           } else {
             setFormErrors(Object.values(response.data.errors));
@@ -73,7 +79,6 @@ const userProfile = ({ user }) => {
     }
   };
 
-  // PHOTO Profile
   const onChange = async (e) => {
     let files = e.target.files || e.dataTransfer.files;
     // console.log(files);
@@ -100,6 +105,15 @@ const userProfile = ({ user }) => {
     });
   };
 
+  const submitFile = (result, name) => {
+    console.log("result");
+    console.log(result);
+    // console.log(result, name);
+    setPhoto(result);
+    setCheck(1)
+  };
+
+  // PHOTO Signature
   const submitSign = () => {
     const profileData = {
       photo
@@ -132,7 +146,6 @@ const userProfile = ({ user }) => {
     }
   };
 
-  // PHOTO Signature
   const onChangeSign = async (e) => {
     let files = e.target.files || e.dataTransfer.files;
     // console.log(files);
@@ -166,6 +179,9 @@ const userProfile = ({ user }) => {
     setPhotoSign(result);
     setCheckSign(1)
   };
+  console.log("test");
+  console.log(IMAGE_URL);
+  console.log(photo);
 
   return (
     <div className="row">
@@ -174,8 +190,7 @@ const userProfile = ({ user }) => {
           alt="profile-user"
           width={200}
           height={200}
-          src={photo || `../../assets/images/user.png`}
-          // src={`../../assets/images/user.png`}
+          src={`${IMAGE_URL}${photo}`||`../../assets/images/user.png`}
           style={{ cursor: "pointer", borderRadius: "50%" }}
         />
         <Typography

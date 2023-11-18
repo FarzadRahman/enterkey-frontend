@@ -9,7 +9,7 @@ export const authStart = () => {
   };
 };
 
-export const authSuccess = (token, userId, name, email, phone,  roles, company) => {
+export const authSuccess = (token, userId, name, email, phone,  roles, company, profile_picture, signature) => {
   Router.push({
     pathname: "/",
   });
@@ -22,6 +22,8 @@ export const authSuccess = (token, userId, name, email, phone,  roles, company) 
     phone: phone,
     roles: roles,
     company: company,
+    profile_picture: profile_picture,
+    signature: signature,
   };
 };
 
@@ -87,7 +89,9 @@ export const auth = (email, password) => {
               response.data.user.email,
               response.data.user.phone,
               response.data.user.role_id,
-              response.data.user.company
+              response.data.user.company,
+              response.data.user.profile_picture,
+              response.data.user.signature,
             )
           );
           // dispatch(checkAuthTimeout(response.data.expires_in));

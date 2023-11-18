@@ -27,6 +27,8 @@ const authSuccess = (state, action) => {
         phone: action.phone,
         roles: action.role_id,
         company: action.company,
+        profile_picture: action.profile_picture,
+        signature: action.signature,
         user: action.user,
         error: null,
         loading: false,
@@ -41,7 +43,7 @@ const authFail = (state, action) => {
 };
 
 const authLogout = (state, action) => {
-    return updateObject(state, { token: null, userId: null, name: null, email: null, phone: null, roles: null, company: null, user: null });
+    return updateObject(state, { token: null, userId: null, name: null, email: null, phone: null, roles: null, company: null, profile_picture: null, signature: null, user: null });
 };
 
 const reducer = ( state = initialState, action ) => {
