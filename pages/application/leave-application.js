@@ -176,14 +176,15 @@ const leaveApplication = ({ token }) => {
   useEffect(() => {
     const apiGrade =
       BASE_URL +
-      "leave/employee-list";
+      "leave/recorder-list";
 
     axios
       .get(apiGrade, {
         headers: { Authorization: "Bearer " + token },
       })
       .then((res) => {
-        // console.log(res.data.data);
+        console.log('data');
+        console.log(res);
         if (res.data) {
          // console.log(res.data.data);
           setRecorderName(res.data);
@@ -210,7 +211,8 @@ const leaveApplication = ({ token }) => {
       'leave_type_id':leave_type_id,
       'start':leaveStartDate,
       'end':leaveEndDate,
-      'stay_location':stayLocation
+      'stay_location':stayLocation,
+      'reviewer_id':recorder_id,
     };
 
     // console.log(application);
