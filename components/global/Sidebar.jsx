@@ -1217,6 +1217,15 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                   change={change}
                   width={width}
                 />
+                <Item
+                  title="Leave Application Form"
+                  to="/application/leave-form"
+                  icon={<ReceiptLongIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                  change={change}
+                  width={width}
+                />
               </SubMenu>
 
 
