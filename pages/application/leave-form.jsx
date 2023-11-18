@@ -983,20 +983,20 @@ const leave_form = ({ query, token }) => {
                             <tr>
                                 <td
                                 className="text-left pb-0 pt-5"
-                                style={{ width: "25%" }}
+                                style={{ width: "65%" }}
                                 >
                                 <p>১. আবেদনকারীর নামঃ  <strong>মোঃ মোস্তফা নুরুন্নবি শাকিল</strong></p>
                                 </td>
-                                <td
+                                {/* <td
                                 className="text-center pb-0 pt-0"
                                 style={{ width: "70%" }}
                                 rowSpan={4}
-                                ></td>
+                                ></td> */}
                             </tr>
                             <tr>
                                 <td
                                 className="text-left pb-0 pt-0"
-                                style={{ width: "25%" }}
+                                style={{ width: "65%" }}
                                 >
                                 <p>২. পদবিঃ <strong>সিস্টেম এনালিস্ট</strong></p>
                                 </td>
@@ -1004,7 +1004,8 @@ const leave_form = ({ query, token }) => {
                             <tr>
                                 <td
                                 className="text-left pb-0 pt-0"
-                                style={{ width: "25%" }}
+                                style={{ width: "85%" }}
+                                colSpan={2}
                                 >
                                 <p>৩.  প্রার্থিত ছুতির সময়কালঃ আগামী............নভেম্বর, ২০২৩ থেকে............নভেম্ব্র, ২০২৩ তারিখ পর্যন্ত মোট............দিনের নৈমিত্তিক ছুটি মঞ্জুর/কর্মস্থলত্যাগ/সরকারি ছুটি সংযুক্তি অনুমতিসহ।</p>
                                 </td>
