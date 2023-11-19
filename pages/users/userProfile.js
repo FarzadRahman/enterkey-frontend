@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
+
 //redux imports
+// import { auth } from "../../store/actions/";
+import { useDispatch } from "react-redux";
 import { connect } from "react-redux";
+import { setAuthImage, logout, authSuccess } from "../../store/actions/auth";
 
 // Theme imports
 import { tokens } from "../theme";
@@ -23,52 +27,38 @@ import axios from "axios";
 import { BASE_URL, SIGN_URL } from "../../base";
 import { IMAGE_URL } from "../../base";
 
-const userProfile = ({ user,company }) => {
-  console.log("user");
-  console.log("company");
-  console.log(company);
-  console.log(user);
+const userProfile = ({ user }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [photo, setPhoto] = useState(user?.profile_picture);
-  const [photoSign, setPhotoSign] = useState(user?.signature);
+  const [pt, setPt] = useState();
+  const [sign, setPhotoSign] = useState(user?.signature);
+  const [sn, setSn] = useState();
   const [check, setCheck] = useState(0);
   const [checkSign, setCheckSign] = useState(0);
-  // useEffect(() => {
-  //   console.log("jwtDecode(user.token)");
-  //   console.log(jwtDecode(user.token));
-  //   console.log("JSON.parse(atob(user.token.split('.')[1]))");
-  //   console.log(JSON.parse(atob(user.token.split('.')[1])));
-  //   const current_user = jwtDecode(user.token, { header: true });
-  //   console.log("current_user");
-  //   console.log(current_user);
-  // }, []);
+  // REDUX
+  const dispatch = useDispatch(setAuthImage(photo, sign));
 
   // PHOTO Profile
   const submit = () => {
     const profileData = {
       photo
     };
-    // console.log("profileData");
-    // console.log(profileData);
     const apiProfile = BASE_URL + "upload/image";
     const config = {
       headers: { Authorization: `Bearer ${user?.token}` },
     };
-    console.log("profileData");
-    console.log(profileData);
     if (photo == "") {
       alert("Please select an Image!");
     } else {
       axios
         .post(apiProfile, profileData, config)
         .then((response) => {
-          console.log("response.data");
-          console.log(response.data);
           if (response.data.status == 200) {
             alert("Profile Photo Uploaded!");
-            setPhoto(user?.profile_picture)
-            setCheck(3)
+            setPhoto(response.data.user?.profile_picture);
+            setCheck(3);
+            dispatch(setAuthImage(response.data?.profile_picture, sign));
           } else {
             setFormErrors(Object.values(response.data.errors));
             console.log(response.data);
@@ -83,7 +73,6 @@ const userProfile = ({ user,company }) => {
 
   const onChange = async (e) => {
     let files = e.target.files || e.dataTransfer.files;
-    // console.log(files);
     if (files.length > 0) {
       uploadDocuments(e, files[0]);
     }
@@ -108,9 +97,6 @@ const userProfile = ({ user,company }) => {
   };
 
   const submitFile = (result, name) => {
-    console.log("result");
-    console.log(result);
-    // console.log(result, name);
     setPhoto(result);
     setCheck(1)
   };
@@ -118,24 +104,24 @@ const userProfile = ({ user,company }) => {
   // PHOTO Signature
   const submitSign = () => {
     const profileData = {
-      photo
+      sign
     };
-    // console.log("profileData");
-    // console.log(profileData);
     const apiProfile = BASE_URL + "upload/sign";
     const config = {
       headers: { Authorization: `Bearer ${user?.token}` },
     };
-    if (photoSign == "") {
+    if (sign == "") {
       alert("Please select an Image!");
     } else {
       axios
         .post(apiProfile, profileData, config)
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           if (response.data.status == 200) {
             alert("Profile Sign Uploaded!");
+            setPhotoSign(response.data?.signature);
             setCheckSign(3)
+            dispatch(setAuthImage(photo, response.data?.signature));
           } else {
             setFormErrors(Object.values(response.data.errors));
             console.log(response.data);
@@ -150,7 +136,6 @@ const userProfile = ({ user,company }) => {
 
   const onChangeSign = async (e) => {
     let files = e.target.files || e.dataTransfer.files;
-    // console.log(files);
     if (files.length > 0) {
       uploadSignDocuments(e, files[0]);
     }
@@ -175,15 +160,9 @@ const userProfile = ({ user,company }) => {
   };
 
   const submitSignFile = (result, name) => {
-    // console.log(result, name);
-    console.log("result");
-    console.log(result);
     setPhotoSign(result);
     setCheckSign(1)
   };
-  console.log("test");
-  console.log(IMAGE_URL);
-  console.log(photo);
 
   return (
     <div className="row">
@@ -192,7 +171,7 @@ const userProfile = ({ user,company }) => {
           alt="profile-user"
           width={200}
           height={200}
-          src={`${IMAGE_URL}${photo}`||`../../assets/images/user.png`}
+          src={pt ? pt : (`${IMAGE_URL}${photo}`||`../../assets/images/user.png`)}
           style={{ cursor: "pointer", borderRadius: "50%" }}
         />
         <Typography
@@ -213,12 +192,16 @@ const userProfile = ({ user,company }) => {
           color="secondary"
           fullWidth
         >
+          
           <input
           hidden
           accept="image/*"
           multiple
           type="file"
-          onChange={onChange}
+          onChange={(e)=>{
+            setPt(URL.createObjectURL(e.target.files[0]));
+            onChange(e);
+          }}
           />
           Change Profile Picture
         </Button>
@@ -241,8 +224,7 @@ const userProfile = ({ user,company }) => {
             alt="profile-user-signature"
             width={200}
             height={200}
-            src={`${SIGN_URL}${photoSign}` || `../../assets/images/govt.png`}
-            // src={`../../assets/images/user.png`}
+            src={sn ? sn : (`${SIGN_URL}${sign}` || `../../assets/images/govt.png`)}
             style={{ cursor: "pointer" }}
           />
           <Typography
@@ -261,7 +243,10 @@ const userProfile = ({ user,company }) => {
               accept="image/*"
               multiple
               type="file"
-              onChange={onChangeSign}
+              onChange={(e)=>{
+                setSn(URL.createObjectURL(e.target.files[0]));
+                onChangeSign(e);
+              }}
               />
               Change Signature
             </Button>
@@ -338,8 +323,7 @@ const userProfile = ({ user,company }) => {
 
 const mapStateToProps = (state) => {
   return {
-    user: state.auth,
-    company: state.company 
+    user: state.auth
   };
 };
 

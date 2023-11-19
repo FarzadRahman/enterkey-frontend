@@ -27,6 +27,14 @@ export const authSuccess = (token, userId, name, email, phone,  roles, company, 
   };
 };
 
+export const setAuthImage = (profile_picture, signature) => {
+  return {
+    type: actionTypes.AUTH_IMAGE,
+    profile_picture: profile_picture,
+    signature: signature,
+  };
+};
+
 export const authFail = (error) => {
   return {
     type: actionTypes.AUTH_FAIL,

@@ -9,6 +9,8 @@ const initialState = {
     phone: null,
     roles: null,
     company: null,
+    profile_picture: null,
+    signature: null,
     error: null,
     loading: false,
     user: null,
@@ -35,6 +37,13 @@ const authSuccess = (state, action) => {
      } );
 };
 
+const setAuthImage = (state, action) => {
+    return updateObject( state, { 
+        profile_picture: action.profile_picture,
+        signature: action.signature,
+     } );
+};
+
 const authFail = (state, action) => {
     return updateObject( state, {
         error: action.error,
@@ -52,6 +61,7 @@ const reducer = ( state = initialState, action ) => {
         case actionTypes.AUTH_SUCCESS: return authSuccess(state, action);
         case actionTypes.AUTH_FAIL: return authFail(state, action);
         case actionTypes.AUTH_LOGOUT: return authLogout(state, action);
+        case actionTypes.AUTH_IMAGE: return setAuthImage(state, action);
         default:
         return state;
     }
