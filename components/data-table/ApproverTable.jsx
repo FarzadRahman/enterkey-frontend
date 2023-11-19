@@ -8,7 +8,7 @@ import { BASE_URL } from "../../base";
 import { connect } from "react-redux";
 
 
-const MyDataTable = ({user})=> {
+const ApproverTable = ({user})=> {
 
 
 // var datatable;
@@ -37,7 +37,7 @@ useEffect(() => {
         stateSave: true,
         type: "POST",
         "ajax": {
-            "url": BASE_URL+'leave/applied-list',
+            "url": BASE_URL+'leave/application/for-approver',
             "type": "POST",
               data: function (d) {
                 d.token= user;
@@ -68,7 +68,7 @@ useEffect(() => {
         <table id="myTable"  className="display" >
         <thead>
               <tr>
-                  <th>Approver Name</th>
+                  <th>Sender Name</th>
                   <th>Recorder Name</th>
                   <th>Start Date</th>
                   <th>End Date</th>
@@ -98,4 +98,4 @@ const mapStateToProps = (state) => {
 };
 
 
-export default connect(mapStateToProps)(MyDataTable);
+export default connect(mapStateToProps)(ApproverTable);

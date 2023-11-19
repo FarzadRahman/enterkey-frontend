@@ -1226,6 +1226,27 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                   change={change}
                   width={width}
                 />
+
+                <Item
+                  title="Pending Recorder"
+                  to="/application/pending-recorder"
+                  icon={<ReceiptLongIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                  change={change}
+                  width={width}
+                />
+
+                
+              <Item
+                  title="Pending Appprover"
+                  to="/application/pending-approver"
+                  icon={<ReceiptLongIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                  change={change}
+                  width={width}
+                />
               </SubMenu>
 
 

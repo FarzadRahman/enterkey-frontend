@@ -8,7 +8,7 @@ import { BASE_URL } from "../../base";
 import { connect } from "react-redux";
 
 
-const MyDataTable = ({user})=> {
+const RecorderTable = ({user})=> {
 
 
 // var datatable;
@@ -37,7 +37,7 @@ useEffect(() => {
         stateSave: true,
         type: "POST",
         "ajax": {
-            "url": BASE_URL+'leave/applied-list',
+            "url": BASE_URL+'leave/application/for-recorder',
             "type": "POST",
               data: function (d) {
                 d.token= user;
@@ -45,8 +45,8 @@ useEffect(() => {
             },
         },
         columns: [
+          {data: 'sender_name', name: 'sender_name'},
           {data: 'full_name', name: 'full_name'},
-          {data: 'recorder_name', name: 'recorder_name'},
           {data: 'start_date', name: 'start_date'},
           {data: 'end_date', name: 'end_date'},
           {data: 'reason', name: 'reason'},
@@ -68,8 +68,8 @@ useEffect(() => {
         <table id="myTable"  className="display" >
         <thead>
               <tr>
+                  <th>Sender</th>
                   <th>Approver Name</th>
-                  <th>Recorder Name</th>
                   <th>Start Date</th>
                   <th>End Date</th>
                   <th>Reasonn</th>
@@ -98,4 +98,4 @@ const mapStateToProps = (state) => {
 };
 
 
-export default connect(mapStateToProps)(MyDataTable);
+export default connect(mapStateToProps)(RecorderTable);
