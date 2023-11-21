@@ -186,7 +186,7 @@ const EmployeeForm = ({ token, id }) => {
         
            
             axios.post(apiUrl, empData, config).then((response) => {
-               
+          
             if (response.data) {
                 Router.push({
                 pathname: "/employees/employeeList",
