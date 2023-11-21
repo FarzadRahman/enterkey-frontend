@@ -62,10 +62,10 @@ useEffect(() => {
 
 
     return (
-      <div>
+      <div className='table-responsive'>
       {/* <button onClick={reloadTable}>reload table</button> */}
      
-        <table id="myTable"  className="display" >
+        <table id="myTable"  className="display table table-bordered" >
         <thead>
               <tr>
                   <th>Approver Name</th>
