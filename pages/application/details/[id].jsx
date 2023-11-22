@@ -101,14 +101,61 @@ const ApplicationDetails = ({ query, token }) => {
         </>
       ) : (
         <>
-          <Typography
-            variant="h2"
-            className="mb-4"
-            color={colors.greenAccent[300]}
-          >
-            Employee Leave Details
-          </Typography>
-          <div className="table-responsive">
+            <Typography
+                variant="h2"
+                className="mb-4"
+                color={colors.greenAccent[300]}
+            >
+                Employee Leave Details
+            </Typography>
+        <div>
+                    
+            <div className="row">
+                <div className="col-12 text-center">
+                    <div className="row">
+                    <small style={{ color: "dodgerblue" }}>
+                        Company: <strong>{details?.sender?.branch?.company?.company_name}</strong>
+                    </small>
+                    </div>
+                    <div className="row">
+                    <small style={{ color: "dodgerblue" }}>
+                        Company Bin: <strong>{details?.sender?.branch?.company?.company_bin}</strong>
+                    </small>
+                    </div>
+                    <div className="row">
+                    <small style={{ color: "dodgerblue" }}>
+                        Company Tin: <strong>{details?.sender?.branch?.company?.company_tin}</strong>
+                    </small>
+                    </div>
+                    <div className="row">
+                    <small style={{ color: "dodgerblue" }}>
+                        Company Contact Gmail: <strong>{details?.sender?.branch?.company?.contact_email}</strong>
+                    </small>
+                    </div>
+                    <div className="row">
+                    <small style={{ color: "dodgerblue" }}>
+                        Company Contact Number: <strong>{details?.approver?.branch?.company?.contact_number}</strong>
+                    </small>
+                    </div>
+                    <div className="row">
+                    <small style={{ color: "dodgerblue" }}>
+                        Company Contact Person: <strong>{details?.approver?.branch?.company?.contact_person}</strong>
+                    </small>
+                    </div>
+                    <div className="row">
+                    <small style={{ color: "darkviolet" }}>
+                        Company Contact Address: <strong>{details?.sender?.branch?.company?.contact_address}</strong>
+                    </small>
+                    </div>
+                    <div className="row">
+                    <small style={{ color: "dodgerblue" }}>
+                        [www.ntrca.gov.bd]
+                    </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div className="table-responsive mt-2">
             <table className="table table-hover table-striped">
                 <thead>
                     <tr className="table-success">
@@ -150,13 +197,6 @@ const ApplicationDetails = ({ query, token }) => {
                                 <p>Designation: <strong>{details?.sender?.designation?.desg_nm}</strong></p>
                                 <p>Grade: <strong>{details?.sender?.designation?.grade?.grade_name}</strong></p>
                                 <p style={{color:"green"}}>Office ID: <strong>{details?.sender?.office_id}</strong></p>
-                                <p>Company: <strong>{details?.sender?.branch?.company?.company_name}</strong></p>
-                                <p>Company Bin: <strong>{details?.sender?.branch?.company?.company_bin}</strong></p>
-                                <p>Company Tin: <strong>{details?.sender?.branch?.company?.company_tin}</strong></p>
-                                <p>Company Contact Address: <strong>{details?.sender?.branch?.company?.contact_address}</strong></p>
-                                <p>Company Contact Gmail: <strong>{details?.sender?.branch?.company?.contact_email}</strong></p>
-                                <p>Company Contact Number: <strong>{details?.sender?.branch?.company?.contact_number}</strong></p>
-                                <p>Company Contact Person: <strong>{details?.sender?.branch?.company?.contact_person}</strong></p>
                             </div>
                         </td>
                         <td>
@@ -170,13 +210,6 @@ const ApplicationDetails = ({ query, token }) => {
                                 <p>Designation: <strong>{details?.reviewer?.designation?.desg_nm}</strong></p>
                                 <p>Grade: <strong>{details?.reviewer?.designation?.grade?.grade_name}</strong></p>
                                 <p style={{color:"green"}}>Office ID: <strong>{details?.reviewer?.office_id}</strong></p>
-                                <p>Company: <strong>{details?.reviewer?.branch?.company?.company_name}</strong></p>
-                                <p>Company Bin: <strong>{details?.reviewer?.branch?.company?.company_bin}</strong></p>
-                                <p>Company Tin: <strong>{details?.reviewer?.branch?.company?.company_tin}</strong></p>
-                                <p>Company Contact Address: <strong>{details?.reviewer?.branch?.company?.contact_address}</strong></p>
-                                <p>Company Contact Email: <strong>{details?.reviewer?.branch?.company?.contact_email}</strong></p>
-                                <p>Company Contact Number: <strong>{details?.reviewer?.branch?.company?.contact_number}</strong></p>
-                                <p>Company Contact Person: <strong>{details?.reviewer?.branch?.company?.contact_person}</strong></p>
                             </div>
                         </td>
                         <td>
@@ -190,13 +223,6 @@ const ApplicationDetails = ({ query, token }) => {
                                 <p>designation: <strong>{details?.approver?.designation?.desg_nm}</strong></p>
                                 <p>grade: <strong>{details?.approver?.designation?.grade?.grade_name}</strong></p>
                                 <p style={{color:"green"}}>Office ID: <strong>{details?.approver?.office_id}</strong></p>
-                                <p>Company: <strong>{details?.approver?.branch?.company?.company_name}</strong></p>
-                                <p>Company Bin: <strong>{details?.approver?.branch?.company?.company_bin}</strong></p>
-                                <p>Company Tin: <strong>{details?.approver?.branch?.company?.company_tin}</strong></p>
-                                <p>Company Contact Address: <strong>{details?.approver?.branch?.company?.contact_address}</strong></p>
-                                <p>Company Contact Email: <strong>{details?.approver?.branch?.company?.contact_email}</strong></p>
-                                <p>Company Contact Number: <strong>{details?.approver?.branch?.company?.contact_number}</strong></p>
-                                <p>Company Contact Person: <strong>{details?.approver?.branch?.company?.contact_person}</strong></p>
                             </div>
                         </td>
                         <td>
