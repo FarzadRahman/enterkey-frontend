@@ -143,27 +143,60 @@ const ApplicationDetails = ({ query, token }) => {
                             <div>
                                 <p>Full Name: <strong>{details?.sender?.full_name}</strong></p>
                                 <p>Email Address: <strong>{details?.sender?.email_address}</strong></p>
-                                <p>Office ID: <strong>{details?.sender?.office_id}</strong></p>
                                 <p>Phone Number: <strong>{details?.sender?.phone_number}</strong></p>
                                 <p>Gender: <strong>{details?.sender?.gender}</strong></p>
+                                <p>Department: <strong>{details?.sender?.department?.department_name}</strong></p>
+                                <p>Branch: <strong>{details?.sender?.branch?.branch_name}</strong></p>
+                                <p>Designation: <strong>{details?.sender?.designation?.desg_nm}</strong></p>
+                                <p>Grade: <strong>{details?.sender?.designation?.grade?.grade_name}</strong></p>
+                                <p style={{color:"green"}}>Office ID: <strong>{details?.sender?.office_id}</strong></p>
+                                <p>Company: <strong>{details?.sender?.branch?.company?.company_name}</strong></p>
+                                <p>Company Bin: <strong>{details?.sender?.branch?.company?.company_bin}</strong></p>
+                                <p>Company Tin: <strong>{details?.sender?.branch?.company?.company_tin}</strong></p>
+                                <p>Company Contact Address: <strong>{details?.sender?.branch?.company?.contact_address}</strong></p>
+                                <p>Company Contact Cmail: <strong>{details?.sender?.branch?.company?.contact_email}</strong></p>
+                                <p>Company Contact Number: <strong>{details?.sender?.branch?.company?.contact_number}</strong></p>
+                                <p>Company Contact Person: <strong>{details?.sender?.branch?.company?.contact_person}</strong></p>
                             </div>
                         </td>
                         <td>
                             <div>
                                 <p>Full Name: <strong>{details?.reviewer?.full_name}</strong></p>
                                 <p>Email Address: <strong>{details?.reviewer?.email_address}</strong></p>
-                                <p>Office ID: <strong>{details?.reviewer?.office_id}</strong></p>
                                 <p>Phone Number: <strong>{details?.reviewer?.phone_number}</strong></p>
                                 <p>Gender: <strong>{details?.reviewer?.gender}</strong></p>
+                                <p>Department: <strong>{details?.reviewer?.department?.department_name}</strong></p>
+                                <p>Branch: <strong>{details?.reviewer?.branch?.branch_name}</strong></p>
+                                <p>Designation: <strong>{details?.reviewer?.designation?.desg_nm}</strong></p>
+                                <p>Grade: <strong>{details?.reviewer?.designation?.grade?.grade_name}</strong></p>
+                                <p style={{color:"green"}}>Office ID: <strong>{details?.reviewer?.office_id}</strong></p>
+                                <p>Company: <strong>{details?.reviewer?.branch?.company?.company_name}</strong></p>
+                                <p>Company Bin: <strong>{details?.reviewer?.branch?.company?.company_bin}</strong></p>
+                                <p>Company Tin: <strong>{details?.reviewer?.branch?.company?.company_tin}</strong></p>
+                                <p>Company Contact Address: <strong>{details?.reviewer?.branch?.company?.contact_address}</strong></p>
+                                <p>Company Contact Email: <strong>{details?.reviewer?.branch?.company?.contact_email}</strong></p>
+                                <p>Company Contact Number: <strong>{details?.reviewer?.branch?.company?.contact_number}</strong></p>
+                                <p>Company Contact Person: <strong>{details?.reviewer?.branch?.company?.contact_person}</strong></p>
                             </div>
                         </td>
                         <td>
                             <div>
                                 <p>Full Name: <strong>{details?.approver?.full_name}</strong></p>
                                 <p>Email Address: <strong>{details?.approver?.email_address}</strong></p>
-                                <p>Office ID: <strong>{details?.approver?.office_id}</strong></p>
                                 <p>Phone Number: <strong>{details?.approver?.phone_number}</strong></p>
                                 <p>Gender: <strong>{details?.approver?.gender}</strong></p>
+                                <p>department_name: <strong>{details?.approver?.department?.department_name}</strong></p>
+                                <p>branch: <strong>{details?.approver?.branch?.branch_name}</strong></p>
+                                <p>designation: <strong>{details?.approver?.designation?.desg_nm}</strong></p>
+                                <p>grade: <strong>{details?.approver?.designation?.grade?.grade_name}</strong></p>
+                                <p style={{color:"green"}}>Office ID: <strong>{details?.approver?.office_id}</strong></p>
+                                <p>company_name: <strong>{details?.approver?.branch?.company?.company_name}</strong></p>
+                                <p>company_company_bin: <strong>{details?.approver?.branch?.company?.company_bin}</strong></p>
+                                <p>company_company_tin: <strong>{details?.approver?.branch?.company?.company_tin}</strong></p>
+                                <p>company_contact_address: <strong>{details?.approver?.branch?.company?.contact_address}</strong></p>
+                                <p>company_contact_email: <strong>{details?.approver?.branch?.company?.contact_email}</strong></p>
+                                <p>company_contact_number: <strong>{details?.approver?.branch?.company?.contact_number}</strong></p>
+                                <p>company_contact_person: <strong>{details?.approver?.branch?.company?.contact_person}</strong></p>
                             </div>
                         </td>
                         <td>
