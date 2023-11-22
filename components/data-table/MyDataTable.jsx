@@ -51,15 +51,22 @@ useEffect(() => {
           {data: 'end_date', name: 'end_date'},
           {data: 'reason', name: 'reason'},
           {data: 'applied_total_days', name: 'applied_total_days'},
+          {data: 'id', name: 'id'},
         ]
         // Add more options based on your requirements
+        //Add this edit link
+        // <Link href={`/application/details/${id}`} className="anchor">
+        //   <button className="btn btn-light btn-sm me-1">
+        //     <EditIcon cursor="pointer" />
+        //   </button>
+        // </Link>
       });
       setDatatable(datatable);
   }
 
  
 }, []);
-
+console.log(Datatable);
 
     return (
       <div className='table-responsive'>
@@ -74,12 +81,26 @@ useEffect(() => {
                   <th>End Date</th>
                   <th>Reasonn</th>
                   <th>No of Days</th>
-              
-                
+                  <th>Action</th>
               </tr>
           </thead>
           <tbody>
-          
+          {/* {Datatable.data?.map((user, index) => (
+              <tr key={index}>
+                <th scope="row">{index + 1}</th>
+                <td>{user.name}</td>
+                <td>{user.email}</td>
+                <td>{user.company_name}</td>
+                <td>{user.role_name}</td>
+                <td>
+                  <Link href={`/users/updateUser/${user.id}`} className="anchor">
+                    <button className="btn btn-light btn-sm me-1">
+                      <EditIcon cursor="pointer" />
+                    </button>
+                  </Link>
+                </td>
+              </tr>
+            ))} */}
           </tbody>
       
         </table>
