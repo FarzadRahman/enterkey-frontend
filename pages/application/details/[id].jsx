@@ -154,7 +154,7 @@ const ApplicationDetails = ({ query, token }) => {
                                 <p>Company Bin: <strong>{details?.sender?.branch?.company?.company_bin}</strong></p>
                                 <p>Company Tin: <strong>{details?.sender?.branch?.company?.company_tin}</strong></p>
                                 <p>Company Contact Address: <strong>{details?.sender?.branch?.company?.contact_address}</strong></p>
-                                <p>Company Contact Cmail: <strong>{details?.sender?.branch?.company?.contact_email}</strong></p>
+                                <p>Company Contact Gmail: <strong>{details?.sender?.branch?.company?.contact_email}</strong></p>
                                 <p>Company Contact Number: <strong>{details?.sender?.branch?.company?.contact_number}</strong></p>
                                 <p>Company Contact Person: <strong>{details?.sender?.branch?.company?.contact_person}</strong></p>
                             </div>
@@ -190,13 +190,13 @@ const ApplicationDetails = ({ query, token }) => {
                                 <p>designation: <strong>{details?.approver?.designation?.desg_nm}</strong></p>
                                 <p>grade: <strong>{details?.approver?.designation?.grade?.grade_name}</strong></p>
                                 <p style={{color:"green"}}>Office ID: <strong>{details?.approver?.office_id}</strong></p>
-                                <p>company_name: <strong>{details?.approver?.branch?.company?.company_name}</strong></p>
-                                <p>company_company_bin: <strong>{details?.approver?.branch?.company?.company_bin}</strong></p>
-                                <p>company_company_tin: <strong>{details?.approver?.branch?.company?.company_tin}</strong></p>
-                                <p>company_contact_address: <strong>{details?.approver?.branch?.company?.contact_address}</strong></p>
-                                <p>company_contact_email: <strong>{details?.approver?.branch?.company?.contact_email}</strong></p>
-                                <p>company_contact_number: <strong>{details?.approver?.branch?.company?.contact_number}</strong></p>
-                                <p>company_contact_person: <strong>{details?.approver?.branch?.company?.contact_person}</strong></p>
+                                <p>Company: <strong>{details?.approver?.branch?.company?.company_name}</strong></p>
+                                <p>Company Bin: <strong>{details?.approver?.branch?.company?.company_bin}</strong></p>
+                                <p>Company Tin: <strong>{details?.approver?.branch?.company?.company_tin}</strong></p>
+                                <p>Company Contact Address: <strong>{details?.approver?.branch?.company?.contact_address}</strong></p>
+                                <p>Company Contact Email: <strong>{details?.approver?.branch?.company?.contact_email}</strong></p>
+                                <p>Company Contact Number: <strong>{details?.approver?.branch?.company?.contact_number}</strong></p>
+                                <p>Company Contact Person: <strong>{details?.approver?.branch?.company?.contact_person}</strong></p>
                             </div>
                         </td>
                         <td>
