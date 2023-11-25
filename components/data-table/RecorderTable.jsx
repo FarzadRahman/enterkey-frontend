@@ -51,6 +51,12 @@ useEffect(() => {
           {data: 'end_date', name: 'end_date'},
           {data: 'reason', name: 'reason'},
           {data: 'applied_total_days', name: 'applied_total_days'},
+          // {data: 'id', name: 'id'},
+   
+            { "data": function(data){
+                            return ' <a href="/application/details/'+data.id+'">Show</a> ';
+                        },
+                        "orderable": false, "searchable":false, "name":"selected_rows" },
         ]
         // Add more options based on your requirements
       });
@@ -68,13 +74,13 @@ useEffect(() => {
         <table id="myTable"  className="display" >
         <thead>
               <tr>
-                  <th>Sender</th>
-                  <th>Approver Name</th>
-                  <th>Start Date</th>
-                  <th>End Date</th>
-                  <th>Reasonn</th>
-                  <th>No of Days</th>
-              
+                  <th width="15%">Sender</th>
+                  <th width="15%">Approver Name</th>
+                  <th width="10%">Start Date</th>
+                  <th width="10%">End Date</th>
+                  <th width="15%">Reasonn</th>
+                  <th width="10%">No of Days</th>
+                  <th width="15%">Action</th>
                 
               </tr>
           </thead>

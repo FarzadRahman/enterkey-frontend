@@ -51,6 +51,10 @@ useEffect(() => {
           {data: 'end_date', name: 'end_date'},
           {data: 'reason', name: 'reason'},
           {data: 'applied_total_days', name: 'applied_total_days'},
+          { "data": function(data){
+            return ' <a href="/application/details/'+data.id+'">Show</a> ';
+        },
+        "orderable": false, "searchable":false, "name":"selected_rows" },
         ]
         // Add more options based on your requirements
       });
@@ -74,6 +78,7 @@ useEffect(() => {
                   <th>End Date</th>
                   <th>Reasonn</th>
                   <th>No of Days</th>
+                  <th>Action</th>
               
                 
               </tr>
