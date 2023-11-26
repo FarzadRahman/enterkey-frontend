@@ -51,7 +51,7 @@ useEffect(() => {
           {data: 'end_date', name: 'end_date'},
           {data: 'reason', name: 'reason'},
           {data: 'applied_total_days', name: 'applied_total_days'},
-          {data: 'id', name: 'id'},
+          {data: 'leave_status_name', name: 'leave_status_name'},
         ]
         // Add more options based on your requirements
         //Add this edit link
@@ -81,7 +81,7 @@ console.log(Datatable);
                   <th>End Date</th>
                   <th>Reasonn</th>
                   <th>No of Days</th>
-                  <th>Action</th>
+                  <th>Status</th>
               </tr>
           </thead>
           <tbody>

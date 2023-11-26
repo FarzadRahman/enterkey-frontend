@@ -53,10 +53,43 @@ const ApplicationDetails = ({ query, token }) => {
     const [details, setDetails] = useState({});
     const [comments, setComments] = useState([]);
 
+    function handleForward(id){
+        // console.log(id);
+        // console.log(comments);
+
+        const apiUrl = BASE_URL + "leave/application-pass/" + id;
+        const empData = {
+            comments
+        };
+        const config = {
+        headers: { Authorization: `Bearer ${token}` },
+        };
+   
+        axios.post(apiUrl, empData, config).then((response) => {
+          console.log(response);
+            
+            });
+    }
+
+
+    function handleBackword(id){
+        const apiUrl = BASE_URL + "leave/application-return/" + id;
+        const empData = {
+            comments
+        };
+        const config = {
+        headers: { Authorization: `Bearer ${token}` },
+        };
+        axios.post(apiUrl, empData, config).then((response) => {
+            console.log(response);
+              
+              });
+
+    }
   // FETCH USER DETAILS
   useEffect(() => {
     
-    const apiUrl = BASE_URL + "leave/details/" + 735;
+    const apiUrl = BASE_URL + "leave/details/" + id;
     axios
       .get(apiUrl, {
         headers: { Authorization: "Bearer " + token },
@@ -241,13 +274,13 @@ const ApplicationDetails = ({ query, token }) => {
                         <td>
                         <button
                             className="btn btn-danger btn-sm"
-                            // onClick={() => handleDelete(details?.id)}
+                            onClick={() => handleForward(details?.id)}
                             >
                             <ArrowForwardIcon cursor="pointer" />
                         </button>
                         <button
                             className="btn btn-danger btn-sm ms-1"
-                            // onClick={() => handleDelete(details?.id)}
+                            onClick={() => handleBackword(details?.id)}
                             >
                             <ArrowBackIcon cursor="pointer" />
                         </button>
