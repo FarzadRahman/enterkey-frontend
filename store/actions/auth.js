@@ -2,6 +2,7 @@ import axios from "axios";
 import * as actionTypes from "./actionTypes";
 import Router from "next/router";
 import { BASE_URL } from "../../base";
+import { toast } from "react-toastify";
 
 export const authStart = () => {
   return {
@@ -85,10 +86,7 @@ export const auth = (email, password) => {
       .then((response) => {
        
         if (response.status==200) {
-       
-          // console.log(response.data.user.id);
-          // return false;
-     
+          toast(`Login Successfully done by - ${response?.data?.user?.name}`, { hideProgressBar: true, autoClose: 2000, type: 'success' })
           dispatch(
             authSuccess(
               response.data.access_token,
@@ -109,6 +107,7 @@ export const auth = (email, password) => {
         }
       })
       .catch((err) => {
+        toast(`${err.response.data.error} 'Credential does not match!'`, { hideProgressBar: true, autoClose: 2000, type: 'error' })
         console.log(err);
         // dispatch(authFail());
       });

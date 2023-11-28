@@ -18,6 +18,7 @@ import { Button } from "@mui/material";
 
 // Components import
 import useKey, { test } from "../services/KeyEvent";
+import { toast } from "react-toastify";
 
 const LoginForm = ({ message }) => {
   // THEME
@@ -43,7 +44,6 @@ const LoginForm = ({ message }) => {
   };
 
   const submitHandler = () => {
-   
     dispatch(auth(email, password));
   };
 
