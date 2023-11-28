@@ -278,13 +278,13 @@ const ApplicationDetails = ({ query, token }) => {
                         <td>
                         <button
                             className="btn btn-danger btn-sm"
-                            onClick={() => handleForward(details?.id)}
+                            onClick={() => handleForward(details?.application?.id)}
                             >
                             <ArrowForwardIcon cursor="pointer" />
                         </button>
                         <button
                             className="btn btn-danger btn-sm ms-1"
-                            onClick={() => handleBackword(details?.id)}
+                            onClick={() => handleBackword(details?.application?.id)}
                             >
                             <ArrowBackIcon cursor="pointer" />
                         </button>
