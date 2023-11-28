@@ -141,43 +141,47 @@ const ApplicationDetails = ({ query, token }) => {
             >
                 Employee Leave Details
             </Typography>
+            <h5>
+                Total leave: {details?.totalApprovedDays === 1 ? '1 day' : `${details?.totalApprovedDays} days`}
+            </h5>
+
         <div>
                     
             <div className="row">
                 <div className="col-12 text-center">
                     <div className="row">
                     <small style={{ color: "dodgerblue" }}>
-                        Company: <strong>{details?.sender?.branch?.company?.company_name}</strong>
+                        Company: <strong>{details?.application?.sender?.branch?.company?.company_name}</strong>
                     </small>
                     </div>
                     <div className="row">
                     <small style={{ color: "dodgerblue" }}>
-                        Company Bin: <strong>{details?.sender?.branch?.company?.company_bin}</strong>
+                        Company Bin: <strong>{details?.application?.sender?.branch?.company?.company_bin}</strong>
                     </small>
                     </div>
                     <div className="row">
                     <small style={{ color: "dodgerblue" }}>
-                        Company Tin: <strong>{details?.sender?.branch?.company?.company_tin}</strong>
+                        Company Tin: <strong>{details?.application?.sender?.branch?.company?.company_tin}</strong>
                     </small>
                     </div>
                     <div className="row">
                     <small style={{ color: "dodgerblue" }}>
-                        Company Contact Gmail: <strong>{details?.sender?.branch?.company?.contact_email}</strong>
+                        Company Contact Gmail: <strong>{details?.application?.sender?.branch?.company?.contact_email}</strong>
                     </small>
                     </div>
                     <div className="row">
                     <small style={{ color: "dodgerblue" }}>
-                        Company Contact Number: <strong>{details?.approver?.branch?.company?.contact_number}</strong>
+                        Company Contact Number: <strong>{details?.application?.approver?.branch?.company?.contact_number}</strong>
                     </small>
                     </div>
                     <div className="row">
                     <small style={{ color: "dodgerblue" }}>
-                        Company Contact Person: <strong>{details?.approver?.branch?.company?.contact_person}</strong>
+                        Company Contact Person: <strong>{details?.application?.approver?.branch?.company?.contact_person}</strong>
                     </small>
                     </div>
                     <div className="row">
                     <small style={{ color: "darkviolet" }}>
-                        Company Contact Address: <strong>{details?.sender?.branch?.company?.contact_address}</strong>
+                        Company Contact Address: <strong>{details?.application?.sender?.branch?.company?.contact_address}</strong>
                     </small>
                     </div>
                     <div className="row">
@@ -204,58 +208,58 @@ const ApplicationDetails = ({ query, token }) => {
                     <tr>
                         <td>
                             <div>
-                                <p style={{color:"blue"}}>Leave Type: <strong>{details?.leave_type?.leave_type_name}</strong></p>
-                                <p style={{color:"blue"}}>Stay Location: <strong>{details?.stay_location}</strong></p>
-                                <p style={{color:"blue"}}>Reason: <strong>{details?.reason}</strong></p>
-                                <p>Start Date: <strong>{details?.start_date}</strong></p>
-                                <p>End Date: <strong>{details?.end_date}</strong></p>
-                                <p style={{color:"red"}}>Applied Total Days: <strong>{details?.applied_total_days}</strong></p>
-                                <p>Comment: <strong>{details?.comment}</strong></p>
-                                <p>Reviewer Start Date: <strong>{details?.reviewer_start_date}</strong></p>
-                                <p>Reviewer End Date: <strong>{details?.reviewer_end_date}</strong></p>
-                                <p style={{color:"red"}}>Review Total Days: <strong>{details?.review_total_days}</strong></p>
-                                <p>Approved Start Date: <strong>{details?.approved_start_date}</strong></p>
-                                <p>Approved End Date: <strong>{details?.approved_end_date}</strong></p>
-                                <p style={{color:"green"}}>Approved Total Days: <strong>{details?.approved_total_days}</strong></p>
+                                <p style={{color:"blue"}}>Leave Type: <strong>{details?.application?.leave_type?.leave_type_name}</strong></p>
+                                <p style={{color:"blue"}}>Stay Location: <strong>{details?.application?.stay_location}</strong></p>
+                                <p style={{color:"blue"}}>Reason: <strong>{details?.application?.reason}</strong></p>
+                                <p>Start Date: <strong>{details?.application?.start_date}</strong></p>
+                                <p>End Date: <strong>{details?.application?.end_date}</strong></p>
+                                <p style={{color:"red"}}>Applied Total Days: <strong>{details?.application?.applied_total_days}</strong></p>
+                                <p>Comment: <strong>{details?.application?.comment}</strong></p>
+                                <p>Reviewer Start Date: <strong>{details?.application?.reviewer_start_date}</strong></p>
+                                <p>Reviewer End Date: <strong>{details?.application?.reviewer_end_date}</strong></p>
+                                <p style={{color:"red"}}>Review Total Days: <strong>{details?.application?.review_total_days}</strong></p>
+                                <p>Approved Start Date: <strong>{details?.application?.approved_start_date}</strong></p>
+                                <p>Approved End Date: <strong>{details?.application?.approved_end_date}</strong></p>
+                                <p style={{color:"green"}}>Approved Total Days: <strong>{details?.application?.approved_total_days}</strong></p>
                             </div>
                         </td>
                         <td>
                             <div>
-                                <p>Full Name: <strong>{details?.sender?.full_name}</strong></p>
-                                <p>Email Address: <strong>{details?.sender?.email_address}</strong></p>
-                                <p>Phone Number: <strong>{details?.sender?.phone_number}</strong></p>
-                                <p>Gender: <strong>{details?.sender?.gender}</strong></p>
-                                <p>Department: <strong>{details?.sender?.department?.department_name}</strong></p>
-                                <p>Branch: <strong>{details?.sender?.branch?.branch_name}</strong></p>
-                                <p>Designation: <strong>{details?.sender?.designation?.desg_nm}</strong></p>
-                                <p>Grade: <strong>{details?.sender?.designation?.grade?.grade_name}</strong></p>
-                                <p style={{color:"green"}}>Office ID: <strong>{details?.sender?.office_id}</strong></p>
+                                <p>Full Name: <strong>{details?.application?.sender?.full_name}</strong></p>
+                                <p>Email Address: <strong>{details?.application?.sender?.email_address}</strong></p>
+                                <p>Phone Number: <strong>{details?.application?.sender?.phone_number}</strong></p>
+                                <p>Gender: <strong>{details?.application?.sender?.gender}</strong></p>
+                                <p>Department: <strong>{details?.application?.sender?.department?.department_name}</strong></p>
+                                <p>Branch: <strong>{details?.application?.sender?.branch?.branch_name}</strong></p>
+                                <p>Designation: <strong>{details?.application?.sender?.designation?.desg_nm}</strong></p>
+                                <p>Grade: <strong>{details?.application?.sender?.designation?.grade?.grade_name}</strong></p>
+                                <p style={{color:"green"}}>Office ID: <strong>{details?.application?.sender?.office_id}</strong></p>
                             </div>
                         </td>
                         <td>
                             <div>
-                                <p>Full Name: <strong>{details?.reviewer?.full_name}</strong></p>
-                                <p>Email Address: <strong>{details?.reviewer?.email_address}</strong></p>
-                                <p>Phone Number: <strong>{details?.reviewer?.phone_number}</strong></p>
-                                <p>Gender: <strong>{details?.reviewer?.gender}</strong></p>
-                                <p>Department: <strong>{details?.reviewer?.department?.department_name}</strong></p>
-                                <p>Branch: <strong>{details?.reviewer?.branch?.branch_name}</strong></p>
-                                <p>Designation: <strong>{details?.reviewer?.designation?.desg_nm}</strong></p>
-                                <p>Grade: <strong>{details?.reviewer?.designation?.grade?.grade_name}</strong></p>
-                                <p style={{color:"green"}}>Office ID: <strong>{details?.reviewer?.office_id}</strong></p>
+                                <p>Full Name: <strong>{details?.application?.reviewer?.full_name}</strong></p>
+                                <p>Email Address: <strong>{details?.application?.reviewer?.email_address}</strong></p>
+                                <p>Phone Number: <strong>{details?.application?.reviewer?.phone_number}</strong></p>
+                                <p>Gender: <strong>{details?.application?.reviewer?.gender}</strong></p>
+                                <p>Department: <strong>{details?.application?.reviewer?.department?.department_name}</strong></p>
+                                <p>Branch: <strong>{details?.application?.reviewer?.branch?.branch_name}</strong></p>
+                                <p>Designation: <strong>{details?.application?.reviewer?.designation?.desg_nm}</strong></p>
+                                <p>Grade: <strong>{details?.application?.reviewer?.designation?.grade?.grade_name}</strong></p>
+                                <p style={{color:"green"}}>Office ID: <strong>{details?.application?.reviewer?.office_id}</strong></p>
                             </div>
                         </td>
                         <td>
                             <div>
-                                <p>Full Name: <strong>{details?.approver?.full_name}</strong></p>
-                                <p>Email Address: <strong>{details?.approver?.email_address}</strong></p>
-                                <p>Phone Number: <strong>{details?.approver?.phone_number}</strong></p>
-                                <p>Gender: <strong>{details?.approver?.gender}</strong></p>
-                                <p>department_name: <strong>{details?.approver?.department?.department_name}</strong></p>
-                                <p>branch: <strong>{details?.approver?.branch?.branch_name}</strong></p>
-                                <p>designation: <strong>{details?.approver?.designation?.desg_nm}</strong></p>
-                                <p>grade: <strong>{details?.approver?.designation?.grade?.grade_name}</strong></p>
-                                <p style={{color:"green"}}>Office ID: <strong>{details?.approver?.office_id}</strong></p>
+                                <p>Full Name: <strong>{details?.application?.approver?.full_name}</strong></p>
+                                <p>Email Address: <strong>{details?.application?.approver?.email_address}</strong></p>
+                                <p>Phone Number: <strong>{details?.application?.approver?.phone_number}</strong></p>
+                                <p>Gender: <strong>{details?.application?.approver?.gender}</strong></p>
+                                <p>department_name: <strong>{details?.application?.approver?.department?.department_name}</strong></p>
+                                <p>branch: <strong>{details?.application?.approver?.branch?.branch_name}</strong></p>
+                                <p>designation: <strong>{details?.application?.approver?.designation?.desg_nm}</strong></p>
+                                <p>grade: <strong>{details?.application?.approver?.designation?.grade?.grade_name}</strong></p>
+                                <p style={{color:"green"}}>Office ID: <strong>{details?.application?.approver?.office_id}</strong></p>
                             </div>
                         </td>
                         <td>
