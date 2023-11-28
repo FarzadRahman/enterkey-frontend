@@ -47,7 +47,7 @@ export function Home() {
   return (
     <>
       <Typography variant="h1" color={colors.greenAccent[300]}>
-        Welcome to fair VAT!
+        Welcome to Enterkey!
       </Typography>
 
       

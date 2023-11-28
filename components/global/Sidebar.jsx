@@ -275,7 +275,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                     alt="profile-user"
                     width="130px"
                     height="40px"
-                    src={`../../assets/images/logo.png`}
+                    src={`../../assets/images/logo.jpg`}
                     style={{ cursor: "pointer" }}
                   />
                   <IconButton onClick={change}>
