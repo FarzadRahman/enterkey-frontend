@@ -10,6 +10,9 @@ import Sidebar from "./global/Sidebar";
 import Topbar from "./global/Topbar";
 import Login from "../pages/login";
 
+import { ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
+
 const Layout = ({ children, isLoggedIn, isCollapsed }) => {
   //Public routes
   const router = useRouter();
@@ -38,6 +41,7 @@ const Layout = ({ children, isLoggedIn, isCollapsed }) => {
         <link rel="icon" href="/logo.jpg" />
         {/* <link rel="icon" href="/favicon.ico" /> */}
       </Head>
+      <ToastContainer />
 
       <>
         {isPublicPath ? (
@@ -74,7 +78,9 @@ const Layout = ({ children, isLoggedIn, isCollapsed }) => {
                 </div>
               </>
             ) : (
+              <>
               <Login />
+              </>
             )}
           </>
         )}
