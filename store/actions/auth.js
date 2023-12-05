@@ -100,7 +100,7 @@ export const auth = (email, password) => {
               response.data.user.signature,
             )
           );
-          // dispatch(checkAuthTimeout(response.data.expires_in));
+          dispatch(checkAuthTimeout(60 * 60 * 24));
           dispatch(setCollapse(false));
         } else {
           dispatch(authNotValid(response.data.message));
