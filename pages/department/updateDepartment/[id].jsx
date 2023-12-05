@@ -8,6 +8,9 @@ import { connect } from "react-redux";
 import { tokens } from "../../theme";
 import { TextField, Button, Typography, useTheme } from "@mui/material";
 
+//Alert
+import { toast } from "react-toastify";
+
 //axios
 import axios from "axios";
 import { BASE_URL } from "../../../base";
@@ -63,30 +66,13 @@ const updateBranch = ({ token, query }) => {
         headers: { Authorization: "Bearer " + token },
       })
       .then((res) => {
-        if (res.data) {
-          res.data.map((department)=> {
-            if(department.dept_id == id){
+        if (res?.status === 200) {
+          res?.data?.data?.map((department)=> {
+            if(department?.dept_id == id){
               setLoader(false);
-              setDepartmentName(department.department_name);
+              setDepartmentName(department?.department_name);
             }
           })
-        
-          // for (let index = 0; index < res.data.length; index++) {
-          //   if (res.data[index].bran_id == id) {
-          //     console.log("res.data.bran_id");
-          //     console.log(res.data[index].bran_id);
-          //   }
-            
-          // }
-          // setBranch(res.data)
-          // setLoader(false);
-          // setBranchName(res.data.data.name);
-          // setBran_id(res.data.data.bran_id);
-          // setCompany_id(res.data.data.company_id);
-          // setContactPerson(res.data.data.person);
-          // setPersonEmail(res.data.data.email);
-          // setContactPhone(res.data.data.phone);
-          // setContactAddress(res.data.data.address);
         } else {
           setFormErrors(res.data.message);
           console.log(res.data);
@@ -109,7 +95,7 @@ const updateBranch = ({ token, query }) => {
     };
     axios.post(apiDepartment, department, config).then((response) => {
       if (response.data) {
-        alert("Department Updated!");
+        toast(`${response?.data?.message} - ${response?.data?.data?.department_name}`, { hideProgressBar: true, autoClose: 2000, type: 'success' })
         Router.push({
           pathname: "/department/departmentList",
         });
