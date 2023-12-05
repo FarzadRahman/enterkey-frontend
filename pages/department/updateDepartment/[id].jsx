@@ -115,7 +115,7 @@ const updateBranch = ({ token, query }) => {
   return (
     <div className="mt-2">
       <div className="row">
-        <div className="col-10">
+        <div className="col-11">
           <Typography
             variant="h2"
             className="mb-4"
@@ -124,7 +124,7 @@ const updateBranch = ({ token, query }) => {
             Update Department
           </Typography>
         </div>
-        <div className="col-2 mt-1">
+        <div className="col-1 mt-1">
           <Link href="/department/departmentList" className="anchor">
             <Button variant="outlined"> Department List</Button>
           </Link>

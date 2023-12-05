@@ -110,7 +110,7 @@ const updateDesignation = ({ token, query }) => {
   return (
     <div className="mt-2">
       <div className="row">
-        <div className="col-10">
+        <div className="col-11">
           <Typography
             variant="h2"
             className="mb-4"
@@ -119,7 +119,7 @@ const updateDesignation = ({ token, query }) => {
             Update Branch
           </Typography>
         </div>
-        <div className="col-2 mt-1">
+        <div className="col-1 mt-1">
           <Link href="/designation/designationList" className="anchor">
             <Button variant="outlined"> Branch List</Button>
           </Link>

@@ -81,7 +81,7 @@ const companyList = ({ token }) => {
       ) : (
         <>
           <div className="row">
-            <div className="col-10">
+            <div className="col-11">
               <Typography
                 variant="h2"
                 className="mb-4"
@@ -90,7 +90,7 @@ const companyList = ({ token }) => {
                 Companies
               </Typography>
             </div>
-            <div className="col-2 mt-1">
+            <div className="col-1 mb-4">
               <Link href="/companies/createCompany" className="anchor">
                 <Button variant="outlined">Create Company</Button>
               </Link>
