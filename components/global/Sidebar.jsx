@@ -272,7 +272,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                   ml="15px"
                 >
                   <img
-                    className=""
+                    className="img-fluid"
                     alt="profile-user"
                     width="130px"
                     height="90px"
