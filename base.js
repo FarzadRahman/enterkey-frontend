@@ -5,4 +5,3 @@ export const BASE_URL = "https://dpcsict.xyz/backend/api/";
 export const IMAGE_URL = "https://dpcsict.xyz/backend/public/profile-picture/";
 export const SIGN_URL = "https://dpcsict.xyz/backend/public/signature/";
 // export const BASE_URL="http://localhost:8000/api/";
-// export const BASE_URL="http://192.168.31.19/enterkey-backend/api/";

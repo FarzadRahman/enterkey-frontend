@@ -46,6 +46,7 @@ const leaveApplication = ({ token }) => {
   const [leaveStartDate, setLeaveStartDate] = useState("");
   const [leaveEndDate, setLeaveEndDate] = useState("");
   const [numberOfDays, setNumberOfDays] = useState(0);
+  const [approvedLeave, setApprovedLeave] = useState(0);
   const { RangePicker } = DatePicker;
 
 
@@ -116,6 +117,31 @@ const leaveApplication = ({ token }) => {
     setNumberOfDays(daysRemaining+1);
   
  }
+
+ useEffect(() => {
+  // Approved Leave
+
+  const apiGrade =
+    BASE_URL +
+    "leave/approve-count";
+
+  axios
+    .get(apiGrade, {
+      headers: { Authorization: "Bearer " + token },
+    })
+    .then((res) => {
+      console.log(res);
+     
+      if (res.data) {
+        setApprovedLeave(res.data);
+      
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}, []);
+
 
   useEffect(() => {
     const calculateDaysRemaining = () => {
@@ -258,8 +284,12 @@ const leaveApplication = ({ token }) => {
        
       </div>
 
+      <div className="row">
+      <p className="col-md-4">Number of Days: {numberOfDays}</p>
+      <p className="col-md-4">Approved Leave: {approvedLeave}</p>
+      </div>
       
-      <p>Number of Days: {numberOfDays}</p>
+    
         
       <div className="row">
         
