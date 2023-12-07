@@ -8,6 +8,9 @@ import { connect } from "react-redux";
 import { tokens } from "../../theme";
 import { Typography, useTheme, CircularProgress, Button, TextField } from "@mui/material";
 
+//Alert
+import { toast } from "react-toastify";
+
 //axios
 import axios from "axios";
 import { BASE_URL } from "../../../base";
@@ -38,11 +41,9 @@ const UpdateCompany = ({ query, token }) => {
         headers: { Authorization: "Bearer " + token },
       })
       .then((res) => {
-        console.log(res);
-        if (res.data) {
-          res.data.map((company)=>{
-            if (company.comp_id == id) {
-              console.log(company.comp_id);
+        if (res?.status === 200) {
+          res?.data?.data?.map((company)=>{
+            if (company?.comp_id == id) {
               setLoader(false);
               setCompanyName(company.company_name);
               setContactEmail(company.contact_email);
@@ -80,7 +81,7 @@ const UpdateCompany = ({ query, token }) => {
     };
     axios.post(apiCompany, companyData, config).then((response) => {
       if (response.data) {
-        alert("Company Updated");
+        toast(`${response?.data?.message} - ${response?.data?.data?.company_name}`, { hideProgressBar: true, autoClose: 2000, type: 'success' })
         Router.push({
           pathname: "/companies/companyList",
         });

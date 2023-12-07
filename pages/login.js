@@ -118,9 +118,10 @@ const Login = ({ isLoggedIn, message }) => {
               >
                 <div className="text-center">
                   <img
+                    className="img-fluid"
                     alt="fairvat-logo"
-                    width={192}
-                    height={59}
+                    width={190}
+                    height={190}
                     src={`../../assets/images/logo.jpg`}
                     style={{ cursor: "pointer" }}
                   />

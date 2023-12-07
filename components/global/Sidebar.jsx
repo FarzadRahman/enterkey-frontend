@@ -272,11 +272,12 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                   ml="15px"
                 >
                   <img
+                    className="img-fluid"
                     alt="profile-user"
                     width="130px"
-                    height="40px"
+                    height="90px"
                     src={`../../assets/images/logo.jpg`}
-                    style={{ cursor: "pointer" }}
+                    style={{ cursor: "pointer", textAlign:"center" }}
                   />
                   <IconButton onClick={change}>
                     <CloseIcon />
@@ -303,8 +304,10 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                     variant="h3"
                     color={colors.grey[100]}
                     sx={{ m: "10px 0 0 0" }}
+                    style={{ cursor: "pointer", textAlign:"left" }}
+                    className="ms-5"
                   >
-                    {name}
+                    {name?.toUpperCase()}
                   </Typography>
                   {roles && (
                     <Typography variant="h5" color={colors.greenAccent[500]}>
