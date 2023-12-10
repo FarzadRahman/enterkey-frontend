@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "proxy": "http://107.167.88.5/",
-  "homepage": "https://dpcsict.xyz/index",
+  "homepage": "https://saikat.mndmbera.edu.bd/",
 
   "scripts": {
     "dev": "node server.js",
