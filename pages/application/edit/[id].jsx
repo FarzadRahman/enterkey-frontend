@@ -33,7 +33,7 @@ import { BASE_URL } from "../../../base";
 // import { AdapterDayjs } from '@mui/x-date-pickers-pro/AdapterDayjs';
 // import { DateRangePicker } from '@mui/x-date-pickers-pro/DateRangePicker';
 
-const editLeaveApplication = ({ token, query }) => {
+const editLeaveApplication = ({ token, query, roles }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
@@ -313,6 +313,7 @@ const editLeaveApplication = ({ token, query }) => {
       {loader ? (
         <CircularProgress />
       ) : (
+        (roles != 1) &&
         <>
           <div className="mt-2">
             <div className="row">
@@ -538,6 +539,7 @@ editLeaveApplication.getInitialProps = async ({ query }) => {
 const mapStateToProps = (state) => {
   return {
     token: state.auth.token,
+    roles: state.auth.roles,
   };
 };
 

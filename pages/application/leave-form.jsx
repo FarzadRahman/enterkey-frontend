@@ -47,7 +47,7 @@ import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import RotateLeftIcon from "@mui/icons-material/RotateLeft";
 import CreateCustomer from "../../components/forms/CreateCustomer";
 
-const leave_form = ({ query, token }) => {
+const leave_form = ({ query, token, roles }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   // HELPER VARIABLES
@@ -871,6 +871,7 @@ const leave_form = ({ query, token }) => {
       {!loader ? (
         <CircularProgress />
       ) : (
+        (roles != 1) &&
         <>
         {/* {showCustomerModal ? (
         <div>
@@ -1137,6 +1138,7 @@ leave_form.getInitialProps = async ({ query }) => {
 const mapStateToProps = (state) => {
   return {
     token: state.auth.token,
+    roles: state.auth.roles,
   };
 };
 
