@@ -6,6 +6,8 @@ import 'datatables.net-dt/css/jquery.dataTables.min.css';
 import { BASE_URL } from "../../base";
 //redux imports
 import { connect } from "react-redux";
+import EditIcon from "@mui/icons-material/Edit";
+import Link from "next/link";
 
 import axios from "axios";
 const MyDataTable = ({user})=> {
@@ -73,9 +75,10 @@ useEffect(() => {
           {data: 'applied_total_days', name: 'applied_total_days'},
           {data: 'leave_status_name', name: 'leave_status_name'},
           { "data": function(data){
-            return ' <a className="custom-link" href="/application/edit/'+data.id+'">Edit</a> ';
+            return ' <a className="custom-link" href="/application/edit/'+data.id+'"><button className="btn btn-light btn-sm me-1">Edit</button></a> ';
+            // return '<Link><a className="custom-link" href="/application/edit/'+data.id+'" ><button className="btn btn-light btn-sm me-1">Edit</button></a></Link>';
         },
-        "orderable": false, "searchable":false, "name":"selected_rows" },
+        "orderable": true, "searchable":true, "name":"selected_rows" },
         ]
         // Add more options based on your requirements
         //Add this edit link
@@ -88,7 +91,6 @@ useEffect(() => {
       setDatatable(datatable);
   }
 
- 
 }, []);
 // console.log(Datatable);
 

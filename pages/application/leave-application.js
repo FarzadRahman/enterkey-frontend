@@ -383,7 +383,7 @@ const leaveApplication = ({ token }) => {
           </TextField>
         </div>
         
-        <div className="col-md-8 mt-4">
+        <div className="col-md-4 mt-4">
           <RangePicker
             label="Date"
             variant="outlined"
