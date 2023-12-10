@@ -11,6 +11,10 @@ import { TextField, Button, Typography, useTheme, MenuItem, DateField } from "@m
 // import { DateField } from '@mui/x-date-pickers';
 // import { DateField } from '@mui/x-date-pickers-pro';
 import AntdMomentWebpackPlugin from '@ant-design/moment-webpack-plugin';
+
+//Alert
+import { toast } from "react-toastify";
+
 // Date
 import { DatePicker } from "antd";
 import dayjs from "dayjs";
@@ -58,20 +62,12 @@ const leaveApplication = ({ token, roles }) => {
     datediff(dateString[0],dateString[1]);
     dateString?.map((date, index) => {
       if (index == 0) {
-        
         setLeaveStartDate(date);
       }
       else{
         setLeaveEndDate(date);
-     
       } 
     });
-
-   
-
-
-   
-    
   }
 
   const disabledDate = (current) => {
@@ -187,8 +183,7 @@ const leaveApplication = ({ token, roles }) => {
         headers: { Authorization: "Bearer " + token },
       })
       .then((res) => {
-        // console.log(res.data.data);
-        if (res.data) {
+        if (res?.status === 200) {
          // console.log(res.data.data);
           setApprovalName(res.data);
         
@@ -203,7 +198,6 @@ const leaveApplication = ({ token, roles }) => {
     const apiGrade =
       BASE_URL +
       "leave/recorder-list";
-
     axios
       .get(apiGrade, {
         headers: { Authorization: "Bearer " + token },
@@ -214,20 +208,12 @@ const leaveApplication = ({ token, roles }) => {
         if (res.data) {
          // console.log(res.data.data);
           setRecorderName(res.data);
-        
         }
       })
       .catch((error) => {
         console.log(error);
       });
   }, []);
-
-  
-
-
-
-
-
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -248,17 +234,14 @@ const leaveApplication = ({ token, roles }) => {
     };
 
     axios.post(apiLeaveApplication, application, config).then((response) => {
-      console.log(response);
-      // alert(response.data.message);
-    //   if (response.data) {
-    //     console.log(response.data.data);
-    //     alert("Branch Information Created!");
-    //     Router.push({
-    //       pathname: "/branch/branchList",
-    //     });
-    //   } else {
-    //     setFormErrors(Object.values(response.data));
-    //   }
+      if (response?.status === 201) {
+        toast(`${response?.data?.message}`, { hideProgressBar: true, autoClose: 2000, type: 'success' })
+        Router.push({
+          pathname: "/application/applied-list",
+        });
+      } else {
+        setFormErrors(Object.values(response.data.errors));
+      }
     });
   };
 

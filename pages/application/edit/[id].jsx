@@ -49,26 +49,20 @@ const editLeaveApplication = ({ token, query, roles }) => {
   const [stayLocation, setStayLocation] = useState("");
   const [leaveStartDate, setLeaveStartDate] = useState("");
   const [leaveEndDate, setLeaveEndDate] = useState("");
-  const [value, setValue] = useState('','');
   const [numberOfDays, setNumberOfDays] = useState(0);
   const [approvedLeave, setApprovedLeave] = useState(0);
   const { RangePicker } = DatePicker;
   const id = query.id;
-  const dateFormat = 'DD/MM/YYYY';
+  const dateFormat = 'YYYY/MM/DD';
   const [loader, setLoader] = useState(true);
 
 
   function onChange(date, dateString) {
-    // console.log("date");
-    // console.log(date);
-    // console.log("dateString");
 
     datediff(dateString[0],dateString[1]);
     dateString?.map((date, index) => {
       if (index == 0) { 
         setLeaveStartDate(date);
-        // console.log("setLeaveStartDate");
-        // console.log(date);
       }
       else{
         setLeaveEndDate(date);
@@ -77,8 +71,6 @@ const editLeaveApplication = ({ token, query, roles }) => {
   }
 
   const disabledDate = (current) => {
-    // console.log("current");
-    // console.log(current);
     // Can not select days before today and today
     return current == dayjs().endOf("day");
   };
@@ -277,8 +269,6 @@ const editLeaveApplication = ({ token, query, roles }) => {
 
     axios.post(apiLeaveApplication, application, config).then((response) => {
       if (response?.status === 201) {
-        console.log("response");
-        console.log(response);
         // alert('test')
         toast(`${response?.data?.message}`, { hideProgressBar: true, autoClose: 2000, type: 'success' })
         Router.push({
