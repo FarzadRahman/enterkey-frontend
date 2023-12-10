@@ -19,7 +19,7 @@ import { BASE_URL } from "../../base";
 import MyDataTable from "../../components/data-table/MyDataTable";
 import RecorderTable from "../../components/data-table/RecorderTable";
 
-const createBranch = ({ token }) => {
+const createBranch = ({ token, roles }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
@@ -37,40 +37,30 @@ const createBranch = ({ token }) => {
   };
 
   return (
-    <div className="mt-2">
-      <div className="row">
-        <div className="col-10">
-          <Typography
-            variant="h2"
-            className="mb-4"
-            color={colors.greenAccent[300]}
-          >
-             Pending List For Recorder
-          </Typography>
+    (roles != 1) &&
+    <>
+      <div className="mt-2">
+        <div className="row">
+          <div className="col-10">
+            <Typography
+              variant="h2"
+              className="mb-4"
+              color={colors.greenAccent[300]}
+            >
+              Pending List For Recorder
+            </Typography>
+          </div>
         </div>
-       
-      </div>
-
-      
-      
-
         <RecorderTable></RecorderTable>
-
-     
-
-
-      
-     
-
-    </div>
-
-    
+      </div>
+    </>
   );
 };
 
 const mapStateToProps = (state) => {
   return {
     token: state.auth.token,
+    roles: state.auth.roles,
   };
 };
 

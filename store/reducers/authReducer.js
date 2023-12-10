@@ -27,7 +27,7 @@ const authSuccess = (state, action) => {
         name: action.name,
         email: action.email,
         phone: action.phone,
-        roles: action.role_id,
+        roles: action.roles,
         company: action.company,
         profile_picture: action.profile_picture,
         signature: action.signature,

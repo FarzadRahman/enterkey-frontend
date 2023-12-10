@@ -8,6 +8,9 @@ import { connect } from "react-redux";
 import { tokens } from "../../theme";
 import { TextField, Button, Typography, useTheme, MenuItem } from "@mui/material";
 
+//Alert
+import { toast } from "react-toastify";
+
 //axios
 import axios from "axios";
 import { BASE_URL } from "../../../base";
@@ -36,11 +39,11 @@ const updateDesignation = ({ token, query }) => {
         headers: { Authorization: "Bearer " + token },
       })
       .then((res) => {
-        if (res.data) {
-          setGrades(res.data);
+        if (res?.status === 200) {
+          setGrades(res?.data?.data);
         } else {
-          setFormErrors(res.data.message);
-          console.log(res.data);
+          setFormErrors(res?.data?.message);
+          console.log(res?.data);
         }
       })
       .catch((error) => {
@@ -55,18 +58,18 @@ const updateDesignation = ({ token, query }) => {
         headers: { Authorization: "Bearer " + token },
       })
       .then((res) => {
-        if (res.data) {
-          setDesignations(res.data);
-          res.data.map((designation)=> {
-            if(designation.desg_id == id){
+        if (res?.status === 200) {
+          setDesignations(res?.data?.data);
+          res?.data?.data?.map((designation)=> {
+            if(designation?.desg_id == id){
               setLoader(false);
-              setDesignationName(designation.desg_nm);
-              setGrade_id(designation.grade_id);
+              setDesignationName(designation?.desg_nm);
+              setGrade_id(designation?.grade_id);
             }
           })
         } else {
-          setFormErrors(res.data.message);
-          console.log(res.data);
+          setFormErrors(res?.data?.message);
+          console.log(res?.data);
         }
       })
       .catch((error) => {
@@ -87,7 +90,7 @@ const updateDesignation = ({ token, query }) => {
     };
     axios.post(apiDesignation, designation, config).then((response) => {
       if (response.data) {
-        alert("Designation Updated!");
+        toast(`${response?.data?.message} - ${response?.data?.data?.desg_nm}`, { hideProgressBar: true, autoClose: 2000, type: 'success' })
         Router.push({
           pathname: "/designation/designationList",
         });
@@ -107,7 +110,7 @@ const updateDesignation = ({ token, query }) => {
   return (
     <div className="mt-2">
       <div className="row">
-        <div className="col-10">
+        <div className="col-11">
           <Typography
             variant="h2"
             className="mb-4"
@@ -116,7 +119,7 @@ const updateDesignation = ({ token, query }) => {
             Update Branch
           </Typography>
         </div>
-        <div className="col-2 mt-1">
+        <div className="col-1 mt-1">
           <Link href="/designation/designationList" className="anchor">
             <Button variant="outlined"> Branch List</Button>
           </Link>

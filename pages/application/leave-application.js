@@ -11,6 +11,10 @@ import { TextField, Button, Typography, useTheme, MenuItem, DateField } from "@m
 // import { DateField } from '@mui/x-date-pickers';
 // import { DateField } from '@mui/x-date-pickers-pro';
 import AntdMomentWebpackPlugin from '@ant-design/moment-webpack-plugin';
+
+//Alert
+import { toast } from "react-toastify";
+
 // Date
 import { DatePicker } from "antd";
 import dayjs from "dayjs";
@@ -29,7 +33,7 @@ import { BASE_URL } from "../../base";
 // import { AdapterDayjs } from '@mui/x-date-pickers-pro/AdapterDayjs';
 // import { DateRangePicker } from '@mui/x-date-pickers-pro/DateRangePicker';
 
-const leaveApplication = ({ token }) => {
+const leaveApplication = ({ token, roles }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
@@ -46,6 +50,7 @@ const leaveApplication = ({ token }) => {
   const [leaveStartDate, setLeaveStartDate] = useState("");
   const [leaveEndDate, setLeaveEndDate] = useState("");
   const [numberOfDays, setNumberOfDays] = useState(0);
+  const [approvedLeave, setApprovedLeave] = useState(0);
   const { RangePicker } = DatePicker;
 
 
@@ -57,20 +62,12 @@ const leaveApplication = ({ token }) => {
     datediff(dateString[0],dateString[1]);
     dateString?.map((date, index) => {
       if (index == 0) {
-        
         setLeaveStartDate(date);
       }
       else{
         setLeaveEndDate(date);
-     
       } 
     });
-
-   
-
-
-   
-    
   }
 
   const disabledDate = (current) => {
@@ -117,6 +114,31 @@ const leaveApplication = ({ token }) => {
   
  }
 
+ useEffect(() => {
+  // Approved Leave
+
+  const apiGrade =
+    BASE_URL +
+    "leave/approve-count";
+
+  axios
+    .get(apiGrade, {
+      headers: { Authorization: "Bearer " + token },
+    })
+    .then((res) => {
+      console.log(res);
+     
+      if (res.data) {
+        setApprovedLeave(res.data);
+      
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}, []);
+
+
   useEffect(() => {
     const calculateDaysRemaining = () => {
         const currentDate = new Date();
@@ -161,8 +183,7 @@ const leaveApplication = ({ token }) => {
         headers: { Authorization: "Bearer " + token },
       })
       .then((res) => {
-        // console.log(res.data.data);
-        if (res.data) {
+        if (res?.status === 200) {
          // console.log(res.data.data);
           setApprovalName(res.data);
         
@@ -177,7 +198,6 @@ const leaveApplication = ({ token }) => {
     const apiGrade =
       BASE_URL +
       "leave/recorder-list";
-
     axios
       .get(apiGrade, {
         headers: { Authorization: "Bearer " + token },
@@ -188,20 +208,12 @@ const leaveApplication = ({ token }) => {
         if (res.data) {
          // console.log(res.data.data);
           setRecorderName(res.data);
-        
         }
       })
       .catch((error) => {
         console.log(error);
       });
   }, []);
-
-  
-
-
-
-
-
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -222,17 +234,14 @@ const leaveApplication = ({ token }) => {
     };
 
     axios.post(apiLeaveApplication, application, config).then((response) => {
-      console.log(response);
-      // alert(response.data.message);
-    //   if (response.data) {
-    //     console.log(response.data.data);
-    //     alert("Branch Information Created!");
-    //     Router.push({
-    //       pathname: "/branch/branchList",
-    //     });
-    //   } else {
-    //     setFormErrors(Object.values(response.data));
-    //   }
+      if (response?.status === 201) {
+        toast(`${response?.data?.message}`, { hideProgressBar: true, autoClose: 2000, type: 'success' })
+        Router.push({
+          pathname: "/application/applied-list",
+        });
+      } else {
+        setFormErrors(Object.values(response.data.errors));
+      }
     });
   };
 
@@ -244,215 +253,221 @@ const leaveApplication = ({ token }) => {
   };
 
   return (
-    <div className="mt-2">
-      <div className="row">
-        <div className="col-10">
-          <Typography
-            variant="h2"
-            className="mb-4"
-            color={colors.greenAccent[300]}
-          >
-            Create Leave Application
-          </Typography>
+    (roles != 1) &&
+    <>
+      <div className="mt-2">
+        <div className="row">
+          <div className="col-10">
+            <Typography
+              variant="h2"
+              className="mb-4"
+              color={colors.greenAccent[300]}
+            >
+              Create Leave Application
+            </Typography>
+          </div>
+        
         </div>
-       
-      </div>
 
+        <div className="row">
+        <p className="col-md-4">Number of Days: {numberOfDays}</p>
+        <p className="col-md-4">Approved Leave: {approvedLeave}</p>
+        </div>
+        
       
-      <p>Number of Days: {numberOfDays}</p>
-        
-      <div className="row">
-        
-      <div className="col-md-4 mt-4">
-          <TextField
-            onChange={(e) => {
-              setApproval_id(+e.target.value);
-            }}
-            select
-            label="Approval Name"
-            size="small"
-            fullWidth
-            value={approval_id || ""}
-
-            className="shadow-input"
-          >
-            {approvalName?.map((option, index) => (
-              <MenuItem key={index} value={option.emp_id}>
-                {option.full_name} 
-              </MenuItem>
-            ))}
-          </TextField>
-        </div>
-
-
-        <div className="col-md-4 mt-4">
-          <TextField
-            onChange={(e) => {
-              setRecorder_id(+e.target.value);
-            }}
-            select
-            label="Select Recorder"
-            size="small"
-            fullWidth
-            value={recorder_id || ""}
-
-            className="shadow-input"
-          >
-            {recorderName?.map((option, index) => (
-              <MenuItem key={index} value={option.emp_id}>
-                {option.full_name} 
-              </MenuItem>
-            ))}
-          </TextField>
-        </div>
-
-
-
-        <div className="col-md-4 mt-4">
-          <TextField
-            label="Reason"
-            variant="outlined"
-            size="small"
-            type="text"
-            fullWidth
-            onChange={(e) => setApplicationReason(e.target.value)}
-            className="shadow-input"
-          />
-        </div>
-
-        <div className="col-md-4 mt-4">
-          <TextField
-            label="Stay Locaton"
-            variant="outlined"
-            size="small"
-            type="text"
-            fullWidth
-            onChange={(e) => setStayLocation(e.target.value)}
-            className="shadow-input"
-          />
-        </div>
-
-        <div className="col-md-4 mt-4">
-          <TextField
-            onChange={(e) => {
-              setLeaveType_id(+e.target.value);
-            }}
-            select
-            label="Leave Type"
-            size="small"
-            fullWidth
-            value={leave_type_id || ""}
-
-            className="shadow-input"
-          >
-            {leaveTypes?.map((option, index) => (
-              <MenuItem key={index} value={option.l_type_id}>
-                {option.leave_type_name} 
-              </MenuItem>
-            ))}
-          </TextField>
-        </div>
-        
-        <div className="col-md-8 mt-4">
-          <RangePicker
-            label="Date"
-            variant="outlined"
-            fullWidth
-            onChange={onChange}
-            size="large"
-            style={{ width: "100%"}}
-            className="shadow-input"
-            // disabledDate={disabledDate}
-          />
-           {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DemoContainer components={['DateRangePicker']}>
-                <DateRangePicker localeText={{ start: 'Check-in', end: 'Check-out' }} />
-              </DemoContainer>
-            </LocalizationProvider> */}
-          {/* <DatePicker label="Uncontrolled picker" defaultValue={dayjs('2022-04-17')} /> */}
-          {/* <DatePicker
-            label="Controlled picker"
-            // value={value}
-            onChange={(e) => setLeaveStartDateOnChange(e.target.value)}
-          /> */}
-          {/* <DatePicker
-            onChange={(e) => setLeaveStartDateOnChange(e.target.value)}
-            size="large"
-            // picker="month"
-            style={{ width: "100%" }}
-            className="shadow-input"
-            // disabledDate={disabledDate}
-            fullWidth
-          /> */}
-          {/* <TextField
-            label="Start Date"
-            variant="outlined"
-            size="small"
-            type="date"
-            fullWidth
-            onChange={(e) => setLeaveStartDateOnChange(e.target.value)}
-            className="shadow-input"
-          /> */}
-          {/* <DatePicker
-            label="Start Date"
-            views={"Start Date"}
-            variant="outlined"
-            size="large"
-            style={{ width: "100%" }}
-            fullWidth
-            // value={leaveStartDate}
-            onChange={(e) => setLeaveStartDateOnChange(e.target.value)}
-            className="shadow-input"
-            defaultValue={"Start"}
-          /> */}
           
-        </div>
-        
-        {/* <div className="col-md-4 mt-4">
-          <DatePicker
-            label="End Date"
-            variant="outlined"
-            size="large"
-            // type="text"
-            style={{ width: "100%" }}
-            fullWidth
-            onChange={(e) => setLeaveEndDateOnChange(e.target.value)}
-            className="shadow-input"
-          />
-        </div> */}
+        <div className="row">
+          
+        <div className="col-md-4 mt-4">
+            <TextField
+              onChange={(e) => {
+                setApproval_id(+e.target.value);
+              }}
+              select
+              label="Approval Name"
+              size="small"
+              fullWidth
+              value={approval_id || ""}
 
-        
-  
-      </div>
+              className="shadow-input"
+            >
+              {approvalName?.map((option, index) => (
+                <MenuItem key={index} value={option.emp_id}>
+                  {option.full_name} 
+                </MenuItem>
+              ))}
+            </TextField>
+          </div>
 
 
-      {/* <MyDataTable></MyDataTable> */}
-     
+          <div className="col-md-4 mt-4">
+            <TextField
+              onChange={(e) => {
+                setRecorder_id(+e.target.value);
+              }}
+              select
+              label="Select Recorder"
+              size="small"
+              fullWidth
+              value={recorder_id || ""}
 
-      <div className="row mt-4">
-        <div className="col-md-12">
-          <Button
-            variant="contained"
-            color="success"
-            className="float-end"
-            onClick={onSubmit}
-          >
-            Create
-          </Button>
-          <Button variant="contained" color="error" onClick={goBack}>
-            Cancel
-          </Button>
-        </div>
-      </div>
-    </div>
+              className="shadow-input"
+            >
+              {recorderName?.map((option, index) => (
+                <MenuItem key={index} value={option.emp_id}>
+                  {option.full_name} 
+                </MenuItem>
+              ))}
+            </TextField>
+          </div>
 
+
+
+          <div className="col-md-4 mt-4">
+            <TextField
+              label="Reason"
+              variant="outlined"
+              size="small"
+              type="text"
+              fullWidth
+              onChange={(e) => setApplicationReason(e.target.value)}
+              className="shadow-input"
+            />
+          </div>
+
+          <div className="col-md-4 mt-4">
+            <TextField
+              label="Stay Locaton"
+              variant="outlined"
+              size="small"
+              type="text"
+              fullWidth
+              onChange={(e) => setStayLocation(e.target.value)}
+              className="shadow-input"
+            />
+          </div>
+
+          <div className="col-md-4 mt-4">
+            <TextField
+              onChange={(e) => {
+                setLeaveType_id(+e.target.value);
+              }}
+              select
+              label="Leave Type"
+              size="small"
+              fullWidth
+              value={leave_type_id || ""}
+
+              className="shadow-input"
+            >
+              {leaveTypes?.map((option, index) => (
+                <MenuItem key={index} value={option.l_type_id}>
+                  {option.leave_type_name} 
+                </MenuItem>
+              ))}
+            </TextField>
+          </div>
+          
+          <div className="col-md-4 mt-4">
+            <RangePicker
+              label="Date"
+              variant="outlined"
+              fullWidth
+              onChange={onChange}
+              size="large"
+              style={{ width: "100%"}}
+              className="shadow-input"
+              // disabledDate={disabledDate}
+            />
+            {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DemoContainer components={['DateRangePicker']}>
+                  <DateRangePicker localeText={{ start: 'Check-in', end: 'Check-out' }} />
+                </DemoContainer>
+              </LocalizationProvider> */}
+            {/* <DatePicker label="Uncontrolled picker" defaultValue={dayjs('2022-04-17')} /> */}
+            {/* <DatePicker
+              label="Controlled picker"
+              // value={value}
+              onChange={(e) => setLeaveStartDateOnChange(e.target.value)}
+            /> */}
+            {/* <DatePicker
+              onChange={(e) => setLeaveStartDateOnChange(e.target.value)}
+              size="large"
+              // picker="month"
+              style={{ width: "100%" }}
+              className="shadow-input"
+              // disabledDate={disabledDate}
+              fullWidth
+            /> */}
+            {/* <TextField
+              label="Start Date"
+              variant="outlined"
+              size="small"
+              type="date"
+              fullWidth
+              onChange={(e) => setLeaveStartDateOnChange(e.target.value)}
+              className="shadow-input"
+            /> */}
+            {/* <DatePicker
+              label="Start Date"
+              views={"Start Date"}
+              variant="outlined"
+              size="large"
+              style={{ width: "100%" }}
+              fullWidth
+              // value={leaveStartDate}
+              onChange={(e) => setLeaveStartDateOnChange(e.target.value)}
+              className="shadow-input"
+              defaultValue={"Start"}
+            /> */}
+            
+          </div>
+          
+          {/* <div className="col-md-4 mt-4">
+            <DatePicker
+              label="End Date"
+              variant="outlined"
+              size="large"
+              // type="text"
+              style={{ width: "100%" }}
+              fullWidth
+              onChange={(e) => setLeaveEndDateOnChange(e.target.value)}
+              className="shadow-input"
+            />
+          </div> */}
+
+          
     
+        </div>
+
+
+        {/* <MyDataTable></MyDataTable> */}
+      
+
+        <div className="row mt-4">
+          <div className="col-md-12">
+            <Button
+              variant="contained"
+              color="success"
+              className="float-end"
+              onClick={onSubmit}
+            >
+              Create
+            </Button>
+            <Button variant="contained" color="error" onClick={goBack}>
+              Cancel
+            </Button>
+          </div>
+        </div>
+      </div>
+    </>
   );
 };
 
 const mapStateToProps = (state) => {
   return {
     token: state.auth.token,
+    roles: state.auth.roles,
   };
 };
 

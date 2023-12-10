@@ -8,6 +8,9 @@ import { connect } from "react-redux";
 import { tokens } from "../../theme";
 import { TextField, Button, Typography, useTheme } from "@mui/material";
 
+//Alert
+import { toast } from "react-toastify";
+
 //axios
 import axios from "axios";
 import { BASE_URL } from "../../../base";
@@ -35,16 +38,16 @@ const updateGrade = ({ token, query }) => {
         headers: { Authorization: "Bearer " + token },
       })
       .then((res) => {
-        if (res.data) {
-          res.data.map((grade)=> {
-            if(grade.gid == id){
+        if (res?.status === 200) {
+          res?.data?.data?.map((grade)=> {
+            if(grade?.gid == id){
               setLoader(false);
-              setGradeName(grade.grade_name);
+              setGradeName(grade?.grade_name);
             }
           })
         } else {
-          setFormErrors(res.data.message);
-          console.log(res.data);
+          setFormErrors(res?.data?.message);
+          console.log(res?.data);
         }
       })
       .catch((error) => {
@@ -63,9 +66,8 @@ const updateGrade = ({ token, query }) => {
       headers: { Authorization: `Bearer ${token}` },
     };
     axios.post(apiGrade, grade, config).then((response) => {
-      console.log(response.data);
       if (response.data) {
-        alert("Grade Updated!");
+        toast(`${response?.data?.message} - ${response?.data?.data?.grade_name}`, { hideProgressBar: true, autoClose: 2000, type: 'success' })
         Router.push({
           pathname: "/grade/gradeList",
         });

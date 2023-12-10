@@ -18,7 +18,7 @@ import axios from "axios";
 import { BASE_URL } from "../../base";
 import MyDataTable from "../../components/data-table/MyDataTable";
 
-const createBranch = ({ token }) => {
+const createBranch = ({ token, roles }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
@@ -36,31 +36,25 @@ const createBranch = ({ token }) => {
   };
 
   return (
-    <div className="mt-2">
-      <div className="row">
-        <div className="col-10">
-          <Typography
-            variant="h2"
-            className="mb-4"
-            color={colors.greenAccent[300]}
-          >
-            My Leave Application
-          </Typography>
+    (roles != 1) &&
+    <>
+      <div className="mt-2">
+        <div className="row">
+          <div className="col-10">
+            <Typography
+              variant="h2"
+              className="mb-4"
+              color={colors.greenAccent[300]}
+            >
+              My Leave Application
+            </Typography>
+          </div>
+        
         </div>
-       
+          <MyDataTable></MyDataTable>
       </div>
-
-      
-      
-        <MyDataTable></MyDataTable>
-
-     
-
-
-      
-     
-
-    </div>
+    </>
+    
 
     
   );
@@ -69,6 +63,7 @@ const createBranch = ({ token }) => {
 const mapStateToProps = (state) => {
   return {
     token: state.auth.token,
+    roles: state.auth.roles,
   };
 };
 

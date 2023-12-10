@@ -6,8 +6,10 @@ import 'datatables.net-dt/css/jquery.dataTables.min.css';
 import { BASE_URL } from "../../base";
 //redux imports
 import { connect } from "react-redux";
+import EditIcon from "@mui/icons-material/Edit";
+import Link from "next/link";
 
-
+import axios from "axios";
 const MyDataTable = ({user})=> {
 
 
@@ -20,6 +22,26 @@ let reloadTable=()=> {
 }
 
 useEffect(() => {
+  // Attach click event to the link and handle navigation using jQuery
+  $('.custom-link').on('click', function (e) {
+    e.preventDefault(); // Prevent the default action of the link
+    const href = $(this).attr('href'); // Get the href attribute
+    // Perform the navigation using Next.js router
+    window.location.href = href; // Use window.location.href to navigate
+  });
+}, []);
+
+useEffect(() => {
+
+  // const apiUrl =BASE_URL+'leave/applied-list';
+
+  //   const config = {
+  //     headers: { Authorization: `Bearer ${user}` },
+  //     };
+  //   axios.post(apiUrl, [], config).then((response) => {
+  //     console.log(response);
+        
+  //       });
 
     //  Check if DataTable has already been initialized
      if (!$.fn.DataTable.isDataTable('#myTable')) {
@@ -52,6 +74,11 @@ useEffect(() => {
           {data: 'reason', name: 'reason'},
           {data: 'applied_total_days', name: 'applied_total_days'},
           {data: 'leave_status_name', name: 'leave_status_name'},
+          { "data": function(data){
+            return ' <a className="custom-link" href="/application/edit/'+data.id+'"><button className="btn btn-light btn-sm me-1">Edit</button></a> ';
+            // return '<Link><a className="custom-link" href="/application/edit/'+data.id+'" ><button className="btn btn-light btn-sm me-1">Edit</button></a></Link>';
+        },
+        "orderable": true, "searchable":true, "name":"selected_rows" },
         ]
         // Add more options based on your requirements
         //Add this edit link
@@ -64,9 +91,8 @@ useEffect(() => {
       setDatatable(datatable);
   }
 
- 
 }, []);
-console.log(Datatable);
+// console.log(Datatable);
 
     return (
       <div className='table-responsive'>
@@ -82,6 +108,7 @@ console.log(Datatable);
                   <th>Reasonn</th>
                   <th>No of Days</th>
                   <th>Status</th>
+                  <th>Action</th>
               </tr>
           </thead>
           <tbody>

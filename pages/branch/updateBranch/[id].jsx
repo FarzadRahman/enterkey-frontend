@@ -8,6 +8,9 @@ import { connect } from "react-redux";
 import { tokens } from "../../theme";
 import { TextField, Button, Typography, useTheme, MenuItem } from "@mui/material";
 
+//Alert
+import { toast } from "react-toastify";
+
 //axios
 import axios from "axios";
 import { BASE_URL } from "../../../base";
@@ -29,34 +32,6 @@ const updateBranch = ({ token, query }) => {
   const [loader, setLoader] = useState(true);
   const id = query.id;
 
-  //fetching branch details
-  // Fetch Company Details
-  // useEffect(() => {
-  //   const apiUrl = BASE_URL + "api/v1/branches/" + id;
-  //   axios
-  //     .get(apiUrl, {
-  //       headers: { Authorization: "Bearer " + token },
-  //     })
-  //     .then((res) => {
-  //       if (res.data.status == true) {
-  //         setLoader(false);
-  //         setBranchName(res.data.data.name);
-  //         setBranchCode(res.data.data.code);
-  //         setOrderPrefix(res.data.data.order_prefix);
-  //         setContactPerson(res.data.data.person);
-  //         setPersonEmail(res.data.data.email);
-  //         setContactPhone(res.data.data.phone);
-  //         setContactAddress(res.data.data.address);
-  //       } else {
-  //         setFormErrors(res.data.message);
-  //         console.log(res.data);
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // }, [id]);
-
   useEffect(() => {
     const apiUrl = BASE_URL + "companies";
     axios
@@ -64,11 +39,11 @@ const updateBranch = ({ token, query }) => {
         headers: { Authorization: "Bearer " + token },
       })
       .then((res) => {
-        if (res.data) {
-          setCompanies(res.data);
+        if (res?.status === 200) {
+          setCompanies(res?.data?.data);
         } else {
-          setFormErrors(res.data.message);
-          console.log(res.data);
+          setFormErrors(res?.data?.message);
+          console.log(res?.data);
         }
       })
       .catch((error) => {
@@ -83,36 +58,15 @@ const updateBranch = ({ token, query }) => {
         headers: { Authorization: "Bearer " + token },
       })
       .then((res) => {
-        if (res.data) {
-          console.log(res.data.bran_id);
-          res.data.map((branch)=> {
+        if (res?.status === 200) {
+          res?.data?.data?.map((branch)=> {
             if(branch.bran_id == id){
-              console.log("branch.bran_id");
-              console.log(branch.bran_id);
-              console.log(id);
               setLoader(false);
               setBranchName(branch.branch_name);
               setBran_id(branch.bran_id);
               setCompany_id(branch.company_id);
             }
           })
-        
-          // for (let index = 0; index < res.data.length; index++) {
-          //   if (res.data[index].bran_id == id) {
-          //     console.log("res.data.bran_id");
-          //     console.log(res.data[index].bran_id);
-          //   }
-            
-          // }
-          // setBranch(res.data)
-          // setLoader(false);
-          // setBranchName(res.data.data.name);
-          // setBran_id(res.data.data.bran_id);
-          // setCompany_id(res.data.data.company_id);
-          // setContactPerson(res.data.data.person);
-          // setPersonEmail(res.data.data.email);
-          // setContactPhone(res.data.data.phone);
-          // setContactAddress(res.data.data.address);
         } else {
           setFormErrors(res.data.message);
           console.log(res.data);
@@ -134,11 +88,10 @@ const updateBranch = ({ token, query }) => {
     const config = {
       headers: { Authorization: `Bearer ${token}` },
     };
-    console.log(branch);
+
     axios.post(apiBranch, branch, config).then((response) => {
-      console.log(response.data);
       if (response.data) {
-        alert("Branch Updated!");
+        toast(`${response?.data?.message} - ${response?.data?.data?.branch_name}`, { hideProgressBar: true, autoClose: 2000, type: 'success' })
         Router.push({
           pathname: "/branch/branchList",
         });
