@@ -272,12 +272,11 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                   ml="15px"
                 >
                   <img
-                    className="img-fluid"
                     alt="profile-user"
                     width="130px"
-                    height="90px"
+                    height="40px"
                     src={`../../assets/images/logo.jpg`}
-                    style={{ cursor: "pointer", textAlign:"center" }}
+                    style={{ cursor: "pointer" }}
                   />
                   <IconButton onClick={change}>
                     <CloseIcon />
@@ -304,10 +303,8 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                     variant="h3"
                     color={colors.grey[100]}
                     sx={{ m: "10px 0 0 0" }}
-                    style={{ cursor: "pointer", textAlign:"left" }}
-                    className="ms-5"
                   >
-                    {name?.toUpperCase()}
+                    {name}
                   </Typography>
                   {roles && (
                     <Typography variant="h5" color={colors.greenAccent[500]}>
@@ -335,367 +332,6 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                 change={change}
                 width={width}
               />
-
-              <SubMenu
-                title="Manage User"
-                icon={<PersonIcon />}
-                style={{
-                  color: colors.grey[100],
-                }}
-                onOpenChange={() => {
-                  handleChange("user");
-                }}
-                open={opened[0].isOpen}
-              >
-                <Item
-                  title="Create New User"
-                  to="/users/createUser"
-                  icon={<PersonAddIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                  change={change}
-                  width={width}
-                />
-                <Item
-                  title="User List"
-                  to="/users/userList"
-                  icon={<ContactsIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                  change={change}
-                  width={width}
-                />
-              </SubMenu>
-              {(roles == 1) &&
-              <>
-                {/* Roles */}
-                <SubMenu
-                  title="Manage Roles"
-                  icon={<GroupIcon />}
-                  style={{
-                    color: colors.grey[100],
-                  }}
-                  onOpenChange={() => {
-                    handleChange("role");
-                  }}
-                  open={opened[1].isOpen}
-                >
-                  <MenuItem
-                    active={selected === "Create Role"}
-                    style={{
-                      color: colors.grey[100],
-                    }}
-                    onClick={() => {
-                      setSelected("Create Role");
-                      setShowRoleModal(true);
-                      window.scrollTo({
-                        top: 0,
-                        behavior: "instant",
-                      });
-                    }}
-                    icon={<AddIcon />}
-                  >
-                    <Typography>Create Role</Typography>
-                  </MenuItem>
-                  <Item
-                    title="Role List"
-                    to="/roles/roleList"
-                    icon={<FormatListBulletedIcon />}
-                    selected={selected}
-                    setSelected={setSelected}
-                    change={change}
-                    width={width}
-                  />
-                </SubMenu>
-
-                {/* Permissions */}
-                <SubMenu
-                  title="Manage Permissions"
-                  icon={<KeyIcon />}
-                  style={{
-                    color: colors.grey[100],
-                  }}
-                  onOpenChange={() => {
-                    handleChange("permission");
-                  }}
-                  open={opened[2].isOpen}
-                >
-                  <MenuItem
-                    active={selected === "Create Permission"}
-                    style={{
-                      color: colors.grey[100],
-                    }}
-                    onClick={() => {
-                      setSelected("Create Permission");
-                      setShowPermModal(true);
-                      window.scrollTo({
-                        top: 0,
-                        behavior: "instant",
-                      });
-                    }}
-                    icon={<AddIcon />}
-                  >
-                    <Typography>Create Permission</Typography>
-                  </MenuItem>
-                </SubMenu>
-              </>
-              }
-
-              {/* Companies */}
-              <SubMenu
-                title="Manage Company"
-                icon={<BusinessIcon />}
-                style={{
-                  color: colors.grey[100],
-                }}
-                onOpenChange={() => {
-                  handleChange("companies");
-                }}
-                open={opened[3].isOpen}
-              >
-                <Item
-                  title="Create New Company"
-                  to="/companies/createCompany"
-                  icon={<AddIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                  change={change}
-                  width={width}
-                />
-                <Item
-                  title="Company List"
-                  to="/companies/companyList"
-                  icon={<DomainAddIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                  change={change}
-                  width={width}
-                />
-              </SubMenu>
-
-              {/* Branches */}
-              <SubMenu
-                title="Manage Branch"
-                icon={<AccountTreeIcon />}
-                style={{
-                  color: colors.grey[100],
-                }}
-                onOpenChange={() => {
-                  handleChange("branch");
-                }}
-                open={opened[5].isOpen}
-              >
-                <Item
-                  title="Create New Branch"
-                  to="/branch/createBranch"
-                  icon={<AddchartIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                  change={change}
-                  width={width}
-                />
-                <Item
-                  title="Branch List"
-                  to="/branch/branchList"
-                  icon={<ReceiptLongIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                  change={change}
-                  width={width}
-                />
-              </SubMenu>
-
-              {/* Department */}
-              <SubMenu
-                title="Manage Department"
-                icon={<AccountTreeIcon />}
-                style={{
-                  color: colors.grey[100],
-                }}
-                onOpenChange={() => {
-                  handleChange("department");
-                }}
-                open={opened[6].isOpen}
-              >
-                <Item
-                  title="Create New Department"
-                  to="/department/createDepartment"
-                  icon={<AddchartIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                  change={change}
-                  width={width}
-                />
-                <Item
-                  title="Department List"
-                  to="/department/departmentList"
-                  icon={<ReceiptLongIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                  change={change}
-                  width={width}
-                />
-              </SubMenu>
-
-              {/* Grade */}
-              <SubMenu
-                title="Manage Grade"
-                icon={<AccountTreeIcon />}
-                style={{
-                  color: colors.grey[100],
-                }}
-                onOpenChange={() => {
-                  handleChange("grade");
-                }}
-                open={opened[7].isOpen}
-              >
-                <Item
-                  title="Create New Grade"
-                  to="/grade/createGrade"
-                  icon={<AddchartIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                  change={change}
-                  width={width}
-                />
-                <Item
-                  title="Grade List"
-                  to="/grade/gradeList"
-                  icon={<ReceiptLongIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                  change={change}
-                  width={width}
-                />
-              </SubMenu>
-
-              {/* Designation */}
-              <SubMenu
-                title="Manage Designation"
-                icon={<AccountTreeIcon />}
-                style={{
-                  color: colors.grey[100],
-                }}
-                onOpenChange={() => {
-                  handleChange("designation");
-                }}
-                open={opened[8].isOpen}
-              >
-                <Item
-                  title="Create New Designation"
-                  to="/designation/createDesignation"
-                  icon={<AddchartIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                  change={change}
-                  width={width}
-                />
-                <Item
-                  title="Designation List"
-                  to="/designation/designationList"
-                  icon={<ReceiptLongIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                  change={change}
-                  width={width}
-                />
-              </SubMenu>
-
-              {/* Employees */}
-              <SubMenu
-                title="Manage Employees"
-                icon={<AccountTreeIcon />}
-                style={{
-                  color: colors.grey[100],
-                }}
-                onOpenChange={() => {
-                  handleChange("employees");
-                }}
-                open={opened[9].isOpen}
-              >
-                <Item
-                  title="Create New Employee"
-                  to="/employees/createEmployee"
-                  icon={<AddchartIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                  change={change}
-                  width={width}
-                />
-                <Item
-                  title="Employee List"
-                  to="/employees/employeeList"
-                  icon={<ReceiptLongIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                  change={change}
-                  width={width}
-                />
-              </SubMenu>
-
-              {/* Leave */}
-              {(roles != 1) &&
-                <SubMenu
-                  title="Leave Application"
-                  icon={<AccountTreeIcon />}
-                  style={{
-                    color: colors.grey[100],
-                  }}
-                  onOpenChange={() => {
-                    handleChange("application");
-                  }}
-                  open={opened[10].isOpen}
-                >
-                  <Item
-                    title="Create New Application"
-                    to="/application/leave-application"
-                    icon={<AddchartIcon />}
-                    selected={selected}
-                    setSelected={setSelected}
-                    change={change}
-                    width={width}
-                  />
-                  <Item
-                    title="Applied Application"
-                    to="/application/applied-list"
-                    icon={<ReceiptLongIcon />}
-                    selected={selected}
-                    setSelected={setSelected}
-                    change={change}
-                    width={width}
-                  />
-                  <Item
-                    title="Leave Application Form"
-                    to="/application/leave-form"
-                    icon={<ReceiptLongIcon />}
-                    selected={selected}
-                    setSelected={setSelected}
-                    change={change}
-                    width={width}
-                  />
-
-                  <Item
-                    title="Pending Recorder"
-                    to="/application/pending-recorder"
-                    icon={<ReceiptLongIcon />}
-                    selected={selected}
-                    setSelected={setSelected}
-                    change={change}
-                    width={width}
-                  />
-
-                  
-                  <Item
-                    title="Pending Appprover"
-                    to="/application/pending-approver"
-                    icon={<ReceiptLongIcon />}
-                    selected={selected}
-                    setSelected={setSelected}
-                    change={change}
-                    width={width}
-                  />
-                </SubMenu>
-              }
 
               {/* Purchases */}
               {/* <SubMenu
@@ -1234,7 +870,139 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                   width={width}
                 />
               </SubMenu> */}
-              
+              <SubMenu
+                title="Manage User"
+                icon={<PersonIcon />}
+                style={{
+                  color: colors.grey[100],
+                }}
+                onOpenChange={() => {
+                  handleChange("user");
+                }}
+                open={opened[0].isOpen}
+              >
+                <Item
+                  title="Create New User"
+                  to="/users/createUser"
+                  icon={<PersonAddIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                  change={change}
+                  width={width}
+                />
+                <Item
+                  title="User List"
+                  to="/users/userList"
+                  icon={<ContactsIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                  change={change}
+                  width={width}
+                />
+              </SubMenu>
+
+              {/* Roles */}
+              <SubMenu
+                title="Manage Roles"
+                icon={<GroupIcon />}
+                style={{
+                  color: colors.grey[100],
+                }}
+                onOpenChange={() => {
+                  handleChange("role");
+                }}
+                open={opened[1].isOpen}
+              >
+                <MenuItem
+                  active={selected === "Create Role"}
+                  style={{
+                    color: colors.grey[100],
+                  }}
+                  onClick={() => {
+                    setSelected("Create Role");
+                    setShowRoleModal(true);
+                    window.scrollTo({
+                      top: 0,
+                      behavior: "instant",
+                    });
+                  }}
+                  icon={<AddIcon />}
+                >
+                  <Typography>Create Role</Typography>
+                </MenuItem>
+                <Item
+                  title="Role List"
+                  to="/roles/roleList"
+                  icon={<FormatListBulletedIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                  change={change}
+                  width={width}
+                />
+              </SubMenu>
+
+              {/* Permissions */}
+              <SubMenu
+                title="Manage Permissions"
+                icon={<KeyIcon />}
+                style={{
+                  color: colors.grey[100],
+                }}
+                onOpenChange={() => {
+                  handleChange("permission");
+                }}
+                open={opened[2].isOpen}
+              >
+                <MenuItem
+                  active={selected === "Create Permission"}
+                  style={{
+                    color: colors.grey[100],
+                  }}
+                  onClick={() => {
+                    setSelected("Create Permission");
+                    setShowPermModal(true);
+                    window.scrollTo({
+                      top: 0,
+                      behavior: "instant",
+                    });
+                  }}
+                  icon={<AddIcon />}
+                >
+                  <Typography>Create Permission</Typography>
+                </MenuItem>
+              </SubMenu>
+
+              {/* Companies */}
+              <SubMenu
+                title="Manage Company"
+                icon={<BusinessIcon />}
+                style={{
+                  color: colors.grey[100],
+                }}
+                onOpenChange={() => {
+                  handleChange("companies");
+                }}
+                open={opened[3].isOpen}
+              >
+                <Item
+                  title="Create New Company"
+                  to="/companies/createCompany"
+                  icon={<AddIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                  change={change}
+                  width={width}
+                />
+                <Item
+                  title="Company List"
+                  to="/companies/companyList"
+                  icon={<DomainAddIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                  change={change}
+                  width={width}
+                />
+              </SubMenu>
 
               {/* Company Settings */}
               {/* <SubMenu
@@ -1259,8 +1027,227 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                 />
               </SubMenu> */}
 
-              
-              
+              {/* Branches */}
+              <SubMenu
+                title="Manage Branch"
+                icon={<AccountTreeIcon />}
+                style={{
+                  color: colors.grey[100],
+                }}
+                onOpenChange={() => {
+                  handleChange("branch");
+                }}
+                open={opened[5].isOpen}
+              >
+                <Item
+                  title="Create New Branch"
+                  to="/branch/createBranch"
+                  icon={<AddchartIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                  change={change}
+                  width={width}
+                />
+                <Item
+                  title="Branch List"
+                  to="/branch/branchList"
+                  icon={<ReceiptLongIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                  change={change}
+                  width={width}
+                />
+              </SubMenu>
+
+              {/* Department */}
+              <SubMenu
+                title="Manage Department"
+                icon={<AccountTreeIcon />}
+                style={{
+                  color: colors.grey[100],
+                }}
+                onOpenChange={() => {
+                  handleChange("department");
+                }}
+                open={opened[6].isOpen}
+              >
+                <Item
+                  title="Create New Department"
+                  to="/department/createDepartment"
+                  icon={<AddchartIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                  change={change}
+                  width={width}
+                />
+                <Item
+                  title="Department List"
+                  to="/department/departmentList"
+                  icon={<ReceiptLongIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                  change={change}
+                  width={width}
+                />
+              </SubMenu>
+
+              {/* Grade */}
+              <SubMenu
+                title="Manage Grade"
+                icon={<AccountTreeIcon />}
+                style={{
+                  color: colors.grey[100],
+                }}
+                onOpenChange={() => {
+                  handleChange("grade");
+                }}
+                open={opened[7].isOpen}
+              >
+                <Item
+                  title="Create New Grade"
+                  to="/grade/createGrade"
+                  icon={<AddchartIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                  change={change}
+                  width={width}
+                />
+                <Item
+                  title="Grade List"
+                  to="/grade/gradeList"
+                  icon={<ReceiptLongIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                  change={change}
+                  width={width}
+                />
+              </SubMenu>
+
+              {/* Designation */}
+              <SubMenu
+                title="Manage Designation"
+                icon={<AccountTreeIcon />}
+                style={{
+                  color: colors.grey[100],
+                }}
+                onOpenChange={() => {
+                  handleChange("designation");
+                }}
+                open={opened[8].isOpen}
+              >
+                <Item
+                  title="Create New Designation"
+                  to="/designation/createDesignation"
+                  icon={<AddchartIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                  change={change}
+                  width={width}
+                />
+                <Item
+                  title="Designation List"
+                  to="/designation/designationList"
+                  icon={<ReceiptLongIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                  change={change}
+                  width={width}
+                />
+              </SubMenu>
+
+              {/* Employees */}
+              <SubMenu
+                title="Manage Employees"
+                icon={<AccountTreeIcon />}
+                style={{
+                  color: colors.grey[100],
+                }}
+                onOpenChange={() => {
+                  handleChange("employees");
+                }}
+                open={opened[9].isOpen}
+              >
+                <Item
+                  title="Create New Employee"
+                  to="/employees/createEmployee"
+                  icon={<AddchartIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                  change={change}
+                  width={width}
+                />
+                <Item
+                  title="Employee List"
+                  to="/employees/employeeList"
+                  icon={<ReceiptLongIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                  change={change}
+                  width={width}
+                />
+              </SubMenu>
+
+                    {/* Leave */}
+                    <SubMenu
+                title="Leave Application"
+                icon={<AccountTreeIcon />}
+                style={{
+                  color: colors.grey[100],
+                }}
+                onOpenChange={() => {
+                  handleChange("application");
+                }}
+                open={opened[10].isOpen}
+              >
+                <Item
+                  title="Create New Application"
+                  to="/application/leave-application"
+                  icon={<AddchartIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                  change={change}
+                  width={width}
+                />
+                <Item
+                  title="Applied Application"
+                  to="/application/applied-list"
+                  icon={<ReceiptLongIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                  change={change}
+                  width={width}
+                />
+                <Item
+                  title="Leave Application Form"
+                  to="/application/leave-form"
+                  icon={<ReceiptLongIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                  change={change}
+                  width={width}
+                />
+
+                <Item
+                  title="Pending Recorder"
+                  to="/application/pending-recorder"
+                  icon={<ReceiptLongIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                  change={change}
+                  width={width}
+                />
+
+                
+              <Item
+                  title="Pending Appprover"
+                  to="/application/pending-approver"
+                  icon={<ReceiptLongIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                  change={change}
+                  width={width}
+                />
+              </SubMenu>
 
 
               {/* HS Codes */}

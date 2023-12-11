@@ -11,6 +11,8 @@ import {
   Button,
 } from "@mui/material";
 
+import { ProSidebarProvider } from "react-pro-sidebar";
+
 //icons
 import ReceiptIcon from "@mui/icons-material/Receipt";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
@@ -28,6 +30,7 @@ import BeachAccessIcon from "@mui/icons-material/BeachAccess";
 import { dataset } from "../components/charts/data";
 import { useState } from "react";
 import BarChart from "../components/charts/BarChart";
+import Tree from "../components/global/Tree"
 
 export function Home() {
   const theme = useTheme();
@@ -254,7 +257,15 @@ export function Home() {
           </Card>
         </div>
       </div>
+      
       <div className="row">
+      <div className="col-md-2"></div>
+          <div className="col-md-8">
+          <Card className="mt-5">
+            <Tree />
+          </Card>
+          </div>
+        {/* <Tree /> */}
         {/* <div className="col-md-3">
           <Card className="mt-5">
             <CardContent className="text-center">
