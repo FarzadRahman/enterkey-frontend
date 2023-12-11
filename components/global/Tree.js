@@ -26,8 +26,8 @@ import { color } from "@mui/system";
 
 // Process data array
 function buildTree(data, parent = 0) {
-  console.log('data');
-  console.log(data);
+//   console.log('data');
+//   console.log(data);
   const tree = [];
 
   for (const item of data) {
@@ -48,8 +48,8 @@ function buildTree(data, parent = 0) {
 // Generate items for sidebar
 function generateMenuItems(nodes) {
   return nodes.map((node) => {
-    console.log('node');
-    console.log(node.url);
+    // console.log('node');
+    // console.log(node.url);
     
     const hasChildren = node.children && node.children.length > 0;
 
@@ -91,8 +91,8 @@ const Tree = () => {
         ]
       })
       .then((res) => {
-        console.log("res");
-        console.log(res.data);
+        // console.log("res");
+        // console.log(res.data);
         setapidata(res.data)
       })
       .catch((error) => {
@@ -108,17 +108,18 @@ const Tree = () => {
 
   // Sidebar Toggle
   const toggle = () => {
-    toggleSidebar();
-    if (toggled) {
-      collapseSidebar();
-    } else {
-      collapseSidebar();
-    }
+    // toggleSidebar();
+    // if (toggled) {
+    //   collapseSidebar();
+    // } else {
+    //   collapseSidebar();
+    // }
+    // collapseSidebar();
   };
 
   // console.log(toggled, broken);
-  console.log("treeData");
-  console.log(treeData);
+//   console.log("treeData");
+//   console.log(treeData);
 
   return (
     <>

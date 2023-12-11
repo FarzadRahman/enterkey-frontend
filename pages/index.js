@@ -1,5 +1,8 @@
 import Link from "next/link";
 
+//redux imports
+import { connect } from "react-redux";
+
 //theme imports
 import { tokens } from "./theme";
 import {
@@ -32,7 +35,9 @@ import { useState } from "react";
 import BarChart from "../components/charts/BarChart";
 import Tree from "../components/global/Tree"
 
-export function Home() {
+export function Home({roles}) {
+  // console.log("rolesrrr");
+  // console.log(roles);
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
@@ -260,11 +265,13 @@ export function Home() {
       
       <div className="row">
       <div className="col-md-2"></div>
-          <div className="col-md-8">
-          <Card className="mt-5">
-            <Tree />
-          </Card>
-          </div>
+          {(roles == 1) &&
+            <div className="col-md-8">
+              <Card className="mt-5">
+                <Tree />
+              </Card>
+            </div>
+          }
         {/* <Tree /> */}
         {/* <div className="col-md-3">
           <Card className="mt-5">
@@ -353,4 +360,14 @@ export function Home() {
   );
 }
 
-export default Home;
+const mapStateToProps = (state) => {
+  return {
+    name: state.auth.name,
+    roles: state.auth.roles,
+    company: state.auth.company,
+    isCollapsed: state.collapse.isCollapse,
+  };
+};
+
+// export default Home;
+export default connect(mapStateToProps)(Home);
