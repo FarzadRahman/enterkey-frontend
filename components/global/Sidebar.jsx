@@ -1186,68 +1186,70 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                   width={width}
                 />
               </SubMenu>
+              
+              {/* Leave */}
+              {(roles != 1) &&
+                <SubMenu
+                  title="Leave Application"
+                  icon={<AccountTreeIcon />}
+                  style={{
+                    color: colors.grey[100],
+                  }}
+                  onOpenChange={() => {
+                    handleChange("application");
+                  }}
+                  open={opened[10].isOpen}
+                >
+                  <Item
+                    title="Create New Application"
+                    to="/application/leave-application"
+                    icon={<AddchartIcon />}
+                    selected={selected}
+                    setSelected={setSelected}
+                    change={change}
+                    width={width}
+                  />
+                  <Item
+                    title="Applied Application"
+                    to="/application/applied-list"
+                    icon={<ReceiptLongIcon />}
+                    selected={selected}
+                    setSelected={setSelected}
+                    change={change}
+                    width={width}
+                  />
+                  <Item
+                    title="Leave Application Form"
+                    to="/application/leave-form"
+                    icon={<ReceiptLongIcon />}
+                    selected={selected}
+                    setSelected={setSelected}
+                    change={change}
+                    width={width}
+                  />
 
-                    {/* Leave */}
-                    <SubMenu
-                title="Leave Application"
-                icon={<AccountTreeIcon />}
-                style={{
-                  color: colors.grey[100],
-                }}
-                onOpenChange={() => {
-                  handleChange("application");
-                }}
-                open={opened[10].isOpen}
-              >
-                <Item
-                  title="Create New Application"
-                  to="/application/leave-application"
-                  icon={<AddchartIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                  change={change}
-                  width={width}
-                />
-                <Item
-                  title="Applied Application"
-                  to="/application/applied-list"
-                  icon={<ReceiptLongIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                  change={change}
-                  width={width}
-                />
-                <Item
-                  title="Leave Application Form"
-                  to="/application/leave-form"
-                  icon={<ReceiptLongIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                  change={change}
-                  width={width}
-                />
+                  <Item
+                    title="Pending Recorder"
+                    to="/application/pending-recorder"
+                    icon={<ReceiptLongIcon />}
+                    selected={selected}
+                    setSelected={setSelected}
+                    change={change}
+                    width={width}
+                  />
 
-                <Item
-                  title="Pending Recorder"
-                  to="/application/pending-recorder"
-                  icon={<ReceiptLongIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                  change={change}
-                  width={width}
-                />
-
-                
-              <Item
-                  title="Pending Appprover"
-                  to="/application/pending-approver"
-                  icon={<ReceiptLongIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                  change={change}
-                  width={width}
-                />
-              </SubMenu>
+                  
+                  <Item
+                    title="Pending Appprover"
+                    to="/application/pending-approver"
+                    icon={<ReceiptLongIcon />}
+                    selected={selected}
+                    setSelected={setSelected}
+                    change={change}
+                    width={width}
+                  />
+                </SubMenu>
+              }
 
 
               {/* HS Codes */}
