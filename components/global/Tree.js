@@ -132,7 +132,13 @@ const Tree = () => {
         rtl={false}
         style={{ height: "100vh" }}
       > */}
-      <ProSidebar width="1150px">
+      <ProSidebar width="1150px" 
+        // breakPoint="md"
+        // transitionDuration={400}
+        backgroundColor="white"
+        // rtl={false}
+        style={{ color: "seagreen" }}
+        >
         <Menu iconShape="square">
           <MenuItem
             // icon={<MenuOutlinedIcon />}
