@@ -104,7 +104,7 @@ const leaveAdvanceReport = ({ token }) => {
         headers: { Authorization: "Bearer " + token },
       })
       .then((res) => {
-        // console.log(res);
+        console.log(res);
         if (res.status === 200) {
           // console.log(res.data.data);
           setUsers(res.data);
@@ -254,7 +254,7 @@ const leaveAdvanceReport = ({ token }) => {
               <tr key={index}>
                 <th scope="row">{index + 1}</th>
                 <td><img height={50} src={IMAGE_URL+user.sender.user.profile_picture}/></td>
-                <td>{user.sender.full_name}</td>
+                <td><b>{user.sender.full_name}</b> <br></br>({user.sender.designation.desg_nm})</td>
                 <td>{user.leave_type.leave_type_name}</td>
                 <td>{user.start_date} <br></br> {user.end_date} &nbsp; ({user.applied_total_days})</td>
                 <td>{user.approved_start_date} <br></br> {user.approved_end_date} &nbsp; ({user.approved_total_days})</td>
