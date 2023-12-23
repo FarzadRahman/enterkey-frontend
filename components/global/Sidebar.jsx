@@ -1248,6 +1248,16 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                     change={change}
                     width={width}
                   />
+
+                  <Item
+                    title="Advance Report"
+                    to="/application/advance-report"
+                    icon={<ReceiptLongIcon />}
+                    selected={selected}
+                    setSelected={setSelected}
+                    change={change}
+                    width={width}
+                  />
                 </SubMenu>
               }
 

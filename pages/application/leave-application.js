@@ -71,15 +71,15 @@ const leaveApplication = ({ token, roles }) => {
   }
 
   const disabledDate = (current) => {
-    console.log("current");
-    console.log(current);
+    // console.log("current");
+    // console.log(current);
     // Can not select days before today and today
     return current == dayjs().endOf("day");
   };
 
   function setLeaveStartDateOnChange(value){
-    console.log("value");
-    console.log(value);
+    // console.log("value");
+    // console.log(value);
     setLeaveStartDate(value);
 
     if(value && leaveEndDate){
@@ -126,7 +126,7 @@ const leaveApplication = ({ token, roles }) => {
       headers: { Authorization: "Bearer " + token },
     })
     .then((res) => {
-      console.log(res);
+      // console.log(res);
      
       if (res.data) {
         setApprovedLeave(res.data);
@@ -162,9 +162,10 @@ const leaveApplication = ({ token, roles }) => {
         headers: { Authorization: "Bearer " + token },
       })
       .then((res) => {
+        console.log(res);
        
         if (res.data) {
-          setLeaveType(res.data.data);
+          setLeaveType(res.data);
         
         }
       })
@@ -203,8 +204,8 @@ const leaveApplication = ({ token, roles }) => {
         headers: { Authorization: "Bearer " + token },
       })
       .then((res) => {
-        console.log('data');
-        console.log(res);
+        // console.log('data');
+        // console.log(res);
         if (res.data) {
          // console.log(res.data.data);
           setRecorderName(res.data);
