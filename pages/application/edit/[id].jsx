@@ -173,7 +173,8 @@ const editLeaveApplication = ({ token, query, roles }) => {
       })
       .then((res) => {
         if (res.data) {
-          setLeaveType(res.data.data);
+          // console.log(res.data);
+          setLeaveType(res.data);
         }
       })
       .catch((error) => {
