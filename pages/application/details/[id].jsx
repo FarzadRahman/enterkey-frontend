@@ -51,7 +51,7 @@ const ApplicationDetails = ({ query, token }) => {
     const [errors, setErrors] = useState("");
     const [loader, setLoader] = useState(true);
     const [details, setDetails] = useState({});
-    const [comments, setComments] = useState([]);
+    const [comments, setComments] = useState("");
     const router = useRouter();     
     function handleForward(id){
         // console.log(id);
@@ -67,7 +67,10 @@ const ApplicationDetails = ({ query, token }) => {
    
         axios.post(apiUrl, empData, config).then((response) => {
           console.log(response);
-                
+          toast(`${response?.data?.message}`, { hideProgressBar: true, autoClose: 2000, type: 'success' })
+          setTimeout(() => {
+            router.back();
+        }, 5000);
             });
     }
 
@@ -82,15 +85,30 @@ const ApplicationDetails = ({ query, token }) => {
         };
         axios.post(apiUrl, empData, config).then((response) => {
             console.log(response);
-                
+            toast(`${response?.data?.message}`, { hideProgressBar: true, autoClose: 2000, type: 'success' })
+            setTimeout(() => {
+                router.back();
+            }, 5000);
               });
 
     }
-    // const handle=(id)=>{
-    //     toast('return', { hideProgressBar: true, autoClose: 2000, type: 'success' })
-    //     router.back();
-    //     // history.goBack();
-    // }
+    const handleApproved=(id)=>{
+        const apiUrl = BASE_URL + "leave/application-approved/" + id;
+        const empData = {
+            comments
+        };
+        const config = {
+        headers: { Authorization: `Bearer ${token}` },
+        };
+        axios.post(apiUrl, empData, config).then((response) => {
+            console.log(response);
+            toast(`${response?.data?.message}`, { hideProgressBar: true, autoClose: 2000, type: 'success' })
+            setTimeout(() => {
+                router.back();
+            }, 5000);
+              });
+        // history.goBack();
+    }
   // FETCH USER DETAILS
   useEffect(() => {
     
@@ -295,7 +313,7 @@ const ApplicationDetails = ({ query, token }) => {
                         </button>
                         <button
                             className="btn btn-danger btn-sm ms-1"
-                            // onClick={() => handle(details?.application?.id)}
+                            onClick={() => handleApproved(details?.application?.id)}
                             >
                             <DoneIcon cursor="pointer" />
                         </button>

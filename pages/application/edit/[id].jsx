@@ -272,9 +272,16 @@ const editLeaveApplication = ({ token, query, roles }) => {
       if (response?.status === 201) {
         // alert('test')
         toast(`${response?.data?.message}`, { hideProgressBar: true, autoClose: 2000, type: 'success' })
-        Router.push({
-          pathname: "/application/applied-list",
-        });
+          if(response?.data?.status === 1){
+            Router.push({
+              pathname: "/application/edit/" + id,
+            });
+          }
+          else{
+            Router.push({
+              pathname: "/application/applied-list",
+            });
+          }
       } else {
         setFormErrors(Object.values(response.data.errors));
       }
