@@ -125,6 +125,11 @@ const AdvanceReportTable = ({ token,leaveType,selectedEmp,leaveStartDate,
                       <EditIcon cursor="pointer" />
                     </button>
                   </Link>
+                  <Link href={`/application/${user.id}`} className="anchor">
+                    <button className="btn btn-light btn-sm me-1">
+                      <EditIcon cursor="pointer" />
+                    </button>
+                  </Link>
                 </td>
 
                 {/* <td>
