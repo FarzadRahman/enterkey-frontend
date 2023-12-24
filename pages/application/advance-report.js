@@ -263,7 +263,7 @@ const leaveAdvanceReport = ({ token }) => {
                 <td>{user.approver.full_name}</td>
                 <td>{user.leave_status.leave_status_name}</td>
                 <td>
-                  <Link href={`/users/updateUser/${user.id}`} className="anchor">
+                  <Link href={`/users/updateUser/${user.employee_id}`} className="anchor">
                     <button className="btn btn-light btn-sm me-1">
                       <EditIcon cursor="pointer" />
                     </button>
