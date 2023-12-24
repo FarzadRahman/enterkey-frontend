@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Router from "next/router";
-
 //redux imports
 import { connect } from "react-redux";
-
+import { useRouter } from 'next/router'
 // Theme imports
 import { tokens } from "../../theme";
 import {
@@ -21,6 +20,7 @@ import axios from "axios";
 import { BASE_URL } from "../../../base";
 import EmployeeForm from "../../../components/forms/EmployeeForm";
 import Link from "next/link";
+import { toast } from "react-toastify";
 
 // Icon import
 import EditIcon from "@mui/icons-material/Edit";
@@ -52,7 +52,7 @@ const ApplicationDetails = ({ query, token }) => {
     const [loader, setLoader] = useState(true);
     const [details, setDetails] = useState({});
     const [comments, setComments] = useState([]);
-
+    const router = useRouter();     
     function handleForward(id){
         // console.log(id);
         // console.log(comments);
@@ -67,7 +67,7 @@ const ApplicationDetails = ({ query, token }) => {
    
         axios.post(apiUrl, empData, config).then((response) => {
           console.log(response);
-            
+                
             });
     }
 
@@ -82,10 +82,15 @@ const ApplicationDetails = ({ query, token }) => {
         };
         axios.post(apiUrl, empData, config).then((response) => {
             console.log(response);
-              
+                
               });
 
     }
+    // const handle=(id)=>{
+    //     toast('return', { hideProgressBar: true, autoClose: 2000, type: 'success' })
+    //     router.back();
+    //     // history.goBack();
+    // }
   // FETCH USER DETAILS
   useEffect(() => {
     
@@ -290,7 +295,7 @@ const ApplicationDetails = ({ query, token }) => {
                         </button>
                         <button
                             className="btn btn-danger btn-sm ms-1"
-                            // onClick={() => handleDelete(details?.id)}
+                            // onClick={() => handle(details?.application?.id)}
                             >
                             <DoneIcon cursor="pointer" />
                         </button>

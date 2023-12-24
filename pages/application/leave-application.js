@@ -237,9 +237,17 @@ const leaveApplication = ({ token, roles }) => {
     axios.post(apiLeaveApplication, application, config).then((response) => {
       if (response?.status === 201) {
         toast(`${response?.data?.message}`, { hideProgressBar: true, autoClose: 2000, type: 'success' })
-        Router.push({
-          pathname: "/application/applied-list",
-        });
+        if(response?.data?.status === 1){
+          Router.push({
+            pathname: "/application/leave-application",
+          });
+        }
+        else
+        {
+          Router.push({
+            pathname: "/application/applied-list",
+          });
+        }
       } else {
         setFormErrors(Object.values(response.data.errors));
       }
