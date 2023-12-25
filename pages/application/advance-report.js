@@ -36,6 +36,8 @@ const leaveAdvanceReport = ({ token }) => {
   // const [totalData, setTotalData] = useState(0);
   const [leaveType, setLeaveType] = useState();
   const [leaveTypeList,setleaveTypeList]=useState([]);
+  const [leaveStatus,setLeaveStatus] =useState();
+  const [leaveStatusList,setLeaveStatusList] =useState([]);
   const [employeeList,setemployeeList]=useState([]);
   const [selectedEmp, setSelectedEmp] = useState();
   const [leaveStartDate, setLeaveStartDate] = useState("");
@@ -88,12 +90,38 @@ const leaveAdvanceReport = ({ token }) => {
         console.log(error);
       });
   },[]);
+  useEffect(() => {
+    const apiUsers =
+    BASE_URL +
+    "leave-status";
+   
+    axios
+      .get(apiUsers, {
+        headers: { Authorization: "Bearer " + token },
+      })
+      .then((res) => {
+       
+        if (res.status === 200) {
+          console.log(res.data);
+          setLeaveStatusList(res.data);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },[]);
+
 
 
 
   const changeLeaveType = (value) => {
     // const { name, value } = e.target;
     setLeaveType(value);
+    // console.log(value);
+  };
+  const changeLeaveStatus = (value) => {
+    // const { name, value } = e.target;
+    setLeaveStatus(value);
     // console.log(value);
   };
 
@@ -121,6 +149,7 @@ const leaveAdvanceReport = ({ token }) => {
   function resetFilter(){
     setSelectedEmp("");
     setLeaveType("");
+    setLeaveStatus("");
     setLeaveStartDate("");
     setLeaveEndDate("");
     setDateRange("");
@@ -155,7 +184,26 @@ const leaveAdvanceReport = ({ token }) => {
            ))}
          </TextField>
        </div>
+       <div className="col-md-3 mt-4">
+        <TextField
+          onChange={(e) => {
+            changeLeaveStatus(+e.target.value);
+          }}
+          select
+          label="Leave Status"
+          size="small"
+          fullWidth
+          value={leaveStatus || ""}
 
+          className="shadow-input"
+        >
+          {leaveStatusList?.map((option, index) => (
+            <MenuItem key={index} value={option.l_stat_id}>
+              {option.leave_status_name} 
+            </MenuItem>
+          ))}
+        </TextField>
+      </div>
        <div className="col-md-3 mt-4">
          <TextField
            onChange={(e) => {
@@ -176,7 +224,7 @@ const leaveAdvanceReport = ({ token }) => {
            ))}
          </TextField>
        </div>
-       <div className="col-md-4 mt-4">
+       <div className="col-md-3 mt-4">
          <RangePicker
            label="Date"
            variant="outlined"
@@ -196,7 +244,7 @@ const leaveAdvanceReport = ({ token }) => {
 
    </div>
    <br></br>
-      <AdvanceReportTable leaveType={leaveType} selectedEmp={selectedEmp} leaveStartDate={leaveStartDate}
+      <AdvanceReportTable leaveType={leaveType} leaveStatus={leaveStatus} selectedEmp={selectedEmp} leaveStartDate={leaveStartDate}
       leaveEndDate={leaveEndDate}></AdvanceReportTable>
    
      

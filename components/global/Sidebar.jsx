@@ -57,6 +57,7 @@ const Item = ({ title, to, icon, selected, setSelected, change, width }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
+
   return (
     <MenuItem
       active={selected === title}
@@ -218,6 +219,8 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
     });
   };
 
+  // console.log(roles);
+
   return (
     <>
       {/* Modals */}
@@ -274,7 +277,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                   <img
                     alt="profile-user"
                     width="130px"
-                    height="40px"
+                    height="80px"
                     src={`../../assets/images/logo.jpg`}
                     style={{ cursor: "pointer" }}
                   />
@@ -870,6 +873,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                   width={width}
                 />
               </SubMenu> */}
+               {roles === 1 && (
               <SubMenu
                 title="Manage User"
                 icon={<PersonIcon />}
@@ -900,8 +904,10 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                   width={width}
                 />
               </SubMenu>
+               )}
 
               {/* Roles */}
+              {roles === 1 && (
               <SubMenu
                 title="Manage Roles"
                 icon={<GroupIcon />}
@@ -940,9 +946,10 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                   width={width}
                 />
               </SubMenu>
-
+              )}
               {/* Permissions */}
-              <SubMenu
+              {roles === 1 && (
+              <SubMenu 
                 title="Manage Permissions"
                 icon={<KeyIcon />}
                 style={{
@@ -971,8 +978,9 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                   <Typography>Create Permission</Typography>
                 </MenuItem>
               </SubMenu>
-
+              )}
               {/* Companies */}
+              {roles === 1 && (
               <SubMenu
                 title="Manage Company"
                 icon={<BusinessIcon />}
@@ -1003,6 +1011,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                   width={width}
                 />
               </SubMenu>
+              )}
 
               {/* Company Settings */}
               {/* <SubMenu
@@ -1028,6 +1037,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
               </SubMenu> */}
 
               {/* Branches */}
+              {roles === 2 && (
               <SubMenu
                 title="Manage Branch"
                 icon={<AccountTreeIcon />}
@@ -1058,8 +1068,10 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                   width={width}
                 />
               </SubMenu>
+              )}
 
               {/* Department */}
+              {roles === 2 && (
               <SubMenu
                 title="Manage Department"
                 icon={<AccountTreeIcon />}
@@ -1090,8 +1102,10 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                   width={width}
                 />
               </SubMenu>
+              )}
 
               {/* Grade */}
+              {roles === 2 && (
               <SubMenu
                 title="Manage Grade"
                 icon={<AccountTreeIcon />}
@@ -1122,8 +1136,10 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                   width={width}
                 />
               </SubMenu>
+              )}
 
               {/* Designation */}
+              {roles === 2 && (
               <SubMenu
                 title="Manage Designation"
                 icon={<AccountTreeIcon />}
@@ -1155,7 +1171,10 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                 />
               </SubMenu>
 
+              )}
+
               {/* Employees */}
+              {roles === 2 && (
               <SubMenu
                 title="Manage Employees"
                 icon={<AccountTreeIcon />}
@@ -1186,6 +1205,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                   width={width}
                 />
               </SubMenu>
+              )}
               
               {/* Leave */}
               {(roles != 1) &&
@@ -1355,6 +1375,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
 };
 
 const mapStateToProps = (state) => {
+ 
   return {
     name: state.auth.name,
     roles: state.auth.roles,

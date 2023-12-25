@@ -109,6 +109,23 @@ const ApplicationDetails = ({ query, token }) => {
               });
         // history.goBack();
     }
+    const handleDelete=(id)=>{
+        const apiUrl = BASE_URL + "leave/application-reject/" + id;
+        const empData = {
+            comments
+        };
+        const config = {
+        headers: { Authorization: `Bearer ${token}` },
+        };
+        axios.post(apiUrl, empData, config).then((response) => {
+            console.log(response);
+            toast(`${response?.data?.message}`, { hideProgressBar: true, autoClose: 2000, type: 'success' })
+            setTimeout(() => {
+                router.back();
+            }, 5000);
+              });
+        // history.goBack();
+    }
   // FETCH USER DETAILS
   useEffect(() => {
     
@@ -325,7 +342,7 @@ const ApplicationDetails = ({ query, token }) => {
                         </button>
                         <button
                             className="btn btn-danger btn-sm ms-1"
-                            // onClick={() => handleDelete(details?.id)}
+                            onClick={() => handleDelete(details?.application?.id)}
                             >
                             <DeleteIcon cursor="pointer" />
                         </button>
