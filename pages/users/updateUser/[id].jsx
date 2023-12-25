@@ -172,6 +172,7 @@ const UserDetails = ({ query, token }) => {
     <div className="row">
        
        <div className="col-md-3 mt-4">
+      
          <TextField
            onChange={(e) => {
              changeLeaveType(+e.target.value);
