@@ -22,6 +22,7 @@ import EmployeeForm from "../../../components/forms/EmployeeForm";
 import Link from "next/link";
 import { toast } from "react-toastify";
 
+import { DatePicker } from "antd";
 // Icon import
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -52,14 +53,83 @@ const ApplicationDetails = ({ query, token }) => {
     const [loader, setLoader] = useState(true);
     const [details, setDetails] = useState({});
     const [comments, setComments] = useState("");
-    const router = useRouter();     
+    const [leaveStartDate, setLeaveStartDate] = useState("");
+    const [leaveEndDate, setLeaveEndDate] = useState("");
+    const [numberOfDays, setNumberOfDays] = useState(0);
+    const [approvedLeave, setApprovedLeave] = useState(0);
+    const { RangePicker } = DatePicker;
+
+    const router = useRouter();
+    function onChange(date, dateString) {
+        // console.log("date");
+        // console.log(date);
+        // console.log("dateString");
+    
+        datediff(dateString[0],dateString[1]);
+        dateString?.map((date, index) => {
+          if (index == 0) {
+            setLeaveStartDate(date);
+          }
+          else{
+            setLeaveEndDate(date);
+          } 
+        });
+      }
+    
+      const disabledDate = (current) => {
+        // console.log("current");
+        // console.log(current);
+        // Can not select days before today and today
+        return current == dayjs().endOf("day");
+      };
+    
+      function setLeaveStartDateOnChange(value){
+        // console.log("value");
+        // console.log(value);
+        setLeaveStartDate(value);
+    
+        if(value && leaveEndDate){
+    
+            datediff(value,leaveStartDate);
+        }
+    
+      }
+    
+      function setLeaveEndDateOnChange(value){
+        setLeaveEndDate(value);
+    
+    
+        if(leaveStartDate && value){
+            datediff(leaveStartDate,value);
+        }
+    
+    
+      }
+    
+      function datediff (date_one, date_two) {
+    
+        const currentDate = new Date(date_one);
+        const examDate = new Date(date_two); // Replace with your desired exam date
+        if(examDate<currentDate){
+            alert('End Date Can not be less than Start Date');
+            return false;
+        }
+        const timeDifference = Math.abs(examDate - currentDate);
+        const daysRemaining = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
+        setNumberOfDays(daysRemaining+1);
+      
+     }
+         
     function handleForward(id){
         // console.log(id);
         // console.log(comments);
 
         const apiUrl = BASE_URL + "leave/application-pass/" + id;
         const empData = {
-            comments
+            'comments':comments,
+            'start':leaveStartDate,
+            'end' : leaveEndDate,
+            'approved_total_days':numberOfDays
         };
         const config = {
         headers: { Authorization: `Bearer ${token}` },
@@ -95,7 +165,10 @@ const ApplicationDetails = ({ query, token }) => {
     const handleApproved=(id)=>{
         const apiUrl = BASE_URL + "leave/application-approved/" + id;
         const empData = {
-            comments
+            'comments':comments,
+            'start':leaveStartDate,
+            'end' : leaveEndDate,
+            'approved_total_days':numberOfDays
         };
         const config = {
         headers: { Authorization: `Bearer ${token}` },
@@ -182,7 +255,8 @@ const ApplicationDetails = ({ query, token }) => {
                 Employee Leave Details
             </Typography>
             <h5>
-                Total leave: {details?.totalApprovedDays === 1 ? '1 day' : `${details?.totalApprovedDays} days`}
+                <p>Total leave: {details?.totalApprovedDays === 1 ? '1 day' : `${details?.totalApprovedDays} days`}</p>
+                <p>Number of days:{numberOfDays}</p>
             </h5>
 
         <div>
@@ -313,6 +387,18 @@ const ApplicationDetails = ({ query, token }) => {
                                 value={comments || ""}
                                 className="shadow-input"
                                 placeholder="Input comment here..."
+                            />
+                            <br></br>
+                            <br></br>
+                            <RangePicker
+                            label="Date"
+                            variant="outlined"
+                            fullWidth
+                            onChange={onChange}
+                            size="large"
+                            style={{ width: "100%"}}
+                            className="shadow-input"
+                            // disabledDate={disabledDate}
                             />
                         </td>
                         <td>
