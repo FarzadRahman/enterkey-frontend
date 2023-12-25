@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 
 // Theme imports
 import { tokens } from "../../pages/theme";
-import { Typography, useTheme } from "@mui/material";
+import { IconButton, Typography, useTheme } from "@mui/material";
 import {   MenuItem, DateField } from "@mui/material";
 //axios
 import axios from "axios";
@@ -16,7 +16,8 @@ import { DatePicker } from "antd";
 const { RangePicker } = DatePicker;
 // Icon import
 import EditIcon from "@mui/icons-material/Edit";
-
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import InfoIcon from '@mui/icons-material/Info';
 import {
   Button,
   CircularProgress,
@@ -24,7 +25,7 @@ import {
   TextField,
 } from "@mui/material";
 
-const AdvanceReportTable = ({ token,leaveType,selectedEmp,leaveStartDate,
+const AdvanceReportTable = ({ token,leaveType,leaveStatus,selectedEmp,leaveStartDate,
     leaveEndDate }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -54,9 +55,13 @@ const AdvanceReportTable = ({ token,leaveType,selectedEmp,leaveStartDate,
     BASE_URL +
     "leave/advance-report?page=" +
     page;
-    const param={leaveType:leaveType,
-      selectedEmp:selectedEmp,leaveStartDate:leaveStartDate,
-      leaveEndDate:leaveEndDate};
+    const param={
+      leaveType:leaveType,
+      leaveStatus:leaveStatus,
+      selectedEmp:selectedEmp,
+      leaveStartDate:leaveStartDate,
+      leaveEndDate:leaveEndDate
+    };
     // axios.post(apiBranch, branch, config).then((response) 
     // console.log(param);
     axios
@@ -75,7 +80,7 @@ const AdvanceReportTable = ({ token,leaveType,selectedEmp,leaveStartDate,
       .catch((error) => {
         console.log(error);
       });
-  }, [page,leaveType,selectedEmp,leaveStartDate,
+  }, [page,leaveType,leaveStatus,selectedEmp,leaveStartDate,
     leaveEndDate]);
 
   // Pagination
@@ -127,7 +132,12 @@ const AdvanceReportTable = ({ token,leaveType,selectedEmp,leaveStartDate,
                   </Link>
                   <Link href={`/application/${user.id}`} className="anchor">
                     <button className="btn btn-light btn-sm me-1">
-                      <EditIcon cursor="pointer" />
+                      <VisibilityIcon cursor="pointer" />
+                    </button>
+                  </Link>
+                  <Link href={`/application/details/${user.id}`} className="anchor">
+                    <button className="btn btn-light btn-sm me-1">
+                      <InfoIcon cursor="pointer" />
                     </button>
                   </Link>
                 </td>

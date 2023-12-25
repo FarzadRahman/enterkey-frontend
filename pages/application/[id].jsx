@@ -168,6 +168,31 @@ const leave_form = ({ query, token, roles }) => {
   const handlePrint = useReactToPrint({
     content: () => printRef.current,
   });
+const convertToBanglaDate = (isoDate) => {
+  const monthsInBangla = {
+    January: 'জানুয়ারি',
+    February: 'ফেব্রুয়ারি',
+    March: 'মার্চ',
+    April: 'এপ্রিল',
+    May: 'মে',
+    June: 'জুন',
+    July: 'জুলাই',
+    August: 'অগাস্ট',
+    September: 'সেপ্টেম্বর',
+    October: 'অক্টোবর',
+    November: 'নভেম্বর',
+    December: 'ডিসেম্বর',
+  };
+
+  const dateObj = new Date(isoDate);
+  const day = dateObj.getDate();
+  const month = dateObj.toLocaleString('en-US', { month: 'long' });
+  const year = dateObj.getFullYear();
+  const banglaDay=convertToBanglaNumber(day);
+  const banglaMonth = monthsInBangla[month];
+  const banglaYear = convertToBanglaNumber(year);
+  return `${banglaDay} ${banglaMonth}, ${banglaYear}`;
+};
   useEffect(() => {
     
     const apiUrl = BASE_URL + "leave/details/" + id;
@@ -1046,7 +1071,7 @@ const leave_form = ({ query, token, roles }) => {
                                 style={{ width: "85%" }}
                                 colSpan={2}
                                 >
-                                <p>৩.  প্রার্থিত ছুতির সময়কালঃ আগামী {details?.application?.start_date} থেকে {details?.application?.end_date} তারিখ পর্যন্ত মোট {convertToBanglaNumber(details?.application?.applied_total_days)} দিনের নৈমিত্তিক ছুটি মঞ্জুর/কর্মস্থলত্যাগ/সরকারি ছুটি সংযুক্তি অনুমতিসহ।</p>
+                                <p>৩.  প্রার্থিত ছুতির সময়কালঃ আগামী {convertToBanglaDate(details?.application?.start_date)} থেকে {convertToBanglaDate(details?.application?.end_date)} তারিখ পর্যন্ত মোট {convertToBanglaNumber(details?.application?.applied_total_days)} দিনের নৈমিত্তিক ছুটি মঞ্জুর/কর্মস্থলত্যাগ/সরকারি ছুটি সংযুক্তি অনুমতিসহ।</p>
                                 </td>
                             </tr>
                             <tr>
@@ -1081,10 +1106,10 @@ const leave_form = ({ query, token, roles }) => {
                                 className="text-center pb-0 pt-0"
                                 style={{ width: "20%" }}
                                 >
-                                {details?.application?.sender?.user?.signature}
+                            {/*{details?.application?.sender?.user?.signature} */} 
                                 {details?.application?.sender?.user?.signature != null ? <img src={SIGN_URL+details?.application?.sender?.signature} alt="Signature" /> : 'No sign'}
                                  <br/>
-                                 {details?.application?.created_at}   
+                                    {convertToBanglaDate(details?.application?.created_at)}   
                                  <hr/>
                                 <p>আবেদনকারীর স্বাক্ষর ও তারিখ</p>
                                 </td>
@@ -1146,7 +1171,7 @@ const leave_form = ({ query, token, roles }) => {
                                 className="text-left pb-0 pt-0"
                                 style={{ width: "60%" }}
                             >
-                                <p>তাঁর....................................................................................দিনের নৈমিত্তিক ছুটি/ভোগাকৃত নৈমিত্তিক ছুটি মঞ্জুর/নামঞ্জুর।</p>
+                                <p>তাঁর {convertToBanglaNumber(details?.application?.approved_total_days) } দিনের নৈমিত্তিক ছুটি/ভোগাকৃত নৈমিত্তিক ছুটি মঞ্জুর/নামঞ্জুর।</p>
                             </td>
                             <td
                                 className="text-center pb-0 pt-0"

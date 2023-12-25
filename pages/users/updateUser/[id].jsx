@@ -29,6 +29,8 @@ const UserDetails = ({ query, token }) => {
 
   const [leaveType, setLeaveType] = useState();
   const [leaveTypeList,setleaveTypeList]=useState([]);
+  const [leaveStatus,setLeaveStatus] =useState();
+  const [leaveStatusList,setLeaveStatusList] =useState([]);
   const [leaveStartDate, setLeaveStartDate] = useState("");
   const [leaveEndDate, setLeaveEndDate] = useState("");
   const [dateRange,setDateRange] = useState([]);
@@ -62,6 +64,26 @@ const UserDetails = ({ query, token }) => {
       });
   },[]);
 
+  useEffect(() => {
+    const apiUsers =
+    BASE_URL +
+    "leave-status";
+   
+    axios
+      .get(apiUsers, {
+        headers: { Authorization: "Bearer " + token },
+      })
+      .then((res) => {
+       
+        if (res.status === 200) {
+          console.log(res.data);
+          setLeaveStatusList(res.data);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },[]);
 
 
   const changeLeaveType = (value) => {
@@ -69,7 +91,11 @@ const UserDetails = ({ query, token }) => {
     setLeaveType(value);
     // console.log(value);
   };
-
+  const changeLeaveStatus = (value) => {
+    // const { name, value } = e.target;
+    setLeaveStatus(value);
+    // console.log(value);
+  };
  
   function onDateChange(date, dateString) {
     // console.log("date");
@@ -90,6 +116,7 @@ const UserDetails = ({ query, token }) => {
   function resetFilter(){
     // setSelectedEmp("");
     setLeaveType("");
+    setLeaveStatus("");
     setLeaveStartDate("");
     setLeaveEndDate("");
     setDateRange("");
@@ -169,6 +196,7 @@ const UserDetails = ({ query, token }) => {
       <Typography variant="h4" color={colors.greenAccent[300]}>Total Casual leave : {leaves.totalApprovedLeave}</Typography>
       <Typography variant="h4" color={colors.greenAccent[300]}>Remaining leave : {leaves.remainingLeave}</Typography>
     </Box>
+    <Box p={3}>
     <div className="row">
        
        <div className="col-md-3 mt-4">
@@ -191,7 +219,27 @@ const UserDetails = ({ query, token }) => {
            ))}
          </TextField>
        </div>
+       <div className="col-md-3 mt-4">
+        <TextField
+          onChange={(e) => {
+            changeLeaveStatus(+e.target.value);
+          }}
+          select
+          label="Leave Status"
+          size="small"
+          fullWidth
+          value={leaveStatus || ""}
 
+          className="shadow-input"
+        >
+          {leaveStatusList?.map((option, index) => (
+            <MenuItem key={index} value={option.l_stat_id}>
+              {option.leave_status_name} 
+            </MenuItem>
+          ))}
+        </TextField>
+      </div>
+      
        <div className="col-md-4 mt-4">
          <RangePicker
            label="Date"
@@ -211,10 +259,12 @@ const UserDetails = ({ query, token }) => {
        </div>
 
    </div>
+
+    </Box>
     <Box p={3}>  
 
         
-            <AdvanceReportTable leaveType={leaveType} selectedEmp={id} leaveStartDate={leaveStartDate}
+            <AdvanceReportTable leaveType={leaveType} leaveStatus={leaveStatus} selectedEmp={id} leaveStartDate={leaveStartDate}
               leaveEndDate={leaveEndDate}></AdvanceReportTable>
    
     </Box>
