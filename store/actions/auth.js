@@ -89,15 +89,15 @@ export const auth = (email, password) => {
           toast(`Login Successfully done by - ${response?.data?.user?.name}`, { hideProgressBar: true, autoClose: 2000, type: 'success' })
           dispatch(
             authSuccess(
-              response.data.access_token,
-              response.data.user.id,
-              response.data.user.name,
-              response.data.user.email,
-              response.data.user.phone,
-              response.data.user.role_id,
-              response.data.user.company,
-              response.data.user.profile_picture,
-              response.data.user.signature,
+              response?.data?.access_token,
+              response?.data?.user?.id,
+              response?.data?.user?.name,
+              response?.data?.user?.email,
+              response?.data?.user?.phone,
+              response?.data?.user?.role_id,
+              response?.data?.user?.company,
+              response?.data?.user?.profile_picture,
+              response?.data?.user?.signature,
             )
           );
           dispatch(checkAuthTimeout(60 * 60 * 2));
@@ -107,7 +107,7 @@ export const auth = (email, password) => {
         }
       })
       .catch((err) => {
-        toast(`${err.response.data.error} 'Credential does not match!'`, { hideProgressBar: true, autoClose: 2000, type: 'error' })
+        toast(`${err?.response?.data?.error} 'Credential does not match!'`, { hideProgressBar: true, autoClose: 2000, type: 'error' })
         console.log(err);
         // dispatch(authFail());
       });
