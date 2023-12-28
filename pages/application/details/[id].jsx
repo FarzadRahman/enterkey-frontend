@@ -29,6 +29,10 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import DoneIcon from '@mui/icons-material/Done';
+import ForwardIcon from '@mui/icons-material/Forward';
+import KeyboardDoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrowDown';
+import HeightIcon from '@mui/icons-material/Height';
+import moment from 'moment';
 
 const ApplicationDetails = ({ query, token }) => {
     const theme = useTheme();
@@ -52,6 +56,7 @@ const ApplicationDetails = ({ query, token }) => {
     const [errors, setErrors] = useState("");
     const [loader, setLoader] = useState(true);
     const [details, setDetails] = useState({});
+    const [trees, setTrees] = useState([]);
     const [comments, setComments] = useState("");
     const [leaveStartDate, setLeaveStartDate] = useState("");
     const [leaveEndDate, setLeaveEndDate] = useState("");
@@ -239,6 +244,32 @@ const ApplicationDetails = ({ query, token }) => {
       });
   }, []);
 
+   // FETCH USER DETAILS
+   useEffect(() => {
+
+    const apiUrl = BASE_URL + "leave/application-history/" + id;
+
+    axios
+      .get(apiUrl, {
+        headers: { Authorization: "Bearer " + token },
+      })
+      .then((res) => {
+        console.log("res");
+        console.log(res.data);
+       
+        if (res.data) {
+          console.log(res.data[0]);
+          setLoader(false);
+          setTrees(res.data)
+        } else {
+          setErrors(res.data.message);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
   return (
     <>
       {loader ? (
@@ -306,7 +337,7 @@ const ApplicationDetails = ({ query, token }) => {
                 </div>
             </div>
         </div>
-        <div className="table-responsive mt-2">
+          <div className="table-responsive mt-2">
             <table className="table table-hover table-striped">
                 <thead>
                     <tr className="table-success">
@@ -447,7 +478,37 @@ const ApplicationDetails = ({ query, token }) => {
                     </tr>
                 </tbody>
             </table>
-        </div>
+          </div>
+          <div className="table-responsive mt-2">
+            <table className="table table-hover table-striped">
+              <thead>
+                <tr className="table-success">
+                  <th>SL</th>
+                  <th>Sender</th>
+                  <th>Receiver</th>
+                  <th>Comment</th>
+                  <th>Date Time</th>
+                </tr>
+              </thead>
+              <tbody>
+                { trees?.map((tree, index) => (
+                  <tr>
+                    <td>{index + 1}</td>
+                    <td>
+                      <p>{tree?.sender?.full_name} ({tree?.sender?.office_id})</p>
+                      <p>{tree?.sender?.designation_id}</p>
+                    </td>
+                    <td>
+                      <p>{tree?.receiver?.full_name} ({tree?.receiver?.office_id})</p>
+                      <p>{tree?.receiver?.designation_id}</p>
+                    </td>
+                    <td>{tree?.comments}</td>
+                    <td>{moment(tree?.created_at).format('MMMM Do YYYY, h:mm:ss a')}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>  
         </>
       )}
     </>

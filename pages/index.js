@@ -265,13 +265,13 @@ export function Home({roles}) {
       
       <div className="row">
       <div className="col-md-2"></div>
-          {(roles == 1) &&
+          {/* {(roles == 1) &&
             <div className="col-md-8">
               <Card className="mt-5">
                 <Tree />
               </Card>
             </div>
-          }
+          } */}
         {/* <Tree /> */}
         {/* <div className="col-md-3">
           <Card className="mt-5">
