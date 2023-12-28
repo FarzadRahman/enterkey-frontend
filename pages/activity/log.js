@@ -128,18 +128,16 @@ const log = ({ token }) => {
           {logs.length > 0 ? (
             <>
               <div className="table-responsive">
-                <table className="table table-striped">
+                <table className="table table-striped table-bordered">
                   <thead>
                     <tr className="table-success">
                       <th>Log NO.</th>
+                      <th>Responsible User</th>
+                      <th>Date Time</th>
+                      <th>User Activity</th>
                       <th>Log Name</th>
-                      <th>Description</th>
-                      <th>Subject Type</th>
-                      <th>Subject Id</th>
-                      <th>Causer Type</th>
-                      <th>Causer Id</th>
-                      <th>Created At</th>
-                      <th>Properties</th>
+                      <th>Activity Table Path</th>
+                      <th>Activity</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -149,25 +147,24 @@ const log = ({ token }) => {
                             {log?.id}
                         </td>
                         <td className="align-middle">
-                            {log?.log_name}
+                            <p>User Name: {log?.user?.name}</p>
+                            <p>Office Id: {log?.user?.employee?.office_id}</p>
+                            <p>Designation: {log?.user?.employee?.designation?.desg_nm}</p>
+                            <p>Department: {log?.user?.employee?.department?.department_name}</p>
+                            <p>Branch: {log?.user?.employee?.branch?.branch_name}</p>
+                            <p>Company: {log?.user?.employee?.branch?.company?.company_name}</p>
+                        </td>
+                        <td className="align-middle">
+                            {moment(log?.created_at).format('MMMM Do YYYY, h:mm:ss a')}
                         </td>
                         <td className="align-middle">
                             {log?.description}
                         </td>
                         <td className="align-middle">
-                            {log?.subject_type}
+                            {log?.log_name}
                         </td>
                         <td className="align-middle">
-                            {log?.subject_id}
-                        </td>
-                        <td className="align-middle">
-                            {log?.causer_type}
-                        </td>
-                        <td className="align-middle">
-                            {log?.causer_id}
-                        </td>
-                        <td className="align-middle">
-                            {moment(log?.created_at).format('MMMM Do YYYY, h:mm:ss a')}
+                            ({log?.subject_id}){log?.subject_type}
                         </td>
                         <td className="align-middle">
                             {log?.properties}
