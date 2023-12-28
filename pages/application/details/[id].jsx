@@ -496,11 +496,11 @@ const ApplicationDetails = ({ query, token }) => {
                     <td>{index + 1}</td>
                     <td>
                       <p>{tree?.sender?.full_name} ({tree?.sender?.office_id})</p>
-                      <p>{tree?.sender?.designation_id}</p>
+                      <p>{tree?.sender?.designation?.desg_nm}</p>
                     </td>
                     <td>
                       <p>{tree?.receiver?.full_name} ({tree?.receiver?.office_id})</p>
-                      <p>{tree?.receiver?.designation_id}</p>
+                      <p>{tree?.receiver?.designation?.desg_nm}</p>
                     </td>
                     <td>{tree?.comments}</td>
                     <td>{moment(tree?.created_at).format('MMMM Do YYYY, h:mm:ss a')}</td>

@@ -12,6 +12,7 @@ import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import { tokens } from "../../pages/theme";
 
 //Icons import
+import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import CloseIcon from "@mui/icons-material/Close";
@@ -133,6 +134,10 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
     },
     {
       name: "application",
+      isOpen: false,
+    },
+    {
+      name: "Activity",
       isOpen: false,
     },
     // {
@@ -873,7 +878,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                   width={width}
                 />
               </SubMenu> */}
-               {roles === 1 && (
+               {roles == 1 && (
               <SubMenu
                 title="Manage User"
                 icon={<PersonIcon />}
@@ -907,7 +912,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                )}
 
               {/* Roles */}
-              {roles === 1 && (
+              {roles == 1 && (
               <SubMenu
                 title="Manage Roles"
                 icon={<GroupIcon />}
@@ -948,7 +953,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
               </SubMenu>
               )}
               {/* Permissions */}
-              {roles === 1 && (
+              {roles == 1 && (
               <SubMenu 
                 title="Manage Permissions"
                 icon={<KeyIcon />}
@@ -980,7 +985,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
               </SubMenu>
               )}
               {/* Companies */}
-              {roles === 1 && (
+              {roles == 1 && (
               <SubMenu
                 title="Manage Company"
                 icon={<BusinessIcon />}
@@ -1037,7 +1042,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
               </SubMenu> */}
 
               {/* Branches */}
-              {roles === 2 && (
+              {roles == 2 && (
               <SubMenu
                 title="Manage Branch"
                 icon={<AccountTreeIcon />}
@@ -1071,7 +1076,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
               )}
 
               {/* Department */}
-              {roles === 2 && (
+              {roles == 2 && (
               <SubMenu
                 title="Manage Department"
                 icon={<AccountTreeIcon />}
@@ -1105,7 +1110,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
               )}
 
               {/* Grade */}
-              {roles === 2 && (
+              {roles == 2 && (
               <SubMenu
                 title="Manage Grade"
                 icon={<AccountTreeIcon />}
@@ -1139,7 +1144,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
               )}
 
               {/* Designation */}
-              {roles === 2 && (
+              {roles == 2 && (
               <SubMenu
                 title="Manage Designation"
                 icon={<AccountTreeIcon />}
@@ -1174,7 +1179,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
               )}
 
               {/* Employees */}
-              {roles === 2 && (
+              {roles == 2 && (
               <SubMenu
                 title="Manage Employees"
                 icon={<AccountTreeIcon />}
@@ -1279,6 +1284,18 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                     width={width}
                   />
                 </SubMenu>
+              }
+
+              {(roles == 1) &&
+                <Item
+                title="Activity"
+                to="/activity/log"
+                icon={<VpnKeyIcon />}
+                selected={selected}
+                setSelected={setSelected}
+                change={change}
+                width={width}
+                />
               }
 
 
