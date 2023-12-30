@@ -1265,7 +1265,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
 
                   
                   <Item
-                    title="Pending Appprover"
+                    title="Pending Approver"
                     to="/application/pending-approver"
                     icon={<ReceiptLongIcon />}
                     selected={selected}
