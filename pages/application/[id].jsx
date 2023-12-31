@@ -327,7 +327,7 @@ const convertToBanglaDate = (isoDate) => {
                                 style={{ width: "20%" }}
                                 >
                             {/*{details?.application?.sender?.user?.signature} */} 
-                                {details?.application?.sender?.user?.signature != null ? <img src={SIGN_URL+details?.application?.sender?.signature} alt="Signature" /> : 'No sign'}
+                                {details?.application?.sender?.user?.signature != null ? <img src={SIGN_URL+details?.application?.sender?.user?.signature} alt="Signature" height={150} width={100}/> : 'No sign'}
                                  <br/>
                                     {convertToBanglaDate(details?.application?.created_at)}   
                                  <hr/>
