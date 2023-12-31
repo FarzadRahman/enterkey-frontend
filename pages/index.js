@@ -1,5 +1,5 @@
 import Link from "next/link";
-
+import React, { useState, useEffect, useRef } from "react";
 //redux imports
 import { connect } from "react-redux";
 
@@ -31,15 +31,20 @@ import BeachAccessIcon from "@mui/icons-material/BeachAccess";
 
 //mock data
 import { dataset } from "../components/charts/data";
-import { useState } from "react";
+// import { useState } from "react";
 import BarChart from "../components/charts/BarChart";
 import Tree from "../components/global/Tree"
+import { BASE_URL } from "../base";
 
-export function Home({roles}) {
+//axios
+import axios from "axios";
+
+export function Home({roles,token}) {
   // console.log("rolesrrr");
   // console.log(roles);
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const [details, setDetails] = useState([]);
 
   const [chartData, setChartData] = useState({
     labels: dataset.map((data) => data.year),
@@ -51,6 +56,24 @@ export function Home({roles}) {
       },
     ],
   });
+  useEffect(() => {
+    
+    const apiUrl = BASE_URL + "leave/approve-leave-count";
+    axios
+      .get(apiUrl, {
+        headers: { Authorization: "Bearer " + token },
+      })
+      .then((res) => {
+       
+          console.log(res.data);
+        //   setLoader(false);
+          setDetails(res.data.totalApprovedDays)
+       })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
 
   return (
     <>
@@ -60,7 +83,9 @@ export function Home({roles}) {
 
       
 
-      <div className="row">
+      {(roles == 1) ? 
+        <>
+        <div className="row">
         {/* <div className="col-md-3">
           <Card className="mt-5">
             <CardContent className="text-center">
@@ -355,6 +380,32 @@ export function Home({roles}) {
         </div> */}
       </div>
 
+      </> :
+      <>
+      <div className="table-responsive" style={{ padding: '2em 0' }}>
+        <table className="table table-hover table-striped">
+          <thead>
+            <tr className="table-success">
+              <th>#</th>
+              <th>Leave Type</th>
+              <th>Total leave</th>
+              <th>Remaining Leave</th>
+            </tr>
+          </thead>
+          <tbody>
+          {details?.map((detail, index) => (
+            <tr key={index}>
+              <td>{index + 1}</td>
+              <td>{detail?.leave_type?.leave_type_name}</td>
+              <td>{detail?.approved_total_days}</td>
+              <td>{detail?.remainingDays}</td>
+            </tr>
+          ))}
+          </tbody>
+        </table>
+      </div>
+      </>
+        }
       {/* <BarChart chartData={chartData} /> */}
     </>
   );
@@ -363,6 +414,7 @@ export function Home({roles}) {
 const mapStateToProps = (state) => {
   return {
     name: state.auth.name,
+    token: state.auth.token,
     roles: state.auth.roles,
     company: state.auth.company,
     isCollapsed: state.collapse.isCollapse,
