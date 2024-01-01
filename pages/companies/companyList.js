@@ -16,8 +16,9 @@ import { BASE_URL } from "../../base";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from '@mui/icons-material/Delete';
 import Pagination from '@mui/material/Pagination';
+import { red } from "@mui/material/colors";
 
-const companyList = ({ token }) => {
+const companyList = ({ token ,roles}) => {
   console.log(token);
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -76,100 +77,117 @@ const companyList = ({ token }) => {
   };
   return (
     <>
-      {loader ? (
-        <CircularProgress />
-      ) : (
+      {
+        (roles==1)
+        ?
         <>
-          <div className="row">
-            <div className="col-11">
-              <Typography
-                variant="h2"
-                className="mb-4"
-                color={colors.greenAccent[300]}
-              >
-                Companies
-              </Typography>
+        {loader ? (
+          <CircularProgress />
+        ) : (
+          <>
+            <div className="row">
+              <div className="col-11">
+                <Typography
+                  variant="h2"
+                  className="mb-4"
+                  color={colors.greenAccent[300]}
+                >
+                  Companies
+                </Typography>
+              </div>
+              <div className="col-1 mb-4">
+                <Link href="/companies/createCompany" className="anchor">
+                  <Button variant="outlined">Create Company</Button>
+                </Link>
+              </div>
             </div>
-            <div className="col-1 mb-4">
-              <Link href="/companies/createCompany" className="anchor">
-                <Button variant="outlined">Create Company</Button>
-              </Link>
-            </div>
-          </div>
-
-          <div className="table-responsive">
-            <table className="table table-striped">
-              <thead>
-                <tr className="table-success">
-                  <th scope="col">#</th>
-                  {/* <th scope="col">Company ID</th> */}
-                  <th scope="col">Company Name</th>
-                  <th scope="col">Company BIN</th>
-                  <th scope="col">Contact Person</th>
-                  <th scope="col">Contact Email</th>
-                  <th scope="col">Contact Phone</th>
-                  <th scope="col">Contact Address</th>
-                  <th scope="col">Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {companies.map((company, index) => (
-                  <tr key={index}>
-                    <th scope="row">{index + 1}</th>
-                    {/* <td className="text-center">{company.comp_id}</td> */}
-                    <td>{company.company_name}</td>
-                    <td>{company.company_bin}</td>
-                    <td>{company.contact_person}</td>
-                    <td>{company.contact_email}</td>
-                    <td>{company.contact_number}</td>
-                    <td>{company.contact_address}</td>
-                    <td>
-                      <Link href={`/companies/updateCompany/${company.comp_id}`}>
-                        <button className="btn btn-light btn-sm me-1">
-                          <EditIcon cursor="pointer" />
-                        </button>
-                      </Link>
-                      <button
-                        className="btn btn-danger btn-sm"
-                        onClick={() => handleDeleteCompany(company.comp_id)}
-                       >
-                          <DeleteIcon cursor="pointer" />
-                      </button>
-                    </td>
+  
+            <div className="table-responsive">
+              <table className="table table-striped">
+                <thead>
+                  <tr className="table-success">
+                    <th scope="col">#</th>
+                    {/* <th scope="col">Company ID</th> */}
+                    <th scope="col">Company Name</th>
+                    <th scope="col">Company BIN</th>
+                    <th scope="col">Contact Person</th>
+                    <th scope="col">Contact Email</th>
+                    <th scope="col">Contact Phone</th>
+                    <th scope="col">Contact Address</th>
+                    <th scope="col">Actions</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          <div className="row justify-content-center">
-            <div className="col-md-12 d-flex justify-content-center">
-              <Pagination
-                count={lastPage}
-                page={page}
-                color="secondary"
-                size="large"
-                onChange={handleChange}
-              />
-              {page === lastPage ? (
-                <span className="ms-3 mt-2">
-                  Showing {1 + (page - 1) * 10} - {totalData} out of {totalData}
-                </span>
-              ) : (
-                <>
-                  {totalData === 0 ? (
-                    <span className="ms-3 mt-2">Showing 0 out of 0</span>
-                  ) : (
-                    <span className="ms-3 mt-2">
-                      Showing {1 + (page - 1) * 10} - {10 + (page - 1) * 10} out
-                      of {totalData}
-                    </span>
-                  )}
-                </>
-              )}
+                </thead>
+                <tbody>
+                  {companies.map((company, index) => (
+                    <tr key={index}>
+                      <th scope="row">{index + 1}</th>
+                      {/* <td className="text-center">{company.comp_id}</td> */}
+                      <td>{company.company_name}</td>
+                      <td>{company.company_bin}</td>
+                      <td>{company.contact_person}</td>
+                      <td>{company.contact_email}</td>
+                      <td>{company.contact_number}</td>
+                      <td>{company.contact_address}</td>
+                      <td>
+                        <Link href={`/companies/updateCompany/${company.comp_id}`}>
+                          <button className="btn btn-light btn-sm me-1">
+                            <EditIcon cursor="pointer" />
+                          </button>
+                        </Link>
+                        <button
+                          className="btn btn-danger btn-sm"
+                          onClick={() => handleDeleteCompany(company.comp_id)}
+                         >
+                            <DeleteIcon cursor="pointer" />
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
-          </div>
+            <div className="row justify-content-center">
+              <div className="col-md-12 d-flex justify-content-center">
+                <Pagination
+                  count={lastPage}
+                  page={page}
+                  color="secondary"
+                  size="large"
+                  onChange={handleChange}
+                />
+                {page === lastPage ? (
+                  <span className="ms-3 mt-2">
+                    Showing {1 + (page - 1) * 10} - {totalData} out of {totalData}
+                  </span>
+                ) : (
+                  <>
+                    {totalData === 0 ? (
+                      <span className="ms-3 mt-2">Showing 0 out of 0</span>
+                    ) : (
+                      <span className="ms-3 mt-2">
+                        Showing {1 + (page - 1) * 10} - {10 + (page - 1) * 10} out
+                        of {totalData}
+                      </span>
+                    )}
+                  </>
+                )}
+              </div>
+            </div>
+          </>
+        )}
         </>
-      )}
+        :
+        <>
+          <Typography
+            variant="h2"
+            className="mb-4"
+            color={red[500]}
+            >
+            Access Denied
+        </Typography>
+        </>
+
+      }
     </>
   );
 };
@@ -177,6 +195,7 @@ const companyList = ({ token }) => {
 const mapStateToProps = (state) => {
   return {
     token: state.auth.token,
+    roles: state.auth.roles,
   };
 };
 
