@@ -75,7 +75,14 @@ useEffect(() => {
           {data: 'applied_total_days', name: 'applied_total_days'},
           {data: 'leave_status_name', name: 'leave_status_name'},
           { "data": function(data){
-            return ' <a className="custom-link" href="/application/edit/'+data.id+'"><button className="btn btn-light btn-sm me-1">Edit</button></a> ';
+            console.log(data);
+            if(data.status == 2 || data.status == 4){
+              return '';
+            }
+            else{
+              return ' <a className="custom-link" href="/application/edit/'+data.id+'"><button className="btn btn-light btn-sm me-1">Edit</button></a> ';
+            }
+            // return ' <a className="custom-link" href="/application/edit/'+data.id+'"><button className="btn btn-light btn-sm me-1">Edit</button></a> ';
             // return '<Link><a className="custom-link" href="/application/edit/'+data.id+'" ><button className="btn btn-light btn-sm me-1">Edit</button></a></Link>';
         },
         "orderable": true, "searchable":true, "name":"selected_rows" },

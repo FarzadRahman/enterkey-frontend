@@ -16,7 +16,7 @@ import axios from "axios";
 import { BASE_URL } from "../../../base";
 
 
-const UpdateCompany = ({ query, token }) => {
+const UpdateCompany = ({ query, token,roles }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
@@ -101,133 +101,138 @@ const UpdateCompany = ({ query, token }) => {
 
   return (
     <>
-      {loader ? (
-        <CircularProgress />
-      ) : (
+      {
+        (roles == 1) &&
         <>
-          <h4 className="text-danger" style={{ fontWeight: 200 }}>
-            {formErrors}
-          </h4>
-          <Typography
-            variant="h2"
-            className="mb-4"
-            color={colors.greenAccent[300]}
-          >
-            Update Company
-          </Typography>
-          <div className="mt-2">
-            <div className="row">
-              <div className="col-md-4 mt-4">
-                <TextField
-                  label="Company Name"
-                  variant="outlined"
-                  size="small"
-                  type="text"
-                  fullWidth
-                  value={name}
-                  onChange={(e) => setCompanyName(e.target.value)}
-                  className="shadow-input"
-                />
+        {loader ? (
+          <CircularProgress />
+        ) : (
+          <>
+            <h4 className="text-danger" style={{ fontWeight: 200 }}>
+              {formErrors}
+            </h4>
+            <Typography
+              variant="h2"
+              className="mb-4"
+              color={colors.greenAccent[300]}
+            >
+              Update Company
+            </Typography>
+            <div className="mt-2">
+              <div className="row">
+                <div className="col-md-4 mt-4">
+                  <TextField
+                    label="Company Name"
+                    variant="outlined"
+                    size="small"
+                    type="text"
+                    fullWidth
+                    value={name}
+                    onChange={(e) => setCompanyName(e.target.value)}
+                    className="shadow-input"
+                  />
+                </div>
+                <div className="col-md-4 mt-4">
+                  <TextField
+                    label="Email"
+                    variant="outlined"
+                    size="small"
+                    type="email"
+                    fullWidth
+                    value={contact_email}
+                    onChange={(e) => setContactEmail(e.target.value)}
+                    className="shadow-input"
+                  />
+                </div>
+                <div className="col-md-4 mt-4">
+                  <TextField
+                    label="Contact Number"
+                    variant="outlined"
+                    size="small"
+                    type="text"
+                    fullWidth
+                    value={contact_number}
+                    onChange={(e) => setContactNumber(e.target.value)}
+                    className="shadow-input"
+                  />
+                </div>
               </div>
-              <div className="col-md-4 mt-4">
-                <TextField
-                  label="Email"
-                  variant="outlined"
-                  size="small"
-                  type="email"
-                  fullWidth
-                  value={contact_email}
-                  onChange={(e) => setContactEmail(e.target.value)}
-                  className="shadow-input"
-                />
+  
+              <div className="row">
+                <div className="col-md-4 mt-4">
+                  <TextField
+                    label="Contact Person"
+                    variant="outlined"
+                    size="small"
+                    type="text"
+                    fullWidth
+                    value={contact_person}
+                    onChange={(e) => setContactPerson(e.target.value)}
+                    className="shadow-input"
+                  />
+                </div>
+                <div className="col-md-4 mt-4">
+                  <TextField
+                    label="TIN"
+                    variant="outlined"
+                    size="small"
+                    type="text"
+                    fullWidth
+                    value={company_tin}
+                    onChange={(e) => setCompanyTin(e.target.value)}
+                    className="shadow-input"
+                  />
+                </div>
+                <div className="col-md-4 mt-4">
+                  <TextField
+                    label="BIN"
+                    variant="outlined"
+                    size="small"
+                    type="text"
+                    fullWidth
+                    value={company_bin}
+                    onChange={(e) => setCompanyBin(e.target.value)}
+                    className="shadow-input"
+                  />
+                </div>
               </div>
-              <div className="col-md-4 mt-4">
-                <TextField
-                  label="Contact Number"
-                  variant="outlined"
-                  size="small"
-                  type="text"
-                  fullWidth
-                  value={contact_number}
-                  onChange={(e) => setContactNumber(e.target.value)}
-                  className="shadow-input"
-                />
+              <div className="row">
+                <div className="col-md-12 mt-4">
+                  <TextField
+                    label="Address"
+                    variant="outlined"
+                    size="small"
+                    fullWidth
+                    multiline
+                    rows={4}
+                    value={contact_address}
+                    onChange={(e) => {
+                      setContactAddress(e.target.value);
+                    }}
+                    className="shadow-input"
+                  />
+                </div>
+              </div>
+              <div className="row mt-4">
+                <div className="col-md-12">
+                  <Button
+                    variant="contained"
+                    color="success"
+                    className="float-end"
+                    onClick={onSubmit}
+                  >
+                    Update
+                  </Button>
+                  <Button variant="contained" color="error" onClick={goBack}>
+                    Cancel
+                  </Button>
+                </div>
               </div>
             </div>
-
-            <div className="row">
-              <div className="col-md-4 mt-4">
-                <TextField
-                  label="Contact Person"
-                  variant="outlined"
-                  size="small"
-                  type="text"
-                  fullWidth
-                  value={contact_person}
-                  onChange={(e) => setContactPerson(e.target.value)}
-                  className="shadow-input"
-                />
-              </div>
-              <div className="col-md-4 mt-4">
-                <TextField
-                  label="TIN"
-                  variant="outlined"
-                  size="small"
-                  type="text"
-                  fullWidth
-                  value={company_tin}
-                  onChange={(e) => setCompanyTin(e.target.value)}
-                  className="shadow-input"
-                />
-              </div>
-              <div className="col-md-4 mt-4">
-                <TextField
-                  label="BIN"
-                  variant="outlined"
-                  size="small"
-                  type="text"
-                  fullWidth
-                  value={company_bin}
-                  onChange={(e) => setCompanyBin(e.target.value)}
-                  className="shadow-input"
-                />
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-md-12 mt-4">
-                <TextField
-                  label="Address"
-                  variant="outlined"
-                  size="small"
-                  fullWidth
-                  multiline
-                  rows={4}
-                  value={contact_address}
-                  onChange={(e) => {
-                    setContactAddress(e.target.value);
-                  }}
-                  className="shadow-input"
-                />
-              </div>
-            </div>
-            <div className="row mt-4">
-              <div className="col-md-12">
-                <Button
-                  variant="contained"
-                  color="success"
-                  className="float-end"
-                  onClick={onSubmit}
-                >
-                  Update
-                </Button>
-                <Button variant="contained" color="error" onClick={goBack}>
-                  Cancel
-                </Button>
-              </div>
-            </div>
-          </div>
+          </>
+        )}
         </>
-      )}
+      }
     </>
   );
 };
@@ -241,6 +246,7 @@ UpdateCompany.getInitialProps = async ({ query }) => {
 const mapStateToProps = (state) => {
   return {
     token: state.auth.token,
+    roles: state.auth.roles,
   };
 };
 

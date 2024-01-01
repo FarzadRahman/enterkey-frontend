@@ -55,7 +55,7 @@ const companyList = ({ token ,roles}) => {
       console.log(error);
       console.log("dddd");
     });
-  }, []);
+  }, [page]);
   const handleDeleteCompany = (companyId) => {
     const apiUrl = BASE_URL + `company/delete/${companyId}`;
     axios
