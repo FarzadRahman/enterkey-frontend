@@ -76,7 +76,7 @@ useEffect(() => {
                   <th>Recorder Name</th>
                   <th>Start Date</th>
                   <th>End Date</th>
-                  <th>Reasonn</th>
+                  <th>Reason</th>
                   <th>No of Days</th>
                   <th>Action</th>
               

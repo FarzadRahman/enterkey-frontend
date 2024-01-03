@@ -78,7 +78,7 @@ export function Home({roles,token}) {
   return (
     <>
       <Typography variant="h1" color={colors.greenAccent[300]}>
-        Welcome to Enterkey!
+        Welcome to NTRCA Leave Management System
       </Typography>
 
       

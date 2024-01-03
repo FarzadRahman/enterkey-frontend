@@ -293,7 +293,7 @@ const leaveApplication = ({ token, roles }) => {
                 setApproval_id(+e.target.value);
               }}
               select
-              label="Approval Name"
+              label="Approver Name"
               size="small"
               fullWidth
               value={approval_id || ""}

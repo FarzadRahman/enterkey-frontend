@@ -10,7 +10,7 @@ import { Typography, useTheme } from "@mui/material";
 
 //axios
 import axios from "axios";
-import { BASE_URL } from "../../base";
+import { BASE_URL,IMAGE_URL } from "../../base";
 
 // Icon import
 import EditIcon from "@mui/icons-material/Edit";
@@ -88,7 +88,9 @@ const employeeList = ({ token }) => {
           <thead>
             <tr className="table-success">
               <th>#</th>
+              <th>Picture</th>
               <th>Full Name</th>
+              <th>Approver/Recorder</th>
               <th>Phone Number</th>
               <th>Email Address</th>
               <th>Office ID</th>
@@ -102,7 +104,37 @@ const employeeList = ({ token }) => {
             {employees?.map((employee, index) => (
               <tr key={index}>
                 <th scope="row">{index + 1}</th>
+                <td>
+                  {
+                    (employee.profile_picture == null ? 
+                      <>
+                      <img height={50} src="/assets/images/user.png"/>
+                      </> 
+                      :
+                      <>
+                      <img height={50} src={IMAGE_URL+employee.profile_picture}/>
+                      </>)
+                  }
+                  
+                </td>
                 <td>{employee.full_name}</td>
+                <td>
+                  
+                    {
+                      (employee.isRecorder==0) && (employee.isApprover == 0) && <></>
+                    }
+                    {
+                      (employee.isRecorder==0) && (employee.isApprover == 1) && <>Approver</>
+                    }
+                    {
+                      (employee.isRecorder==1) && (employee.isApprover == 0) && <>Recorder</>
+                    }
+                    {
+                      (employee.isRecorder==1) && (employee.isApprover == 1) && <>Approver + Recorder</>
+                    }
+                  
+                  
+                </td>
                 <td>{employee.phone_number}</td>
                 <td>{employee.email_address}</td>
                 <td>{employee.office_id}</td>

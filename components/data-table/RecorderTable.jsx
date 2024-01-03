@@ -78,7 +78,7 @@ useEffect(() => {
                   <th width="15%">Approver Name</th>
                   <th width="10%">Start Date</th>
                   <th width="10%">End Date</th>
-                  <th width="15%">Reasonn</th>
+                  <th width="15%">Reason</th>
                   <th width="10%">No of Days</th>
                   <th width="15%">Action</th>
                 
