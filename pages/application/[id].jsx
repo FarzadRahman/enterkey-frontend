@@ -363,6 +363,8 @@ const convertToBanglaDate = (isoDate) => {
                                 className="text-center pb-0 pt-0"
                                 style={{ width: "20%" }}
                             >
+                            {details?.application?.reviewer?.user?.signature != null ? <img src={SIGN_URL+details?.application?.reviewer?.user?.signature} alt="Signature" height={150} width={100}/> : ''}
+                      
                             <hr/>
                                 <p>(নৈমিত্তিক ছুটি রেকর্ডকারীর স্বাক্ষর)</p>
                             </td>
@@ -397,6 +399,13 @@ const convertToBanglaDate = (isoDate) => {
                                 className="text-center pb-0 pt-0"
                                 style={{ width: "20%" }}
                             >
+                            {
+                              (details?.application?.status == 2)
+                              && 
+                              <>
+                              {details?.application?.approver?.user?.signature != null ? <img src={SIGN_URL+details?.application?.approver?.user?.signature} alt="Signature" height={150} width={100}/> : ''}
+                              </>
+                            }
                             <hr/>
                                 <p>(ছুটির মঞ্জরকারীর কর্মকর্তার স্বাক্ষর)</p>
                             </td>

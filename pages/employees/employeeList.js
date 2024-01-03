@@ -15,7 +15,7 @@ import { BASE_URL,IMAGE_URL } from "../../base";
 // Icon import
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from '@mui/icons-material/Delete';
-
+import Person2Icon from '@mui/icons-material/Person2';
 import {
   Button,
   CircularProgress,
@@ -145,6 +145,11 @@ const employeeList = ({ token }) => {
                   <Link href={`/employees/updateEmployee/${employee.emp_id}`} className="anchor">
                     <button className="btn btn-light btn-sm me-1">
                       <EditIcon cursor="pointer" />
+                    </button>
+                  </Link>
+                  <Link href={`/users/updateUser/${employee.emp_id}`} className="anchor">
+                    <button className="btn btn-light btn-sm me-1">
+                      <Person2Icon cursor="pointer" />
                     </button>
                   </Link>
                   <button
