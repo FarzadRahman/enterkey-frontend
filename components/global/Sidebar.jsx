@@ -282,7 +282,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                   <img
                     alt="profile-user"
                     width="130px"
-                    height="80px"
+                    height="130px"
                     src={`../../assets/images/logo.jpg`}
                     style={{ cursor: "pointer" }}
                   />

@@ -77,7 +77,7 @@ export function Home({roles,token}) {
 
   return (
     <>
-      <Typography variant="h1" color={colors.greenAccent[300]}>
+      <Typography variant="h2" color={colors.greenAccent[300]}>
         Welcome to NTRCA Leave Management System
       </Typography>
 
