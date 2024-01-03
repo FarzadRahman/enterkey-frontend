@@ -71,7 +71,7 @@ const Login = ({ isLoggedIn, message }) => {
         <div
           style={{
             height: "100vh",
-            backgroundImage: `url(${bg.src})`,
+            // backgroundImage: `url(${bg.src})`,
             backgroundSize: "cover",
           }}
         >
@@ -106,7 +106,9 @@ const Login = ({ isLoggedIn, message }) => {
           </Snackbar>
           <div className="container">
             <div className="row">
-              <div className="col-md-4"></div>
+              <div className="col-md-4">
+              </div>
+              <div className="text-center pt-5"><h1 className="pt-5">NTRCA Leave Management System</h1></div>
               <div
                 className="col-md-4 pt-4 ps-5 pe-5 pb-4 rounded shadow-box"
                 style={{
