@@ -282,7 +282,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                   <img
                     alt="profile-user"
                     width="130px"
-                    height="80px"
+                    height="130px"
                     src={`../../assets/images/logo.jpg`}
                     style={{ cursor: "pointer" }}
                   />
@@ -1243,7 +1243,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                     change={change}
                     width={width}
                   />
-                  <Item
+               {/*   <Item
                     title="Leave Application Form"
                     to="/application/leave-form"
                     icon={<ReceiptLongIcon />}
@@ -1252,7 +1252,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                     change={change}
                     width={width}
                   />
-
+              */}
                   <Item
                     title="Pending Recorder"
                     to="/application/pending-recorder"
