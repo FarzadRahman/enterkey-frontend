@@ -32,13 +32,14 @@ const employeeList = ({ token }) => {
   const [page, setPage] = useState(1);
   const [lastPage, setLastPage] = useState(1);
   const [totalData, setTotalData] = useState(0);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
-    
-    const apiUsers =
-    BASE_URL +
-    "employees?page=" +
-    page;
+    fetchEmployees();
+  }, [page, searchQuery]); // Call fetchEmployees when page or searchQuery changes
+
+  const fetchEmployees = () => {
+    const apiUsers = `${BASE_URL}employees?page=${page}&searchQuery=${searchQuery}`;
 
     axios
       .get(apiUsers, {
@@ -54,8 +55,11 @@ const employeeList = ({ token }) => {
       .catch((error) => {
         console.log(error);
       });
-  }, [page]);
+  };
 
+  const handleSearchChange = (event) => {
+    setSearchQuery(event.target.value); // Update search query state
+  };
   // DeleteHandle
   const handleDelete = (employeeId) => {
     const apiUrl = BASE_URL + `employees/${employeeId}`;
@@ -83,6 +87,22 @@ const employeeList = ({ token }) => {
       <Typography variant="h2" className="mb-4" color={colors.greenAccent[300]}>
       Employee List
       </Typography>
+      <div className="d-flex justify-content-end mb-3">
+        <input
+          type="text"
+          placeholder="Search"
+          value={searchQuery}
+          onChange={handleSearchChange}
+          className="form-control w-auto"
+          style={{
+            width: "300px", // Set your desired width
+            height: "40px", // Set your desired height
+            fontSize: "16px", // Set your desired font size
+            // Add any other inline styles as needed
+          }}
+        />
+      </div>
+    
       <div className="table-responsive">
         <table className="table table-hover table-striped">
           <thead>
