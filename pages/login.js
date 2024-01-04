@@ -108,15 +108,21 @@ const Login = ({ isLoggedIn, message }) => {
             <div className="row">
               <div className="col-md-4">
               </div>
-              <div className="text-center pt-5"><h1 className="pt-5">NTRCA Leave Management System</h1></div>
-              <div
-                className="col-md-4 pt-4 ps-5 pe-5 pb-4 rounded shadow-box"
-                style={{
-                  position: "fixed",
-                  top: "50%",
-                  left: "50%",
-                  transform: "translate(-50%, -50%)",
-                }}
+              <div className="col-md-4 h4 text-center mt-5 d-flex align-items-center justify-content-center rounded shadow-box">
+                NTRCA Leave Management System
+              </div>
+              <div className="col-md-4"></div>
+            </div>
+            <div className="row mt-5">
+              <div className="col-md-4">
+              </div>
+              <div className="col-md-4 pt-4 ps-5 pe-5 pb-4 rounded shadow-box"
+                // style={{
+                //   position: "",
+                //   top: "50%",
+                //   left: "50%",
+                //   transform: "translate(-50%, -50%)",
+                // }}
               >
                 <div className="text-center">
                   <img
