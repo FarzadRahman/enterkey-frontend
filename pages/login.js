@@ -108,8 +108,8 @@ const Login = ({ isLoggedIn, message }) => {
             <div className="row">
               <div className="col-md-4">
               </div>
-              <div className="col-md-4 h4 text-center mt-5 d-flex align-items-center justify-content-center rounded shadow-box">
-                NTRCA Leave Management System
+              <div className="col-md-4 text-center mt-5 d-flex align-items-center justify-content-center custom-text">
+                <strong>Welcome to NTRCA Leave Management System</strong>
               </div>
               <div className="col-md-4"></div>
             </div>
