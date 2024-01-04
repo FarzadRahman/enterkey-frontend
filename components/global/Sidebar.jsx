@@ -1243,7 +1243,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                     change={change}
                     width={width}
                   />
-                  <Item
+               {/*   <Item
                     title="Leave Application Form"
                     to="/application/leave-form"
                     icon={<ReceiptLongIcon />}
@@ -1252,7 +1252,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                     change={change}
                     width={width}
                   />
-
+              */}
                   <Item
                     title="Pending Recorder"
                     to="/application/pending-recorder"
