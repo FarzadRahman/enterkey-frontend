@@ -383,7 +383,6 @@ export function Home({roles,token}) {
       </> :
       <>
       <div className="table-responsive" style={{ padding: '2em 0' }}>
-        {details ? "" :
         <table className="table table-hover table-striped">
           <thead>
             <tr className="table-success">
@@ -404,7 +403,6 @@ export function Home({roles,token}) {
           ))}
           </tbody>
         </table>
-        }
       </div>
       </>
         }
