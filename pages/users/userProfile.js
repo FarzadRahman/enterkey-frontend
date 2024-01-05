@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { connect } from "react-redux";
 import { setAuthImage, logout, authSuccess } from "../../store/actions/auth";
 
+import { toast } from "react-toastify";
 // Theme imports
 import { tokens } from "../theme";
 
@@ -55,11 +56,18 @@ const userProfile = ({ user }) => {
         .post(apiProfile, profileData, config)
         .then((response) => {
           if (response.data.status == 200) {
-            alert("Profile Photo Uploaded!");
+            // alert("Profile Photo Uploaded!");
+            toast(`${response?.data?.message}`, { hideProgressBar: true, autoClose: 2000, type: 'success' })
+              
             setPhoto(response.data.user?.profile_picture);
             setCheck(3);
             dispatch(setAuthImage(response.data?.profile_picture, sign));
-          } else {
+          }
+          else if(response.data.status == 500)
+          {
+            toast(`${response?.data?.message}`, { hideProgressBar: true, autoClose: 2000, type: 'error' });
+          } 
+          else {
             setFormErrors(Object.values(response.data.errors));
             console.log(response.data);
           }
@@ -118,11 +126,17 @@ const userProfile = ({ user }) => {
         .then((response) => {
           // console.log(response);
           if (response.data.status == 200) {
-            alert("Profile Sign Uploaded!");
+            // alert("Profile Sign Uploaded!");
+            toast(`${response?.data?.message}`, { hideProgressBar: true, autoClose: 2000, type: 'success' })
             setPhotoSign(response.data?.signature);
             setCheckSign(3)
             dispatch(setAuthImage(photo, response.data?.signature));
-          } else {
+          }else if(response.data.status == 500)
+          {
+            toast(`${response?.data?.message}`, { hideProgressBar: true, autoClose: 2000, type: 'error' })
+           
+          }
+           else {
             setFormErrors(Object.values(response.data.errors));
             console.log(response.data);
           }
