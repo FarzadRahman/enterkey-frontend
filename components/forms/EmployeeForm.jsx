@@ -7,6 +7,8 @@ import { TextField, MenuItem, Button } from "@mui/material";
 //redux imports
 import { connect } from "react-redux";
 
+import { toast } from "react-toastify";
+
 //axios
 import axios from "axios";
 import { BASE_URL } from "../../base";
@@ -158,8 +160,10 @@ const EmployeeForm = ({ token, id }) => {
             axios.post(apiUrl, empData, config).then((response) => {
                  
             if (response.data) {
-                console.log(response.data);
+                // console.log(data);
+                toast(`${response?.data?.message}`, { hideProgressBar: true, autoClose: 2000, type: 'success' })
                 Router.push({
+                   
                 pathname: "/employees/employeeList",
                 });
             } else {
@@ -189,6 +193,7 @@ const EmployeeForm = ({ token, id }) => {
             axios.post(apiUrl, empData, config).then((response) => {
           
             if (response.data) {
+                toast(`${response?.data?.message}`, { hideProgressBar: true, autoClose: 2000, type: 'success' })
                 Router.push({
                 pathname: "/employees/employeeList",
                 });
