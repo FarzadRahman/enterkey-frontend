@@ -21,7 +21,7 @@ import axios from "axios";
 import { BASE_URL } from "../../../base";
 import EmployeeForm from "../../../components/forms/EmployeeForm";
 
-const EmployeeDetails = ({ query, token }) => {
+const EmployeeDetails = ({ query, token,roles }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
@@ -31,7 +31,7 @@ const EmployeeDetails = ({ query, token }) => {
   const [phone, setPhone] = useState("");
   const [status, setStatus] = useState(null);
   const [company_id, setCompanyId] = useState(0);
-  const [roles, setRoles] = useState([]);
+  // const [roles, setRoles] = useState([]);
   const [permissions, setPermissions] = useState([]);
   const id = +query.id;
 
@@ -62,7 +62,7 @@ const EmployeeDetails = ({ query, token }) => {
           setStatus(+res.data.data.status);
           
 
-          setRoles([]);
+          // setRoles([]);
           setPermissions([]);
 
           // res.data.data.roles?.map((role) => {
@@ -89,13 +89,16 @@ const EmployeeDetails = ({ query, token }) => {
         </>
       ) : (
         <>
-          <Typography
+          {
+            (roles!=3) && 
+            <Typography
             variant="h2"
             className="mb-4"
             color={colors.greenAccent[300]}
           >
             Update Employee
           </Typography>
+          }
           {<EmployeeForm id={id} />}
         </>
       )}
@@ -112,6 +115,7 @@ EmployeeDetails.getInitialProps = async ({ query }) => {
 const mapStateToProps = (state) => {
   return {
     token: state.auth.token,
+    roles: state.auth.roles,
   };
 };
 

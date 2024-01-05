@@ -8,12 +8,11 @@ import { TextField, MenuItem, Button } from "@mui/material";
 import { connect } from "react-redux";
 
 import { toast } from "react-toastify";
-
 //axios
 import axios from "axios";
 import { BASE_URL } from "../../base";
 
-const EmployeeForm = ({ token, id }) => {
+const EmployeeForm = ({ token, id,roles }) => {
     const [full_name, setFull_name] = useState("");
     const [gender, setGender] = useState("");
     const [phone_number, setPhone_number] = useState("");
@@ -205,203 +204,220 @@ const EmployeeForm = ({ token, id }) => {
     }
     if(token){
         return (
-            <div>
-            <form>
-                <div className="row">
-                <div className="col-md-4 mt-4">
-                    <TextField
-                    label="Full Name"
-                    variant="outlined"
-                    size="small"
-                    type="text"
-                    fullWidth
-                    value={full_name || ""}
-                    onChange={(e) => setFull_name(e.target.value)}
-                    className="shadow-input"
-                    />
-                </div>
-                <div className="col-md-4 mt-4">
-                    <TextField
-                    onChange={(e) => {
-                        setGender(e.target.value);
-                    }}
-                    select
-                    label="Gender"
-                    size="small"
-                    fullWidth
-                    value={gender || ""}
-                    className="shadow-input"
-                    >
-                    {genders?.map((option, index) => (
-                        <MenuItem key={index} value={option.gender}>
-                        {option.gender} 
-                        </MenuItem>
-                    ))}
-                    </TextField>
-                </div>
-                <div className="col-md-4 mt-4">
-                    <TextField
-                    label="Phone Number (01XXXXXXXXX)"
-                    variant="outlined"
-                    size="small"
-                    type="number"
-                    fullWidth
-                    value={phone_number || ""}
-                    onChange={(e) => setPhone_number(e.target.value)}
-                    className="shadow-input"
-                    />
-                </div>
-                </div>
-                <div className="row">
-                <div className="col-md-4 mt-4">
-                    <TextField
-                    label="Email"
-                    variant="outlined"
-                    size="small"
-                    type="email"
-                    fullWidth
-                    value={email_address || ""}
-                    onChange={(e) => setEmail_address(e.target.value)}
-                    className="shadow-input"
-                    />
-                </div>
-                <div className="col-md-4 mt-4">
-                    <TextField
-                    label="Office ID"
-                    variant="outlined"
-                    size="small"
-                    type="text"
-                    fullWidth
-                    value={office_id || ""}
-                    onChange={(e) => setOffice_id(e.target.value)}
-                    className="shadow-input"
-                    />
-                </div>
-                <div className="col-md-4 mt-4">
-                    <TextField
-                    onChange={(e) => {
-                        setBranch_id(+e.target.value);
-                    }}
-                    select
-                    label="Branch"
-                    size="small"
-                    fullWidth
-                    value={branch_id || ""}
-    
-                    className="shadow-input"
-                    >
-                    {branches?.map((option, index) => (
-                        <MenuItem key={index} value={option.bran_id}>
-                        {option.branch_name}
-                        </MenuItem>
-                    ))}
-                    </TextField>
-                </div>
-                </div>
-                <div className="row">
+           <>
+            {
+                (roles!=3) ?
+                <>
+                <div>
+                <form>
+                    <div className="row">
                     <div className="col-md-4 mt-4">
                         <TextField
-                        onChange={(e) => {
-                            setDesignation_id(+e.target.value);
-                        }}
-                        select
-                        label="Designation"
-                        size="small"
-                        fullWidth
-                        value={designation_id || ""}
-    
-                        className="shadow-input"
-                        >
-                        {designations?.map((option, index) => (
-                            <MenuItem key={index} value={option.desg_id}>
-                            {option.desg_nm}
-                            </MenuItem>
-                        ))}
-                        </TextField>
-                    </div>
-                    <div className="col-md-4 mt-4">
-                        <TextField
-                        onChange={(e) => {
-                            setDepartment_id(+e.target.value);
-                        }}
-                        select
-                        label="Department"
-                        size="small"
-                        fullWidth
-                        value={department_id || ""}
-                        className="shadow-input"
-                        >
-                        {departments?.map((option, index) => (
-                            <MenuItem key={index} value={option.dept_id}>
-                            {option.department_name}
-                            </MenuItem>
-                        ))}
-                        </TextField>
-                    </div>
-                    {!id && 
-                        <div className="col-md-4 mt-4">
-                        <TextField
-                        label="Password"
+                        label="Full Name"
                         variant="outlined"
                         size="small"
-                        type="password"
+                        type="text"
                         fullWidth
-                        onChange={(e) => setPassword(e.target.value)}
+                        value={full_name || ""}
+                        onChange={(e) => setFull_name(e.target.value)}
                         className="shadow-input"
                         />
-                        </div>
-                    }
-                    {id && 
+                    </div>
+                    <div className="col-md-4 mt-4">
+                        <TextField
+                        onChange={(e) => {
+                            setGender(e.target.value);
+                        }}
+                        select
+                        label="Gender"
+                        size="small"
+                        fullWidth
+                        value={gender || ""}
+                        className="shadow-input"
+                        >
+                        {genders?.map((option, index) => (
+                            <MenuItem key={index} value={option.gender}>
+                            {option.gender} 
+                            </MenuItem>
+                        ))}
+                        </TextField>
+                    </div>
+                    <div className="col-md-4 mt-4">
+                        <TextField
+                        label="Phone Number (01XXXXXXXXX)"
+                        variant="outlined"
+                        size="small"
+                        type="number"
+                        fullWidth
+                        value={phone_number || ""}
+                        onChange={(e) => setPhone_number(e.target.value)}
+                        className="shadow-input"
+                        />
+                    </div>
+                    </div>
+                    <div className="row">
+                    <div className="col-md-4 mt-4">
+                        <TextField
+                        label="Email"
+                        variant="outlined"
+                        size="small"
+                        type="email"
+                        fullWidth
+                        value={email_address || ""}
+                        onChange={(e) => setEmail_address(e.target.value)}
+                        className="shadow-input"
+                        />
+                    </div>
+                    <div className="col-md-4 mt-4">
+                        <TextField
+                        label="Office ID"
+                        variant="outlined"
+                        size="small"
+                        type="text"
+                        fullWidth
+                        value={office_id || ""}
+                        onChange={(e) => setOffice_id(e.target.value)}
+                        className="shadow-input"
+                        />
+                    </div>
+                    <div className="col-md-4 mt-4">
+                        <TextField
+                        onChange={(e) => {
+                            setBranch_id(+e.target.value);
+                        }}
+                        select
+                        label="Branch"
+                        size="small"
+                        fullWidth
+                        value={branch_id || ""}
+        
+                        className="shadow-input"
+                        >
+                        {branches?.map((option, index) => (
+                            <MenuItem key={index} value={option.bran_id}>
+                            {option.branch_name}
+                            </MenuItem>
+                        ))}
+                        </TextField>
+                    </div>
+                    </div>
+                    <div className="row">
                         <div className="col-md-4 mt-4">
                             <TextField
-                            label="User ID"
+                            onChange={(e) => {
+                                setDesignation_id(+e.target.value);
+                            }}
+                            select
+                            label="Designation"
+                            size="small"
+                            fullWidth
+                            value={designation_id || ""}
+        
+                            className="shadow-input"
+                            >
+                            {designations?.map((option, index) => (
+                                <MenuItem key={index} value={option.desg_id}>
+                                {option.desg_nm}
+                                </MenuItem>
+                            ))}
+                            </TextField>
+                        </div>
+                        <div className="col-md-4 mt-4">
+                            <TextField
+                            onChange={(e) => {
+                                setDepartment_id(+e.target.value);
+                            }}
+                            select
+                            label="Department"
+                            size="small"
+                            fullWidth
+                            value={department_id || ""}
+                            className="shadow-input"
+                            >
+                            {departments?.map((option, index) => (
+                                <MenuItem key={index} value={option.dept_id}>
+                                {option.department_name}
+                                </MenuItem>
+                            ))}
+                            </TextField>
+                        </div>
+                        {!id && 
+                            <div className="col-md-4 mt-4">
+                            <TextField
+                            label="Password"
                             variant="outlined"
                             size="small"
-                            type="text"
+                            type="password"
                             fullWidth
-                            // onChange={(e) => setPassword(e.target.value)}
-                            value={user_id || ""}
+                            onChange={(e) => setPassword(e.target.value)}
                             className="shadow-input"
-                            readOnly
                             />
-                        </div>
-                    }
-                <div className="col-md-4 mt-4">
-                    <input value="test" type="checkbox" checked={isRecorrder} defaultChecked={isRecorrder}  onChange = {handleRecorderChange} />   
-                
-                    {isRecorrder ? (
-                        <div> Recorder is checked. </div>
-                    ) : (
-                        <div> Recorder is not checked. </div>
-                    )}  
+                            </div>
+                        }
+                        {id && 
+                            <div className="col-md-4 mt-4">
+                                <TextField
+                                label="User ID"
+                                variant="outlined"
+                                size="small"
+                                type="text"
+                                fullWidth
+                                // onChange={(e) => setPassword(e.target.value)}
+                                value={user_id || ""}
+                                className="shadow-input"
+                                readOnly
+                                />
+                            </div>
+                        }
+                    <div className="col-md-4 mt-4">
+                        <input value="test" type="checkbox" checked={isRecorrder} defaultChecked={isRecorrder}  onChange = {handleRecorderChange} />   
+                    
+                        {isRecorrder ? (
+                            <div> Recorder is checked. </div>
+                        ) : (
+                            <div> Recorder is not checked. </div>
+                        )}  
+                    </div>
+    
+                    <div className="col-md-4 mt-4">
+                        <input value="approver" checked={isApprover} type="checkbox"  onChange = {handleApproverChange} />   
+                    
+                        {isApprover ? (
+                            <div> Approver is checked. </div>
+                        ) : (
+                            <div> Approver is not checked. </div>
+                        )}  
+                    </div>
+                   
+                    </div>
+                    
+                    <div className="row">
+                    <div className="col-md-12">
+                        <Button
+                        onClick={register}
+                        variant="contained"
+                        className="float-end mt-4"
+                        >
+                            {id ?  ("Update Employee") : ("Create Employee")
+                        }
+                        </Button>
+                    </div>
+                    </div>
+                </form>
                 </div>
-
-                <div className="col-md-4 mt-4">
-                    <input value="approver" checked={isApprover} type="checkbox"  onChange = {handleApproverChange} />   
+                </>:
+                <>
                 
-                    {isApprover ? (
-                        <div> Approver is checked. </div>
-                    ) : (
-                        <div> Approver is not checked. </div>
-                    )}  
-                </div>
-               
-                </div>
-                
-                <div className="row">
-                <div className="col-md-12">
-                    <Button
-                    onClick={register}
-                    variant="contained"
-                    className="float-end mt-4"
+                    <h2
+                        style={{
+                            color:"red"
+                        }}
                     >
-                        {id ?  ("Update Employee") : ("Create Employee")
-                    }
-                    </Button>
-                </div>
-                </div>
-            </form>
-            </div>
+                    Access Denied
+                    </h2>
+                </>
+            }
+           </>
         );
     }else{
         console.log("Token Empty");
@@ -410,6 +426,7 @@ const EmployeeForm = ({ token, id }) => {
 const mapStateToProps = (state) => {
     return {
         token: state.auth.token,
+        roles: state.auth.roles,
     };
 };
 export default connect(mapStateToProps)(EmployeeForm);

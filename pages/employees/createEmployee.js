@@ -19,13 +19,16 @@ const createEmployee = ({ roles }) => {
     <>
       {!superAdmin ? (
         <>
-          <Typography
+          {
+            (roles != 3) && 
+            <Typography
             variant="h2"
             className="mb-4"
             color={colors.greenAccent[300]}
           >
             Create Employee
           </Typography>
+        }
           {!superAdmin && <EmployeeForm />}
         </>
       ) : (
