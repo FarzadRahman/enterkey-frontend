@@ -204,7 +204,7 @@ const convertToBanglaDate = (isoDate) => {
                 ) : (
                   <>
                     <div>
-                      <br/>
+               
                       <br/>
                     
                       <div className="row">
@@ -253,7 +253,7 @@ const convertToBanglaDate = (isoDate) => {
 
                     <div className="table-responsive mt-1">
                       <table
-                        className="table table-hover"
+                        className=""
                         style={{ border: "white" }}
                       >
                         <thead>
@@ -335,7 +335,7 @@ const convertToBanglaDate = (isoDate) => {
                                 </td>
                             </tr>
                             <br/>
-                            <br/>
+                           
                             <tr>
                             <td
                                 className="text-left pb-0 pt-0"
@@ -350,7 +350,7 @@ const convertToBanglaDate = (isoDate) => {
                                 <p>বিকল্প কর্মকর্তা/কর্মচারীর নাম ও স্বাক্ষর</p>
                             </td>
                             </tr>
-                            <br/>
+                        
                             <br/>
                             <tr>
                             <td
@@ -369,7 +369,7 @@ const convertToBanglaDate = (isoDate) => {
                                 <p>(নৈমিত্তিক ছুটি রেকর্ডকারীর স্বাক্ষর)</p>
                             </td>
                             </tr>
-                            <br/>
+                          
                             <br/>
                             <tr>
                             <td
@@ -386,7 +386,7 @@ const convertToBanglaDate = (isoDate) => {
                                 <p>(নিয়ন্ত্রণকারী কর্মকর্তার স্বাক্ষর)</p>
                             </td>
                             </tr>
-                            <br/>
+                      
                             <br/>
                             <tr>
                             <td
@@ -403,7 +403,7 @@ const convertToBanglaDate = (isoDate) => {
                               (details?.application?.status == 2)
                               && 
                               <>
-                              {details?.application?.approver?.user?.signature != null ? <img src={SIGN_URL+details?.application?.approver?.user?.signature} alt="Signature" height={150} width={100}/> : ''}
+                              {details?.application?.approver?.user?.signature != null ? <img src={SIGN_URL+details?.application?.approver?.user?.signature} alt="Signature" height={75} width={50}/> : ''}
                               </>
                             }
                             <hr/>
