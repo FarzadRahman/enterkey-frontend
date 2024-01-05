@@ -327,7 +327,7 @@ const convertToBanglaDate = (isoDate) => {
                                 style={{ width: "20%" }}
                                 >
                             {/*{details?.application?.sender?.user?.signature} */} 
-                                {details?.application?.sender?.user?.signature != null ? <img src={SIGN_URL+details?.application?.sender?.user?.signature} alt="Signature" height={150} width={100}/> : 'No sign'}
+                                {details?.application?.sender?.user?.signature != null ? <img src={SIGN_URL+details?.application?.sender?.user?.signature} alt="Signature" height={75} width={50}/> : 'No sign'}
                                  <br/>
                                     {convertToBanglaDate(details?.application?.created_at)}   
                                  <hr/>
@@ -363,7 +363,7 @@ const convertToBanglaDate = (isoDate) => {
                                 className="text-center pb-0 pt-0"
                                 style={{ width: "20%" }}
                             >
-                            {details?.application?.reviewer?.user?.signature != null ? <img src={SIGN_URL+details?.application?.reviewer?.user?.signature} alt="Signature" height={150} width={100}/> : ''}
+                            {details?.application?.reviewer?.user?.signature != null ? <img src={SIGN_URL+details?.application?.reviewer?.user?.signature} alt="Signature" height={75} width={50}/> : ''}
                       
                             <hr/>
                                 <p>(নৈমিত্তিক ছুটি রেকর্ডকারীর স্বাক্ষর)</p>
