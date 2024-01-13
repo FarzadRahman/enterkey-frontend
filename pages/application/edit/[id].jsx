@@ -14,6 +14,9 @@ import AntdMomentWebpackPlugin from '@ant-design/moment-webpack-plugin';
 // Date
 import { DatePicker, Space  } from "antd";
 import dayjs from "dayjs";
+
+import Modal from '@mui/material/Modal';
+import Box from '@mui/material/Box';
 // import { DatePicker } from '@mui/x-date-pickers-pro';
 // import { DatePicker } from '@mui/x-date-pickers';
 // import { DatePicker } from '@mui/x-date-pickers';
@@ -55,6 +58,13 @@ const editLeaveApplication = ({ token, query, roles }) => {
   const id = query.id;
   const dateFormat = 'YYYY/MM/DD';
   const [loader, setLoader] = useState(true);
+
+  const [openModal, setOpenModal] = useState(false);
+  const [selectedApprovalName, setSelectedApprovalName] = useState("");
+  const [selectedRecorderName, setSelectedRecorderName] = useState("");
+  const [selectedLeaveType, setSelectedLeaveType] = useState("");
+  const [selectedStartDate, setSelectedStartDate] = useState("");
+  const [selectedEndDate, setSelectedEndDate] = useState("");
 
 
   function onChange(date, dateString) {
@@ -249,9 +259,65 @@ const editLeaveApplication = ({ token, query, roles }) => {
   //     }
   //   });
   // };
+  const handleOpenModal = () => {
+    setSelectedApprovalName(approvalName.find((option) => option.emp_id === +approval_id)?.full_name || "");
+    setSelectedRecorderName(recorderName.find((option) => option.emp_id === +recorder_id)?.full_name || "");
+    setSelectedLeaveType(leaveTypes.find((option) => option.l_type_id === +leave_type_id)?.leave_type_name || "");
+    setSelectedStartDate(leaveStartDate);
+    setSelectedEndDate(leaveEndDate);
+    setOpenModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setOpenModal(false);
+  };
 
   const onSubmit = (e) => {
     e.preventDefault();
+    const validationErrors = [];
+
+    // Check each required field and update validationErrors array
+    if (!approval_id) {
+      validationErrors.push("Please select an Approver Name");
+    }
+  
+    if (!recorder_id) {
+      validationErrors.push("Please select a Recorder Name");
+    }
+  
+    if (!application_Reason) {
+      validationErrors.push("Please enter a Reason");
+    }
+  
+    if (!leave_type_id) {
+      validationErrors.push("Please select a Leave Type");
+    }
+  
+    if (!leaveStartDate) {
+      validationErrors.push("Please select a Start Date");
+    }
+  
+    if (!leaveEndDate) {
+      validationErrors.push("Please select an End Date");
+    }
+  
+    if (!stayLocation) {
+      validationErrors.push("Please enter a Stay Location");
+    }
+  
+    // Check if there are any validation errors
+    if (validationErrors.length > 0) {
+      // Display the first validation error
+      toast(validationErrors[0], { type: 'error' });
+      return;
+    }
+  
+    // Open the confirmation modal
+    handleOpenModal();
+  };
+
+  const handleSubmitConfirmation = () => {
+    // Perform the actual submission logic here
     const application = {
       'approval_id':approval_id,
       'reason':application_Reason,
@@ -297,7 +363,14 @@ const editLeaveApplication = ({ token, query, roles }) => {
     //     setFormErrors(Object.values(response.data));
     //   }
     });
+    // Close the modal after submission
+    handleCloseModal();
   };
+ 
+
+  // const onSubmits = (e) => {
+    
+  // };
 
   // RETURN TO LIST
   const goBack = () => {
@@ -522,6 +595,84 @@ const editLeaveApplication = ({ token, query, roles }) => {
               </div>
             </div>
           </div>
+          {/* Modal */}
+      <Modal
+      open={openModal}
+      onClose={handleCloseModal}
+      aria-labelledby="modal-title"
+      aria-describedby="modal-description"
+    >
+      <Box
+      sx={{
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: 600,
+        bgcolor: 'white',
+        boxShadow: 6,
+        p: 4,
+        borderRadius: 12,
+        textAlign: 'left',
+      }}
+      >
+          <Typography
+            variant="h2"
+            className="mb-4"
+            color={colors.greenAccent[300]}
+            >
+              Are you sure to update the application?
+            </Typography>
+            <Typography variant="body1" paragraph>
+              <strong>Approver Name:</strong> {selectedApprovalName}
+              <Box sx={{ borderTop: '1px solid #ccc', paddingTop: 1, marginBottom: 1 }} />
+            </Typography>
+            <Typography variant="body1" paragraph>
+              <strong>Recorder Name:</strong> {selectedRecorderName}
+              <Box sx={{ borderTop: '1px solid #ccc', paddingTop: 1, marginBottom: 1 }} />
+            </Typography>
+            <Typography variant="body1" paragraph>
+              <strong>Leave Type:</strong> {selectedLeaveType}
+              <Box sx={{ borderTop: '1px solid #ccc', paddingTop: 1, marginBottom: 1 }} />
+            </Typography>
+            <Typography variant="body1" paragraph>
+              <strong>Start Date:</strong> {selectedStartDate}
+              <Box sx={{ borderTop: '1px solid #ccc', paddingTop: 1, marginBottom: 1 }} />
+            </Typography>
+            <Typography variant="body1" paragraph>
+              <strong>End Date:</strong> {selectedEndDate}
+              <Box sx={{ borderTop: '1px solid #ccc', paddingTop: 1, marginBottom: 1 }} />
+            </Typography>
+            <Typography variant="body1" paragraph>
+              <strong>Reason:</strong> {application_Reason}
+              <Box sx={{ borderTop: '1px solid #ccc', paddingTop: 1, marginBottom: 1 }} />
+            </Typography>
+            <Typography variant="body1" paragraph>
+              <strong>Stay Location:</strong> {stayLocation}
+              <Box sx={{ borderTop: '1px solid #ccc', paddingTop: 1, marginBottom: 1 }} />
+            </Typography>
+
+            <Typography variant="body1" paragraph>
+              <strong>Number of Days: {numberOfDays}</strong>
+            </Typography>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handleSubmitConfirmation}
+              sx={{ mt: 2, mr: 2 }}
+            >
+              Update
+            </Button>
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={handleCloseModal}
+              sx={{ mt: 2 }}
+            >
+              Cancel
+            </Button>
+          </Box>
+        </Modal>
         </>
       )}
     </> 
