@@ -81,6 +81,8 @@ useEffect(() => {
                   <th width="15%">Reason</th>
                   <th width="10%">No of Days</th>
                   <th width="15%">Action</th>
+
+               
                 
               </tr>
           </thead>
