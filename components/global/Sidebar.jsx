@@ -1273,7 +1273,9 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                     change={change}
                     width={width}
                   />
-
+                {
+                  (roles !=3) && 
+                  
                   <Item
                     title="Advance Report"
                     to="/application/advance-report"
@@ -1283,6 +1285,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                     change={change}
                     width={width}
                   />
+                }
                 </SubMenu>
               }
 
