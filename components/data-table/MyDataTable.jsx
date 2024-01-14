@@ -76,7 +76,7 @@ useEffect(() => {
           {data: 'leave_status_name', name: 'leave_status_name'},
           { "data": function(data){
             console.log(data);
-            if(data.status == 2 || data.status == 4){
+            if(data.status == 2 || data.status == 4 || data.status == 1){
               return '';
             }
             else{
