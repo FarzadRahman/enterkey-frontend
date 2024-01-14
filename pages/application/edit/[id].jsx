@@ -601,21 +601,26 @@ const editLeaveApplication = ({ token, query, roles }) => {
       onClose={handleCloseModal}
       aria-labelledby="modal-title"
       aria-describedby="modal-description"
-    >
-      <Box
-      sx={{
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        width: 600,
-        bgcolor: 'white',
-        boxShadow: 6,
-        p: 4,
-        borderRadius: 12,
-        textAlign: 'left',
-      }}
       >
+      <Box
+        sx={{
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          width: '80%', // Adjusted width for small screens
+          maxWidth: 600, // Maximum width for larger screens
+          bgcolor: 'white',
+          boxShadow: 6,
+          p: 4,
+          borderRadius: 12,
+          textAlign: 'center', // Center text for small screens
+          '@media (min-width: 600px)': {
+            width: 600,
+            textAlign: 'left', // Align text to the left for larger screens
+          },
+        }}
+        >
           <Typography
             variant="h2"
             className="mb-4"
