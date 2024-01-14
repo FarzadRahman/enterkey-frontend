@@ -19,7 +19,9 @@ import {
   Menu,
   MenuItem,
   ListItemIcon,
+  IconButton,
 } from "@mui/material";
+import MessageOutlinedIcon from "@mui/icons-material/MessageOutlined";
 import { tokens } from "../../pages/theme";
 // import { InputBase } from "@mui/material";
 
@@ -40,6 +42,12 @@ const Topbar = ({ token, isCollapsed, name }) => {
 
   //Responsive
   const [width, setWidth] = useState(window.innerWidth);
+  // const [showMessage, setShowMessage] = useState(false);
+
+  // const toggleMessage = () => {
+  //   setShowMessage(!showMessage);
+  // };
+  
 
   // SET WINDOW SIZE
   useEffect(() => {
@@ -56,7 +64,7 @@ const Topbar = ({ token, isCollapsed, name }) => {
 
   const submitHandler = () => {
     const apiUrl = BASE_URL + "logout";
-    console.log("logput");
+    console.log("logout");
     const config = {
       headers: { Authorization: `Bearer ${token}` },
     };
@@ -142,6 +150,30 @@ const Topbar = ({ token, isCollapsed, name }) => {
           >
             {name}
           </Button>
+          {/*<Box position="relative" display="inline-block" marginLeft="10px">
+          <IconButton onClick={toggleMessage}>
+            <MessageOutlinedIcon />
+          </IconButton>
+      
+          {showMessage && (
+            <Box
+              position="absolute"
+              top="100%"
+              left="0"
+              border="1px solid #ccc"
+              padding="10px"
+              backgroundColor="white"
+              zIndex="1"
+              whiteSpace="nowrap"
+            >
+              <p style={{ margin: 0 }}>This is a dummy message!</p>
+              
+              <p style={{ margin: 0 }}>This is a dummy message!</p>
+              <p style={{ margin: 0 }}>This is a dummy message!</p>
+              <p style={{ margin: 0 }}>This is a dummy message!</p>
+            </Box>
+          )}
+        </Box>   */}
           <Menu
             id="basic-menu"
             anchorEl={anchorEl}

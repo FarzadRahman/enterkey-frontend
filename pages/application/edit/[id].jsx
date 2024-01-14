@@ -15,8 +15,7 @@ import AntdMomentWebpackPlugin from '@ant-design/moment-webpack-plugin';
 import { DatePicker, Space  } from "antd";
 import dayjs from "dayjs";
 
-import Modal from '@mui/material/Modal';
-import Box from '@mui/material/Box';
+import CustomModal from "../../../components/CustomModal/CustomModal";
 // import { DatePicker } from '@mui/x-date-pickers-pro';
 // import { DatePicker } from '@mui/x-date-pickers';
 // import { DatePicker } from '@mui/x-date-pickers';
@@ -598,88 +597,21 @@ const editLeaveApplication = ({ token, query, roles }) => {
             </div>
           </div>
           {/* Modal */}
-      <Modal
-      open={openModal}
-      onClose={handleCloseModal}
-      aria-labelledby="modal-title"
-      aria-describedby="modal-description"
-      >
-      <Box
-        sx={{
-          position: 'absolute',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          width: '80%', // Adjusted width for small screens
-          maxWidth: 600, // Maximum width for larger screens
-          bgcolor: 'white',
-          boxShadow: 6,
-          p: 4,
-          borderRadius: 12,
-          textAlign: 'center', // Center text for small screens
-          '@media (min-width: 600px)': {
-            width: 600,
-            textAlign: 'left', // Align text to the left for larger screens
-          },
-        }}
-        >
-          <Typography
-            variant="h2"
-            className="mb-4"
-            color={colors.greenAccent[300]}
-            >
-              Are you sure to update the application?
-            </Typography>
-            <Typography variant="body1" paragraph>
-              <strong>Approver Name:</strong> {selectedApprovalName}
-              <Box sx={{ borderTop: '1px solid #ccc', paddingTop: 1, marginBottom: 1 }} />
-            </Typography>
-            <Typography variant="body1" paragraph>
-              <strong>Recorder Name:</strong> {selectedRecorderName}
-              <Box sx={{ borderTop: '1px solid #ccc', paddingTop: 1, marginBottom: 1 }} />
-            </Typography>
-            <Typography variant="body1" paragraph>
-              <strong>Leave Type:</strong> {selectedLeaveType}
-              <Box sx={{ borderTop: '1px solid #ccc', paddingTop: 1, marginBottom: 1 }} />
-            </Typography>
-            <Typography variant="body1" paragraph>
-              <strong>Start Date:</strong> {selectedStartDate}
-              <Box sx={{ borderTop: '1px solid #ccc', paddingTop: 1, marginBottom: 1 }} />
-            </Typography>
-            <Typography variant="body1" paragraph>
-              <strong>End Date:</strong> {selectedEndDate}
-              <Box sx={{ borderTop: '1px solid #ccc', paddingTop: 1, marginBottom: 1 }} />
-            </Typography>
-            <Typography variant="body1" paragraph>
-              <strong>Reason:</strong> {application_Reason}
-              <Box sx={{ borderTop: '1px solid #ccc', paddingTop: 1, marginBottom: 1 }} />
-            </Typography>
-            <Typography variant="body1" paragraph>
-              <strong>Stay Location:</strong> {stayLocation}
-              <Box sx={{ borderTop: '1px solid #ccc', paddingTop: 1, marginBottom: 1 }} />
-            </Typography>
-
-            <Typography variant="body1" paragraph>
-              <strong>Number of Days: {numberOfDays}</strong>
-            </Typography>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={handleSubmitConfirmation}
-              sx={{ mt: 2, mr: 2 }}
-            >
-              Update
-            </Button>
-            <Button
-              variant="contained"
-              color="secondary"
-              onClick={handleCloseModal}
-              sx={{ mt: 2 }}
-            >
-              Cancel
-            </Button>
-          </Box>
-        </Modal>
+          <CustomModal 
+          open={openModal}
+          onClose={handleCloseModal}
+          actionType="update"
+          selectedApprovalName={selectedApprovalName}
+          selectedRecorderName={selectedRecorderName}
+          selectedLeaveType={selectedLeaveType}
+          selectedStartDate={selectedStartDate}
+          selectedEndDate={selectedEndDate}
+          application_Reason={application_Reason}
+          stayLocation={stayLocation}
+          numberOfDays={numberOfDays}
+          handleSubmitConfirmation={handleSubmitConfirmation}
+       >
+       </CustomModal>
         </>
       )}
     </> 
