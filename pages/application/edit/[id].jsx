@@ -503,6 +503,8 @@ const editLeaveApplication = ({ token, query, roles }) => {
               
               <div className="col-md-4 mt-4">
                 <RangePicker
+                  showTime
+                // format="YYYY/MM/DD"
                   label="Date"
                   variant="outlined"
                   fullWidth

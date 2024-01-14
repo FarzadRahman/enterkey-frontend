@@ -31,6 +31,9 @@ import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import KeyIcon from "@mui/icons-material/Key";
 
+//Notification
+import Notify from "./Notify";
+
 const Topbar = ({ token, isCollapsed, name }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -93,6 +96,7 @@ const Topbar = ({ token, isCollapsed, name }) => {
 
   return (
     <>
+      
       <Box
         display="flex"
         justifyContent="space-between"
@@ -126,6 +130,8 @@ const Topbar = ({ token, isCollapsed, name }) => {
           <IconButton onClick={submitHandler}>
             <LogoutIcon />
           </IconButton> */}
+
+          <Notify/>
 
           <Button
             endIcon={<ArrowDropDownIcon />}

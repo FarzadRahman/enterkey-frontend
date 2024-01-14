@@ -67,6 +67,7 @@
   },
   "devDependencies": {
     "@ant-design/moment-webpack-plugin": "^0.0.4",
+    "@types/node": "20.11.0",
     "antd-moment-webpack-plugin": "^0.0.2"
   }
 }
