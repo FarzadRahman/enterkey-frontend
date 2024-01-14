@@ -55,7 +55,7 @@ const LoginForm = ({ message }) => {
         className="ms-2 mb-1"
         style={{ fontWeight: "400" }}
       >
-        Email
+        Email/Phone
       </Typography>
       <input
         type="email"
