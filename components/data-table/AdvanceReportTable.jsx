@@ -30,7 +30,7 @@ const AdvanceReportTable = ({ token,leaveType,leaveStatus,selectedEmp,leaveStart
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [users, setUsers] = useState([]);
-  console.log(selectedEmp);
+  // console.log(selectedEmp);
 
 
 
@@ -46,7 +46,19 @@ const AdvanceReportTable = ({ token,leaveType,leaveStatus,selectedEmp,leaveStart
     return new Date(dateString).toLocaleDateString(undefined, options);
   } 
 
-
+  const getColorByStatus = (statusId) => {
+    switch (statusId) {
+      case 1:
+        return 'black';
+      case 2:
+        return 'green';
+      case 3:
+        return 'orange';
+      case 4:
+        return 'red';
+      default:
+        return 'black'; // Default color if the status is not 1, 2, 3, or 4
+    }};
 
   useEffect(() => {
     
@@ -69,9 +81,9 @@ const AdvanceReportTable = ({ token,leaveType,leaveStatus,selectedEmp,leaveStart
         headers: { Authorization: "Bearer " + token },
       })
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         if (res.status === 200) {
-          // console.log(res.data.data);
+          console.log(res.data.data);
           setUsers(res.data);
           setLastPage(res.data.last_page);
           setTotalData(res.data.total);
@@ -98,7 +110,7 @@ const AdvanceReportTable = ({ token,leaveType,leaveStatus,selectedEmp,leaveStart
         <table className="table table-hover table-striped">
           <thead>
             <tr className="table-success">
-              <th>#</th>
+              {/* <th>#</th>
               <th>Picture</th>
               <th>Name</th>
               <th>Leave Type</th>
@@ -108,22 +120,44 @@ const AdvanceReportTable = ({ token,leaveType,leaveStatus,selectedEmp,leaveStart
               <th>Application Date</th>
               <th>Approver Name</th>
               <th>Leave Status</th>
-              <th>Actions</th>
+              <th>Actions</th> */}
+
+                
+                  <th width="20%">Application ID</th>
+                  <th width="10%">Applied Date</th>
+                  <th width="7%">Approver Name</th>
+                  <th width="7%">Recorder Name</th>
+                  <th width="15%">Applied Duration</th>
+                  <th width="15%">Approved Duration</th>
+                  <th width="10%">Status</th>
+                  <th width="15%">Action</th>
             </tr>
           </thead>
           <tbody>
             {users.data?.map((user, index) => ( 
               <tr key={index}>
-                <th scope="row">{index + 1}</th>
-                <td><img height={50} src={IMAGE_URL+user.sender.user.profile_picture}/></td>
-                <td><b>{user.sender.full_name}</b> <br></br>({user.sender.designation.desg_nm})</td>
-                <td>{user.leave_type.leave_type_name}</td>
-                <td>{user.start_date} <br></br> {user.end_date} &nbsp; ({user.applied_total_days})</td>
-                <td>{user.approved_start_date} <br></br> {user.approved_end_date} &nbsp; ({user.approved_total_days})</td>
-                <td>{user.stay_location}</td>
+                {/* <th scope="row">{index + 1}</th> */}
+                <td>
+                <img height={50} src={IMAGE_URL+user.sender.user.profile_picture}/>
+                <br></br>
+                Application ID : {user.id}
+                <br></br>
+                Leave Type : {user.leave_type.leave_type_name}
+                <br></br>
+                
+                Sender : <b>{user.sender.full_name}</b> <br></br>({user.sender.designation.desg_nm})
+                </td>
                 <td>{formatDate(user.created_at)}</td>
                 <td>{user.approver.full_name}</td>
-                <td>{user.leave_status.leave_status_name}</td>
+                <td>{user.reviewer.full_name}</td>
+                <td>{user.start_date} <br></br> {user.end_date} &nbsp; ({user.applied_total_days})</td>
+                <td>{user.approved_start_date} <br></br> {user.approved_end_date} &nbsp; ({user.approved_total_days})</td>                         
+               
+                
+                <td style={{ color: getColorByStatus(user.leave_status.l_stat_id) }}>
+                    {user.leave_status.leave_status_name}
+                </td>
+
                 <td>
                   <Link href={`/users/updateUser/${user.employee_id}`} className="anchor">
                     <button className="btn btn-light btn-sm me-1">
