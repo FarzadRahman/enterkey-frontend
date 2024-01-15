@@ -43,6 +43,9 @@ const leaveApplication = ({ token, roles }) => {
   const [approvalName,setApprovalName]=useState([]);
   const [approval_id,setApproval_id]=useState("");
 
+  const [reasons,setReasons]=useState([{id:1, name:"Physical Problen"},{id:2, name:"Family Issue"},{id:3, name:"Others"}]);
+  const [reason_id,setReason_id]=useState("");
+
   const [recorderName,setRecorderName]=useState([]);
   const [recorder_id,setRecorder_id]=useState("");
 
@@ -505,7 +508,7 @@ const leaveApplication = ({ token, roles }) => {
     <div className="row mt-4">
       <div className="col-md-12">
         {/* Reason TextField */}
-        <TextField
+        {/* <TextField
           label="Reason"
           variant="outlined"
           size="small"
@@ -513,7 +516,22 @@ const leaveApplication = ({ token, roles }) => {
           fullWidth
           onChange={(e) => setApplicationReason(e.target.value)}
           className="shadow-input"
-        />
+        /> */}
+        <TextField
+          onChange={(e) => setReason_id(+e.target.value)}
+          select
+          label="Reason"
+          size="small"
+          fullWidth
+          value={reason_id || ""}
+          className="shadow-input"
+        >
+          {reasons?.map((option, index) => (
+            <MenuItem key={index} value={option.id}>
+              {option.name}
+            </MenuItem>
+          ))}
+        </TextField>
       </div>
     </div>
   
