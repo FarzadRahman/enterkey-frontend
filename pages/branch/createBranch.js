@@ -81,7 +81,7 @@ const createBranch = ({ token }) => {
     e.preventDefault();
     const branch = {
       branch_name,
-      company_id,
+      // company_id,
     };
     const apiBranch = BASE_URL + "branch/create";
     const config = {
@@ -128,7 +128,7 @@ const createBranch = ({ token }) => {
         </div>
       </div>
       <div className="row">
-        <div className="col-md-6 mt-4">
+        <div className="col-md-12 mt-4">
           <TextField
             label="Branch Name"
             variant="outlined"
@@ -140,7 +140,7 @@ const createBranch = ({ token }) => {
           />
         </div>
         
-        <div className="col-md-6 mt-4">
+        {/*<div className="col-md-6 mt-4">
           <TextField
             onChange={(e) => {
               setCompany_id(+e.target.value);
@@ -157,10 +157,10 @@ const createBranch = ({ token }) => {
               <MenuItem key={index} value={option.comp_id}>
                 {option.company_name} 
                 {/* ({option.company_bin}) */}
-              </MenuItem>
-            ))}
+            {/*</MenuItem>*/}
+           {/* ))}
           </TextField>
-        </div>
+            </div>*/}
         {/* <div className="col-md-6 mt-4">
           <TextField
             label="Company Id"

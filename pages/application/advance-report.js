@@ -43,6 +43,7 @@ const leaveAdvanceReport = ({ token }) => {
   const [leaveStartDate, setLeaveStartDate] = useState("");
   const [leaveEndDate, setLeaveEndDate] = useState("");
   const [dateRange,setDateRange] = useState([]);
+  const [appliedDate, setAppliedDate] = useState("");
 
   function formatDate(dateString){
     const options = { year: "numeric", month: "long", day: "numeric"};
@@ -145,7 +146,11 @@ const leaveAdvanceReport = ({ token }) => {
       } 
     });
   }
-
+  const handleAppliedDateChange = (date) => {
+    console.log(date);
+    setAppliedDate(date);
+  };
+  
   function resetFilter(){
     setSelectedEmp("");
     setLeaveType("");
@@ -153,6 +158,7 @@ const leaveAdvanceReport = ({ token }) => {
     setLeaveStartDate("");
     setLeaveEndDate("");
     setDateRange("");
+    setAppliedDate("");
   }
 
 
@@ -237,6 +243,19 @@ const leaveAdvanceReport = ({ token }) => {
            // disabledDate={disabledDate}
          />
          </div>
+         <div className="col-md-3 mt-4">
+          <DatePicker
+            onChange={handleAppliedDateChange}
+            label="Applied Date"
+            variant="outlined"
+            fullWidth
+            size="large"
+            style={{ width: "100%" }}
+            value={appliedDate}
+            className="shadow-input"
+          />
+        </div>
+
 
        <div className="col-md-2 mt-4">
          <button className="btn btn-info"  onClick={resetFilter}>reset</button>
@@ -245,7 +264,7 @@ const leaveAdvanceReport = ({ token }) => {
    </div>
    <br></br>
       <AdvanceReportTable leaveType={leaveType} leaveStatus={leaveStatus} selectedEmp={selectedEmp} leaveStartDate={leaveStartDate}
-      leaveEndDate={leaveEndDate}></AdvanceReportTable>
+      leaveEndDate={leaveEndDate}  appliedDate={appliedDate}></AdvanceReportTable>
    
      
     </>

@@ -123,9 +123,9 @@ const designationList = ({ token }) => {
               <thead>
                 <tr className="table-success">
                   <th scope="col">#</th>
+                  <th scope="col">Designation Name</th>
                   <th scope="col">Grade Name</th>
                   {/* <th scope="col">Branch ID</th> */}
-                  <th scope="col">Designation Name</th>
                   <th scope="col">Actions</th>
                 </tr>
               </thead>
@@ -133,9 +133,10 @@ const designationList = ({ token }) => {
                 {designations?.map((designation, index) => (
                   <tr key={index}>
                     <th scope="row">{index + 1}</th>
+                    <td>{designation.desg_nm}</td>
                     <td>{designation.grade.grade_name}</td>
                     {/* <td>{branch.bran_id}</td> */}
-                    <td>{designation.desg_nm}</td>
+                   
                     <td>
                       <Link href={`/designation/updateDesignation/${designation.desg_id}`}>
                         <button className="btn btn-light btn-sm me-1">

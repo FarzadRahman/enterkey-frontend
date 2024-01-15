@@ -61,6 +61,9 @@ const editLeaveApplication = ({ token, query, roles }) => {
   const [openModal, setOpenModal] = useState(false);
   const [selectedApprovalName, setSelectedApprovalName] = useState("");
   const [selectedRecorderName, setSelectedRecorderName] = useState("");
+  const [selectedApprovalDesignation, setSelectedApprovalDesignation] = useState("");
+  const [selectedRecorderDesignation, setSelectedRecorderDesignation] = useState("");
+  
   const [selectedLeaveType, setSelectedLeaveType] = useState("");
   const [selectedStartDate, setSelectedStartDate] = useState("");
   const [selectedEndDate, setSelectedEndDate] = useState("");
@@ -264,12 +267,15 @@ const editLeaveApplication = ({ token, query, roles }) => {
   const handleOpenModal = () => {
     setSelectedApprovalName(approvalName.find((option) => option.emp_id === +approval_id)?.full_name || "");
     setSelectedRecorderName(recorderName.find((option) => option.emp_id === +recorder_id)?.full_name || "");
+    
+    setSelectedApprovalDesignation(approvalName.find((option) => option.emp_id === +approval_id)?.desg_nm || "");
+    setSelectedRecorderDesignation(recorderName.find((option) => option.emp_id === +recorder_id)?.desg_nm || "");
+    
     setSelectedLeaveType(leaveTypes.find((option) => option.l_type_id === +leave_type_id)?.leave_type_name || "");
     setSelectedStartDate(leaveStartDate);
     setSelectedEndDate(leaveEndDate);
     setOpenModal(true);
   };
-
   const handleCloseModal = () => {
     setOpenModal(false);
   };
@@ -388,21 +394,6 @@ const editLeaveApplication = ({ token, query, roles }) => {
         (roles != 1) &&
         <>
           <div className="mt-2">
-            {/* <div className="row">
-              <div className="col-10">
-                <Typography
-                  variant="h2"
-                  className="mb-4"
-                  color={colors.greenAccent[300]}
-                >
-                  Update Leave Application
-                </Typography>
-              </div>
-            </div>
-            <div className="row">
-            <p className="col-md-4">Number of Days: {numberOfDays}</p>
-            <p className="col-md-4">Approved Leave: {approvedLeave}</p>
-            </div> */}
             <div className="row">
               <div className="text-left h5 col-4">
                 Approved Leave: {approvedLeave}
@@ -597,6 +588,8 @@ const editLeaveApplication = ({ token, query, roles }) => {
           actionType="update"
           selectedApprovalName={selectedApprovalName}
           selectedRecorderName={selectedRecorderName}
+          selectedApprovalDesignation={selectedApprovalDesignation}
+          selectedRecorderDesignation={selectedRecorderDesignation}
           selectedLeaveType={selectedLeaveType}
           selectedStartDate={selectedStartDate}
           selectedEndDate={selectedEndDate}

@@ -1225,6 +1225,8 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                   }}
                   open={opened[10].isOpen}
                 >
+                {(roles != 2) &&
+                  <>
                   <Item
                     title="Create New Application"
                     to="/application/leave-application"
@@ -1235,7 +1237,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                     width={width}
                   />
                   <Item
-                    title="Applied Application"
+                    title="My Application"
                     to="/application/applied-list"
                     icon={<ReceiptLongIcon />}
                     selected={selected}
@@ -1273,6 +1275,9 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                     change={change}
                     width={width}
                   />
+                  </>
+                }
+                  
                 {
                   (roles !=3) && 
                   

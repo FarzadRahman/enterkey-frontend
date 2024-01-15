@@ -25,8 +25,8 @@ import {
   TextField,
 } from "@mui/material";
 
-const AdvanceReportTable = ({ token,leaveType,leaveStatus,selectedEmp,leaveStartDate,
-    leaveEndDate, appliedDate }) => {
+const MyApplicationTable = ({ token,leaveType,leaveStatus,selectedEmp,leaveStartDate,
+    leaveEndDate }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [users, setUsers] = useState([]);
@@ -60,20 +60,73 @@ const AdvanceReportTable = ({ token,leaveType,leaveStatus,selectedEmp,leaveStart
         return 'black'; // Default color if the status is not 1, 2, 3, or 4
     }};
 
+    const getButtonsByStatus = (statusId,applicationId) => {
+      switch (statusId) {
+        case 1:
+          return (
+            <>
+              <Button variant="contained" color="primary">
+                View
+              </Button>
+              <Button variant="contained" color="secondary">
+                History
+              </Button>
+            </>
+          );
+        case 2:
+          return (
+            <>
+              <Button variant="contained" color="primary">
+                View
+              </Button>
+              <Button variant="contained" color="secondary">
+                History
+              </Button>
+            </>
+          );
+        case 3:
+          return (
+            <>
+              <Button variant="contained" color="primary">
+                View
+              </Button>
+              <Button variant="contained" color="secondary">
+                History
+              </Button>
+              <Link href={`/application/edit/${applicationId}`}>
+              <Button variant="contained" color="warning">
+                Edit
+              </Button>
+            </Link>
+            </>
+          );
+        case 4:
+          return (
+            <Button variant="contained" color="secondary">
+              History
+            </Button>
+          );
+        default:
+          return null; // No buttons if the status is not 1, 2, 3, or 4
+      }
+    };
+    
+      
+      
+
   useEffect(() => {
     
     
     const apiUsers =
     BASE_URL +
-    "leave/advance-report?page=" +
+    "leave/applied-list?page=" +
     page;
     const param={
       leaveType:leaveType,
       leaveStatus:leaveStatus,
       selectedEmp:selectedEmp,
       leaveStartDate:leaveStartDate,
-      leaveEndDate:leaveEndDate,
-      appliedDate:appliedDate,
+      leaveEndDate:leaveEndDate
     };
     // axios.post(apiBranch, branch, config).then((response) 
     // console.log(param);
@@ -82,7 +135,7 @@ const AdvanceReportTable = ({ token,leaveType,leaveStatus,selectedEmp,leaveStart
         headers: { Authorization: "Bearer " + token },
       })
       .then((res) => {
-         console.log(res);
+        // console.log(res);
         if (res.status === 200) {
           console.log(res.data.data);
           setUsers(res.data);
@@ -94,7 +147,7 @@ const AdvanceReportTable = ({ token,leaveType,leaveStatus,selectedEmp,leaveStart
         console.log(error);
       });
   }, [page,leaveType,leaveStatus,selectedEmp,leaveStartDate,
-    leaveEndDate,appliedDate]);
+    leaveEndDate]);
 
   // Pagination
   const handleChange = (e, page) => {
@@ -160,21 +213,8 @@ const AdvanceReportTable = ({ token,leaveType,leaveStatus,selectedEmp,leaveStart
                 </td>
 
                 <td>
-                  <Link href={`/users/updateUser/${user.employee_id}`} className="anchor">
-                    <button className="btn btn-light btn-sm me-1">
-                      <EditIcon cursor="pointer" />
-                    </button>
-                  </Link>
-                  <Link href={`/application/${user.id}`} className="anchor">
-                    <button className="btn btn-light btn-sm me-1">
-                      <VisibilityIcon cursor="pointer" />
-                    </button>
-                  </Link>
-                  <Link href={`/application/details/${user.id}`} className="anchor">
-                    <button className="btn btn-light btn-sm me-1">
-                      <InfoIcon cursor="pointer" />
-                    </button>
-                  </Link>
+                {getButtonsByStatus(user.leave_status.l_stat_id,user.id)}
+                
                 </td>
 
                 {/* <td>
@@ -226,4 +266,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(AdvanceReportTable);
+export default connect(mapStateToProps)(MyApplicationTable);

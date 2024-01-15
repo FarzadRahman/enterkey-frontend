@@ -217,6 +217,7 @@ const mapStateToProps = (state) => {
     token: state.auth.token,
     isCollapsed: state.collapse.isCollapse,
     name: state.auth.name,
+    designation: state.auth.designation,
   };
 };
 

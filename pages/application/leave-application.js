@@ -508,7 +508,7 @@ const leaveApplication = ({ token, roles }) => {
     <div className="row mt-4">
       <div className="col-md-12">
         {/* Reason TextField */}
-        {/* <TextField
+         <TextField
           label="Reason"
           variant="outlined"
           size="small"
@@ -516,7 +516,8 @@ const leaveApplication = ({ token, roles }) => {
           fullWidth
           onChange={(e) => setApplicationReason(e.target.value)}
           className="shadow-input"
-        /> */}
+        /> 
+        {/*
         <TextField
           onChange={(e) => setReason_id(+e.target.value)}
           select
@@ -531,7 +532,8 @@ const leaveApplication = ({ token, roles }) => {
               {option.name}
             </MenuItem>
           ))}
-        </TextField>
+        </TextField> 
+      */}
       </div>
     </div>
   

@@ -82,7 +82,7 @@ const updateBranch = ({ token, query }) => {
     const apiBranch = BASE_URL + "branch/update/" + id;
     const branch = {
       branch_name,
-      company_id,
+      // company_id,
     };
 
     const config = {
@@ -128,7 +128,7 @@ const updateBranch = ({ token, query }) => {
       </div>
 
       <div className="row">
-        <div className="col-md-6 mt-4">
+        <div className="col-md-12 mt-4">
           <TextField
             label="Branch Name"
             variant="outlined"
@@ -140,7 +140,7 @@ const updateBranch = ({ token, query }) => {
             className="shadow-input"
           />
         </div>
-        <div className="col-md-6 mt-4">
+       {/*<div className="col-md-6 mt-4">
             <TextField
               onChange={(e) => {
                 setCompany_id(+e.target.value);
@@ -159,7 +159,7 @@ const updateBranch = ({ token, query }) => {
                 </MenuItem>
               ))}
             </TextField>
-          </div>
+              </div>*/}
         {/* <div className="col-md-6 mt-4">
           <TextField
             label="Company Id"

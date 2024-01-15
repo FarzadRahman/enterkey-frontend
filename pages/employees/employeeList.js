@@ -114,10 +114,10 @@ const employeeList = ({ token,roles}) => {
                 <th>#</th>
                 <th>Picture</th>
                 <th>Full Name</th>
-                <th>Approver/Recorder</th>
+                <th>Role</th>
                 <th>Phone Number</th>
                 <th>Email Address</th>
-                <th>Office ID</th>
+            {/*   // <th>Office ID</th>*/}
                 <th>Branch</th>
                 <th>Designation</th>
                 <th>Department</th>
@@ -145,7 +145,7 @@ const employeeList = ({ token,roles}) => {
                   <td>
                     
                       {
-                        (employee.isRecorder==0) && (employee.isApprover == 0) && <></>
+                        (employee.isRecorder==0) && (employee.isApprover == 0) && <>Employee</>
                       }
                       {
                         (employee.isRecorder==0) && (employee.isApprover == 1) && <>Approver</>
@@ -154,14 +154,14 @@ const employeeList = ({ token,roles}) => {
                         (employee.isRecorder==1) && (employee.isApprover == 0) && <>Recorder</>
                       }
                       {
-                        (employee.isRecorder==1) && (employee.isApprover == 1) && <>Approver + Recorder</>
+                        (employee.isRecorder==1) && (employee.isApprover == 1) && <>Approver , Recorder</>
                       }
                     
                     
                   </td>
                   <td>{employee.phone_number}</td>
                   <td>{employee.email_address}</td>
-                  <td>{employee.office_id}</td>
+                  {/*<td>{employee.office_id}</td>*/}
                   <td>{employee?.branch?.branch_name}</td>
                   <td>{employee?.designation?.desg_nm}</td>
                   <td>{employee?.department?.department_name}</td>

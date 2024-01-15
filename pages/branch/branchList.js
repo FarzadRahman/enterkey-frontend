@@ -155,7 +155,7 @@ const branchList = ({ token }) => {
               <thead>
                 <tr className="table-success">
                   <th scope="col">#</th>
-                  <th scope="col">Company Name</th>
+                  {/*<th scope="col">Company Name</th>*/}
                   {/* <th scope="col">Branch ID</th> */}
                   <th scope="col">Branch Name</th>
                   <th scope="col">Actions</th>
@@ -165,7 +165,7 @@ const branchList = ({ token }) => {
                 {branches?.map((branch, index) => (
                   <tr key={index}>
                     <th scope="row">{index + 1}</th>
-                    <td>{branch.company.company_name}</td>
+                    {/*<td>{branch.company.company_name}</td>*/}
                     {/* <td>{branch.bran_id}</td> */}
                     <td>{branch.branch_name}</td>
                     <td>
