@@ -282,7 +282,6 @@ const ApplicationDetails = ({ query, token }) => {
             ) : (
                 <>
                     <div className="row">
-                        
                         <div className="text-left h5 col-4">
                             Total leave {details?.totalApprovedDays == 1 ? 'day: 1' : `days: ${details?.totalApprovedDays}`}
                         </div>
