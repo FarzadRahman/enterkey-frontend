@@ -14,6 +14,9 @@ const CustomModal = ({
   actionType,
   selectedApprovalName,
   selectedRecorderName,
+  
+  selectedApprovalDesignation,
+  selectedRecorderDesignation,
   selectedLeaveType,
   selectedStartDate,
   selectedEndDate,
@@ -58,25 +61,26 @@ const CustomModal = ({
         : 'Are you sure to update the application?'}
         </Typography>
         <Typography variant="body1" paragraph>
-          <strong>Approver Name:</strong> {selectedApprovalName}
-          <Box sx={{ borderTop: '1px solid #ccc', paddingTop: 1, marginBottom: 1 }} />
-        </Typography>
-        <Typography variant="body1" paragraph>
-          <strong>Recorder Name:</strong> {selectedRecorderName}
-          <Box sx={{ borderTop: '1px solid #ccc', paddingTop: 1, marginBottom: 1 }} />
-        </Typography>
-        <Typography variant="body1" paragraph>
           <strong>Leave Type:</strong> {selectedLeaveType}
           <Box sx={{ borderTop: '1px solid #ccc', paddingTop: 1, marginBottom: 1 }} />
         </Typography>
         <Typography variant="body1" paragraph>
-          <strong>Start Date:</strong> {selectedStartDate}
+          <strong>Approver Name:</strong> {selectedApprovalName}-({selectedApprovalDesignation})
           <Box sx={{ borderTop: '1px solid #ccc', paddingTop: 1, marginBottom: 1 }} />
         </Typography>
         <Typography variant="body1" paragraph>
-          <strong>End Date:</strong> {selectedEndDate}
+          <strong>Recorder Name:</strong> {selectedRecorderName}-({selectedRecorderDesignation})
           <Box sx={{ borderTop: '1px solid #ccc', paddingTop: 1, marginBottom: 1 }} />
         </Typography>
+        <Typography variant="body1" paragraph>
+            <strong>Duration: </strong> 
+            Start Date: {selectedStartDate}
+            <p style={{ marginLeft: "65px" }}>End Date: {selectedEndDate}</p>
+            <Box sx={{ borderTop: '1px solid #ccc', paddingTop: 1, marginBottom: 1 }} />
+        </Typography>
+
+
+
         <Typography variant="body1" paragraph>
           <strong>Reason:</strong> {application_Reason}
           <Box sx={{ borderTop: '1px solid #ccc', paddingTop: 1, marginBottom: 1 }} />
@@ -88,7 +92,7 @@ const CustomModal = ({
 
         <Typography variant="body1" paragraph>
           <strong>Number of Days:</strong> {numberOfDays}
-        </Typography>
+        </Typography>{/**/}
         {actionType === 'submit' ? (
             <Button
               variant="contained"
