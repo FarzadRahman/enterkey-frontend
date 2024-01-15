@@ -215,10 +215,12 @@ const ApplicationDetails = ({ query, token }) => {
             .then((res) => {
 
                 if (res.data) {
-                    console.log('data is here:');
-                    console.log(res.data.application.status);
+                    // console.log('data is here:');
+                    // console.log(res.data.application.status);
                     setLoader(false);
-                    setDetails(res.data)
+                    console.log("res?.data");
+                    console.log(res?.data);
+                    setDetails(res?.data)
                     //   setName(res.data.data.full_name);
                     //   setEmail(res.data.data.email_address);
                     //   setPhone(res.data.data.phone_number);
@@ -259,7 +261,7 @@ const ApplicationDetails = ({ query, token }) => {
                 console.log(res.data);
 
                 if (res.data) {
-                    console.log(res.data[0]);
+                    // console.log(res.data[0]);
                     setLoader(false);
                     setTrees(res.data)
                 } else {
@@ -279,19 +281,25 @@ const ApplicationDetails = ({ query, token }) => {
                 </>
             ) : (
                 <>
-                    <Typography
-                        variant="h2"
-                        className="mb-4"
-                        color={colors.greenAccent[300]}
-                    >
-                        Employee Leave Details
-                    </Typography>
-                    <h5>
-                        <p>Total leave: {details?.totalApprovedDays === 1 ? '1 day' : `${details?.totalApprovedDays} days`}</p>
-                        <p>Number of days:{numberOfDays}</p>
-                    </h5>
-
-                    <div>
+                    <div className="row">
+                        
+                        <div className="text-left h5 col-4">
+                            Total leave {details?.totalApprovedDays == 1 ? 'day: 1' : `days: ${details?.totalApprovedDays}`}
+                        </div>
+                        <div className="text-left h4 col-4">
+                            <Typography
+                                variant="h3"
+                                className="mb-4 text-center"
+                                color={colors.greenAccent[300]}
+                            >
+                                Employee Leave Details
+                            </Typography>
+                        </div>
+                        <div className="text-end h5 col-4">
+                            Number of days:{numberOfDays}
+                        </div>
+                    </div>
+                    {/* <div>
 
                         <div className="row">
                             <div className="col-12 text-center">
@@ -337,9 +345,9 @@ const ApplicationDetails = ({ query, token }) => {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                     <div className="table-responsive mt-2">
-                        <table className="table table-hover table-striped">
+                        <table className="table table-hover table-bordered">
                             <thead>
                                 <tr className="table-success">
                                     <th>Leave Details</th>
@@ -355,18 +363,19 @@ const ApplicationDetails = ({ query, token }) => {
                                     <td>
                                         <div>
                                             <p style={{ color: "blue" }}>Leave Type: <strong>{details?.application?.leave_type?.leave_type_name}</strong></p>
-                                            <p style={{ color: "blue" }}>Stay Location: <strong>{details?.application?.stay_location}</strong></p>
                                             <p style={{ color: "blue" }}>Reason: <strong>{details?.application?.reason}</strong></p>
-                                            <p>Start Date: <strong>{details?.application?.start_date}</strong></p>
-                                            <p>End Date: <strong>{details?.application?.end_date}</strong></p>
+                                            <p style={{ color: "blue" }}>Stay Location: <strong>{details?.application?.stay_location}</strong></p>
+                                            <p>Start Date: <strong>{moment(details?.application?.start_date).format('MMMM Do YYYY, h:mm:ss a')}</strong></p>
+                                            <p>End Date: <strong>{moment(details?.application?.end_date).format('MMMM Do YYYY, h:mm:ss a')}</strong></p>
                                             <p style={{ color: "red" }}>Applied Total Days: <strong>{details?.application?.applied_total_days}</strong></p>
                                             <p>Comment: <strong>{details?.application?.comment}</strong></p>
                                             <p>Reviewer Start Date: <strong>{details?.application?.reviewer_start_date}</strong></p>
                                             <p>Reviewer End Date: <strong>{details?.application?.reviewer_end_date}</strong></p>
                                             <p style={{ color: "red" }}>Review Total Days: <strong>{details?.application?.review_total_days}</strong></p>
-                                            <p>Approved Start Date: <strong>{details?.application?.approved_start_date}</strong></p>
-                                            <p>Approved End Date: <strong>{details?.application?.approved_end_date}</strong></p>
+                                            <p>Approved Start Date: <strong>{moment(details?.application?.approved_start_date).format('MMMM Do YYYY, h:mm:ss a')}</strong></p>
+                                            <p>Approved End Date: <strong>{moment(details?.application?.approved_end_date).format('MMMM Do YYYY, h:mm:ss a')}</strong></p>
                                             <p style={{ color: "green" }}>Approved Total Days: <strong>{details?.application?.approved_total_days}</strong></p>
+                                            <p style={{ color: "red" }}>Status: <strong>{details?.application?.leave_status?.leave_status_name.toUpperCase()}</strong></p>
                                         </div>
                                     </td>
                                     <td>
@@ -414,7 +423,7 @@ const ApplicationDetails = ({ query, token }) => {
                                         {details?.application?.status == 2 ? (
                                             <>Application is Approved</>
                                         ) : (
-                                            <>
+                                            <div className="text-center">
                                                 <TextField
                                                     // label="Comment"
                                                     variant="outlined"
@@ -425,6 +434,7 @@ const ApplicationDetails = ({ query, token }) => {
                                                     value={comments || ""}
                                                     className="shadow-input"
                                                     placeholder="Input comment here..."
+                                                    style={{ width: "100%" }}
                                                 />
                                                 <br></br>
                                                 <br></br>
@@ -438,7 +448,7 @@ const ApplicationDetails = ({ query, token }) => {
                                                     className="shadow-input"
                                                 // disabledDate={disabledDate}
                                                 />
-                                            </>
+                                            </div>
                                         )}
 
                                     </td>
@@ -448,38 +458,38 @@ const ApplicationDetails = ({ query, token }) => {
                                         {details?.application?.status == 2 ? (
                                             <div>Application is Approved</div>
                                         ) : (
-                                            <>
+                                            <div className="text-center">
                                                 <button
-                                                    className="btn btn-danger btn-sm"
+                                                    className="btn btn-danger btn-sm mt-1 p-1"
                                                     onClick={() => handleForward(details?.application?.id)}
                                                 >
                                                     <ArrowForwardIcon cursor="pointer" />
                                                 </button>
                                                 <button
-                                                    className="btn btn-danger btn-sm ms-1"
+                                                    className="btn btn-danger btn-sm ms-1 mt-1 p-1"
                                                     onClick={() => handleBackword(details?.application?.id)}
                                                 >
                                                     <ArrowBackIcon cursor="pointer" />
                                                 </button>
                                                 <button
-                                                    className="btn btn-danger btn-sm ms-1"
+                                                    className="btn btn-danger btn-sm ms-1 mt-1 p-1"
                                                     onClick={() => handleApproved(details?.application?.id)}
                                                 >
                                                     <DoneIcon cursor="pointer" />
                                                 </button>
+                                                {/* <Link><a className="custom-link" href="/application/edit/'+data.id+'" ><button className="btn btn-light btn-sm me-1">Edit</button></a></Link> */}
+                                                <Link href={`/application/edit/${id}`} className="anchor">
+                                                    <button className="btn btn-danger btn-sm ms-1 mt-1 p-1">
+                                                        <EditIcon cursor="pointer" />
+                                                    </button>
+                                                </Link>
                                                 <button
-                                                    className="btn btn-danger btn-sm ms-1"
-                                                // onClick={() => handleDelete(details?.id)}
-                                                >
-                                                    <EditIcon cursor="pointer" />
-                                                </button>
-                                                <button
-                                                    className="btn btn-danger btn-sm ms-1"
+                                                    className="btn btn-danger btn-sm ms-1 mt-1 p-1"
                                                     onClick={() => handleDelete(details?.application?.id)}
                                                 >
                                                     <DeleteIcon cursor="pointer" />
                                                 </button>
-                                            </> // This is an empty fragment, nothing will be rendered when status is not 2
+                                            </div> // This is an empty fragment, nothing will be rendered when status is not 2
                                         )}
 
                                         {/* <Link href={`/employees/updateEmployee/${details?.id}`} className="anchor">
@@ -499,7 +509,7 @@ const ApplicationDetails = ({ query, token }) => {
                         </table>
                     </div>
                     <div className="table-responsive mt-2">
-                        <table className="table table-hover table-striped">
+                        <table className="table table-hover table-bordered">
                             <thead>
                                 <tr className="table-success">
                                     <th>SL</th>
@@ -507,6 +517,7 @@ const ApplicationDetails = ({ query, token }) => {
                                     <th>Receiver</th>
                                     <th>Comment</th>
                                     <th>Date Time</th>
+                                    {/* <th>Status</th> */}
                                 </tr>
                             </thead>
                             <tbody>
@@ -523,6 +534,7 @@ const ApplicationDetails = ({ query, token }) => {
                                         </td>
                                         <td>{tree?.comments}</td>
                                         <td>{moment(tree?.created_at).format('MMMM Do YYYY, h:mm:ss a')}</td>
+                                        {/* <td>{tree?.status}</td> */}
                                     </tr>
                                 ))}
                             </tbody>
