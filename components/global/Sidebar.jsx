@@ -137,6 +137,18 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
       isOpen: false,
     },
     {
+      name: "employee",
+      isOpen: false,
+    },
+    {
+      name: "Taskasrecorder",
+      isOpen: false,
+    },
+    {
+      name: "taskApprover",
+      isOpen: false,
+    },
+    {
       name: "Activity",
       isOpen: false,
     },
@@ -260,7 +272,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
         <ProSidebar
           collapsed={isCollapsed}
           collapsedWidth={width > 600 ? "100px" : "0px"}
-          width={width > 600 ? "270px" : "100vw"}
+          width={width > 600 ? "290px" : "100vw"}
         >
           <Menu iconShape="square">
             {/* LOGO AND MENU ICON */}
@@ -1213,7 +1225,8 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
               )}
               
               {/* Leave */}
-              {(roles != 1) &&
+              {
+              // (roles != 1) &&
                 <SubMenu
                   title="Leave Application"
                   icon={<AccountTreeIcon />}
@@ -1274,7 +1287,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                     width={width}
                   />
                 {
-                  (roles !=3) && 
+                  // (roles !=3) && 
                   
                   <Item
                     title="Advance Report"
@@ -1289,6 +1302,102 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                 </SubMenu>
               }
 
+              <SubMenu
+                  title={name}
+                  icon={<AccountTreeIcon />}
+                  style={{
+                    color: colors.grey[100],
+                  }}
+                  onOpenChange={() => {
+                    handleChange("employee");
+                  }}
+                  open={opened[11].isOpen}
+                >
+                  <Item
+                    title="Message Box"
+                    to="/application/applied-list"
+                    icon={<ReceiptLongIcon />}
+                    selected={selected}
+                    setSelected={setSelected}
+                    change={change}
+                    width={width}
+                  />
+
+                  <Item
+                    title="create new application"
+                    to="/application/leave-application"
+                    icon={<AddchartIcon />}
+                    selected={selected}
+                    setSelected={setSelected}
+                    change={change}
+                    width={width}
+                  />
+
+                  <Item
+                    title="My Application"
+                    to="/application/pending-recorder"
+                    icon={<ReceiptLongIcon />}
+                    selected={selected}
+                    setSelected={setSelected}
+                    change={change}
+                    width={width}
+                  />
+
+                  <SubMenu
+                    title="Task as Recorder"
+                    icon={<AccountTreeIcon />}
+                    style={{
+                      color: colors.grey[100],
+                    }}
+                  >
+                    <Item
+                      title="Process Application"
+                      to=""
+                      icon={<ReceiptLongIcon />}
+                      selected={selected}
+                      setSelected={setSelected}
+                      change={change}
+                      width={width}
+                    />
+                    <Item
+                      title="Application Status"
+                      to=""
+                      icon={<ReceiptLongIcon />}
+                      selected={selected}
+                      setSelected={setSelected}
+                      change={change}
+                      width={width}
+                    />
+                  </SubMenu>
+                  <SubMenu
+                    title="Task Approver"
+                    icon={<AccountTreeIcon />}
+                    style={{
+                      color: colors.grey[100],
+                    }}
+                  >
+                    <Item
+                      title="Pending for Approval"
+                      to=""
+                      icon={<ReceiptLongIcon />}
+                      selected={selected}
+                      setSelected={setSelected}
+                      change={change}
+                      width={width}
+                    />
+                    <Item
+                      title="Processed Application"
+                      to=""
+                      icon={<ReceiptLongIcon />}
+                      selected={selected}
+                      setSelected={setSelected}
+                      change={change}
+                      width={width}
+                    />
+                  </SubMenu>
+                
+                </SubMenu>
+
               {(roles == 1) &&
                 <Item
                 title="Activity"
@@ -1300,91 +1409,6 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                 width={width}
                 />
               }
-
-
-              {/* HS Codes */}
-              {/* <SubMenu
-                title="Manage HS Codes"
-                icon={<CodeIcon />}
-                style={{
-                  color: colors.grey[100],
-                }}
-                onOpenChange={() => {
-                  handleChange("hscodes");
-                }}
-                open={opened[9].isOpen}
-              >
-                <Item
-                  title="HS Code List"
-                  to="/hsCodes/hsCodeList"
-                  icon={<FormatListBulletedIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                  change={change}
-                  width={width}
-                />
-              </SubMenu> */}
-
-              {/* User */}
-              
-
-              {/* Categories */}
-              {/* <SubMenu
-                title="Manage Categories"
-                icon={<ReceiptIcon />}
-                style={{
-                  color: colors.grey[100],
-                }}
-                onOpenChange={() => {
-                  handleChange("categories");
-                }}
-                open={opened[17].isOpen}
-              >
-                <Item
-                  title="Create Category"
-                  to="/categories/createCategory"
-                  icon={<AddIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                  change={change}
-                  width={width}
-                />
-                <Item
-                  title="Category List"
-                  to="/categories/categoryList"
-                  icon={<InventoryIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                  change={change}
-                  width={width}
-                />
-              </SubMenu> */}
-
-              
-              
-
-              {/* Reports */}
-              {/* <SubMenu
-                title="Reports"
-                icon={<ReceiptIcon />}
-                style={{
-                  color: colors.grey[100],
-                }}
-                onOpenChange={() => {
-                  handleChange("report");
-                }}
-                open={opened[16].isOpen}
-              >
-                <Item
-                  title="Stock Report"
-                  to="/products/productStock"
-                  icon={<InventoryIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                  change={change}
-                  width={width}
-                />
-              </SubMenu> */}
             </Box>
           </Menu>
           <hr />
