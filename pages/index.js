@@ -40,8 +40,8 @@ import { BASE_URL } from "../base";
 import axios from "axios";
 
 export function Home({roles,token}) {
-  // console.log("rolesrrr");
-  // console.log(roles);
+  // console.log("roles");
+  // console.log(token);
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [details, setDetails] = useState([]);
@@ -418,6 +418,7 @@ const mapStateToProps = (state) => {
     roles: state.auth.roles,
     company: state.auth.company,
     isCollapsed: state.collapse.isCollapse,
+    
   };
 };
 

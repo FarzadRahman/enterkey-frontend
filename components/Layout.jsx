@@ -42,8 +42,9 @@ const Layout = ({ children, isLoggedIn, isCollapsed }) => {
         <link rel="icon" href="/logoicon.ico" />
         {/* <link rel="icon" href="/favicon.ico" /> */}
       </Head>
-      <ToastContainer />
-
+      {!(isLoggedIn == null) &&
+        <ToastContainer />
+      }
       <>
         {isPublicPath ? (
           <>

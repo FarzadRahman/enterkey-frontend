@@ -1,57 +1,55 @@
 import React, { useEffect, useState } from "react";
-import Link from "next/link";
 import { useRouter } from "next/router";
+// import Link from "next/link";
 
 // Redux
 import { connect } from "react-redux";
 
 // Themes
-import {
-  Typography,
-  useTheme,
-  Snackbar,
-  Alert,
-  AlertTitle,
-  IconButton,
-} from "@mui/material";
-import { tokens } from "./theme";
+// import {
+//   Typography,
+//   useTheme,
+//   Snackbar,
+//   Alert,
+//   AlertTitle,
+//   IconButton,
+// } from "@mui/material";
+// import { tokens } from "./theme";
 
 // Components
 import LoginForm from "../components/forms/LoginForm";
 
 // bg
-import bg from "../public/assets/images/vat3.png";
+// import bg from "../public/assets/images/vat3.png";
 
 // ICONS
-import CloseIcon from "@mui/icons-material/Close";
+// import CloseIcon from "@mui/icons-material/Close";
 
 const Login = ({ isLoggedIn, message }) => {
-  const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
   const router = useRouter();
+  
+  // const theme = useTheme();
+  // const colors = tokens(theme.palette.mode);
+  // const [formErrors, setFormErrors] = useState("");
+  // const [open, setOpen] = useState(false);
+  // const [loading, setLoading] = useState(false);
+  const [yes, setYes] = useState(true);
 
-  const [formErrors, setFormErrors] = useState("");
-  const [open, setOpen] = useState(false);
-  const [loading, setLoading] = useState(false);
+  // useEffect(() => {
+  //   setLoading(true);
+  //   setTimeout(() => {
+  //     setLoading(false);
+  //   }, 2000);
+  // }, []);
 
   useEffect(() => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 2000);
-  }, []);
-
-  useEffect(() => {
+    if (message = "Unauthorized") {
+      setYes(false);
+    }
     if (isLoggedIn) {
       router.push("/");
     }
   }, []);
-
-  // Setting Error
-  useEffect(() => {
-    setFormErrors(message);
-    if (formErrors && !open) handleClickEvent();
-  });
 
   // Toast error
   const handleToClose = (event, reason) => {
@@ -65,9 +63,6 @@ const Login = ({ isLoggedIn, message }) => {
 
   return (
     <>
-      {loading ? (
-        <div className="loader-container"></div>
-      ) : (
         <div
           style={{
             height: "100vh",
@@ -75,7 +70,7 @@ const Login = ({ isLoggedIn, message }) => {
             backgroundSize: "cover",
           }}
         >
-          <Snackbar
+          {/* <Snackbar
             anchorOrigin={{
               horizontal: "right",
               vertical: "bottom",
@@ -103,7 +98,7 @@ const Login = ({ isLoggedIn, message }) => {
             >
               <div className="text-center">{formErrors}</div>
             </Alert>
-          </Snackbar>
+          </Snackbar> */}
           <div className="container">
             <div className="row">
               <div className="col-md-4">
@@ -140,7 +135,6 @@ const Login = ({ isLoggedIn, message }) => {
             </div>
           </div>
         </div>
-      )}
     </>
   );
 };

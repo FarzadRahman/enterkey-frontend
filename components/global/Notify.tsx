@@ -52,7 +52,7 @@ export default function DescriptionAlerts() {
   };
 
   return (
-    <Box sx={{ margin: "8px" }}>
+    <Box  sx={{ margin: "8px" }}>
       <IconButton size="large" onClick={toggleNotificationCenter}>
         <Badge badgeContent={unreadCount} color="primary">
           <MailIcon color="action" />
