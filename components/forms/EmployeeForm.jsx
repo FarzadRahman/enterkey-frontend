@@ -574,7 +574,7 @@ const EmployeeForm = ({ token, id,roles }) => {
                             Cancel
                             </Button>
                             <Button onClick={confirmSubmit} variant="contained" color="primary">
-                                {id ?  <>Confirm</>:<>Update</>}
+                                {id ?  <>Update</>:<>Confirm</>}
                             </Button>
                         </Box>
                         </Box>

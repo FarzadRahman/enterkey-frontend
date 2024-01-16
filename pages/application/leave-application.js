@@ -568,6 +568,7 @@ const leaveApplication = ({ token, roles }) => {
         </Button>
       </div>
     </div>
+    
   </div>
       {/* Modal */}
      <CustomModal 

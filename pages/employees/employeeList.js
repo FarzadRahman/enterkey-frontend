@@ -8,6 +8,7 @@ import { connect } from "react-redux";
 import { tokens } from "../theme";
 import { greenAccent } from '@mui/material/colors';
 
+import { toast } from "react-toastify";
 import { Typography, useTheme } from "@mui/material";
 //axios
 import axios from "axios";
@@ -63,6 +64,7 @@ const employeeList = ({ token,roles}) => {
   };
   // DeleteHandle
   const handleDelete = (employeeId) => {
+    if (window.confirm("Are you sure you want to delete this employee?")){
     const apiUrl = BASE_URL + `employees/${employeeId}`;
     axios
     .post(apiUrl, {
@@ -70,12 +72,15 @@ const employeeList = ({ token,roles}) => {
     })
     .then((res) => {
     if (res.status === 200) {
+      console.log(res);
       setEmployees(employees.filter((employee) => employee.emp_id !== employeeId));
     }
     })
     .catch((error) => {
       console.log(error);
     });
+    }
+  
   };
 
   // Pagination
