@@ -1,110 +1,3 @@
-// import React, { Component,useState,useEffect } from 'react';
-// // import React, { useState, useEffect } from "react";
-// import 'datatables.net';
-// import $ from 'jquery';
-// import 'datatables.net-dt/css/jquery.dataTables.min.css';
-// import { BASE_URL } from "../../base";
-// //redux imports
-// import { connect } from "react-redux";
-
-
-// const ApproverTable = ({user})=> {
-
-
-// // var datatable;
-// const [Datatable, setDatatable] = useState();
-
-
-// let reloadTable=()=> {
-//   Datatable.ajax.reload();
-// }
-
-// useEffect(() => {
-
-//     //  Check if DataTable has already been initialized
-//      if (!$.fn.DataTable.isDataTable('#myTable')) {
-//       // Initialize DataTable with Bootstrap styling
-//     let  datatable= $('#myTable').DataTable({
-//         // DataTable options and configurations
-//         // For example:
-//         paging: true,
-//         searching: true,
-//         ordering: true,
-//         responsive: true,
-//         processing: true,
-//         serverSide: true,
-//         Filter: true,
-//         stateSave: true,
-//         type: "POST",
-//         "ajax": {
-//             "url": BASE_URL+'leave/application/for-approver',
-//             "type": "POST",
-//               data: function (d) {
-//                 d.token= user;
-            
-//             },
-//         },
-//         columns: [
-//           {data: 'full_name', name: 'full_name'},
-//           {data: 'recorder_name', name: 'recorder_name'},
-//           {data: 'start_date', name: 'start_date'},
-//           {data: 'end_date', name: 'end_date'},
-//           {data: 'reason', name: 'reason'},
-//           {data: 'applied_total_days', name: 'applied_total_days'},
-//           { "data": function(data){
-//             return ' <a href="/application/details/'+data.id+'">Show</a> ';
-//         },
-//         "orderable": false, "searchable":false, "name":"selected_rows" },
-//         ]
-//         // Add more options based on your requirements
-//       });
-//       setDatatable(datatable);
-//   }
-
- 
-// }, []);
-
-
-//     return (
-//       <div>
-//       {/* <button onClick={reloadTable}>reload table</button> */}
-     
-//         <table id="myTable"  className="display" >
-//         <thead>
-//               <tr>
-//                   <th>Sender Name</th>
-//                   <th>Recorder Name</th>
-//                   <th>Start Date</th>
-//                   <th>End Date</th>
-//                   <th>Reason</th>
-//                   <th>No of Days</th>
-//                   <th>Action</th>
-              
-                
-//               </tr>
-//           </thead>
-//           <tbody>
-          
-//           </tbody>
-      
-//         </table>
-//         </div>
-     
-//     );
-    
-  
-//   }
-
-
-// const mapStateToProps = (state) => {
-//   return {
-//     user: state.auth.token
-//   };
-// };
-
-
-// export default connect(mapStateToProps)(ApproverTable);
-
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { format } from 'date-fns';
@@ -131,8 +24,9 @@ import {
   Pagination,
   TextField,
 } from "@mui/material";
+import moment from 'moment';
 
-const ApproverTable = ({ token,leaveType,leaveStatus,selectedEmp,leaveStartDate,
+const MessageBoxTable = ({ token,leaveType,leaveStatus,selectedEmp,leaveStartDate,
     leaveEndDate }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -156,7 +50,7 @@ const ApproverTable = ({ token,leaveType,leaveStatus,selectedEmp,leaveStartDate,
   const getColorByStatus = (statusId) => {
     switch (statusId) {
       case 1:
-        return 'black';
+        return 'gray';
       case 2:
         return 'green';
       case 3:
@@ -171,8 +65,8 @@ const ApproverTable = ({ token,leaveType,leaveStatus,selectedEmp,leaveStartDate,
     
     
     const apiUsers =
-    BASE_URL + "leave/application-to-me?page=" +
-    // "leave/advance-report?page=" +
+    BASE_URL +
+    "leave/messages?page=" +
     page;
     const param={
       leaveType:leaveType,
@@ -183,15 +77,17 @@ const ApproverTable = ({ token,leaveType,leaveStatus,selectedEmp,leaveStartDate,
     };
     // axios.post(apiBranch, branch, config).then((response) 
     // console.log(param);
+    console.log("message");
     axios
-      .post(apiUsers, param,{
+      .get(apiUsers,{
         headers: { Authorization: "Bearer " + token },
       })
       .then((res) => {
-        // console.log("pending res");
-        // console.log(res);
-        if (res.status == 200) {
-          // console.log(res.data.data);
+        console.log("message");
+        console.log(res.data);
+        console.log(res?.data?.data);
+        if (res.status === 200) {
+        //   console.log(res.data.data);
           setUsers(res.data);
           setLastPage(res.data.last_page);
           setTotalData(res.data.total);
@@ -231,43 +127,44 @@ const ApproverTable = ({ token,leaveType,leaveStatus,selectedEmp,leaveStartDate,
               <th>Actions</th> */}
 
                 
-                  <th width="20%">Application ID</th>
+                  {/* <th width="20%">Application ID</th>
                   <th width="10%">Applied Date</th>
                   <th width="7%">Approver Name</th>
                   <th width="7%">Recorder Name</th>
                   <th width="15%">Applied Duration</th>
                   <th width="15%">Approved Duration</th>
                   <th width="10%">Status</th>
-                  <th width="15%">Action</th>
+                  <th width="15%">Action</th> */}
+
+                <th className="text-center" width="15%">Application ID</th>
+                <th className="text-center" width="40%">Message</th>
+                <th className="text-center" width="15%">View Message</th>
             </tr>
           </thead>
           <tbody>
-            {users.data?.map((user, index) => ( 
+            {users?.data?.map((user, index) => ( 
               <tr key={index}>
-                {/* <th scope="row">{index + 1}</th> */}
-                <td>
-                <img height={50} src={IMAGE_URL+user.sender.user.profile_picture}/>
-                <br></br>
-                Application ID : {user.id}
-                <br></br>
-                Leave Type : {user.leave_type.leave_type_name}
-                <br></br>
-                
-                Sender : <b>{user.sender.full_name}</b> <br></br>({user.sender.designation.desg_nm})
-                </td>
-                <td>{formatDate(user.created_at)}</td>
-                <td>{user.approver.full_name}</td>
-                <td>{user.reviewer.full_name}</td>
-                <td>{user.start_date} <br></br> {user.end_date} &nbsp; ({user.applied_total_days})</td>
-                <td>{user.approved_start_date} <br></br> {user.approved_end_date} &nbsp; ({user.approved_total_days})</td>                         
+                <th className="text-center" scope="row">{`${user?.application?.id}`}</th>
+                {(user?.application?.status == 1) &&
+                    <td className="text-center">{`An applicant has sent application for `}<span style={{ color: getColorByStatus(user?.application?.leave_status?.l_stat_id) }}>{user?.application?.leave_status?.leave_status_name.toUpperCase()}</span><p className="small text-end">({moment(user?.application?.updated_at).format('MMMM Do YYYY, h:mm:ss a')})</p></td>
+                }
+                {(user?.application?.status == 2) &&
+                    <td className="text-center">{`You have `}<span style={{ color: getColorByStatus(user?.application?.leave_status?.l_stat_id) }}>{user?.application?.leave_status?.leave_status_name.toUpperCase()}</span> an application<p className="small text-end">({moment(user?.application?.updated_at).format('MMMM Do YYYY, h:mm:ss a')})</p></td>
+                }
+                {(user?.application?.status == 3) &&
+                    <td className="text-center"><span style={{ color: getColorByStatus(user?.application?.leave_status?.l_stat_id) }}>{user?.application?.leave_status?.leave_status_name.toUpperCase()}</span> has applicant's application<p className="small text-end">({moment(user?.application?.updated_at).format('MMMM Do YYYY, h:mm:ss a')})</p></td>
+                }
+                {/* <td>{formatDate(user?.created_at)}</td> */}
+                {/* <td>{user.start_date} <br></br> {user.end_date} &nbsp; ({user.applied_total_days})</td>
+                <td>{user.approved_start_date} <br></br> {user.approved_end_date} &nbsp; ({user.approved_total_days})</td>                          */}
                
                 
-                <td style={{ color: getColorByStatus(user.leave_status.l_stat_id) }}>
-                    {user.leave_status.leave_status_name}
-                </td>
+                {/* <td style={{ color: getColorByStatus(user?.application?.leave_status?.l_stat_id) }}>
+                    {user?.application?.leave_status?.leave_status_name}
+                </td> */}
 
-                <td>
-                  <Link href={`/users/updateUser/${user.employee_id}`} className="anchor">
+                <td className="text-center">
+                  {/* <Link href={`/users/updateUser/${user.employee_id}`} className="anchor">
                     <button className="btn btn-light btn-sm me-1">
                       <EditIcon cursor="pointer" />
                     </button>
@@ -276,10 +173,10 @@ const ApproverTable = ({ token,leaveType,leaveStatus,selectedEmp,leaveStartDate,
                     <button className="btn btn-light btn-sm me-1">
                       <VisibilityIcon cursor="pointer" />
                     </button>
-                  </Link>
-                  <Link href={`/application/details/${user.id}`} className="anchor">
+                  </Link> */}
+                  <Link href={`/application/view/${user?.application_id}`} className="anchor">
                     <button className="btn btn-light btn-sm me-1">
-                      <InfoIcon cursor="pointer" />
+                      <VisibilityIcon cursor="pointer" />
                     </button>
                   </Link>
                 </td>
@@ -333,4 +230,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(ApproverTable);
+export default connect(mapStateToProps)(MessageBoxTable);
