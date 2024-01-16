@@ -220,7 +220,7 @@ const leavePendingApprover = ({ token }) => {
   return (
     <>
       <Typography variant="h2" className="mb-4" color={colors.greenAccent[300]}>
-        All Leave List
+        All Pending Approver Leave List
       </Typography>
       <div className="row">
        

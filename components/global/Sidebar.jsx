@@ -1315,7 +1315,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                 >
                   <Item
                     title="Message Box"
-                    to="/application/applied-list"
+                    to="/application/messageBox"
                     icon={<ReceiptLongIcon />}
                     selected={selected}
                     setSelected={setSelected}

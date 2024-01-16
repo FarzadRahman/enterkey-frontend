@@ -1,132 +1,3 @@
-// import React, { useState, useEffect } from "react";
-// import Router from "next/router";
-// import Link from "next/link";
-// //redux imports
-// import { connect } from "react-redux";
-
-// //theme
-// import { tokens } from "../theme";
-// import { TextField, Button, Typography, useTheme, MenuItem } from "@mui/material";
-
-// // Datatable
-
-
-
- 
-// //axios
-// import axios from "axios";
-// import { BASE_URL } from "../../base";
-// import MyDataTable from "../../components/data-table/MyDataTable";
-// import RecorderTable from "../../components/data-table/RecorderTable";
-
-// const createBranch = ({ token, roles }) => {
-//   const theme = useTheme();
-//   const colors = tokens(theme.palette.mode);
-
-
-
-
-
-
-
-//   // RETURN TO LIST
-//   const goBack = () => {
-//     Router.push({
-//       pathname: "/branch/branchList",
-//     });
-//   };
-
-//   return (
-//     // (roles != 1) &&
-//     <>
-//       <div className="mt-2">
-//         <div className="row">
-//           <div className="col-10">
-//             <Typography
-//               variant="h2"
-//               className="mb-4"
-//               color={colors.greenAccent[300]}
-//             >
-//               Pending List For Recorder
-//             </Typography>
-//           </div>
-//         </div>
-//         <RecorderTable></RecorderTable>
-//       </div>
-//     </>
-//   );
-// };
-
-// const mapStateToProps = (state) => {
-//   return {
-//     token: state.auth.token,
-//     roles: state.auth.roles,
-//   };
-// };
-
-// export default connect(mapStateToProps)(createBranch);
-
-
-// import React, { useState, useEffect } from "react";
-// import Router from "next/router";
-// import Link from "next/link";
-// //redux imports
-// import { connect } from "react-redux";
-
-// //theme
-// import { tokens } from "../theme";
-// import { TextField, Button, Typography, useTheme, MenuItem } from "@mui/material";
-
-// // Datatable
-
-
-
- 
-// //axios
-// import axios from "axios";
-// import { BASE_URL } from "../../base";
-// import ApproverTable from "../../components/data-table/ApproverTable";
-
-// const createBranch = ({ token, roles }) => {
-//   const theme = useTheme();
-//   const colors = tokens(theme.palette.mode);
-//   // RETURN TO LIST
-//   const goBack = () => {
-//     Router.push({
-//       pathname: "/branch/branchList",
-//     });
-//   };
-
-//   return (
-//     (roles != 1) &&
-//     <>
-//       <div className="mt-2">
-//         <div className="row">
-//           <div className="col-10">
-//             <Typography
-//               variant="h2"
-//               className="mb-4"
-//               color={colors.greenAccent[300]}
-//             >
-//             Pending List For Approver
-//             </Typography>
-//           </div>
-//         </div>
-//         <ApproverTable></ApproverTable>
-//       </div>
-//     </>
-//   );
-// };
-
-// const mapStateToProps = (state) => {
-//   return {
-//     token: state.auth.token,
-//     roles: state.auth.roles,
-//   };
-// };
-
-// export default connect(mapStateToProps)(createBranch);
-
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { format } from 'date-fns';
@@ -152,9 +23,10 @@ import {
   Pagination,
   TextField,
 } from "@mui/material";
-import RecorderTable from "../../components/data-table/RecorderTable";
+import MessageBoxTable from "../../components/data-table/MessageBoxTable";
+import moment from 'moment';
 
-const leavePendingRecorder = ({ token }) => {
+const messageBox = ({ token }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   // const [users, setUsers] = useState([]);
@@ -172,6 +44,7 @@ const leavePendingRecorder = ({ token }) => {
   const [leaveStartDate, setLeaveStartDate] = useState("");
   const [leaveEndDate, setLeaveEndDate] = useState("");
   const [dateRange,setDateRange] = useState([]);
+  const [empId, setEmpId] = useState("");
 
   function formatDate(dateString){
     const options = { year: "numeric", month: "long", day: "numeric"};
@@ -289,11 +162,23 @@ const leavePendingRecorder = ({ token }) => {
   return (
     <>
       <Typography variant="h2" className="mb-4" color={colors.greenAccent[300]}>
-        All Pending Recorder Leave List
+        All Message List
       </Typography>
       <div className="row">
+
+      <div className="col-md-3 mt-4">
+        <TextField
+            label="Search Application ID"
+            variant="outlined"
+            size="small"
+            type="text"
+            fullWidth
+            onChange={(e) => setEmpId(e.target.value)}
+            className="shadow-input"
+        />
+       </div>
        
-       <div className="col-md-3 mt-4">
+       {/* <div className="col-md-3 mt-4">
          <TextField
            onChange={(e) => {
              changeLeaveType(+e.target.value);
@@ -365,7 +250,7 @@ const leavePendingRecorder = ({ token }) => {
            className="shadow-input"
            // disabledDate={disabledDate}
          />
-         </div>
+         </div> */}
 
        <div className="col-md-2 mt-4">
          <button className="btn btn-info"  onClick={resetFilter}>reset</button>
@@ -373,8 +258,8 @@ const leavePendingRecorder = ({ token }) => {
 
    </div>
    <br></br>
-      <RecorderTable leaveType={leaveType} leaveStatus={leaveStatus} selectedEmp={selectedEmp} leaveStartDate={leaveStartDate}
-      leaveEndDate={leaveEndDate}></RecorderTable>
+      <MessageBoxTable leaveType={leaveType} leaveStatus={leaveStatus} selectedEmp={selectedEmp} leaveStartDate={leaveStartDate}
+      leaveEndDate={leaveEndDate}></MessageBoxTable>
    
      
     </>
@@ -387,4 +272,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(leavePendingRecorder);
+export default connect(mapStateToProps)(messageBox);
