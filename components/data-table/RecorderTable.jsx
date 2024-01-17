@@ -358,39 +358,39 @@ const RecorderTable = ({ token,leaveType,leaveStatus,selectedEmp,leaveStartDate,
               <tr key={index}>
                 {/* <th scope="row">{index + 1}</th> */}
                 <td>
-                <img height={50} src={IMAGE_URL+user.sender.user.profile_picture}/>
+                <img height={50} src={IMAGE_URL+user?.sender?.user?.profile_picture}/>
                 <br></br>
                 Application ID : {user.id}
                 <br></br>
-                Leave Type : {user.leave_type.leave_type_name}
+                Leave Type : {user?.leave_type?.leave_type_name}
                 <br></br>
                 
-                Sender : <b>{user.sender.full_name}</b> <br></br>({user.sender.designation.desg_nm})
+                Sender : <b>{user?.sender?.full_name}</b> <br></br>({user?.sender?.designation?.desg_nm})
                 </td>
-                <td>{formatDate(user.created_at)}</td>
-                <td>{user.approver.full_name}</td>
-                <td>{user.reviewer.full_name}</td>
-                <td>{user.start_date} <br></br> {user.end_date} &nbsp; ({user.applied_total_days})</td>
-                <td>{user.approved_start_date} <br></br> {user.approved_end_date} &nbsp; ({user.approved_total_days})</td>                         
+                <td>{formatDate(user?.created_at)}</td>
+                <td>{user?.approver?.full_name}</td>
+                <td>{user?.reviewer?.full_name}</td>
+                <td>{user?.start_date} <br></br> {user?.end_date} &nbsp; ({user?.applied_total_days})</td>
+                <td>{user?.approved_start_date} <br></br> {user?.approved_end_date} &nbsp; ({user?.approved_total_days})</td>                         
                
                 
-                <td style={{ color: getColorByStatus(user.leave_status.l_stat_id) }}>
-                    {user.leave_status.leave_status_name}
+                <td style={{ color: getColorByStatus(user?.leave_status?.l_stat_id) }}>
+                    {user?.leave_status?.leave_status_name}
                 </td>
 
                 <td>
                   {/* <Link href={`/users/updateUser/${user.employee_id}`} className="anchor"> */}
-                  <Link href={`/application/edit/${user.id}`} className="anchor">
+                  <Link href={`/application/edit/${user?.id}`} className="anchor">
                     <button className="btn btn-light btn-sm me-1">
                       <EditIcon cursor="pointer" />
                     </button>
                   </Link>
-                  <Link href={`/application/${user.id}`} className="anchor">
+                  <Link href={`/application/${user?.id}`} className="anchor">
                     <button className="btn btn-light btn-sm me-1">
                       <VisibilityIcon cursor="pointer" />
                     </button>
                   </Link>
-                  <Link href={`/application/details/${user.id}`} className="anchor">
+                  <Link href={`/application/details/${user?.id}`} className="anchor">
                     <button className="btn btn-light btn-sm me-1">
                       <InfoIcon cursor="pointer" />
                     </button>

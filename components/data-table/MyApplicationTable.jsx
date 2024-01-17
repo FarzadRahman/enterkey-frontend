@@ -192,28 +192,28 @@ const MyApplicationTable = ({ token,leaveType,leaveStatus,selectedEmp,leaveStart
               <tr key={index}>
                 {/* <th scope="row">{index + 1}</th> */}
                 <td>
-                <img height={50} src={IMAGE_URL+user.sender.user.profile_picture}/>
+                <img height={50} src={IMAGE_URL+user?.sender?.user?.profile_picture}/>
                 <br></br>
-                Application ID : {user.id}
+                Application ID : {user?.id}
                 <br></br>
-                Leave Type : {user.leave_type.leave_type_name}
+                Leave Type : {user?.leave_type?.leave_type_name}
                 <br></br>
                 
-                Sender : <b>{user.sender.full_name}</b> <br></br>({user.sender.designation.desg_nm})
+                Sender : <b>{user?.sender?.full_name}</b> <br></br>({user?.sender?.designation?.desg_nm})
                 </td>
-                <td>{formatDate(user.created_at)}</td>
-                <td>{user.approver.full_name}</td>
-                <td>{user.reviewer.full_name}</td>
-                <td>{user.start_date} <br></br> {user.end_date} &nbsp; ({user.applied_total_days})</td>
-                <td>{user.approved_start_date} <br></br> {user.approved_end_date} &nbsp; ({user.approved_total_days})</td>                         
+                <td>{formatDate(user?.created_at)}</td>
+                <td>{user?.approver?.full_name}</td>
+                <td>{user?.reviewer?.full_name}</td>
+                <td>{user?.start_date} <br></br> {user?.end_date} &nbsp; ({user?.applied_total_days})</td>
+                <td>{user?.approved_start_date} <br></br> {user?.approved_end_date} &nbsp; ({user?.approved_total_days})</td>                         
                
                 
-                <td style={{ color: getColorByStatus(user.leave_status.l_stat_id) }}>
-                    {user.leave_status.leave_status_name}
+                <td style={{ color: getColorByStatus(user?.leave_status?.l_stat_id) }}>
+                    {user?.leave_status?.leave_status_name}
                 </td>
 
                 <td>
-                {getButtonsByStatus(user.leave_status.l_stat_id,user.id)}
+                {getButtonsByStatus(user?.leave_status?.l_stat_id,user?.id)}
                 
                 </td>
 
@@ -262,7 +262,7 @@ const MyApplicationTable = ({ token,leaveType,leaveStatus,selectedEmp,leaveStart
 
 const mapStateToProps = (state) => {
   return {
-    token: state.auth.token,
+    token: state?.auth?.token,
   };
 };
 
