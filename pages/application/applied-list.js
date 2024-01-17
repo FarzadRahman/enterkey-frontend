@@ -218,7 +218,7 @@ const createBranch = ({ token, roles }) => {
        ))}
      </TextField>
    </div>
-    <div className="col-md-3 mt-4">
+    <div className="col-md-6 mt-4">
       <RangePicker
         label="Date"
         variant="outlined"
