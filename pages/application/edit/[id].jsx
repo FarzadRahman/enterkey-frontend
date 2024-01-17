@@ -122,11 +122,13 @@ const editLeaveApplication = ({ token, query, roles }) => {
     })
     .then((res) => {
       if (res?.status === 200) {
+        console.log("res?.data");
         console.log(res?.data);
-        setApproval_id(res?.data?.application?.approver?.emp_id);
+        console.log(res?.data?.application?.reviewer?.emp_id);
+        setApproval_id(res?.data?.application?.approval_id);
         setRecorder_id(res?.data?.application?.reviewer_id);
         setApplicationReason(res?.data?.application?.reason);
-        setLeaveType_id(res?.data?.application?.leave_type?.l_type_id)
+        setLeaveType_id(res?.data?.application?.status)
         setStayLocation(res?.data?.application?.stay_location);
         setLeaveStartDate(res?.data?.application?.start_date);
         setLeaveEndDate(res?.data?.application?.end_date);
@@ -229,8 +231,8 @@ const editLeaveApplication = ({ token, query, roles }) => {
         headers: { Authorization: "Bearer " + token },
       })
       .then((res) => {
-        // console.log('data');
-        // console.log(res);
+        console.log('data');
+        console.log(res);
         if (res.data) {
          // console.log(res.data.data);
           setRecorderName(res.data);
@@ -597,8 +599,8 @@ const editLeaveApplication = ({ token, query, roles }) => {
           stayLocation={stayLocation}
           numberOfDays={numberOfDays}
           handleSubmitConfirmation={handleSubmitConfirmation}
-       >
-       </CustomModal>
+          >
+          </CustomModal>
         </>
       )}
     </> 

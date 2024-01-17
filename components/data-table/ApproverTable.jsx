@@ -208,6 +208,101 @@ const ApproverTable = ({ token,leaveType,leaveStatus,selectedEmp,leaveStartDate,
     setPage(page);
   };
 
+  const getButtonsByStatus = (statusId,applicationId) => {
+    switch (statusId) {
+      case 1:
+        return (
+          <>
+            <Link href={`/application/details/${applicationId}`} className="anchor">
+              <button className="btn btn-light btn-sm me-1">
+                <InfoIcon cursor="pointer" />
+              </button>
+            </Link>
+            <Link href={`/application/${applicationId}`} className="anchor">
+              <button className="btn btn-light btn-sm me-1">
+                <VisibilityIcon cursor="pointer" />
+              </button>
+            </Link>
+            {/* <Link href={`/application/edit/${applicationId}`} className="anchor">
+              <button className="btn btn-light btn-sm me-1">
+                <EditIcon cursor="pointer" />
+              </button>
+            </Link> */}
+            {/* <Button variant="contained" color="primary">
+              View
+            </Button>
+            <Button variant="contained" color="secondary">
+              History
+            </Button> */}
+          </>
+        );
+      case 2:
+        return (
+          <>
+            <Link href={`/application/details/${applicationId}`} className="anchor">
+              <button className="btn btn-light btn-sm me-1">
+                <InfoIcon cursor="pointer" />
+              </button>
+            </Link>
+            <Link href={`/application/${applicationId}`} className="anchor">
+              <button className="btn btn-light btn-sm me-1">
+                <VisibilityIcon cursor="pointer" />
+              </button>
+            </Link>
+            {/* <Button variant="contained" color="primary">
+              View
+            </Button>
+            <Button variant="contained" color="secondary">
+              History
+            </Button> */}
+          </>
+        );
+      case 3:
+        return (
+          <>
+            <Link href={`/application/details/${applicationId}`} className="anchor">
+              <button className="btn btn-light btn-sm me-1">
+                <InfoIcon cursor="pointer" />
+              </button>
+            </Link>
+            <Link href={`/application/${applicationId}`} className="anchor">
+              <button className="btn btn-light btn-sm me-1">
+                <VisibilityIcon cursor="pointer" />
+              </button>
+            </Link>
+            {/* <Button variant="contained" color="primary">
+              View
+            </Button>
+            <Button variant="contained" color="secondary">
+              History
+            </Button> */}
+            {/* <Link href={`/application/edit/${applicationId}`}>
+              <Button variant="contained" color="warning">
+                Edit
+              </Button>
+            </Link> */}
+          </>
+        );
+      case 4:
+        return (
+          <>
+            <Link href={`/application/details/${applicationId}`} className="anchor">
+              <button className="btn btn-light btn-sm me-1">
+                <InfoIcon cursor="pointer" />
+              </button>
+            </Link>
+            <Link href={`/application/${applicationId}`} className="anchor">
+              <button className="btn btn-light btn-sm me-1">
+                <VisibilityIcon cursor="pointer" />
+              </button>
+            </Link>
+          </>
+        );
+      default:
+        return null; // No buttons if the status is not 1, 2, 3, or 4
+    }
+  };
+
 
   return (
     <>
@@ -267,12 +362,13 @@ const ApproverTable = ({ token,leaveType,leaveStatus,selectedEmp,leaveStartDate,
                 </td>
 
                 <td>
-                  <Link href={`/application/edit/${user.id}`} className="anchor">
+                  {getButtonsByStatus(user?.leave_status?.l_stat_id,user?.id)}
+                  {/* <Link href={`/application/edit/${user.id}`} className="anchor">
                     <button className="btn btn-light btn-sm me-1">
                       <EditIcon cursor="pointer" />
                     </button>
-                  </Link>
-                  <Link href={`/application/${user.id}`} className="anchor">
+                  </Link> */}
+                  {/* <Link href={`/application/${user.id}`} className="anchor">
                     <button className="btn btn-light btn-sm me-1">
                       <VisibilityIcon cursor="pointer" />
                     </button>
@@ -281,7 +377,7 @@ const ApproverTable = ({ token,leaveType,leaveStatus,selectedEmp,leaveStartDate,
                     <button className="btn btn-light btn-sm me-1">
                       <InfoIcon cursor="pointer" />
                     </button>
-                  </Link>
+                  </Link> */}
                 </td>
 
                 {/* <td>

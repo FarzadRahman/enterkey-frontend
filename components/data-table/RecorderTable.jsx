@@ -242,6 +242,10 @@ import {
   Pagination,
   TextField,
 } from "@mui/material";
+import Router from "next/router";
+
+//Alert
+import { toast } from "react-toastify";
 
 const RecorderTable = ({ token,leaveType,leaveStatus,selectedEmp,leaveStartDate,
     leaveEndDate }) => {
@@ -249,6 +253,9 @@ const RecorderTable = ({ token,leaveType,leaveStatus,selectedEmp,leaveStartDate,
   const colors = tokens(theme.palette.mode);
   const [users, setUsers] = useState([]);
   // console.log(selectedEmp);
+
+  const [approval_id,setApproval_id]=useState("");
+  const [approvalName,setApprovalName]=useState([]);
 
 
 
@@ -276,7 +283,28 @@ const RecorderTable = ({ token,leaveType,leaveStatus,selectedEmp,leaveStartDate,
         return 'red';
       default:
         return 'black'; // Default color if the status is not 1, 2, 3, or 4
-    }};
+  }};
+
+  useEffect(() => {
+    const apiGrade =
+      BASE_URL +
+      "leave/employee-list";
+
+    axios
+      .get(apiGrade, {
+        headers: { Authorization: "Bearer " + token },
+      })
+      .then((res) => {
+        if (res?.status === 200) {
+          console.log(res?.data);
+          setApprovalName(res?.data);
+        
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   useEffect(() => {
     
@@ -312,12 +340,125 @@ const RecorderTable = ({ token,leaveType,leaveStatus,selectedEmp,leaveStartDate,
       .catch((error) => {
         console.log(error);
       });
-  }, [page,leaveType,leaveStatus,selectedEmp,leaveStartDate,
-    leaveEndDate]);
+  }, [approval_id,page,leaveType,leaveStatus,selectedEmp,leaveStartDate,leaveEndDate]);
+
+  const setApproval = (approver_id, application_id) => {
+    setApproval_id(approver_id);
+    const application = {
+      approval_id: approver_id
+    };
+    const apiLeaveApplication = BASE_URL + "leave/select-approver/" + application_id;
+    const config = {
+      headers: { Authorization: `Bearer ${token}` },
+    };
+
+    axios.post(apiLeaveApplication, application, config).then((response) => {
+      if (response?.status == 200) {
+        toast(`${response?.data?.message}`, { hideProgressBar: true, autoClose: 2000, type: 'success' })
+      } else {
+        setFormErrors(Object.values(response.data.errors));
+      }
+    });
+  };
 
   // Pagination
   const handleChange = (e, page) => {
     setPage(page);
+  };
+
+  const getButtonsByStatus = (statusId,applicationId) => {
+    switch (statusId) {
+      case 1:
+        return (
+          <>
+            <Link href={`/application/details/${applicationId}`} className="anchor">
+              <button className="btn btn-light btn-sm me-1">
+                <InfoIcon cursor="pointer" />
+              </button>
+            </Link>
+            <Link href={`/application/${applicationId}`} className="anchor">
+              <button className="btn btn-light btn-sm me-1">
+                <VisibilityIcon cursor="pointer" />
+              </button>
+            </Link>
+            {/* <Link href={`/application/edit/${applicationId}`} className="anchor">
+              <button className="btn btn-light btn-sm me-1">
+                <EditIcon cursor="pointer" />
+              </button>
+            </Link> */}
+            {/* <Button variant="contained" color="primary">
+              View
+            </Button>
+            <Button variant="contained" color="secondary">
+              History
+            </Button> */}
+          </>
+        );
+      case 2:
+        return (
+          <>
+            <Link href={`/application/details/${applicationId}`} className="anchor">
+              <button className="btn btn-light btn-sm me-1">
+                <InfoIcon cursor="pointer" />
+              </button>
+            </Link>
+            <Link href={`/application/${applicationId}`} className="anchor">
+              <button className="btn btn-light btn-sm me-1">
+                <VisibilityIcon cursor="pointer" />
+              </button>
+            </Link>
+            {/* <Button variant="contained" color="primary">
+              View
+            </Button>
+            <Button variant="contained" color="secondary">
+              History
+            </Button> */}
+          </>
+        );
+      case 3:
+        return (
+          <>
+            <Link href={`/application/details/${applicationId}`} className="anchor">
+              <button className="btn btn-light btn-sm me-1">
+                <InfoIcon cursor="pointer" />
+              </button>
+            </Link>
+            <Link href={`/application/${applicationId}`} className="anchor">
+              <button className="btn btn-light btn-sm me-1">
+                <VisibilityIcon cursor="pointer" />
+              </button>
+            </Link>
+            {/* <Button variant="contained" color="primary">
+              View
+            </Button>
+            <Button variant="contained" color="secondary">
+              History
+            </Button> */}
+            {/* <Link href={`/application/edit/${applicationId}`}>
+              <Button variant="contained" color="warning">
+                Edit
+              </Button>
+            </Link> */}
+          </>
+        );
+      case 4:
+        return (
+          <>
+            <Link href={`/application/details/${applicationId}`} className="anchor">
+              <button className="btn btn-light btn-sm me-1">
+                <InfoIcon cursor="pointer" />
+              </button>
+            </Link>
+            <Link href={`/application/${applicationId}`} className="anchor">
+              <button className="btn btn-light btn-sm me-1">
+                <VisibilityIcon cursor="pointer" />
+              </button>
+            </Link>
+          </>
+        );
+      default:
+        return null; // No buttons if the status is not 1, 2, 3, or 4
+    }
   };
 
 
@@ -345,10 +486,10 @@ const RecorderTable = ({ token,leaveType,leaveStatus,selectedEmp,leaveStartDate,
                 
                   <th width="20%">Application ID</th>
                   <th width="10%">Applied Date</th>
-                  <th width="7%">Approver Name</th>
-                  <th width="7%">Recorder Name</th>
-                  <th width="15%">Applied Duration</th>
-                  <th width="15%">Approved Duration</th>
+                  <th width="15%">Approver Name</th>
+                  <th width="10%">Recorder Name</th>
+                  <th width="10%">Applied Duration</th>
+                  <th width="10%">Approved Duration</th>
                   <th width="10%">Status</th>
                   <th width="15%">Action</th>
             </tr>
@@ -368,7 +509,28 @@ const RecorderTable = ({ token,leaveType,leaveStatus,selectedEmp,leaveStartDate,
                 Sender : <b>{user?.sender?.full_name}</b> <br></br>({user?.sender?.designation?.desg_nm})
                 </td>
                 <td>{formatDate(user?.created_at)}</td>
-                <td>{user?.approver?.full_name}</td>
+                <td>
+                {user?.approver?.full_name == null ? 
+                  ( 
+                  <TextField
+                    onChange={(e) => setApproval(+e.target?.value, user?.id)}
+                    select
+                    label="Approver Name"
+                    size="small"
+                    fullWidth
+                    value={approval_id || ""}
+                    className="shadow-input"
+                  >
+                    {approvalName?.map((option, index) => (
+                      <MenuItem key={index} value={option?.emp_id}>
+                        {option?.full_name}-({option?.desg_nm})
+                      </MenuItem>
+                    ))}
+                  </TextField>
+                  )
+                : user?.approver?.full_name}
+                
+                </td>
                 <td>{user?.reviewer?.full_name}</td>
                 <td>{user?.start_date} <br></br> {user?.end_date} &nbsp; ({user?.applied_total_days})</td>
                 <td>{user?.approved_start_date} <br></br> {user?.approved_end_date} &nbsp; ({user?.approved_total_days})</td>                         
@@ -377,15 +539,17 @@ const RecorderTable = ({ token,leaveType,leaveStatus,selectedEmp,leaveStartDate,
                 <td style={{ color: getColorByStatus(user?.leave_status?.l_stat_id) }}>
                     {user?.leave_status?.leave_status_name}
                 </td>
+                
 
                 <td>
+                  {getButtonsByStatus(user?.leave_status?.l_stat_id,user?.id)}
                   {/* <Link href={`/users/updateUser/${user.employee_id}`} className="anchor"> */}
-                  <Link href={`/application/edit/${user?.id}`} className="anchor">
+                  {/* <Link href={`/application/edit/${user?.id}`} className="anchor">
                     <button className="btn btn-light btn-sm me-1">
                       <EditIcon cursor="pointer" />
                     </button>
-                  </Link>
-                  <Link href={`/application/${user?.id}`} className="anchor">
+                  </Link> */}
+                  {/* <Link href={`/application/${user?.id}`} className="anchor">
                     <button className="btn btn-light btn-sm me-1">
                       <VisibilityIcon cursor="pointer" />
                     </button>
@@ -394,7 +558,7 @@ const RecorderTable = ({ token,leaveType,leaveStatus,selectedEmp,leaveStartDate,
                     <button className="btn btn-light btn-sm me-1">
                       <InfoIcon cursor="pointer" />
                     </button>
-                  </Link>
+                  </Link> */}
                 </td>
 
                 {/* <td>

@@ -50,6 +50,7 @@ const leaveApplication = ({ token, roles }) => {
   const [recorder_id,setRecorder_id]=useState("");
 
   const [application_Reason, setApplicationReason] = useState("");
+  const [application_ReasonText, setApplicationReasonText] = useState("");
   const [leaveTypes, setLeaveType] = useState([]);
   const [leave_type_id, setLeaveType_id] = useState("");
   const [stayLocation, setStayLocation] = useState("");
@@ -211,8 +212,8 @@ const leaveApplication = ({ token, roles }) => {
       })
       .then((res) => {
         if (res?.status === 200) {
-          console.log(res.data);
-          setApprovalName(res.data);
+          console.log(res?.data);
+          setApprovalName(res?.data);
         
         }
       })
@@ -243,13 +244,13 @@ const leaveApplication = ({ token, roles }) => {
   }, []);
 
   const handleOpenModal = () => {
-    setSelectedApprovalName(approvalName.find((option) => option.emp_id === +approval_id)?.full_name || "");
-    setSelectedRecorderName(recorderName.find((option) => option.emp_id === +recorder_id)?.full_name || "");
+    setSelectedApprovalName(approvalName?.find((option) => option?.emp_id === +approval_id)?.full_name || "");
+    setSelectedRecorderName(recorderName?.find((option) => option?.emp_id === +recorder_id)?.full_name || "");
     
-    setSelectedApprovalDesignation(approvalName.find((option) => option.emp_id === +approval_id)?.desg_nm || "");
-    setSelectedRecorderDesignation(recorderName.find((option) => option.emp_id === +recorder_id)?.desg_nm || "");
+    setSelectedApprovalDesignation(approvalName?.find((option) => option?.emp_id === +approval_id)?.desg_nm || "");
+    setSelectedRecorderDesignation(recorderName?.find((option) => option?.emp_id === +recorder_id)?.desg_nm || "");
     
-    setSelectedLeaveType(leaveTypes.find((option) => option.l_type_id === +leave_type_id)?.leave_type_name || "");
+    setSelectedLeaveType(leaveTypes?.find((option) => option?.l_type_id === +leave_type_id)?.leave_type_name || "");
     setSelectedStartDate(leaveStartDate);
     setSelectedEndDate(leaveEndDate);
     setOpenModal(true);
@@ -260,13 +261,16 @@ const leaveApplication = ({ token, roles }) => {
   };
 
   const onSubmit = (e) => {
+    if (application_Reason == "Others") {
+      setApplicationReason(application_ReasonText);
+    }
     e.preventDefault();
     const validationErrors = [];
 
     // Check each required field and update validationErrors array
-    if (!approval_id) {
-      validationErrors.push("Please select an Approver Name");
-    }
+    // if (!approval_id) {
+    //   validationErrors.push("Please select an Approver Name");
+    // }
   
     if (!recorder_id) {
       validationErrors.push("Please select a Recorder Name");
@@ -304,7 +308,6 @@ const leaveApplication = ({ token, roles }) => {
   };
 
   const handleSubmitConfirmation = () => {
-    // Perform the actual submission logic here
     const application = {
       approval_id: approval_id,
       reason: application_Reason,
@@ -366,7 +369,7 @@ const leaveApplication = ({ token, roles }) => {
       <div className="col-md-6">
         {/* Leave Type Selection */}
         <TextField
-          onChange={(e) => setLeaveType_id(+e.target.value)}
+          onChange={(e) => setLeaveType_id(+e?.target?.value)}
           select
           label="Leave Type"
           size="small"
@@ -375,8 +378,8 @@ const leaveApplication = ({ token, roles }) => {
           className="shadow-input"
         >
           {leaveTypes?.map((option, index) => (
-            <MenuItem key={index} value={option.l_type_id}>
-              {option.leave_type_name}
+            <MenuItem key={index} value={option?.l_type_id}>
+              {option?.leave_type_name}
             </MenuItem>
           ))}
         </TextField>
@@ -387,7 +390,7 @@ const leaveApplication = ({ token, roles }) => {
       <div className="col-md-6">
         {/* Approver Name Selection */}
         <TextField
-          onChange={(e) => setApproval_id(+e.target.value)}
+          onChange={(e) => setApproval_id(+e.target?.value)}
           select
           label="Approver Name"
           size="small"
@@ -396,8 +399,8 @@ const leaveApplication = ({ token, roles }) => {
           className="shadow-input"
         >
           {approvalName?.map((option, index) => (
-            <MenuItem key={index} value={option.emp_id}>
-              {option.full_name}-({option.desg_nm})
+            <MenuItem key={index} value={option?.emp_id}>
+              {option?.full_name}-({option?.desg_nm})
             </MenuItem>
           ))}
         </TextField>
@@ -406,7 +409,7 @@ const leaveApplication = ({ token, roles }) => {
       <div className="col-md-6">
         {/* Recorder Name Selection */}
         <TextField
-          onChange={(e) => setRecorder_id(+e.target.value)}
+          onChange={(e) => setRecorder_id(+e?.target?.value)}
           select
           label="Select Recorder"
           size="small"
@@ -415,8 +418,8 @@ const leaveApplication = ({ token, roles }) => {
           className="shadow-input"
         >
           {recorderName?.map((option, index) => (
-            <MenuItem key={index} value={option.emp_id}>
-              {option.full_name}-({option.desg_nm})
+            <MenuItem key={index} value={option?.emp_id}>
+              {option?.full_name}-({option?.desg_nm})
             </MenuItem>
           ))}
         </TextField>
@@ -507,33 +510,35 @@ const leaveApplication = ({ token, roles }) => {
 
     <div className="row mt-4">
       <div className="col-md-12">
-        {/* Reason TextField */}
-         <TextField
-          label="Reason"
-          variant="outlined"
-          size="small"
-          type="text"
-          fullWidth
-          onChange={(e) => setApplicationReason(e.target.value)}
-          className="shadow-input"
-        /> 
-        {/*
+        
         <TextField
-          onChange={(e) => setReason_id(+e.target.value)}
+          onChange={(e) => setApplicationReason(e.target.value)}
           select
           label="Reason"
           size="small"
           fullWidth
-          value={reason_id || ""}
+          value={application_Reason || ""}
           className="shadow-input"
         >
           {reasons?.map((option, index) => (
-            <MenuItem key={index} value={option.id}>
-              {option.name}
+            <MenuItem key={index} value={option?.name}>
+              {option?.name}
             </MenuItem>
           ))}
         </TextField> 
-      */}
+
+        { (application_Reason == "Others") &&
+          <TextField
+            label="Reason"
+            variant="outlined"
+            size="small"
+            type="text"
+            fullWidth
+            onChange={(e) => setApplicationReasonText(e?.target?.value)}
+            className="shadow-input mt-3"
+          /> 
+        }
+     
       </div>
     </div>
   
@@ -546,7 +551,7 @@ const leaveApplication = ({ token, roles }) => {
           size="small"
           type="text"
           fullWidth
-          onChange={(e) => setStayLocation(e.target.value)}
+          onChange={(e) => setStayLocation(e?.target?.value)}
           className="shadow-input"
         />
       </div>

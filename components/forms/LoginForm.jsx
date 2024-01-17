@@ -107,7 +107,7 @@ const LoginForm = ({ token, message }) => {
       </Typography>
       <input
         type="email"
-        className="form-control mb-3 mt-2"
+        className="form-control mb-2 mt-2"
         id="email"
         // onChange={(e) => logInput(e.target.value)}
         onChange={(e) => setEmail(e.target.value)}
@@ -128,7 +128,7 @@ const LoginForm = ({ token, message }) => {
       >
         Password
       </Typography>
-      <div className="input-group mb-4 mt-2">
+      <div className="input-group mb-2 mt-2">
         <input
           type={passwordType}
           className="form-control"
@@ -154,15 +154,7 @@ const LoginForm = ({ token, message }) => {
           />
         </div> */}
       {/* <button onClick={login} className="btn btn-success mb-3"> */}
-      <Button
-        onClick={submitHandler}
-        variant="contained"
-        className="float-end"
-        style={{ backgroundColor: "#255288" }}
-      >
-        Login
-      </Button>
-      <Link href="/forgotPassword" className="anchor">
+      <Link href="/forgotPassword" className="anchor text-center">
         <MenuItem onClick={handleClose}>
           <ListItemIcon>
             <KeyIcon />
@@ -170,6 +162,14 @@ const LoginForm = ({ token, message }) => {
           Forgotten password?
         </MenuItem>
       </Link>
+      <Button
+        onClick={submitHandler}
+        variant="contained"
+        className="float-end mt-1"
+        style={{ backgroundColor: "#255288" }}
+      >
+        Login
+      </Button>
     </div>
   );
 };

@@ -1238,6 +1238,15 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                   }}
                   open={opened[10].isOpen}
                 >
+                  <Item
+                    title="Message Box"
+                    to="/application/messageBox"
+                    icon={<ReceiptLongIcon />}
+                    selected={selected}
+                    setSelected={setSelected}
+                    change={change}
+                    width={width}
+                  />
                 {(roles != 2) &&
                   <>
                   <Item
@@ -1400,7 +1409,6 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                       width={width}
                     />
                   </SubMenu>
-                
                 </SubMenu>
 
               {(roles == 1) &&

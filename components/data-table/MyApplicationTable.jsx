@@ -65,49 +65,118 @@ const MyApplicationTable = ({ token,leaveType,leaveStatus,selectedEmp,leaveStart
         case 1:
           return (
             <>
-              <Button variant="contained" color="primary">
+              {/* <Link href={`/application/details/${applicationId}`} className="anchor">
+                <button className="btn btn-light btn-sm me-1">
+                  <InfoIcon cursor="pointer" />
+                </button>
+              </Link> */}
+              {/* <Link href={`/application/edit/${applicationId}`} className="anchor">
+                <button className="btn btn-light btn-sm me-1">
+                  <EditIcon cursor="pointer" />
+                </button>
+              </Link> */}
+              <Link href={`/application/edit/${applicationId}`} className="anchor">
+                <button className="btn btn-light btn-sm me-1">
+                  <EditIcon cursor="pointer" />
+                </button>
+              </Link>
+              <Link href={`/application/${applicationId}`} className="anchor">
+                <button className="btn btn-light btn-sm me-1">
+                  <VisibilityIcon cursor="pointer" />
+                </button>
+              </Link>
+              {/* <Button variant="contained" color="primary">
                 View
               </Button>
               <Button variant="contained" color="secondary">
                 History
-              </Button>
+              </Button> */}
             </>
           );
         case 2:
           return (
             <>
-              <Button variant="contained" color="primary">
+              <Link href={`/application/${applicationId}`} className="anchor">
+                <button className="btn btn-light btn-sm me-1">
+                  <VisibilityIcon cursor="pointer" />
+                </button>
+              </Link>
+              {/* <Link href={`/application/details/${applicationId}`} className="anchor">
+                <button className="btn btn-light btn-sm me-1">
+                  <InfoIcon cursor="pointer" />
+                </button>
+              </Link> */}
+              {/* <Button variant="contained" color="primary">
                 View
               </Button>
               <Button variant="contained" color="secondary">
                 History
-              </Button>
+              </Button> */}
             </>
           );
         case 3:
           return (
             <>
-              <Button variant="contained" color="primary">
+              <Link href={`/application/edit/${applicationId}`} className="anchor">
+                <button className="btn btn-light btn-sm me-1">
+                  <EditIcon cursor="pointer" />
+                </button>
+              </Link>
+              <Link href={`/application/${applicationId}`} className="anchor">
+                <button className="btn btn-light btn-sm me-1">
+                  <VisibilityIcon cursor="pointer" />
+                </button>
+              </Link>
+              {/* <Link href={`/application/details/${applicationId}`} className="anchor">
+                <button className="btn btn-light btn-sm me-1">
+                  <InfoIcon cursor="pointer" />
+                </button>
+              </Link> */}
+              {/* <Button variant="contained" color="primary">
                 View
               </Button>
               <Button variant="contained" color="secondary">
                 History
-              </Button>
-              <Link href={`/application/edit/${applicationId}`}>
-              <Button variant="contained" color="warning">
-                Edit
-              </Button>
-            </Link>
+              </Button> */}
+              {/* <Link href={`/application/edit/${applicationId}`}>
+                <Button variant="contained" color="warning">
+                  Edit
+                </Button>
+              </Link> */}
             </>
           );
         case 4:
           return (
-            <Button variant="contained" color="secondary">
-              History
-            </Button>
+            <>
+              <Link href={`/application/edit/${applicationId}`} className="anchor">
+                <button className="btn btn-light btn-sm me-1">
+                  <EditIcon cursor="pointer" />
+                </button>
+              </Link>
+              <Link href={`/application/${applicationId}`} className="anchor">
+                <button className="btn btn-light btn-sm me-1">
+                  <VisibilityIcon cursor="pointer" />
+                </button>
+              </Link>
+            </>
+          );
+          case 5:
+          return (
+            <>
+              <Link href={`/application/edit/${applicationId}`} className="anchor">
+                <button className="btn btn-light btn-sm me-1">
+                  <EditIcon cursor="pointer" />
+                </button>
+              </Link>
+              <Link href={`/application/${applicationId}`} className="anchor">
+                <button className="btn btn-light btn-sm me-1">
+                  <VisibilityIcon cursor="pointer" />
+                </button>
+              </Link>
+            </>
           );
         default:
-          return null; // No buttons if the status is not 1, 2, 3, or 4
+          return null;
       }
     };
     

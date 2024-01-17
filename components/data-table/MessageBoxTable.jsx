@@ -57,6 +57,8 @@ const MessageBoxTable = ({ token,leaveType,leaveStatus,selectedEmp,leaveStartDat
         return 'orange';
       case 4:
         return 'red';
+      case 5:
+        return 'blue';
       default:
         return 'black'; // Default color if the status is not 1, 2, 3, or 4
     }};
@@ -152,11 +154,17 @@ const MessageBoxTable = ({ token,leaveType,leaveStatus,selectedEmp,leaveStartDat
                     <td className="text-center">{`You have `}<span style={{ color: getColorByStatus(user?.application?.leave_status?.l_stat_id) }}>{user?.application?.leave_status?.leave_status_name.toUpperCase()}</span> an application<p className="small text-end">({moment(user?.application?.updated_at).format('MMMM Do YYYY, h:mm:ss a')})</p></td>
                 }
                 {(user?.application?.status == 3) &&
-                    <td className="text-center"><span style={{ color: getColorByStatus(user?.application?.leave_status?.l_stat_id) }}>{user?.application?.leave_status?.leave_status_name.toUpperCase()}</span> has applicant's application<p className="small text-end">({moment(user?.application?.updated_at).format('MMMM Do YYYY, h:mm:ss a')})</p></td>
+                    <td className="text-center">{`Your application has been `}<span style={{ color: getColorByStatus(user?.application?.leave_status?.l_stat_id) }}>{user?.application?.leave_status?.leave_status_name.toUpperCase()}</span><p className="small text-end">({moment(user?.application?.updated_at).format('MMMM Do YYYY, h:mm:ss a')})</p></td>
+                }
+                {(user?.application?.status == 4) &&
+                    <td className="text-center">{`Your application has been `}<span style={{ color: getColorByStatus(user?.application?.leave_status?.l_stat_id) }}>{user?.application?.leave_status?.leave_status_name.toUpperCase()}</span> has applicant's application<p className="small text-end">({moment(user?.application?.updated_at).format('MMMM Do YYYY, h:mm:ss a')})</p></td>
+                }
+                {(user?.application?.status == 5) &&
+                    <td className="text-center">{`Your application has been `}<span style={{ color: getColorByStatus(user?.application?.leave_status?.l_stat_id) }}>{user?.application?.leave_status?.leave_status_name.toUpperCase()}</span><p className="small text-end">({moment(user?.application?.updated_at).format('MMMM Do YYYY, h:mm:ss a')})</p></td>
                 }
                 {/* <td>{formatDate(user?.created_at)}</td> */}
                 {/* <td>{user.start_date} <br></br> {user.end_date} &nbsp; ({user.applied_total_days})</td>
-                <td>{user.approved_start_date} <br></br> {user.approved_end_date} &nbsp; ({user.approved_total_days})</td>                          */}
+                <td>{user.approved_start_date} <br></br> {user.approved_end_date} &nbsp; ({user.approved_total_days})</td>*/}
                
                 
                 {/* <td style={{ color: getColorByStatus(user?.application?.leave_status?.l_stat_id) }}>
@@ -195,31 +203,31 @@ const MessageBoxTable = ({ token,leaveType,leaveStatus,selectedEmp,leaveStartDat
       </div>
       <div className="row justify-content-center">
             <div className="col-md-12 d-flex justify-content-center">
-              <Pagination
+                <Pagination
                 count={lastPage}
                 page={page}
                 color="secondary"
                 size="large"
                 onChange={handleChange}
-              />
-              {page === lastPage ? (
+                />
+                {page === lastPage ? (
                 <span className="ms-3 mt-2">
-                  Showing {1 + (page - 1) * 10} - {totalData} out of {totalData}
+                    Showing {1 + (page - 1) * 10} - {totalData} out of {totalData}
                 </span>
-              ) : (
+                ) : (
                 <>
-                  {totalData === 0 ? (
+                    {totalData === 0 ? (
                     <span className="ms-3 mt-2">Showing 0 out of 0</span>
-                  ) : (
+                    ) : (
                     <span className="ms-3 mt-2">
-                      Showing {1 + (page - 1) * 10} - {10 + (page - 1) * 10} out
-                      of {totalData}
+                        Showing {1 + (page - 1) * 10} - {10 + (page - 1) * 10} out
+                        of {totalData}
                     </span>
-                  )}
+                    )}
                 </>
-              )}
+                )}
             </div>
-          </div>
+        </div>
     </>
   );
 };
