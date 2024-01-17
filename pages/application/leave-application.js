@@ -510,6 +510,21 @@ const leaveApplication = ({ token, roles }) => {
 
     <div className="row mt-4">
       <div className="col-md-12">
+        {/* Stay Location TextField */}
+        <TextField
+          label="Stay Location"
+          variant="outlined"
+          size="small"
+          type="text"
+          fullWidth
+          onChange={(e) => setStayLocation(e?.target?.value)}
+          className="shadow-input"
+        />
+      </div>
+    </div>
+
+    <div className="row mt-4">
+      <div className="col-md-12">
         
         <TextField
           onChange={(e) => setApplicationReason(e.target.value)}
@@ -539,21 +554,6 @@ const leaveApplication = ({ token, roles }) => {
           /> 
         }
      
-      </div>
-    </div>
-  
-    <div className="row mt-4">
-      <div className="col-md-12">
-        {/* Stay Location TextField */}
-        <TextField
-          label="Stay Location"
-          variant="outlined"
-          size="small"
-          type="text"
-          fullWidth
-          onChange={(e) => setStayLocation(e?.target?.value)}
-          className="shadow-input"
-        />
       </div>
     </div>
   
