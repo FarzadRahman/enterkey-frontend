@@ -171,7 +171,7 @@ const ApproverTable = ({ token,leaveType,leaveStatus,selectedEmp,leaveStartDate,
     
     
     const apiUsers =
-    BASE_URL + "leave/application-to-me?page=" +
+    BASE_URL + "leave/application/for-approver?page=" +
     // "leave/advance-report?page=" +
     page;
     const param={
@@ -284,6 +284,21 @@ const ApproverTable = ({ token,leaveType,leaveStatus,selectedEmp,leaveStartDate,
           </>
         );
       case 4:
+        return (
+          <>
+            <Link href={`/application/details/${applicationId}`} className="anchor">
+              <button className="btn btn-light btn-sm me-1">
+                <InfoIcon cursor="pointer" />
+              </button>
+            </Link>
+            <Link href={`/application/${applicationId}`} className="anchor">
+              <button className="btn btn-light btn-sm me-1">
+                <VisibilityIcon cursor="pointer" />
+              </button>
+            </Link>
+          </>
+        );
+        case 5:
         return (
           <>
             <Link href={`/application/details/${applicationId}`} className="anchor">
