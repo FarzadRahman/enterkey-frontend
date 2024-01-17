@@ -267,7 +267,7 @@ const ApproverTable = ({ token,leaveType,leaveStatus,selectedEmp,leaveStartDate,
                 </td>
 
                 <td>
-                  <Link href={`/users/updateUser/${user.employee_id}`} className="anchor">
+                  <Link href={`/application/edit/${user.id}`} className="anchor">
                     <button className="btn btn-light btn-sm me-1">
                       <EditIcon cursor="pointer" />
                     </button>
