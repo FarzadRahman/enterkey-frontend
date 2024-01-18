@@ -79,7 +79,7 @@ const Item = ({ title, to, icon, selected, setSelected, change, width }) => {
   );
 };
 
-const Sidebar = ({ name, roles, company, isCollapsed }) => {
+const Sidebar = ({ name, roles, company, isCollapsed, isRecorder, isApprover, email }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   // const [isCollapsed, setIsCollapsed] = useState(false);
@@ -289,7 +289,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                   display="flex"
                   justifyContent="space-between"
                   alignItems="center"
-                  ml="15px"
+                  ml="55px"
                 >
                   <img
                     alt="profile-user"
@@ -320,12 +320,13 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                 </Box> */}
                 <Box textAlign="center">
                   <Typography
-                    variant="h3"
+                    variant="h5"
                     color={colors.grey[100]}
                     sx={{ m: "10px 0 0 0" }}
                   >
                     {name}
                   </Typography>
+                  <p>{email}</p>
                   {roles && (
                     <Typography variant="h5" color={colors.greenAccent[500]}>
                       <b>{roles[0]?.name}</b>
@@ -352,544 +353,6 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                 change={change}
                 width={width}
               />
-
-              {/* Purchases */}
-              {/* <SubMenu
-                title="Purchase"
-                icon={<ShoppingCartIcon />}
-                style={{
-                  color: colors.grey[100],
-                }}
-                onOpenChange={() => {
-                  handleChange("purchases");
-                }}
-                open={opened[7].isOpen}
-              >
-                <Item
-                  title="Local Purchase"
-                  to="/purchases/grn"
-                  icon={<ShoppingBasketIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                  change={change}
-                  width={width}
-                />
-                <Item
-                  title="Imported Purchase"
-                  to="/purchases/grnImported"
-                  icon={<ShoppingBasketIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                  change={change}
-                  width={width}
-                />
-                <Item
-                  title="Bulk Purchase"
-                  to="/purchases/bulkPurchase"
-                  icon={<ShoppingBasketIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                  change={change}
-                  width={width}
-                />
-                <Item
-                  title="Purchase List"
-                  to="/purchases/purchaseList"
-                  icon={<FormatListBulletedIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                  change={change}
-                  width={width}
-                />
-                <Item
-                  title="Purchase Return List"
-                  to="/purchases/returnList"
-                  icon={<FormatListBulletedIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                  change={change}
-                  width={width}
-                />
-              </SubMenu> */}
-
-              {/* Orders */}
-              {/* <SubMenu
-                title="Sale Order"
-                icon={<ShoppingBagIcon />}
-                style={{
-                  color: colors.grey[100],
-                }}
-                onOpenChange={() => {
-                  handleChange("orders");
-                }}
-                open={opened[5].isOpen}
-              >
-                <Item
-                  title="New Sale"
-                  to="/orders/createOrder"
-                  icon={<AddIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                  change={change}
-                  width={width}
-                />
-                <Item
-                  title="Bulk Sale"
-                  to="/orders/bulkOrder"
-                  icon={<AddIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                  change={change}
-                  width={width}
-                />
-                <Item
-                  title="Manual Sales Return"
-                  to="/orders/createReturn"
-                  icon={<AddIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                  change={change}
-                  width={width}
-                />
-                <Item
-                  title="Sales Order List"
-                  to="/orders/OrderList"
-                  icon={<FormatListBulletedIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                  change={change}
-                  width={width}
-                />
-                <Item
-                  title="Sales Return List"
-                  to="/orders/returnList"
-                  icon={<FormatListBulletedIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                  change={change}
-                  width={width}
-                />
-              </SubMenu> */}
-
-              {/* Vendors */}
-              {/* <SubMenu
-                title="Manage Vendors"
-                icon={<StoreIcon />}
-                style={{
-                  color: colors.grey[100],
-                }}
-                onOpenChange={() => {
-                  handleChange("vendors");
-                }}
-                open={opened[8].isOpen}
-              >
-                <Item
-                  title="Create New Vendor"
-                  to="/vendors/createVendor"
-                  icon={<AddIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                  change={change}
-                  width={width}
-                />
-                <Item
-                  title="Vendor List"
-                  to="/vendors/vendorList"
-                  icon={<FormatListBulletedIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                  change={change}
-                  width={width}
-                />
-              </SubMenu> */}
-
-              {/* Customers */}
-              {/* <SubMenu
-                title="Manage Customers"
-                icon={<FaceIcon />}
-                style={{
-                  color: colors.grey[100],
-                }}
-                onOpenChange={() => {
-                  handleChange("customers");
-                }}
-                open={opened[3].isOpen}
-              >
-                <Item
-                  title="Create New Customer"
-                  to="/customers/createCustomer"
-                  icon={<AddIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                  change={change}
-                  width={width}
-                />
-                <Item
-                  title="Bulk Create Customer"
-                  to="/customers/bulkCustomer"
-                  icon={<AddIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                  change={change}
-                  width={width}
-                />
-                <Item
-                  title="Customer List"
-                  to="/customers/customerList"
-                  icon={<ContactsIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                  change={change}
-                  width={width}
-                />
-              </SubMenu> */}
-
-              {/* MUSHAK */}
-              {/* <SubMenu
-                title="Mushak"
-                icon={<ReceiptIcon />}
-                style={{
-                  color: colors.grey[100],
-                }}
-                onOpenChange={() => {
-                  handleChange("mushak");
-                }}
-                open={opened[4].isOpen}
-              >
-                <Item
-                  title="Mushak 9.1"
-                  to="/mushak/mushak_91"
-                  icon={<AssignmentIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                  change={change}
-                  width={width}
-                />
-                <Item
-                  title="Mushak 6.1"
-                  to="/purchases/purchaseVat"
-                  icon={<AssignmentIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                  change={change}
-                  width={width}
-                />
-                <Item
-                  title="Mushak 6.2"
-                  to="/products/productVat"
-                  icon={<AssignmentIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                  change={change}
-                  width={width}
-                />
-                <Item
-                  title="Mushak 6.2.1"
-                  to="/purchases/purchaseVatGoods"
-                  icon={<AssignmentIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                  change={change}
-                  width={width}
-                />
-                <Item
-                  title="Mushak 6.2.1-Branch"
-                  to="/purchases/purchaseVatGoodsBranch"
-                  icon={<AssignmentIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                  change={change}
-                  width={width}
-                />
-                <Item
-                  title="Mushak 6.10"
-                  to="/mushak/mushak_610"
-                  icon={<AssignmentIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                  change={change}
-                  width={width}
-                />
-                <Item
-                  title="Report"
-                  to="/mushak/report"
-                  icon={<AssignmentIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                  change={change}
-                  width={width}
-                />
-                <SubMenu
-                  title="VAT Deposit"
-                  icon={<CreditScoreIcon />}
-                  style={{
-                    color: colors.grey[100],
-                  }}
-                >
-                  <Item
-                    title="New Deposit"
-                    to="/mushak/subForms/vatDeposit/createVatDeposit"
-                    icon={<AddIcon />}
-                    selected={selected}
-                    setSelected={setSelected}
-                    change={change}
-                    width={width}
-                  />
-                  <Item
-                    title="Deposit List"
-                    to="/mushak/subForms/vatDeposit/vatDepositList"
-                    icon={<CreditScoreIcon />}
-                    selected={selected}
-                    setSelected={setSelected}
-                    change={change}
-                    width={width}
-                  />
-                </SubMenu>
-                <SubMenu
-                  title="VAT Adjustment"
-                  icon={<CreditScoreIcon />}
-                  style={{
-                    color: colors.grey[100],
-                  }}
-                >
-                  <Item
-                    title="New Adjustment"
-                    to="/mushak/subForms/adjustments/createAdjustment"
-                    icon={<AddIcon />}
-                    selected={selected}
-                    setSelected={setSelected}
-                    change={change}
-                    width={width}
-                  />
-                  <Item
-                    title="Adjustment List"
-                    to="/mushak/subForms/adjustments/adjustmentList"
-                    icon={<CreditScoreIcon />}
-                    selected={selected}
-                    setSelected={setSelected}
-                    change={change}
-                    width={width}
-                  />
-                </SubMenu>
-              </SubMenu> */}
-
-              {/* Products */}
-              {/* <SubMenu
-                title="Manage Products"
-                icon={<CategoryIcon />}
-                style={{
-                  color: colors.grey[100],
-                }}
-                onOpenChange={() => {
-                  handleChange("products");
-                }}
-                open={opened[6].isOpen}
-              >
-                <Item
-                  title="Create New Product"
-                  to="/products/createProduct"
-                  icon={<AddIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                  change={change}
-                  width={width}
-                />
-                <Item
-                  title="Bulk Product Upload"
-                  to="/products/bulkProduct"
-                  icon={<AddIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                  change={change}
-                  width={width}
-                />
-                <Item
-                  title="Finished Goods"
-                  to="/products/finishedGoodList"
-                  icon={<ExtensionIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                  change={change}
-                  width={width}
-                />
-                <Item
-                  title="Raw Materials"
-                  to="/products/rawMaterialList"
-                  icon={<FormatPaintIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                  change={change}
-                  width={width}
-                />
-                <Item
-                  title="Services"
-                  to="/products/serviceList"
-                  icon={<DesignServicesIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                  change={change}
-                  width={width}
-                />
-                <Item
-                  title="Spare Parts"
-                  to="/products/accessoriesList"
-                  icon={<BeachAccessIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                  change={change}
-                  width={width}
-                />
-              </SubMenu> */}
-
-              {/* Stock */}
-              {/* <SubMenu
-                title="Manage Stock"
-                icon={<InventoryIcon />}
-                style={{
-                  color: colors.grey[100],
-                }}
-                onOpenChange={() => {
-                  handleChange("stock");
-                }}
-                open={opened[12].isOpen}
-              >
-                <Item
-                  title="Receive Finished Goods"
-                  to="/products/receiveGood"
-                  icon={<AddIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                  change={change}
-                  width={width}
-                />
-                <Item
-                  title="Received Goods List"
-                  to="/products/goodList"
-                  icon={<FormatListBulletedIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                  change={change}
-                  width={width}
-                />
-                <Item
-                  title="Product Stocks"
-                  to="/products/productStock"
-                  icon={<InventoryIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                  change={change}
-                  width={width}
-                />
-                <Item
-                  title="Create Stock"
-                  to="/products/createStock"
-                  icon={<InventoryIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                  change={change}
-                  width={width}
-                />
-                <Item
-                  title="Opening Stock List"
-                  to="/products/stockList"
-                  icon={<InventoryIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                  change={change}
-                  width={width}
-                />
-              </SubMenu> */}
-
-              {/* Stock Transfer */}
-              {/* <SubMenu
-                title="Transfer Stock"
-                icon={<MoveDownIcon />}
-                style={{
-                  color: colors.grey[100],
-                }}
-                onOpenChange={() => {
-                  handleChange("transfer");
-                }}
-                open={opened[15].isOpen}
-              >
-                <Item
-                  title="Transfer Product"
-                  to="/transfers/transferProduct"
-                  icon={<MoveDownIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                  change={change}
-                  width={width}
-                />
-                <Item
-                  title="Bulk Transfer"
-                  to="/transfers/bulkTransfer"
-                  icon={<MoveDownIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                  change={change}
-                  width={width}
-                />
-                <Item
-                  title="Transfer List"
-                  to="/transfers/transferList"
-                  icon={<FormatListBulletedIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                  change={change}
-                  width={width}
-                />
-              </SubMenu> */}
-
-              {/* BOM */}
-              {/* <SubMenu
-                title="Manage BOM"
-                icon={<ReceiptIcon />}
-                style={{
-                  color: colors.grey[100],
-                }}
-                onOpenChange={() => {
-                  handleChange("bom");
-                }}
-                open={opened[1].isOpen}
-              >
-                <Item
-                  title="Create New BOM"
-                  to="/bom/createBom"
-                  icon={<AddchartIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                  change={change}
-                  width={width}
-                />
-                <Item
-                  title="BOM List"
-                  to="/bom/bomList"
-                  icon={<ReceiptLongIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                  change={change}
-                  width={width}
-                />
-                <Item
-                  title="BOM Template"
-                  to="/bom/bomTemplate"
-                  icon={<ReceiptLongIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                  change={change}
-                  width={width}
-                />
-                <Item
-                  title="Value Addition Settings"
-                  to="/settings/vatSettings_4_3"
-                  icon={<SettingsApplicationsIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                  change={change}
-                  width={width}
-                />
-              </SubMenu> */}
                {roles == 1 && (
               <SubMenu
                 title="Manage User"
@@ -1226,7 +689,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
               
               {/* Leave */}
               {
-              // (roles != 1) &&
+              (roles != 1) &&
                 <SubMenu
                   title="Leave Application"
                   icon={<AccountTreeIcon />}
@@ -1247,8 +710,6 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                     change={change}
                     width={width}
                   />
-                {(roles != 2) &&
-                  <>
                   <Item
                     title="Create New Application"
                     to="/application/leave-application"
@@ -1267,16 +728,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                     change={change}
                     width={width}
                   />
-               {/*   <Item
-                    title="Leave Application Form"
-                    to="/application/leave-form"
-                    icon={<ReceiptLongIcon />}
-                    selected={selected}
-                    setSelected={setSelected}
-                    change={change}
-                    width={width}
-                  />
-              */}
+                  {(isRecorder == 1) &&
                   <Item
                     title="Pending Recorder"
                     to="/application/pending-recorder"
@@ -1286,8 +738,8 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                     change={change}
                     width={width}
                   />
-
-                  
+                  }
+                  {(isApprover == 1) &&
                   <Item
                     title="Pending Approver"
                     to="/application/pending-approver"
@@ -1297,12 +749,9 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                     change={change}
                     width={width}
                   />
-                  </>
-                }
-                  
+                  }
                 {
-                  // (roles !=3) && 
-                  
+                  (roles !=3) && 
                   <Item
                     title="Advance Report"
                     to="/application/advance-report"
@@ -1316,7 +765,8 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                 </SubMenu>
               }
 
-              <SubMenu
+              {(roles != 1) &&
+                <SubMenu
                   title={`Application for ${name}`}
                   icon={<AccountTreeIcon />}
                   style={{
@@ -1327,6 +777,18 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                   }}
                   open={opened[11].isOpen}
                 >
+                  {
+                    (roles !=3) && 
+                    <Item
+                      title="Advance Report"
+                      to="/application/advance-report"
+                      icon={<ReceiptLongIcon />}
+                      selected={selected}
+                      setSelected={setSelected}
+                      change={change}
+                      width={width}
+                    />
+                  }
                   <Item
                     title="Message Box"
                     to="/application/messageBox"
@@ -1356,60 +818,64 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                     change={change}
                     width={width}
                   />
-
-                  <SubMenu
-                    title="Task as Recorder"
-                    icon={<AccountTreeIcon />}
-                    style={{
-                      color: colors.grey[100],
-                    }}
-                  >
-                    <Item
-                      title="Process Application"
-                      to="/application/pending-recorder"
-                      icon={<ReceiptLongIcon />}
-                      selected={selected}
-                      setSelected={setSelected}
-                      change={change}
-                      width={width}
-                    />
-                    <Item
-                      title="Application Status"
-                      to="/application/advance-report"
-                      icon={<ReceiptLongIcon />}
-                      selected={selected}
-                      setSelected={setSelected}
-                      change={change}
-                      width={width}
-                    />
-                  </SubMenu>
-                  <SubMenu
-                    title="Task Approver"
-                    icon={<AccountTreeIcon />}
-                    style={{
-                      color: colors.grey[100],
-                    }}
-                  >
-                    <Item
-                      title="Pending for Approval"
-                      to="/application/pending-approver"
-                      icon={<ReceiptLongIcon />}
-                      selected={selected}
-                      setSelected={setSelected}
-                      change={change}
-                      width={width}
-                    />
-                    <Item
-                      title="Processed Application"
-                      to="/application/advance-report"
-                      icon={<ReceiptLongIcon />}
-                      selected={selected}
-                      setSelected={setSelected}
-                      change={change}
-                      width={width}
-                    />
-                  </SubMenu>
+                  {(isRecorder == 1) &&
+                    <SubMenu
+                      title="Task as Recorder"
+                      icon={<AccountTreeIcon />}
+                      style={{
+                        color: colors.grey[100],
+                      }}
+                    >
+                      <Item
+                        title="Process Application"
+                        to="/application/pending-recorder"
+                        icon={<ReceiptLongIcon />}
+                        selected={selected}
+                        setSelected={setSelected}
+                        change={change}
+                        width={width}
+                      />
+                      <Item
+                        title="Application Status"
+                        to="/application/advance-report"
+                        icon={<ReceiptLongIcon />}
+                        selected={selected}
+                        setSelected={setSelected}
+                        change={change}
+                        width={width}
+                      />
+                    </SubMenu>
+                  }
+                  {(isApprover == 1) &&
+                    <SubMenu
+                      title="Task Approver"
+                      icon={<AccountTreeIcon />}
+                      style={{
+                        color: colors.grey[100],
+                      }}
+                    >
+                      <Item
+                        title="Pending for Approval"
+                        to="/application/pending-approver"
+                        icon={<ReceiptLongIcon />}
+                        selected={selected}
+                        setSelected={setSelected}
+                        change={change}
+                        width={width}
+                      />
+                      <Item
+                        title="Processed Application"
+                        to="/application/advance-report"
+                        icon={<ReceiptLongIcon />}
+                        selected={selected}
+                        setSelected={setSelected}
+                        change={change}
+                        width={width}
+                      />
+                    </SubMenu>
+                  }
                 </SubMenu>
+              }
 
               {(roles == 1) &&
                 <Item
@@ -1432,12 +898,16 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
 };
 
 const mapStateToProps = (state) => {
- 
+ console.log("side state");
+ console.log(state);
   return {
-    name: state.auth.name,
-    roles: state.auth.roles,
-    company: state.auth.company,
-    isCollapsed: state.collapse.isCollapse,
+    name: state?.auth?.name,
+    email: state?.auth?.email,
+    roles: state?.auth?.roles,
+    company: state?.auth?.company,
+    isApprover: state?.auth?.isApprover,
+    isRecorder: state?.auth?.isRecorder,
+    isCollapsed: state?.collapse?.isCollapse,
   };
 };
 

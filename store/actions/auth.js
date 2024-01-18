@@ -94,7 +94,7 @@ export const auth = (email, password) => {
             authSuccess(
               response?.data?.access_token,
               response?.data?.user?.id,
-              response?.data?.user?.name,
+              response?.data?.employee?.full_name,
               response?.data?.user?.email,
               response?.data?.user?.phone,
               response?.data?.user?.role_id,

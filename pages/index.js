@@ -78,7 +78,7 @@ export function Home({roles,token}) {
   return (
     <>
       <Typography variant="h2" color={colors.greenAccent[300]}>
-        Welcome to NTRCA Leave Management System
+        Welcome to NTRCA Leave Management System
       </Typography>
 
       
@@ -412,7 +412,7 @@ export function Home({roles,token}) {
 }
 
 const mapStateToProps = (state) => {
-  console.log("state");
+  console.log("index state");
   console.log(state);
   return {
     name: state.auth.name,
