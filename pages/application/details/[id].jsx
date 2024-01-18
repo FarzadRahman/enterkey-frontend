@@ -281,169 +281,96 @@ const ApplicationDetails = ({ query, token }) => {
         switch (statusId) {
           case 1:
             return (
-              <>
-                <div className="text-center">
-                    <button
-                        className="btn btn-danger btn-sm mt-1 p-1"
-                        onClick={() => handleForward(applicationId)}
-                    >
-                        <ArrowForwardIcon cursor="pointer" />
-                    </button>
-                    <button
-                        className="btn btn-danger btn-sm ms-1 mt-1 p-1"
-                        onClick={() => handleBackword(applicationId)}
-                    >
-                        <ArrowBackIcon cursor="pointer" />
-                    </button>
-                    <button
-                        className="btn btn-danger btn-sm ms-1 mt-1 p-1"
-                        onClick={() => handleApproved(applicationId)}
-                    >
-                        <DoneIcon cursor="pointer" />
-                    </button>
-                    {/* <Link href={`/application/edit/${id}`} className="anchor">
-                        <button className="btn btn-danger btn-sm ms-1 mt-1 p-1">
-                            <EditIcon cursor="pointer" />
+                <>
+                    <div className="text-center">
+                        <button
+                            className="btn btn-danger btn-sm mt-1 p-1"
+                            onClick={() => handleForward(applicationId)}
+                        >
+                            <ArrowForwardIcon cursor="pointer" />
                         </button>
-                    </Link> */}
-                    <button
-                        className="btn btn-danger btn-sm ms-1 mt-1 p-1"
-                        onClick={() => handleDelete(applicationId)}
-                    >
-                        <DeleteIcon cursor="pointer" />
-                    </button>
-                </div>
-                {/* <Link href={`/application/details/${applicationId}`} className="anchor">
-                  <button className="btn btn-light btn-sm me-1">
-                    <InfoIcon cursor="pointer" />
-                  </button>
-                </Link>
-                <Link href={`/application/${applicationId}`} className="anchor">
-                  <button className="btn btn-light btn-sm me-1">
-                    <VisibilityIcon cursor="pointer" />
-                  </button>
-                </Link> */}
-                {/* <Link href={`/application/edit/${applicationId}`} className="anchor">
-                  <button className="btn btn-light btn-sm me-1">
-                    <EditIcon cursor="pointer" />
-                  </button>
-                </Link> */}
-                {/* <Button variant="contained" color="primary">
-                  View
-                </Button>
-                <Button variant="contained" color="secondary">
-                  History
-                </Button> */}
-              </>
+                        <button
+                            className="btn btn-danger btn-sm ms-1 mt-1 p-1"
+                            onClick={() => handleBackword(applicationId)}
+                        >
+                            <ArrowBackIcon cursor="pointer" />
+                        </button>
+                        <button
+                            className="btn btn-danger btn-sm ms-1 mt-1 p-1"
+                            onClick={() => handleApproved(applicationId)}
+                        >
+                            <DoneIcon cursor="pointer" />
+                        </button>
+                        <button
+                            className="btn btn-danger btn-sm ms-1 mt-1 p-1"
+                            onClick={() => handleDelete(applicationId)}
+                        >
+                            <DeleteIcon cursor="pointer" />
+                        </button>
+                    </div>
+                </>
             );
           case 2:
             return (
-              <>
-                <div className="text-center">
-                    <button
-                        className="btn btn-danger btn-sm mt-1 p-1"
-                        onClick={() => handleForward(applicationId)}
-                    >
-                        <ArrowForwardIcon cursor="pointer" />
-                    </button>
-                    <button
-                        className="btn btn-danger btn-sm ms-1 mt-1 p-1"
-                        onClick={() => handleBackword(applicationId)}
-                    >
-                        <ArrowBackIcon cursor="pointer" />
-                    </button>
-                    <button
-                        className="btn btn-danger btn-sm ms-1 mt-1 p-1"
-                        onClick={() => handleApproved(applicationId)}
-                    >
-                        <DoneIcon cursor="pointer" />
-                    </button>
-                    {/* <Link href={`/application/edit/${id}`} className="anchor">
-                        <button className="btn btn-danger btn-sm ms-1 mt-1 p-1">
-                            <EditIcon cursor="pointer" />
+                <>
+                    <div className="text-center">
+                        <button
+                            className="btn btn-danger btn-sm mt-1 p-1"
+                            onClick={() => handleForward(applicationId)}
+                        >
+                            <ArrowForwardIcon cursor="pointer" />
                         </button>
-                    </Link> */}
-                    <button
-                        className="btn btn-danger btn-sm ms-1 mt-1 p-1"
-                        onClick={() => handleDelete(applicationId)}
-                    >
-                        <DeleteIcon cursor="pointer" />
-                    </button>
-                </div>
-                {/* <Link href={`/application/details/${applicationId}`} className="anchor">
-                  <button className="btn btn-light btn-sm me-1">
-                    <InfoIcon cursor="pointer" />
-                  </button>
-                </Link>
-                <Link href={`/application/${applicationId}`} className="anchor">
-                  <button className="btn btn-light btn-sm me-1">
-                    <VisibilityIcon cursor="pointer" />
-                  </button>
-                </Link> */}
-                {/* <Button variant="contained" color="primary">
-                  View
-                </Button>
-                <Button variant="contained" color="secondary">
-                  History
-                </Button> */}
-              </>
+                        <button
+                            className="btn btn-danger btn-sm ms-1 mt-1 p-1"
+                            onClick={() => handleBackword(applicationId)}
+                        >
+                            <ArrowBackIcon cursor="pointer" />
+                        </button>
+                        <button
+                            className="btn btn-danger btn-sm ms-1 mt-1 p-1"
+                            onClick={() => handleApproved(applicationId)}
+                        >
+                            <DoneIcon cursor="pointer" />
+                        </button>
+                        <button
+                            className="btn btn-danger btn-sm ms-1 mt-1 p-1"
+                            onClick={() => handleDelete(applicationId)}
+                        >
+                            <DeleteIcon cursor="pointer" />
+                        </button>
+                    </div>
+                </>
             );
           case 3:
             return (
-              <>
-                <div className="text-center">
-                    <button
-                        className="btn btn-danger btn-sm mt-1 p-1"
-                        onClick={() => handleForward(applicationId)}
-                    >
-                        <ArrowForwardIcon cursor="pointer" />
-                    </button>
-                    <button
-                        className="btn btn-danger btn-sm ms-1 mt-1 p-1"
-                        onClick={() => handleBackword(applicationId)}
-                    >
-                        <ArrowBackIcon cursor="pointer" />
-                    </button>
-                    <button
-                        className="btn btn-danger btn-sm ms-1 mt-1 p-1"
-                        onClick={() => handleApproved(applicationId)}
-                    >
-                        <DoneIcon cursor="pointer" />
-                    </button>
-                    {/* <Link href={`/application/edit/${id}`} className="anchor">
-                        <button className="btn btn-danger btn-sm ms-1 mt-1 p-1">
-                            <EditIcon cursor="pointer" />
+                <>
+                    <div className="text-center">
+                        <button
+                            className="btn btn-danger btn-sm mt-1 p-1"
+                            onClick={() => handleForward(applicationId)}
+                        >
+                            <ArrowForwardIcon cursor="pointer" />
                         </button>
-                    </Link> */}
-                    <button
-                        className="btn btn-danger btn-sm ms-1 mt-1 p-1"
-                        onClick={() => handleDelete(applicationId)}
-                    >
-                        <DeleteIcon cursor="pointer" />
-                    </button>
-                </div>
-                {/* <Link href={`/application/details/${applicationId}`} className="anchor">
-                  <button className="btn btn-light btn-sm me-1">
-                    <InfoIcon cursor="pointer" />
-                  </button>
-                </Link>
-                <Link href={`/application/${applicationId}`} className="anchor">
-                  <button className="btn btn-light btn-sm me-1">
-                    <VisibilityIcon cursor="pointer" />
-                  </button>
-                </Link> */}
-                {/* <Button variant="contained" color="primary">
-                  View
-                </Button>
-                <Button variant="contained" color="secondary">
-                  History
-                </Button> */}
-                {/* <Link href={`/application/edit/${applicationId}`}>
-                  <Button variant="contained" color="warning">
-                    Edit
-                  </Button>
-                </Link> */}
-              </>
+                        <button
+                            className="btn btn-danger btn-sm ms-1 mt-1 p-1"
+                            onClick={() => handleBackword(applicationId)}
+                        >
+                            <ArrowBackIcon cursor="pointer" />
+                        </button>
+                        <button
+                            className="btn btn-danger btn-sm ms-1 mt-1 p-1"
+                            onClick={() => handleApproved(applicationId)}
+                        >
+                            <DoneIcon cursor="pointer" />
+                        </button>
+                        <button
+                            className="btn btn-danger btn-sm ms-1 mt-1 p-1"
+                            onClick={() => handleDelete(applicationId)}
+                        >
+                            <DeleteIcon cursor="pointer" />
+                        </button>
+                    </div>
+                </>
             );
           case 4:
             return (
@@ -467,11 +394,6 @@ const ApplicationDetails = ({ query, token }) => {
                     >
                         <DoneIcon cursor="pointer" />
                     </button>
-                    {/* <Link href={`/application/edit/${id}`} className="anchor">
-                        <button className="btn btn-danger btn-sm ms-1 mt-1 p-1">
-                            <EditIcon cursor="pointer" />
-                        </button>
-                    </Link> */}
                     <button
                         className="btn btn-danger btn-sm ms-1 mt-1 p-1"
                         onClick={() => handleDelete(applicationId)}
@@ -479,20 +401,23 @@ const ApplicationDetails = ({ query, token }) => {
                         <DeleteIcon cursor="pointer" />
                     </button>
                 </div>
-                {/* <Link href={`/application/details/${applicationId}`} className="anchor">
-                  <button className="btn btn-light btn-sm me-1">
-                    <InfoIcon cursor="pointer" />
-                  </button>
-                </Link>
-                <Link href={`/application/${applicationId}`} className="anchor">
-                  <button className="btn btn-light btn-sm me-1">
-                    <VisibilityIcon cursor="pointer" />
-                  </button>
-                </Link> */}
               </>
             );
+            case 5:
+            return (
+                <>
+                    <div>Application is Forwarded</div>
+                    {/* <div className="text-center">
+                        <Link href={`/application/${applicationId}`} className="anchor">
+                            <button className="btn btn-light btn-sm me-1">
+                            <VisibilityIcon cursor="pointer" />
+                            </button>
+                        </Link>
+                    </div> */}
+                </>
+            );
           default:
-            return null; // No buttons if the status is not 1, 2, 3, or 4
+            return null; // No buttons if the status is not 1, 2, 3, 4, 5
         }
       };
 

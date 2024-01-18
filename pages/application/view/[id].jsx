@@ -273,6 +273,33 @@ const ViewMessage = ({ query, token }) => {
             });
     }, []);
 
+    const getButtonsByStatus = (statusId,applicationId) => {
+      switch (statusId) {
+        case 1:
+          return (
+            <div className="text-start">Application is Pending</div>
+          );
+        case 2:
+          return (
+            <div className="text-start">Application is Approved</div>
+          );
+        case 3:
+          return (
+            <div className="text-start">Application is Return</div>
+          );
+        case 4:
+          return (
+            <div className="text-start">Application is Rejected</div>
+          );
+        case 5:
+          return (
+            <div className="text-start">Application is Forwared</div>
+          );
+        default:
+          return null;
+      }
+    };
+
     return (
         <>
             {loader ? (
@@ -357,121 +384,46 @@ const ViewMessage = ({ query, token }) => {
                             <thead>
                               <tr className="table-success">
                                 <th colSpan={6}>
-                                  {details?.application?.status == 2 ? (
-                                      <div>Application is Approved</div>
+                                  {getButtonsByStatus(details?.application?.leave_status?.l_stat_id,details?.application?.id)}
+                                  {/* {details?.application?.status == 2 ? (
+                                    <div>Application is Approved</div>
                                   ) : (
-                                    <div className="row">
-                                      
-                                      {/* <div className="col-md-1"></div>
-                                      <div className="col-md-2">
-                                        <button
-                                          className="btn btn-danger btn-sm mt-1 p-1"
-                                          onClick={() => handleForward(details?.application?.id)}
-                                        >
-                                          <ArrowForwardIcon cursor="pointer" />
-                                        </button>
-                                      </div>
-                                      <div className="col-md-2">
-                                        <button
-                                          className="btn btn-danger btn-sm ms-1 mt-1 p-1"
-                                          onClick={() => handleBackword(details?.application?.id)}
-                                        >
-                                          <ArrowBackIcon cursor="pointer" />
-                                        </button>
-                                      </div>
-                                      <div className="col-md-2">
-                                        <button
-                                          className="btn btn-danger btn-sm ms-1 mt-1 p-1"
-                                          onClick={() => handleApproved(details?.application?.id)}
-                                        >
-                                          <DoneIcon cursor="pointer" />
-                                        </button>
-                                      </div>
-                                      <div className="col-md-2">
-                                        <Link href={`/application/edit/${id}`} className="anchor">
-                                          <button className="btn btn-danger btn-sm ms-1 mt-1 p-1">
-                                              <EditIcon cursor="pointer" />
-                                          </button>
-                                        </Link>
-                                      </div>
-                                      <div className="col-md-2">
-                                        <button
-                                          className="btn btn-danger btn-sm ms-1 mt-1 p-1"
-                                          onClick={() => handleDelete(details?.application?.id)}
-                                        >
-                                          <DeleteIcon cursor="pointer" />
-                                        </button>
-                                      </div>
-                                      <div className="col-md-1"></div> */}
-                                      <div className="responsive">
-                                        <button
-                                            className="btn btn-danger btn-sm mt-1 p-1 ms-2"
-                                            onClick={() => handleForward(details?.application?.id)}
-                                        >
-                                            <ArrowForwardIcon cursor="pointer" />
-                                        </button>
-                                        <button
-                                            className="btn btn-danger btn-sm ms-1 mt-1 p-1 ms-2"
-                                            onClick={() => handleBackword(details?.application?.id)}
-                                        >
-                                            <ArrowBackIcon cursor="pointer" />
-                                        </button>
-                                        <button
-                                            className="btn btn-danger btn-sm ms-1 mt-1 p-1 ms-2"
-                                            onClick={() => handleApproved(details?.application?.id)}
-                                        >
-                                            <DoneIcon cursor="pointer" />
-                                        </button>
-                                        {/* <Link><a className="custom-link" href="/application/edit/'+data.id+'" ><button className="btn btn-light btn-sm me-1">Edit</button></a></Link> */}
-                                        <Link href={`/application/edit/${id}`} className="anchor">
-                                            <button className="btn btn-danger btn-sm ms-1 mt-1 p-1 ms-2">
-                                                <EditIcon cursor="pointer" />
-                                            </button>
-                                        </Link>
-                                        <button
-                                            className="btn btn-danger btn-sm ms-1 mt-1 p-1 ms-2"
-                                            onClick={() => handleDelete(details?.application?.id)}
-                                        >
-                                            <DeleteIcon cursor="pointer" />
-                                        </button>
-                                      </div>
-                                    </div>
-                                  )}
+                                    <>
+                                      {getButtonsByStatus(details?.application?.leave_status?.l_stat_id,details?.application?.id)}
+                                    </>
+                                  )} */}
                                 </th>
                               </tr>
                               <br/>
-                              
-                                  <Typography
-                                    variant="h6"
-                                    className="mb-4"
-                                    color={colors.greenAccent[300]}
-                                  >
-                                    Subject: <strong>{`${details?.application?.leave_type?.leave_type_name}`}</strong>
-                                  </Typography>
-                                  <Typography
-                                    variant="h6"
-                                    className="mb-4"
-                                    color={colors.greenAccent[300]}
-                                  >
-                                    {`From: ${details?.application?.sender?.email_address}`}<br/>
-                                    {`To: ${details?.application?.reviewer?.email_address}`}<br/>
-                                  </Typography>
-                                  <Typography
-                                    variant="h6"
-                                    className="mb-4"
-                                    color={colors.greenAccent[300]}
-                                  >
-                                    {`Application ID: ${details?.application?.id}`}<br/>
-                                  </Typography>
-                              
-                                <tr className="table-success">
-                                  <th>Leave Details</th>
-                                  <th>Sender Details</th>
-                                  <th>Reviewer Details</th>
-                                  <th>Approver Details</th>
-                                  <th>Comment</th>
-                                  {/* <th>Actions</th> */}
-                                </tr>
+                              <Typography
+                                variant="h6"
+                                className="mb-3"
+                                color={colors.greenAccent[300]}
+                              >
+                                Subject: <strong>{`${details?.application?.leave_type?.leave_type_name}`}</strong>
+                              </Typography>
+                              <Typography
+                                variant="h6"
+                                className="mb-3"
+                                color={colors.greenAccent[300]}
+                              >
+                                {`From: ${details?.application?.sender?.email_address}`}<br/>
+                                {`To: ${details?.application?.reviewer?.email_address}`}<br/>
+                              </Typography>
+                              <Typography
+                                variant="h6"
+                                className="mb-4"
+                                color={colors.greenAccent[300]}
+                              >
+                                {`Application ID: ${details?.application?.id}`}<br/>
+                              </Typography>
+                            
+                              <tr className="table-success">
+                                <th>Leave Details</th>
+                                <th>Sender Details</th>
+                                <th>Reviewer Details</th>
+                                <th>Approver Details</th>
+                              </tr>
                             </thead>
                             <tbody>
                                 <tr>
@@ -532,91 +484,6 @@ const ViewMessage = ({ query, token }) => {
                                             <p style={{ color: "green" }}>Office ID: <strong>{details?.application?.approver?.office_id}</strong></p>
                                         </div>
                                     </td>
-                                    <td>
-
-
-                                        {details?.application?.status == 2 ? (
-                                            <>Application is Approved</>
-                                        ) : (
-                                            <div className="text-center">
-                                                <TextField
-                                                    // label="Comment"
-                                                    variant="outlined"
-                                                    size="small"
-                                                    type="text"
-                                                    fullWidth
-                                                    onChange={(e) => setComments(e.target.value)}
-                                                    value={comments || ""}
-                                                    className="shadow-input"
-                                                    placeholder="Input comment here..."
-                                                    style={{ width: "100%" }}
-                                                />
-                                                <br></br>
-                                                <br></br>
-                                                <RangePicker
-                                                    label="Date"
-                                                    variant="outlined"
-                                                    fullWidth
-                                                    onChange={onChange}
-                                                    size="large"
-                                                    style={{ width: "100%" }}
-                                                    className="shadow-input"
-                                                // disabledDate={disabledDate}
-                                                />
-                                            </div>
-                                        )}
-
-                                    </td>
-                                    {/* <td> */}
-
-
-                                        {/* {details?.application?.status == 2 ? (
-                                            <div>Application is Approved</div>
-                                        ) : (
-                                            <div className="text-center">
-                                                <button
-                                                    className="btn btn-danger btn-sm mt-1 p-1"
-                                                    onClick={() => handleForward(details?.application?.id)}
-                                                >
-                                                    <ArrowForwardIcon cursor="pointer" />
-                                                </button>
-                                                <button
-                                                    className="btn btn-danger btn-sm ms-1 mt-1 p-1"
-                                                    onClick={() => handleBackword(details?.application?.id)}
-                                                >
-                                                    <ArrowBackIcon cursor="pointer" />
-                                                </button>
-                                                <button
-                                                    className="btn btn-danger btn-sm ms-1 mt-1 p-1"
-                                                    onClick={() => handleApproved(details?.application?.id)}
-                                                >
-                                                    <DoneIcon cursor="pointer" />
-                                                </button><Link href={`/application/edit/${id}`} className="anchor">
-                                                    <button className="btn btn-danger btn-sm ms-1 mt-1 p-1">
-                                                        <EditIcon cursor="pointer" />
-                                                    </button>
-                                                </Link>
-                                                <button
-                                                    className="btn btn-danger btn-sm ms-1 mt-1 p-1"
-                                                    onClick={() => handleDelete(details?.application?.id)}
-                                                >
-                                                    <DeleteIcon cursor="pointer" />
-                                                </button>
-                                            </div>
-                                        )} */}
-
-                                        {/* <Link href={`/employees/updateEmployee/${details?.id}`} className="anchor">
-                            <button className="btn btn-light btn-sm me-1">
-                            <EditIcon cursor="pointer" />
-                            </button>
-                        </Link>
-                        <button
-                            className="btn btn-danger btn-sm"
-                            onClick={() => handleDelete(details?.id)}
-                            >
-                            <DeleteIcon cursor="pointer" />
-                        </button> */}
-                                    {/* </td> */}
                                 </tr>
                             </tbody>
                         </table>
