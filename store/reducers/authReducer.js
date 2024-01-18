@@ -14,6 +14,8 @@ const initialState = {
     error: null,
     loading: false,
     user: null,
+    isApprover: null,
+    isRecorder: null,
 };
 
 const authStart = ( state, action ) => {
@@ -22,16 +24,18 @@ const authStart = ( state, action ) => {
 
 const authSuccess = (state, action) => {
     return updateObject( state, { 
-        token: action.idToken,
-        userId: action.userId,
-        name: action.name,
-        email: action.email,
-        phone: action.phone,
-        roles: action.roles,
-        company: action.company,
-        profile_picture: action.profile_picture,
-        signature: action.signature,
-        user: action.user,
+        token: action?.idToken,
+        userId: action?.userId,
+        name: action?.name,
+        email: action?.email,
+        phone: action?.phone,
+        roles: action?.roles,
+        company: action?.company,
+        profile_picture: action?.profile_picture,
+        signature: action?.signature,
+        user: action?.user,
+        isApprover: action?.isApprover,
+        isRecorder: action?.isRecorder,
         error: null,
         loading: false,
      } );
@@ -52,7 +56,7 @@ const authFail = (state, action) => {
 };
 
 const authLogout = (state, action) => {
-    return updateObject(state, { token: null, userId: null, name: null, email: null, phone: null, roles: null, company: null, profile_picture: null, signature: null, user: null });
+    return updateObject(state, { token: null, userId: null, name: null, email: null, phone: null, roles: null, company: null, profile_picture: null, signature: null, user: null, isApprover: null, isRecorder: null });
 };
 
 const reducer = ( state = initialState, action ) => {

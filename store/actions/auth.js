@@ -10,7 +10,7 @@ export const authStart = () => {
   };
 };
 
-export const authSuccess = (token, userId, name, email, phone,  roles, company, profile_picture, signature) => {
+export const authSuccess = (token, userId, name, email, phone,  roles, company, profile_picture, signature, isApprover, isRecorder) => {
   Router.push({
     pathname: "/",
   });
@@ -25,6 +25,8 @@ export const authSuccess = (token, userId, name, email, phone,  roles, company, 
     company: company,
     profile_picture: profile_picture,
     signature: signature,
+    isApprover: isApprover,
+    isRecorder: isRecorder,
   };
 };
 
@@ -84,6 +86,8 @@ export const auth = (email, password) => {
     axios
       .post(apiUrl, authData)
       .then((response) => {
+        console.log("login");
+        console.log(response);
         if (response.status==200) {
           toast(`Login Successfully done by - ${response?.data?.user?.name}`, { hideProgressBar: true, autoClose: 2000, type: 'success' })
           dispatch(
@@ -97,6 +101,8 @@ export const auth = (email, password) => {
               response?.data?.user?.company,
               response?.data?.user?.profile_picture,
               response?.data?.user?.signature,
+              response?.data?.employee?.isApprover,
+              response?.data?.employee?.isRecorder,
             )
           );
           dispatch(checkAuthTimeout(60 * 60 * 2));
