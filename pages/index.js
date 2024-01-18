@@ -412,8 +412,6 @@ export function Home({roles,token}) {
 }
 
 const mapStateToProps = (state) => {
-  console.log("index state");
-  console.log(state);
   return {
     name: state.auth.name,
     token: state.auth.token,

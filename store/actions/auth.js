@@ -86,8 +86,6 @@ export const auth = (email, password) => {
     axios
       .post(apiUrl, authData)
       .then((response) => {
-        console.log("login");
-        console.log(response);
         if (response.status==200) {
           toast(`Login Successfully done by - ${response?.data?.user?.name}`, { hideProgressBar: true, autoClose: 2000, type: 'success' })
           dispatch(
@@ -115,8 +113,8 @@ export const auth = (email, password) => {
         alert(`${err?.response?.data?.error} ' Login credential does not match!'`);
         // toast(`${err?.response?.data?.error} 'Credential does not match!'`, { hideProgressBar: true, autoClose: 2000, type: 'error' })
         console.log(err);
-        dispatch(authNotValid(err?.response?.data?.error));
-        dispatch(authFail(`${err?.response?.data?.error} 'Credential does not match!'`));
+        // dispatch(authNotValid(err?.response?.data?.error));
+        // dispatch(authFail(`${err?.response?.data?.error} 'Credential does not match!'`));
       });
   };
 };

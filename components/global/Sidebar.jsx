@@ -898,8 +898,6 @@ const Sidebar = ({ name, roles, company, isCollapsed, isRecorder, isApprover, em
 };
 
 const mapStateToProps = (state) => {
- console.log("side state");
- console.log(state);
   return {
     name: state?.auth?.name,
     email: state?.auth?.email,
