@@ -243,7 +243,7 @@ const leaveAdvanceReport = ({ token }) => {
            // disabledDate={disabledDate}
          />
          </div>
-         <div className="col-md-3 mt-4">
+         {/* <div className="col-md-3 mt-4">
           <DatePicker
             onChange={handleAppliedDateChange}
             label="Applied Date"
@@ -254,7 +254,7 @@ const leaveAdvanceReport = ({ token }) => {
             value={appliedDate}
             className="shadow-input"
           />
-        </div>
+          </div> */}
 
 
        <div className="col-md-2 mt-4">

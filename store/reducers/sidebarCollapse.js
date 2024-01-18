@@ -8,13 +8,13 @@ const initialState = {
 
 const setCollapse = (state, action) => {
   return updateObject(state, {
-    isCollapse: action.isCollapse,
+    isCollapse: action?.isCollapse,
   });
 };
 
 const reducer = (state = initialState, action) => {
-  switch (action.type) {
-    case actionTypes.SIDEBAR_COLLPASE:
+  switch (action?.type) {
+    case actionTypes?.SIDEBAR_COLLPASE:
       return setCollapse(state, action);
     default:
       return state;

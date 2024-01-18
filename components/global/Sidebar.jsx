@@ -207,9 +207,9 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
     function handleResize() {
       setWidth(window.innerWidth);
     }
-    window.addEventListener("resize", handleResize);
+    window?.addEventListener("resize", handleResize);
     return () => {
-      window.removeEventListener("resize", handleResize);
+      window?.removeEventListener("resize", handleResize);
     };
   }, []);
 
@@ -224,11 +224,11 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
   // SET OPENED
   const handleChange = (name) => {
     opened?.map((submenu, index) => {
-      if (submenu.name == name) {
+      if (submenu?.name == name) {
         let newOpened = [...opened];
         newOpened[index].isOpen = !newOpened[index].isOpen;
         setOpened(newOpened);
-      } else if (submenu.isOpen) {
+      } else if (submenu?.isOpen) {
         let newOpened = [...opened];
         newOpened[index].isOpen = !newOpened[index].isOpen;
         setOpened(newOpened);
@@ -1317,7 +1317,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
               }
 
               <SubMenu
-                  title={name}
+                  title={`Application for ${name}`}
                   icon={<AccountTreeIcon />}
                   style={{
                     color: colors.grey[100],
@@ -1349,7 +1349,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
 
                   <Item
                     title="My Application"
-                    to="/application/pending-recorder"
+                    to="/application/applied-list"
                     icon={<ReceiptLongIcon />}
                     selected={selected}
                     setSelected={setSelected}
@@ -1366,7 +1366,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                   >
                     <Item
                       title="Process Application"
-                      to=""
+                      to="/application/pending-recorder"
                       icon={<ReceiptLongIcon />}
                       selected={selected}
                       setSelected={setSelected}
@@ -1375,7 +1375,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                     />
                     <Item
                       title="Application Status"
-                      to=""
+                      to="/application/advance-report"
                       icon={<ReceiptLongIcon />}
                       selected={selected}
                       setSelected={setSelected}
@@ -1392,7 +1392,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                   >
                     <Item
                       title="Pending for Approval"
-                      to=""
+                      to="/application/pending-approver"
                       icon={<ReceiptLongIcon />}
                       selected={selected}
                       setSelected={setSelected}
@@ -1401,7 +1401,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                     />
                     <Item
                       title="Processed Application"
-                      to=""
+                      to="/application/advance-report"
                       icon={<ReceiptLongIcon />}
                       selected={selected}
                       setSelected={setSelected}

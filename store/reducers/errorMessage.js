@@ -13,15 +13,15 @@ const authSuccess = (state, action) => {
 
 const authValidation = (state, action) => {
   return updateObject(state, {
-    message: action.message,
+    message: action?.message,
   });
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.AUTH_VALIDATION:
+    case actionTypes?.AUTH_VALIDATION:
       return authValidation(state, action);
-    case actionTypes.AUTH_SUCCESS:
+    case actionTypes?.AUTH_SUCCESS:
       return authSuccess(state, action);
     default:
       return state;
