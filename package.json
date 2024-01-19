@@ -2,12 +2,11 @@
   "name": "fair-vat-next",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://107.167.88.5/",
+  "proxy": "http://app.ntrcaleave.xyz",
   "scripts": {
-    "dev": "next dev -p 3005",
+    "dev": "node server.js",
     "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "start": "NODE_ENV=production node server.js"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",

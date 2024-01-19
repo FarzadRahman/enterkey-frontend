@@ -131,7 +131,7 @@ export default function DescriptionAlerts() {
                         )
                       }
                     >
-                      {notification.content}
+                      {/* {notification.content} */}
                     </Alert>
                   );
                 })}
