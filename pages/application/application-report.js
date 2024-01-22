@@ -1,47 +1,75 @@
-import React, { useState, useEffect } from "react";
-import Router from "next/router";
+import React, { useEffect, useState } from "react";
+import Link from "next/link";
+import { format } from 'date-fns';
+//redux imports
 import { connect } from "react-redux";
-import {
-  Typography,
-  useTheme,
-  Box,
-  Paper,
-  Grid,
-  Avatar,
-  TextField,
-  Pagination,
-  MenuItem,
-} from "@mui/material"; 
 
-import { tokens } from "../../theme";
+// Theme imports
+import { tokens } from "../theme";
+import { Typography, useTheme } from "@mui/material";
+import {   MenuItem, DateField } from "@mui/material";
+//axios
 import axios from "axios";
-import { BASE_URL, IMAGE_URL } from "../../../base";
-import { Padding } from "@mui/icons-material";
+import { BASE_URL } from "../../base";
+import { IMAGE_URL } from "../../base";
 import { DatePicker } from "antd";
-import AdvanceReportTable from "../../../components/data-table/AdvanceReportTable";
 const { RangePicker } = DatePicker;
-const UserDetails = ({ query, token }) => {
+// Icon import
+import EditIcon from "@mui/icons-material/Edit";
+
+import {
+  Button,
+  CircularProgress,
+  Pagination,
+  TextField,
+} from "@mui/material";
+import ApplicationReportTable from "../../components/data-table/ApplicationReportTable";
+
+const leaveApplicationReport = ({ token }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   // const [users, setUsers] = useState([]);
 
-  const [employeeDetails, setEmployeeDetails] = useState(null);
-
+  // // Pagination
+  // const [page, setPage] = useState(1);
+  // const [lastPage, setLastPage] = useState(1);
+  // const [totalData, setTotalData] = useState(0);
   const [leaveType, setLeaveType] = useState();
   const [leaveTypeList,setleaveTypeList]=useState([]);
   const [leaveStatus,setLeaveStatus] =useState();
   const [leaveStatusList,setLeaveStatusList] =useState([]);
+  const [employeeList,setemployeeList]=useState([]);
+  const [selectedEmp, setSelectedEmp] = useState();
   const [leaveStartDate, setLeaveStartDate] = useState("");
   const [leaveEndDate, setLeaveEndDate] = useState("");
   const [dateRange,setDateRange] = useState([]);
+  const [appliedDate, setAppliedDate] = useState("");
 
-  const id = +query.id;
-
-  const [leaves,setLeaves]=useState([]);
   function formatDate(dateString){
     const options = { year: "numeric", month: "long", day: "numeric"};
     return new Date(dateString).toLocaleDateString(undefined, options);
-  }
+  } 
+
+  useEffect(() => {
+    const apiUsers =
+    BASE_URL +
+    "employees?isPaginate=false";
+   
+    axios
+      .get(apiUsers, {
+        headers: { Authorization: "Bearer " + token },
+      })
+      .then((res) => {
+        // console.log(res);
+        if (res.status === 200) {
+          // console.log(res);
+          setemployeeList(res.data);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },[]);
 
   useEffect(() => {
     const apiUsers =
@@ -63,7 +91,6 @@ const UserDetails = ({ query, token }) => {
         console.log(error);
       });
   },[]);
-
   useEffect(() => {
     const apiUsers =
     BASE_URL +
@@ -86,6 +113,8 @@ const UserDetails = ({ query, token }) => {
   },[]);
 
 
+
+
   const changeLeaveType = (value) => {
     // const { name, value } = e.target;
     setLeaveType(value);
@@ -96,7 +125,12 @@ const UserDetails = ({ query, token }) => {
     setLeaveStatus(value);
     // console.log(value);
   };
- 
+
+  const changeSelectedEmp = (value) => {
+    // const { name, value } = e.target;
+    setSelectedEmp(value);
+    // console.log(value);
+  };
   function onDateChange(date, dateString) {
     // console.log("date");
     // console.log(date);
@@ -112,95 +146,31 @@ const UserDetails = ({ query, token }) => {
       } 
     });
   }
-
+  const handleAppliedDateChange = (date) => {
+    console.log(date);
+    setAppliedDate(date);
+  };
+  
   function resetFilter(){
-    // setSelectedEmp("");
+    setSelectedEmp("");
     setLeaveType("");
     setLeaveStatus("");
     setLeaveStartDate("");
     setLeaveEndDate("");
     setDateRange("");
+    setAppliedDate("");
   }
 
 
 
-
-
-
-
-  useEffect(() => {
-    const apiUrl = BASE_URL + "employee/details/" + id;
-    axios
-      .get(apiUrl, {
-        headers: { Authorization: "Bearer " + token },
-      })
-      .then((res) => {
-        console.log(res.data);
-        setEmployeeDetails(res.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
-  useEffect(() => {
-    const apiUsers =
-    BASE_URL +
-    "employee/total-casual-leave/"+id;
-   
-    axios
-      .get(apiUsers, {
-        headers: { Authorization: "Bearer " + token },
-      })
-      .then((res) => {
-       
-           console.log(res);
-          setLeaves(res.data);
-        
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  },[]);
-
   return (
     <>
-    <Box p={3}>
-      <Typography variant="h2" mb={4} color={colors.greenAccent[300]}>
-        User Details
+      <Typography variant="h2" className="mb-4" color={colors.greenAccent[300]}>
+        All Leave List
       </Typography>
-      {employeeDetails && (
-        <Paper elevation={3} sx={{ p: 3 }}>
-          <Grid container spacing={2}>
-            <Grid item xs={12} sm={9}>
-              <img height={250} alt="User Profile" src={IMAGE_URL + employeeDetails?.user?.profile_picture} />
-            </Grid>
-            <Grid item xs={12} sm={3} sx={{ textAlign: "left" }}>
-              <Typography variant="h4" color={colors.greenAccent[300]}>Employee ID: {employeeDetails?.emp_id}</Typography>
-              <Typography variant="h4" color={colors.greenAccent[300]}>Full Name: {employeeDetails?.full_name}</Typography>
-              <Typography variant="h4" color={colors.greenAccent[300]}>Gender: {employeeDetails?.gender}</Typography>
-              <Typography variant="h4" color={colors.greenAccent[300]}>Phone number: {employeeDetails?.phone_number}</Typography>
-              <Typography variant="h4" color={colors.greenAccent[300]}>Email: {employeeDetails?.email_address}</Typography>
-              <Typography variant="h4" color={colors.greenAccent[300]}>Office ID: {employeeDetails?.office_id}</Typography>
-              <Typography variant="h4" color={colors.greenAccent[300]}>Branch: {employeeDetails?.branch?.branch_name}</Typography>
-              <Typography variant="h4" color={colors.greenAccent[300]}>Designation Name: {employeeDetails?.designation?.desg_nm}</Typography>
-              <Typography variant="h4" color={colors.greenAccent[300]}>Department Name: {employeeDetails?.department?.department_name}</Typography>
-              <Typography variant="h4" color={colors.greenAccent[300]}>Company Name: {employeeDetails?.branch?.company?.company_name}</Typography>
-              
-              {/* Add more details as needed */}
-            </Grid>
-          </Grid>
-        </Paper>
-      )}
-    </Box>
-    <Box p={3} display="flex" justifyContent="space-between">
-      <Typography variant="h4" color={colors.greenAccent[300]}>Total Casual leave : {leaves?.totalApprovedLeave}</Typography>
-      <Typography variant="h4" color={colors.greenAccent[300]}>Remaining leave : {leaves?.remainingLeave}</Typography>
-    </Box>
-    <Box p={3}>
-    <div className="row">
+      <div className="row">
        
        <div className="col-md-3 mt-4">
-      
          <TextField
            onChange={(e) => {
              changeLeaveType(+e.target.value);
@@ -240,8 +210,27 @@ const UserDetails = ({ query, token }) => {
           ))}
         </TextField>
       </div>
-      
-       <div className="col-md-4 mt-4">
+       <div className="col-md-3 mt-4">
+         <TextField
+           onChange={(e) => {
+             changeSelectedEmp(+e.target.value);
+           }}
+           select
+           label="Employee List"
+           size="small"
+           fullWidth
+           value={selectedEmp || ""}
+
+           className="shadow-input"
+         >
+           {employeeList?.map((option, index) => (
+             <MenuItem key={index} value={option.emp_id}>
+               {option.full_name} 
+             </MenuItem>
+           ))}
+         </TextField>
+       </div>
+       <div className="col-md-3 mt-4">
          <RangePicker
            label="Date"
            variant="outlined"
@@ -254,29 +243,32 @@ const UserDetails = ({ query, token }) => {
            // disabledDate={disabledDate}
          />
          </div>
+         {/* <div className="col-md-3 mt-4">
+          <DatePicker
+            onChange={handleAppliedDateChange}
+            label="Applied Date"
+            variant="outlined"
+            fullWidth
+            size="large"
+            style={{ width: "100%" }}
+            value={appliedDate}
+            className="shadow-input"
+          />
+          </div> */}
+
 
        <div className="col-md-2 mt-4">
          <button className="btn btn-info"  onClick={resetFilter}>reset</button>
        </div>
 
    </div>
-
-    </Box>
-    <Box p={3}>  
-
-        
-            <AdvanceReportTable leaveType={leaveType} leaveStatus={leaveStatus} selectedEmp={id} leaveStartDate={leaveStartDate}
-              leaveEndDate={leaveEndDate}></AdvanceReportTable>
+   <br></br>
+      <ApplicationReportTable leaveType={leaveType} leaveStatus={leaveStatus} selectedEmp={selectedEmp} leaveStartDate={leaveStartDate}
+      leaveEndDate={leaveEndDate}  appliedDate={appliedDate}></ApplicationReportTable>
    
-    </Box>
+     
     </>
   );
-};
-
-UserDetails.getInitialProps = async ({ query }) => {
-  return {
-    query,
-  };
 };
 
 const mapStateToProps = (state) => {
@@ -285,4 +277,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(UserDetails);
+export default connect(mapStateToProps)(leaveApplicationReport);

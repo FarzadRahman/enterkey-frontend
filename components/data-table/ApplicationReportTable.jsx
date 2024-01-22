@@ -25,8 +25,8 @@ import {
   TextField,
 } from "@mui/material";
 
-const MyApplicationTable = ({ token,leaveType,leaveStatus,selectedEmp,leaveStartDate,
-    leaveEndDate }) => {
+const ApplicationReportTable = ({ token,leaveType,leaveStatus,selectedEmp,leaveStartDate,
+    leaveEndDate, appliedDate }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [users, setUsers] = useState([]);
@@ -60,127 +60,20 @@ const MyApplicationTable = ({ token,leaveType,leaveStatus,selectedEmp,leaveStart
         return 'black'; // Default color if the status is not 1, 2, 3, or 4
     }};
 
-    const getButtonsByStatus = (statusId,applicationId) => {
-      switch (statusId) {
-        case 1:
-          return (
-            <>
-              {/* <Link href={`/application/details/${applicationId}`} className="anchor">
-                <button className="btn btn-light btn-sm me-1">
-                  <InfoIcon cursor="pointer" />
-                </button>
-              </Link> */}
-              {/* <Link href={`/application/edit/${applicationId}`} className="anchor">
-                <button className="btn btn-light btn-sm me-1">
-                  <EditIcon cursor="pointer" />
-                </button>
-              </Link> */}
-              <Link href={`/application/${applicationId}`} className="anchor">
-                <button className="btn btn-light btn-sm me-1">
-                  <VisibilityIcon cursor="pointer" />
-                </button>
-              </Link>
-              {/* <Button variant="contained" color="primary">
-                View
-              </Button>
-              <Button variant="contained" color="secondary">
-                History
-              </Button> */}
-            </>
-          );
-        case 2:
-          return (
-            <>
-              <Link href={`/application/${applicationId}`} className="anchor">
-                <button className="btn btn-light btn-sm me-1">
-                  <VisibilityIcon cursor="pointer" />
-                </button>
-              </Link>
-              {/* <Link href={`/application/details/${applicationId}`} className="anchor">
-                <button className="btn btn-light btn-sm me-1">
-                  <InfoIcon cursor="pointer" />
-                </button>
-              </Link> */}
-              {/* <Button variant="contained" color="primary">
-                View
-              </Button>
-              <Button variant="contained" color="secondary">
-                History
-              </Button> */}
-            </>
-          );
-        case 3:
-          return (
-            <>
-              <Link href={`/application/${applicationId}`} className="anchor">
-                <button className="btn btn-light btn-sm me-1">
-                  <VisibilityIcon cursor="pointer" />
-                </button>
-              </Link>
-              <Link href={`/application/edit/${applicationId}`} className="anchor">
-                <button className="btn btn-light btn-sm me-1">
-                  <EditIcon cursor="pointer" />
-                </button>
-              </Link>
-              {/* <Link href={`/application/details/${applicationId}`} className="anchor">
-                <button className="btn btn-light btn-sm me-1">
-                  <InfoIcon cursor="pointer" />
-                </button>
-              </Link> */}
-              {/* <Button variant="contained" color="primary">
-                View
-              </Button>
-              <Button variant="contained" color="secondary">
-                History
-              </Button> */}
-              {/* <Link href={`/application/edit/${applicationId}`}>
-                <Button variant="contained" color="warning">
-                  Edit
-                </Button>
-              </Link> */}
-            </>
-          );
-        case 4:
-          return (
-            <>
-              <Link href={`/application/${applicationId}`} className="anchor">
-                <button className="btn btn-light btn-sm me-1">
-                  <VisibilityIcon cursor="pointer" />
-                </button>
-              </Link>
-            </>
-          );
-          case 5:
-          return (
-            <>
-              <Link href={`/application/${applicationId}`} className="anchor">
-                <button className="btn btn-light btn-sm me-1">
-                  <VisibilityIcon cursor="pointer" />
-                </button>
-              </Link>
-            </>
-          );
-        default:
-          return null;
-      }
-    };
-    
-      
-      
-
   useEffect(() => {
     
     
     const apiUsers =
     BASE_URL +
-    "leave/applied-list?page=" +
+    "leave/application-to-me?page=" +
     page;
     const param={
       leaveType:leaveType,
       leaveStatus:leaveStatus,
       selectedEmp:selectedEmp,
       leaveStartDate:leaveStartDate,
-      leaveEndDate:leaveEndDate
+      leaveEndDate:leaveEndDate,
+      appliedDate:appliedDate,
     };
     // axios.post(apiBranch, branch, config).then((response) 
     // console.log(param);
@@ -189,7 +82,7 @@ const MyApplicationTable = ({ token,leaveType,leaveStatus,selectedEmp,leaveStart
         headers: { Authorization: "Bearer " + token },
       })
       .then((res) => {
-        // console.log(res);
+         console.log(res);
         if (res.status === 200) {
           console.log(res.data.data);
           setUsers(res.data);
@@ -201,7 +94,7 @@ const MyApplicationTable = ({ token,leaveType,leaveStatus,selectedEmp,leaveStart
         console.log(error);
       });
   }, [page,leaveType,leaveStatus,selectedEmp,leaveStartDate,
-    leaveEndDate]);
+    leaveEndDate,appliedDate]);
 
   // Pagination
   const handleChange = (e, page) => {
@@ -253,7 +146,7 @@ const MyApplicationTable = ({ token,leaveType,leaveStatus,selectedEmp,leaveStart
                 Leave Type : {user?.leave_type?.leave_type_name}
                 <br></br>
                 
-                Sender : <b>{user?.sender?.full_name}</b> <br></br>({user?.sender?.designation?.desg_nm})
+                Sender : <b>{user?.sender?.full_name}</b> <br></br>({user?.sender?.designation.desg_nm})
                 </td>
                 <td>{formatDate(user?.created_at)}</td>
                 <td>{user?.approver?.full_name}</td>
@@ -267,8 +160,22 @@ const MyApplicationTable = ({ token,leaveType,leaveStatus,selectedEmp,leaveStart
                 </td>
 
                 <td>
-                {getButtonsByStatus(user?.leave_status?.l_stat_id,user?.id)}
-                
+                  {/* <Link href={`/users/updateUser/${user.employee_id}`} className="anchor"> */}
+                  {/* <Link href={`/application/edit/${user?.id}`} className="anchor">
+                    <button className="btn btn-light btn-sm me-1">
+                      <EditIcon cursor="pointer" />
+                    </button>
+                  </Link> */}
+                  <Link href={`/application/${user?.id}`} className="anchor">
+                    <button className="btn btn-light btn-sm me-1">
+                      <VisibilityIcon cursor="pointer" />
+                    </button>
+                  </Link>
+                  <Link href={`/application/view/${user?.id}`} className="anchor">
+                    <button className="btn btn-light btn-sm me-1">
+                      <InfoIcon cursor="pointer" />
+                    </button>
+                  </Link>
                 </td>
 
                 {/* <td>
@@ -316,8 +223,8 @@ const MyApplicationTable = ({ token,leaveType,leaveStatus,selectedEmp,leaveStart
 
 const mapStateToProps = (state) => {
   return {
-    token: state?.auth?.token,
+    token: state.auth.token,
   };
 };
 
-export default connect(mapStateToProps)(MyApplicationTable);
+export default connect(mapStateToProps)(ApplicationReportTable);

@@ -76,8 +76,8 @@ export const checkAuthTimeout = (expirationTime) => {
 export const auth = (email, password) => {
   return (dispatch) => {
     dispatch(authStart());
-    // const apiUrl = BASE_URL + "api/v1/auth/login";
     const apiUrl = BASE_URL + "login";
+    // const apiUrl = "https://ntrcaleave.xyz/api/login";
     const authData = {
       email: email,
       password: password,
@@ -86,7 +86,7 @@ export const auth = (email, password) => {
     axios
       .post(apiUrl, authData)
       .then((response) => {
-        if (response.status==200) {
+        if (response.status===200) {
           toast(`Login Successfully done by - ${response?.data?.user?.name}`, { hideProgressBar: true, autoClose: 2000, type: 'success' })
           dispatch(
             authSuccess(
@@ -110,7 +110,7 @@ export const auth = (email, password) => {
         }
       })
       .catch((err) => {
-        alert(`${err?.response?.data?.error} ' Login credential does not match!'`);
+        alert(`'Login credential does not match!!!'`);
         // toast(`${err?.response?.data?.error} 'Credential does not match!'`, { hideProgressBar: true, autoClose: 2000, type: 'error' })
         console.log(err);
         // dispatch(authNotValid(err?.response?.data?.error));

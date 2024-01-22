@@ -124,14 +124,14 @@ export default function DescriptionAlerts() {
                             color="primary"
                             aria-label="upload picture"
                             component="span"
-                            onClick={() => markAsRead(notification.id)}
+                            onClick={() => markAsRead(notification?.id)}
                           >
                             <MarkChatReadIcon />
                           </IconButton>
                         )
                       }
                     >
-                      <>{notification.content}</>
+                      <>{notification?.content}</>
                     </Alert>
                   );
                 })}
