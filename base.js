@@ -11,7 +11,7 @@ export const BASE_URL = "https://ntrcaleave.xyz/api/";
 // export const BASE_URL = "https://saikat.mndmbera.edu.bd/api/";
 // export const IMAGE_URL = "https://saikat.mndmbera.edu.bd/public/profile-picture/";
 // export const SIGN_URL = "https://saikat.mndmbera.edu.bd/public/signature/";
-// export const BASE_URL = "https://ntrcaleave.xyz/api/";
+// sexport const BASE_URL = "https://ntrcaleave.xyz/api/";
 export const IMAGE_URL = "https://ntrcaleave.xyz/public/profile-picture/";
 export const SIGN_URL = "https://ntrcaleave.xyz/public/signature/";
 
