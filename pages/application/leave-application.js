@@ -71,7 +71,7 @@ const leaveApplication = ({ token, roles }) => {
   const [selectedStartDate, setSelectedStartDate] = useState("");
   const [selectedEndDate, setSelectedEndDate] = useState("");
   const [file, setFile] = useState(null);
-  const [fileName,setFileName] =useState();
+
   // const [reasonOptions] = useState(["Physical Illness", "Family Issue", "Others"]);
   // const [selectedReason, setSelectedReason] = useState("");
   // const [openOthersField, setOpenOthersField] = useState(false);
@@ -123,9 +123,6 @@ const leaveApplication = ({ token, roles }) => {
   };
 
   const submitImageFile = (result, name) => {
-    // console.log('name:',name);
-    // console.log(result);
-    setFileName(name);
     setFile(result);
   };
 
@@ -361,8 +358,7 @@ const leaveApplication = ({ token, roles }) => {
       end: leaveEndDate,
       stay_location: stayLocation,
       reviewer_id: recorder_id,
-      files: file,
-      fileName:fileName
+      files: file
     };
     const apiLeaveApplication = BASE_URL + "leave/create";
     const config = {
@@ -449,7 +445,7 @@ const leaveApplication = ({ token, roles }) => {
               background: "",
             }}
           >
-            <p>Upload file shown here</p>
+            <p>Upload file shown here (Optional)</p>
           </div>
           )
         }
